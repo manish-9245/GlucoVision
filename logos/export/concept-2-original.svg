@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+<title>GlucoVision — concentric retina / AI pupil</title>
+<g id="icon">
+<!-- Outer fundus wall — deep indigo -->
+<circle cx="256" cy="256" r="156" fill="#1E1B4B"/>
+<!-- Middle layer — warm cream -->
+<circle cx="256" cy="256" r="112" fill="#FFFBEB"/>
+<!-- Inner iris / active scan field — mint -->
+<circle cx="256" cy="256" r="68" fill="#7ED8B7"/>
+<!-- Central pupil — indigo -->
+<circle cx="256" cy="256" r="26" fill="#1E1B4B"/>
+<!-- Corneal highlight — small cream glint for eye depth -->
+<circle cx="245.5" cy="245.5" r="6.5" fill="#FFFBEB"/>
+<!-- AI scan reticle — minimal crosshair with gap, hints targeting -->
+<g fill="none" stroke="#1E1B4B" stroke-width="7" stroke-linecap="round">
+<path d="M256 218 L256 234"/>
+<path d="M256 278 L256 294"/>
+<path d="M218 256 L234 256"/>
+<path d="M278 256 L294 256"/>
+</g>
+</g>
+</svg>

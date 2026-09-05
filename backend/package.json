@@ -1,0 +1,24 @@
+{
+  "name": "glucovision-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --persist-to=./.wrangler/state",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create glucovision",
+    "db:migrate": "wrangler d1 migrations apply glucovision --local && wrangler d1 migrations apply glucovision --remote",
+    "db:migrate:local": "wrangler d1 migrations apply glucovision --local",
+    "db:migrate:remote": "wrangler d1 migrations apply glucovision --remote",
+    "db:seed": "wrangler d1 execute glucovision --local --file=./seed.sql",
+    "db:seed:remote": "wrangler d1 execute glucovision --remote --file=./seed.sql"
+  },
+  "dependencies": {
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0",
+    "typescript": "^5.7.0",
+    "@cloudflare/workers-types": "^4.20241127.0"
+  }
+}

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+<title>GlucoVision — fundus abstract</title>
+<g id="icon">
+<!-- Fundus: perfect circle, teal field with ink stroke on white -->
+<circle cx="256" cy="256" r="146" fill="#0f766e" stroke="#0a0a0f" stroke-width="12"/>
+<!-- Optic disc: small central white disc -->
+<circle cx="256" cy="256" r="28" fill="#ffffff"/>
+<!-- Two minimal vessel arcades — thick, round-capped, stays inside fundus -->
+<g fill="none" stroke="#0a0a0f" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+<path d="M 280 248 C 304 230.5 334 221 371 240.5"/>
+<path d="M 280 264 C 304 281.5 334 291 371 271.5"/>
+</g>
+</g>
+</svg>

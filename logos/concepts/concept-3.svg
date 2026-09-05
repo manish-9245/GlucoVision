@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+<title>GlucoVision — Eye + Signal Waves</title>
+<desc>Minimal geometric almond eye with three coral signal arcs emanating from pupil — AI inference and offline sync.</desc>
+<g id="icon">
+  <!-- Almond eye: off-white sclera with deep charcoal stroke -->
+  <path d="M 72 256 C 128 128 384 128 440 256 C 384 384 128 384 72 256 Z" fill="#F7F3EE" stroke="#1A1F1E" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Pupil: solid charcoal -->
+  <circle cx="256" cy="256" r="46" fill="#1A1F1E"/>
+  <!-- Signal waves: three minimal coral arcs centered on pupil, rightward -->
+  <g fill="none" stroke="#FF5C39" stroke-width="14" stroke-linecap="round">
+    <path d="M 304.1 207.9 A 68 68 0 0 1 304.1 304.1"/>
+    <path d="M 318.2 193.8 A 88 88 0 0 1 318.2 318.2"/>
+    <path d="M 331 181 A 106 106 0 0 1 331 331"/>
+  </g>
+</g>
+</svg>

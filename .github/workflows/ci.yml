@@ -1,0 +1,17 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      - run: npm run build
+      - name: Backend typecheck
+        run: npm --prefix backend install && npx --prefix backend tsc --project tsconfig.json --noEmit
+      - name: No secrets leaked
+        run: |
+          ! grep -r "nvapi-" --include="*.ts" --include="*.js" backend/src src || (echo "Real NVIDIA key leaked - only startswith checks allowed" && exit 1)
+          ! grep -r "Bearer nvapi" --include="*.ts" --include="*.js" src || true

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+<title>GlucoVision — Concentric Retina</title>
+<rect width="512" height="512" fill="#FCFCF9"/>
+<g id="icon">
+<!-- Outer fundus wall — thick for 16px legibility -->
+<circle cx="256" cy="256" r="148" fill="none" stroke="#0a0a0f" stroke-width="32"/>
+<!-- Inner pupil/disc — teal accent -->
+<circle cx="256" cy="256" r="72" fill="none" stroke="#0f766e" stroke-width="28"/>
+<!-- Tiny AI targeting crosshair — centered, high contrast on off-white -->
+<line x1="236" y1="256" x2="276" y2="256" stroke="#0a0a0f" stroke-width="8" stroke-linecap="round"/>
+<line x1="256" y1="236" x2="256" y2="276" stroke="#0a0a0f" stroke-width="8" stroke-linecap="round"/>
+</g>
+</svg>

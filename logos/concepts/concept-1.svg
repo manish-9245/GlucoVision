@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+<title>GlucoVision — G + fundus</title>
+<g id="icon">
+<!-- Geometric G: thick C-sector + horizontal bar (same fill merges visually) -->
+<path d="M393.2 228 A140 140 0 1 0 393.2 284 L328.8 284 A78 78 0 1 1 328.8 228 Z" fill="#0C1F3F"/>
+<rect x="252" y="228" width="141.2" height="56" fill="#0C1F3F"/>
+<!-- Fundus circle — negative space of G, rendered as flat teal -->
+<circle cx="256" cy="256" r="66" fill="#13C0A3"/>
+<!-- Minimal vessel arcade — geometric, stays inside fundus -->
+<g fill="none" stroke="#0C1F3F" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+<path d="M270 242 C252 256 234 270 225 293"/>
+<path d="M270 242 C286 258 292 276 286 299"/>
+</g>
+<!-- Optic disc — warm amber, offset to suggest nasal placement -->
+<circle cx="270" cy="242" r="18.5" fill="#FF9F1C"/>
+<!-- Optic cup — deep-ink punctum for legibility at 16px -->
+<circle cx="270" cy="242" r="6.2" fill="#0C1F3F"/>
+</g>
+</svg>

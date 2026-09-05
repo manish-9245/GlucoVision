@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "glucovision-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "glucovision",
+      "database_id": "807e03df-811c-4025-9a69-aefe5ed34533",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [],
+  "vars": {
+    "ALLOWED_ORIGIN": "http://localhost:3000,https://glucovision.pages.dev,https://glucovision.wethreemusks.workers.dev"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

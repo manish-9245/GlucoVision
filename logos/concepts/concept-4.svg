@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+<title>GlucoVision — droplet eye fusion</title>
+<g id="icon">
+  <!-- Droplet — glucose / blood drop merged with eye container -->
+  <path d="M 256 60 C 256 60 108 186 108 308 C 108 392.5 171.5 454 256 454 C 340.5 454 404 392.5 404 308 C 404 186 256 60 256 60 Z" fill="#4A2340"/>
+  <!-- Eye base — ivory circular field inside droplet -->
+  <circle cx="256" cy="300" r="110" fill="#FFFBF0"/>
+  <!-- Iris — saffron -->
+  <circle cx="256" cy="300" r="70" fill="#E9A426"/>
+  <!-- Pupil — plum -->
+  <circle cx="256" cy="300" r="32" fill="#4A2340"/>
+  <!-- Catchlight — ivory highlight for legibility and depth -->
+  <circle cx="272" cy="284" r="12" fill="#FFFBF0"/>
+</g>
+</svg>

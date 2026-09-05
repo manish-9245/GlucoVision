@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+<title>GlucoVision — Lotus Eye</title>
+<desc>Minimal geometric lotus petals forming an almond eye; central pupil. Sage, terracotta and wheat palette for rural India.</desc>
+<g id="icon">
+<!-- almond eye base — flat deep sage -->
+<path d="M 68 256 C 122 142 390 142 444 256 C 390 370 122 370 68 256 Z" fill="#25382F"/>
+<!-- lotus petals — wheat, flat, geometric -->
+<path d="M 256 164 C 230 177 215 212 256 264 C 297 212 282 177 256 164 Z" fill="#F2E6CC"/>
+<path d="M 256 164 C 230 177 215 212 256 264 C 297 212 282 177 256 164 Z" fill="#F2E6CC" transform="rotate(-34 256 264)"/>
+<path d="M 256 164 C 230 177 215 212 256 264 C 297 212 282 177 256 164 Z" fill="#F2E6CC" transform="rotate(34 256 264)"/>
+<!-- central pupil — terracotta -->
+<circle cx="256" cy="256" r="40" fill="#C77A4A"/>
+<!-- highlight — wheat for legibility at small size -->
+<circle cx="242" cy="242" r="9" fill="#F2E6CC"/>
+</g>
+</svg>

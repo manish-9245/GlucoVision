@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img">
+<title>GlucoVision — G + fundus refined</title>
+<g id="icon">
+<!-- Thick C-shaped G — stroke logic for legibility at 16px, negative space is fundus circle -->
+<path d="M 376.7 189.1 A 138 138 0 1 0 376.7 322.9" fill="none" stroke="#0f766e" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Two minimal vessel arcs inside fundus negative space -->
+<g fill="none" stroke="#0a0a0f" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+<path d="M256 256 C236 268 222 285.5 214 310"/>
+<path d="M256 256 C276 268 290 285.5 298 310"/>
+</g>
+<!-- Central optic disc — small ink dot -->
+<circle cx="256" cy="256" r="20" fill="#0a0a0f"/>
+</g>
+</svg>
