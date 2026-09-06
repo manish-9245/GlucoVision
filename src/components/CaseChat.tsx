@@ -247,9 +247,31 @@ export function CaseChat({
         ) : (
           msgs.map((m) => (
             <div key={m.id} className={`flex flex-col ${m.role === "user" ? "items-end" : "items-start"}`}>
-              <div className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-6 whitespace-pre-wrap border ${m.role === "user" ? "bg-zinc-900 text-white border-zinc-900" : "bg-white border-zinc-200"}`}>
-                {m.content}
-                {m.model && <div className="mt-1 text-[10px] opacity-60 font-mono">via {m.model}</div>}
+              <div className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-6 border ${m.role === "user" ? "bg-zinc-900 text-white border-zinc-900" : "bg-white border-zinc-200"}`}>
+                {m.role === "assistant" ? (
+                  <div
+                    className="prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0 prose-strong:font-bold prose-strong:text-zinc-900 prose-headings:font-bold prose-headings:mt-2 prose-headings:mb-1"
+                    dangerouslySetInnerHTML={{
+                      __html: m.content
+                        // bold **text** -> <strong>
+                        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+                        // italic *text* (avoid **)
+                        .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, "<em>$1</em>")
+                        // headings ## -> <strong>
+                        .replace(/^###\s+(.+)$/gm, "<div class='font-bold mt-2'>$1</div>")
+                        .replace(/^##\s+(.+)$/gm, "<div class='font-bold text-sm mt-2'>$1</div>")
+                        // bullet lists — lines starting with - or •
+                        .replace(/^\s*[—\-•]\s+(.+)$/gm, "<div class='flex gap-1.5 ml-1'><span class='text-zinc-400'>•</span><span>$1</span></div>")
+                        // numbered lists
+                        .replace(/^\s*\d+\.\s+(.+)$/gm, "<div class='ml-1'>$1</div>")
+                        // line breaks
+                        .replace(/\n/g, "<br />"),
+                    }}
+                  />
+                ) : (
+                  <span className="whitespace-pre-wrap">{m.content}</span>
+                )}
+                {m.model && <div className="mt-2 text-[10px] opacity-60 font-mono border-t border-zinc-100 pt-1">via {m.model}</div>}
               </div>
               {m.created_at && <div className="text-[10px] text-zinc-400 mt-1 px-1">{new Date(m.created_at).toLocaleString()}</div>}
             </div>

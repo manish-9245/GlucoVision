@@ -422,12 +422,12 @@ export default function Landing() {
       },
     });
 
-    // Image scale & fade for gallery images
+    // Image scale & fade for gallery images — keep fully visible, no fade to 0.25
     const galleryImages = gsap.utils.toArray<HTMLElement>(".gallery-img");
     galleryImages.forEach((img) => {
       gsap.fromTo(
         img,
-        { scale: 0.88, opacity: 0.7, filter: "brightness(0.85)" },
+        { scale: 0.96, opacity: 0.9, filter: "brightness(0.95)" },
         {
           scale: 1,
           opacity: 1,
@@ -435,23 +435,13 @@ export default function Landing() {
           ease: "power2.out",
           scrollTrigger: {
             trigger: img,
-            start: "top 88%",
-            end: "top 42%",
-            scrub: 1,
+            start: "top 90%",
+            end: "top 45%",
+            scrub: 0.8,
           },
         }
       );
-      gsap.to(img, {
-        opacity: 0.25,
-        filter: "brightness(0.6)",
-        ease: "none",
-        scrollTrigger: {
-          trigger: img,
-          start: "top 18%",
-          end: "bottom -10%",
-          scrub: 1,
-        },
-      });
+      // No fade out — cards stay fully visible when pinned text is reading
     });
 
     // Pinned section
@@ -937,12 +927,12 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* DESIRE , Pinned Scroll Split (GSAP pin + Image Scale & Fade) */}
-      <section ref={pinnedRef} id="evidence" className="relative bg-zinc-950 text-white">
+      {/* DESIRE , Pinned Scroll Split (GSAP pin + Image Scale & Fade) — visibility fixed */}
+      <section ref={pinnedRef} id="evidence" className="relative bg-zinc-950 text-white overflow-hidden isolate">
         <div className="w-full max-w-[1120px] mx-auto px-6 min-w-0 overflow-x-hidden">
-          <div className="grid lg:grid-cols-[480px_1fr] gap-10 md:gap-16">
-            {/* Pinned left */}
-            <div className="pinned-left lg:h-screen lg:sticky lg:top-0 flex flex-col justify-center py-16 lg:py-0 relative z-20">
+          <div className="grid lg:grid-cols-[480px_1fr] gap-10 md:gap-16 items-start">
+            {/* Pinned left — always visible, solid bg on desktop to prevent gallery bleed */}
+            <div className="pinned-left lg:h-screen lg:sticky lg:top-0 flex flex-col justify-center py-16 lg:py-0 relative z-30 bg-zinc-950 lg:bg-transparent">
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-300">
                 <Sparkles className="w-3.5 h-3.5" /> Evidence you can verify
               </div>
@@ -979,8 +969,8 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Scrolling gallery right — super high z so cards never hide behind text */}
-            <div ref={galleryRef} className="py-8 lg:py-16 space-y-6 lg:space-y-10 relative z-[60]">
+            {/* Scrolling gallery right — below pinned text on desktop, above on mobile, never hidden */}
+            <div ref={galleryRef} className="py-8 lg:py-16 space-y-6 lg:space-y-10 relative z-10 lg:z-10">
               {[
                 {
                   img: "/images/fundus-mild.jpg",
@@ -1007,7 +997,7 @@ export default function Landing() {
                   desc: "Safe and private, syncs when online, doctor confirms before treatment",
                 },
               ].map((card, idx) => (
-                <div key={idx} className="gallery-img group overflow-hidden rounded-[28px] bg-zinc-900 border border-white/10 relative z-[70]">
+                <div key={idx} className="gallery-img group overflow-hidden rounded-[28px] bg-zinc-900 border border-white/10 relative z-10">
                   <div className="relative h-[320px] md:h-[420px] overflow-hidden">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover will-change-transform" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />

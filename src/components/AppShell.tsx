@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, Users, ScanEye, Send, Pill, Footprints, Menu, X, LogOut, ShieldCheck } from "lucide-react";
+import { LayoutDashboard, Users, ScanEye, Send, Pill, Footprints, Menu, X, LogOut, ShieldCheck, Globe } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
+import { LanguageSwitcher } from "@/lib/i18n";
 
 const nav = [
   { href: "/app/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -92,9 +93,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               GlucoVision
             </span>
           </Link>
-          <button onClick={() => setOpen(!open)} className="w-11 h-11 border border-zinc-200 bg-white grid place-items-center rounded-full shadow-sm active:scale-95 transition">
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <button onClick={() => setOpen(!open)} className="w-11 h-11 border border-zinc-200 bg-white grid place-items-center rounded-full shadow-sm active:scale-95 transition">
+              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </header>
         {open && (
           <div className="lg:hidden border-b border-zinc-200 bg-white p-3 grid grid-cols-2 gap-2">

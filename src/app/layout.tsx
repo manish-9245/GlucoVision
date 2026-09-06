@@ -4,6 +4,7 @@ import "./globals.css";
 import { StoreProvider } from "@/lib/store";
 import { AuthProvider } from "@/lib/auth";
 import { RegisterSW } from "@/components/RegisterSW";
+import { LanguageProvider } from "@/lib/i18n";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -47,9 +48,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-full flex flex-col bg-[#FCFCF9] text-zinc-900 selection:bg-teal-600 selection:text-white">
-        <AuthProvider>
-          <StoreProvider>{children}</StoreProvider>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <StoreProvider>{children}</StoreProvider>
+          </AuthProvider>
+        </LanguageProvider>
         <RegisterSW />
       </body>
     </html>
