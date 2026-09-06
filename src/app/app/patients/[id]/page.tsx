@@ -765,19 +765,58 @@ export default function PatientExaminationPage() {
       {/* Add new examination */}
       <AddVisitInline patientId={patient.id} />
 
-      {/* foot & other */}
-      <div className="grid md:grid-cols-2 gap-4 text-sm">
-        <div className="border border-zinc-200 bg-white p-4 flex items-center justify-between">
-          <div>
-            <div className="font-semibold flex items-center gap-2">
-              <Footprints className="w-4 h-4" /> Foot screening
+      {/* Foot report — visible on same page as eye report */}
+      <div className="border border-zinc-200 bg-white p-4 md:p-5">
+        <h2 className="text-lg font-black tracking-tight flex items-center gap-2" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
+          <Footprints className="w-5 h-5 text-teal-700" /> Foot report — on same page
+        </h2>
+        <p className="text-xs text-zinc-600 mt-1">Diabetic foot check done together with eye camp. See risk, flags, and next steps below — no need to open another page.</p>
+        {patient.footAnalysis ? (
+          <div className="mt-4 space-y-3">
+            <div className={`border p-4 flex items-center justify-between ${patient.footAnalysis.risk === "high" ? "bg-red-50 border-red-200" : patient.footAnalysis.risk === "moderate" ? "bg-amber-50 border-amber-200" : "bg-emerald-50 border-emerald-200"}`}>
+              <div>
+                <div className="text-xs font-bold tracking-widest opacity-60">FOOT RISK</div>
+                <div className={`text-xl font-black mt-1 capitalize ${patient.footAnalysis.risk === "high" ? "text-red-700" : patient.footAnalysis.risk === "moderate" ? "text-amber-800" : "text-emerald-700"}`}>{patient.footAnalysis.risk} risk</div>
+                <div className="text-xs text-zinc-700 mt-1 max-w-[520px]">{patient.footAnalysis.summary}</div>
+              </div>
+              <div className={`w-14 h-14 grid place-items-center text-white font-black text-xl border shadow ${patient.footAnalysis.risk === "high" ? "bg-red-600 border-red-700" : patient.footAnalysis.risk === "moderate" ? "bg-amber-500 border-amber-600" : "bg-emerald-600 border-emerald-700"}`}>
+                {patient.footAnalysis.risk === "high" ? "!!" : patient.footAnalysis.risk === "moderate" ? "!" : "✓"}
+              </div>
             </div>
-            <div className="text-xs text-zinc-600 mt-1">Last: {patient.footLastCheck || "never"} • bundled with eye camp</div>
+            {patient.footAnalysis.flags.length > 0 ? (
+              <div className="space-y-2">
+                {patient.footAnalysis.flags.map((f) => (
+                  <div key={f.id} className={`rounded-xl border p-3 text-xs leading-relaxed flex gap-2 ${f.severity === "high" ? "bg-red-50 border-red-200 text-red-800" : f.severity === "med" ? "bg-amber-50 border-amber-200 text-amber-900" : "bg-zinc-50 border-zinc-200"}`}>
+                    <span className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${f.severity === "high" ? "bg-red-500" : f.severity === "med" ? "bg-amber-500" : "bg-emerald-500"}`} />
+                    <span>{f.label}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-xs text-emerald-900">No flags. Keep daily foot check, moisturise, never walk barefoot.</div>
+            )}
+            <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-xs">
+              <b>Recommendation:</b> {patient.footAnalysis.recommendation}
+              <br />
+              <b>Next check:</b> {patient.footAnalysis.nextCheck} • <b>Diet tips:</b> {patient.footAnalysis.dietTips.join(", ")}
+            </div>
+            <div className="text-xs text-zinc-500">Last foot check: {patient.footLastCheck ? new Date(patient.footLastCheck).toLocaleString() : "—"} • {patient.footChecks?.length || 0} records</div>
+            <Link href="/app/foot" className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:underline">
+              Open detailed foot screening <ArrowLeft className="w-3 h-3 rotate-180" />
+            </Link>
           </div>
-          <Link href="/app/foot" className="px-4 py-2 bg-zinc-900 text-white text-xs font-semibold">
-            Open foot
-          </Link>
-        </div>
+        ) : (
+          <div className="mt-4 border-2 border-dashed border-zinc-200 bg-zinc-50 p-6 text-center">
+            <div className="text-sm font-bold">No foot screening yet</div>
+            <div className="text-xs text-zinc-600 mt-1">Do eye and foot together in one visit.</div>
+            <Link href="/app/foot" className="mt-3 inline-flex px-4 py-2 bg-zinc-900 text-white text-xs font-semibold">
+              Start foot check
+            </Link>
+          </div>
+        )}
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-4 text-sm">
         <div className="border border-zinc-200 bg-teal-50 p-4 flex items-center justify-between">
           <div className="text-sm">
             <div className="font-semibold">Need second opinion?</div>
@@ -785,6 +824,15 @@ export default function PatientExaminationPage() {
           </div>
           <Link href={`/app/patients?patient=${patient.id}`} className="px-4 py-2 bg-teal-700 text-white text-xs font-semibold">
             Ask
+          </Link>
+        </div>
+        <div className="border border-zinc-200 bg-white p-4 flex items-center justify-between">
+          <div className="text-sm">
+            <div className="font-semibold">View all patients</div>
+            <div className="text-xs text-zinc-600">Back to registry</div>
+          </div>
+          <Link href="/app/patients" className="px-4 py-2 border border-zinc-200 bg-white text-xs font-semibold">
+            Registry
           </Link>
         </div>
       </div>
