@@ -573,6 +573,15 @@ function ScreeningInner() {
       recommendedActions: [STAGE_META[stage].action, STAGE_META[stage].interval, "No auto prescription, doctor check needed"],
       urgency: (["routine", "routine", "soon", "urgent", "emergency"][stage] as "routine" | "soon" | "urgent" | "emergency"),
     };
+    // Diet plan per scan, based on stage + metabolic control
+    const dietPlan = (() => {
+      const hb = patient.hbA1c;
+      if (stage === 0) return { summary: "Balanced plate to keep sugar steady and protect eyes.", dos: ["Whole grains: jowar, bajra, brown rice (1.5 cups)", "Dal + veg daily, 2 tsp oil", "Fruit 100g guava or papaya", "Walk 30 min daily"], donts: ["Avoid sugary tea, sweets, white rice", "Avoid fried snacks"], dailyCalories: patient.gender === "F" ? "1400-1600 kcal" : "1600-1800 kcal", followUp: "Annual eye check" };
+      if (stage === 1) return { summary: "Tighten control to stop mild changes from growing.", dos: ["Millet + dal + green veg", "1 fruit and almonds", "Salt <5g", "Walk 30-45 min"], donts: ["No added sugar", "Limit salt and packaged snacks", "No tobacco"], dailyCalories: patient.gender === "F" ? "1400-1500 kcal" : "1600-1700 kcal", followUp: "Eye check in 6 months" };
+      if (stage === 2) return { summary: "Steady sugar and eye follow up helps prevent worsening.", dos: ["1 cup millet + dal + 2 cups veg", "Low salt, lean protein", "Fruit 100g only", "Walk 30 min + foot check"], donts: ["No sweets or fried foods", "No deep fried or high salt", "Do not miss medicines"], dailyCalories: patient.gender === "F" ? "1300-1500 kcal" : "1500-1700 kcal", followUp: "Eye check in 3 months" };
+      if (stage === 3) return { summary: "Strict control to protect eye from further bleeding.", dos: ["Strict salt <4g, oil <2 tsp", "Small frequent meals", "Fruit 80-100g only", "Daily walk as tolerated"], donts: ["No sugar or fried foods", "No smoking or alcohol", "Avoid long gaps without food"], dailyCalories: patient.gender === "F" ? "1200-1400 kcal" : "1400-1600 kcal", followUp: "Urgent eye referral 1-2 weeks" };
+      return { summary: "Very strict diet and urgent eye care.", dos: ["Very strict small portions", "Salt <3g, oil <2 tsp", "Fruit 50-80g only", "Light activity only"], donts: ["No sugar or fried foods", "No alcohol or smoking", "Do not delay treatment"], dailyCalories: patient.gender === "F" ? "1200-1300 kcal" : "1300-1500 kcal", followUp: "Emergency eye referral 1 week" };
+    })();
     const visit = {
       id: `v${Date.now()}`,
       date: new Date().toISOString(),
@@ -582,7 +591,9 @@ function ScreeningInner() {
       notes: `${DR_LABELS[result.stage]}, via ${imageUrl?.startsWith("http") ? "AI" : "on device AI"} and heatmap. Quality ${quality}/100. ${STAGE_META[result.stage].action}`,
       imageQuality: quality,
       imageUrl,
+      eye,
       analysis: sysAnalysis,
+      dietPlan,
     };
     addVisit(patient.id, visit);
     if (result.stage >= 2) {

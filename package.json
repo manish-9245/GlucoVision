@@ -10,7 +10,7 @@
     "cf:build": "opennextjs-cloudflare build",
     "cf:deploy": "opennextjs-cloudflare deploy",
     "cf:preview": "opennextjs-cloudflare preview",
-    "backend:dev": "wrangler dev --cwd backend --persist-to=./backend/.wrangler/state",
+    "backend:dev": "wrangler dev --cwd backend --port 8787",
     "backend:deploy": "wrangler deploy --cwd backend",
     "backend:migrate": "wrangler d1 migrations apply glucovision --remote --cwd backend",
     "backend:seed": "wrangler d1 execute glucovision --remote --file=./backend/seed.sql --cwd backend"

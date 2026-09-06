@@ -66,33 +66,80 @@ export const patients: Patient[] = [
         ],
         "notes": "Moderate NPDR, scattered exudates",
         "imageQuality": 92,
-        "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
-          "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: no sugar at all, use sugar-free for tea if needed",
-            "Extra: less salt, check BP twice weekly at PHC"
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 1 exudates at 92/100 quality, 87% confidence. Risk 86/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "moderate"
+            }
           ],
-          "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months",
-            "HB high, avoid any sweets until next HbA1c check"
+          "stageJustification": "1 focal lesions: exudates within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (87%) \u2014 quality 92/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.2%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.2% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "148/92",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 148 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "11y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 11y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision, floaters",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1500-1700 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "imageQualityAssessment": "Excellent 92/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
         },
         "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "left"
+        "dietPlan": {
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
+          "dos": [
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check",
+            "Extra: no sugar at all"
+          ],
+          "donts": [
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines",
+            "HB high, avoid sweets"
+          ],
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye check in 3 months"
+        },
+        "eye": "right"
       },
       {
         "id": "v1-other",
         "date": "2026-02-10",
         "drStage": 2,
-        "confidence": 0.85,
+        "confidence": 0.88,
         "heatmapRegions": [
           {
             "x": 42,
@@ -101,36 +148,175 @@ export const patients: Patient[] = [
             "label": "exudates"
           }
         ],
-        "notes": "Moderate NPDR, scattered exudates (right eye)",
+        "notes": "Moderate NPDR, scattered exudates (left eye)",
         "imageQuality": 92,
         "imageUrl": "/images/eye-macro.jpg",
-        "eye": "right",
+        "eye": "left",
         "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: no sugar at all, use sugar-free for tea if needed",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1500-1700 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "followUp": "Eye check in 3 months"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 1 exudates at 92/100 quality, 87% confidence. Risk 86/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "1 focal lesions: exudates within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (87%) \u2014 quality 92/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.2%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.2% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "148/92",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 148 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "11y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 11y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision, floaters",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 92/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
+        }
       }
     ],
     "lastScreened": "2026-02-10",
     "medication": [
       "Metformin 500mg",
-      "Glimipride 2mg"
+      "Glimipride 2mg",
+      "Telmisartan 40mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-02-10",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-02-10",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-02-10",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-02-10",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-02-10",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-02-10",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-02-10",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-02-10",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "completed"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-02-10",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      }
     ]
   },
   {
@@ -178,23 +364,71 @@ export const patients: Patient[] = [
         "heatmapRegions": [],
         "notes": "No DR, healthy retina",
         "imageQuality": 95,
-        "dietPlan": {
-          "summary": "Balanced diabetes plate to keep sugar and BP steady and protect eyes.",
-          "dos": [
-            "Whole grains: jowar, bajra, brown rice (1.5 cups cooked per meal)",
-            "Dal + seasonal veg daily, 2 tsp oil max",
-            "Fruit: 1 small guava or papaya (100g) \u2014 avoid mango/banana in excess",
-            "Walk 30 min daily, check sugar as advised"
+        "analysis": {
+          "summary": "No DR \u2014 no lesions at 95/100 quality, 94% confidence. Risk 34/100.",
+          "lesionsDetected": [
+            {
+              "type": "none",
+              "count": 0,
+              "locations": "entire retina clear",
+              "severity": "none"
+            }
           ],
-          "donts": [
-            "Avoid sugary tea, cold drinks, sweets, and white rice in large portions",
-            "Avoid fried snacks (samosa, pakora) and reusing oil",
-            "Avoid skipping meals \u2014 eat on time"
+          "stageJustification": "No microaneurysms, haemorrhages, or exudates detected. Retina shows uniform reflex, sharp disc margins. Absence of lesions across all quadrants confirms No DR (ETDRS 10).",
+          "confidenceExplanation": "High confidence (94%) because image quality 95/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.1%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.1% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "132/84",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 132 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "6y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 6y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "asymptomatic",
+              "contribution": "Asymptomatic \u2014 typical early DR, screening still essential"
+            }
           ],
-          "dailyCalories": "1400-1600 kcal",
-          "followUp": "Continue same plan, annual eye rescreen"
+          "imageQualityAssessment": "Excellent 95/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "No DR is clinically significant as a true negative \u2014 confirms good metabolic control is protecting retina. No referral, but annual rescreen essential as 11y DM still at risk.",
+          "recommendedActions": [
+            "Continue annual screening",
+            "Maintain HbA1c <7%, BP <130/80",
+            "Annual foot check + lipid control"
+          ],
+          "urgency": "routine"
         },
         "imageUrl": "/images/fundus-normal.jpg",
+        "dietPlan": {
+          "summary": "Balanced plate to keep sugar steady and protect eyes.",
+          "dos": [
+            "Whole grains: jowar, bajra, brown rice (1.5 cups)",
+            "Dal + veg daily, 2 tsp oil",
+            "Fruit: 1 small guava/papaya",
+            "Walk 30 min daily"
+          ],
+          "donts": [
+            "Avoid sugary tea, cold drinks, sweets",
+            "Avoid fried snacks",
+            "Avoid skipping meals"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Annual eye check"
+        },
         "eye": "left"
       },
       {
@@ -208,25 +442,98 @@ export const patients: Patient[] = [
         "imageUrl": "/images/fundus-normal.jpg",
         "eye": "right",
         "dietPlan": {
-          "summary": "Balanced diabetes plate to keep sugar and BP steady and protect eyes.",
+          "summary": "Balanced plate to keep sugar steady and protect eyes.",
           "dos": [
-            "Whole grains: jowar, bajra, brown rice (1.5 cups cooked per meal)",
-            "Dal + seasonal veg daily, 2 tsp oil max",
-            "Fruit: 1 small guava or papaya (100g) \u2014 avoid mango/banana in excess",
-            "Walk 30 min daily, check sugar as advised"
+            "Whole grains: jowar, bajra, brown rice (1.5 cups)",
+            "Dal + veg daily, 2 tsp oil",
+            "Fruit: 1 small guava/papaya",
+            "Walk 30 min daily"
           ],
           "donts": [
-            "Avoid sugary tea, cold drinks, sweets, and white rice in large portions",
-            "Avoid fried snacks (samosa, pakora) and reusing oil",
-            "Avoid skipping meals \u2014 eat on time"
+            "Avoid sugary tea, cold drinks, sweets",
+            "Avoid fried snacks",
+            "Avoid skipping meals"
           ],
           "dailyCalories": "1400-1600 kcal",
-          "followUp": "Continue same plan, annual eye rescreen"
+          "followUp": "Annual eye check"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "No DR \u2014 no lesions at 95/100 quality, 94% confidence. Risk 34/100.",
+          "lesionsDetected": [
+            {
+              "type": "none",
+              "count": 0,
+              "locations": "entire retina clear",
+              "severity": "none"
+            }
+          ],
+          "stageJustification": "No microaneurysms, haemorrhages, or exudates detected. Retina shows uniform reflex, sharp disc margins. Absence of lesions across all quadrants confirms No DR (ETDRS 10).",
+          "confidenceExplanation": "High confidence (94%) because image quality 95/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.1%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.1% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "132/84",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 132 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "6y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 6y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "asymptomatic",
+              "contribution": "Asymptomatic \u2014 typical early DR, screening still essential"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 95/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "No DR is clinically significant as a true negative \u2014 confirms good metabolic control is protecting retina. No referral, but annual rescreen essential as 11y DM still at risk.",
+          "recommendedActions": [
+            "Continue annual screening",
+            "Maintain HbA1c <7%, BP <130/80",
+            "Annual foot check + lipid control"
+          ],
+          "urgency": "routine"
+        }
       }
     ],
-    "lastScreened": "2026-04-12"
+    "lastScreened": "2026-04-12",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-04-12",
+        "indication": "Maintenance",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-04-12",
+        "indication": "BP control",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg",
+      "Telmisartan 40mg"
+    ]
   },
   {
     "id": "GV-003",
@@ -283,33 +590,80 @@ export const patients: Patient[] = [
         ],
         "notes": "Severe NPDR, intraretinal haemorrhages",
         "imageQuality": 88,
+        "analysis": {
+          "summary": "Severe NPDR \u2014 1 haemorrhage at 88/100 quality, 91% confidence. Risk 92/100.",
+          "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "4-quadrant haemorrhages + 1 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (91%) \u2014 quality 88/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "10.1%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 10.1% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "162/98",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 162 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "15y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 15y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision, eye pain",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 88/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
+        },
+        "imageUrl": "/images/fundus-scatter.jpg",
         "dietPlan": {
-          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
-            "Small frequent meals, millet + dal, no large rice plates",
-            "Fruit limited to 80-100g, no juice/dry fruits",
-            "Daily walk as tolerated, plus BP and sugar log",
-            "Extra: no sugar at all, use sugar-free for tea if needed",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sugar, fried, salty, or processed foods",
-            "No smoking, alcohol, or missing doses",
-            "Avoid long gaps without food or heavy feasts",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1400-1600 kcal",
-          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+          "followUp": "Urgent eye referral 1-2 weeks"
         },
-        "imageUrl": "/images/fundus-proliferative.jpg",
         "eye": "left"
       },
       {
         "id": "v3-other",
         "date": "2026-01-18",
         "drStage": 3,
-        "confidence": 0.92,
+        "confidence": 0.9,
         "heatmapRegions": [
           {
             "x": 55,
@@ -320,31 +674,194 @@ export const patients: Patient[] = [
         ],
         "notes": "Severe NPDR, intraretinal haemorrhages (right eye)",
         "imageQuality": 88,
-        "imageUrl": "/images/fundus-proliferative.jpg",
+        "imageUrl": "/images/fundus-scatter.jpg",
         "eye": "right",
         "dietPlan": {
-          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
-            "Small frequent meals, millet + dal, no large rice plates",
-            "Fruit limited to 80-100g, no juice/dry fruits",
-            "Daily walk as tolerated, plus BP and sugar log",
-            "Extra: no sugar at all, use sugar-free for tea if needed",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sugar, fried, salty, or processed foods",
-            "No smoking, alcohol, or missing doses",
-            "Avoid long gaps without food or heavy feasts",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1400-1600 kcal",
-          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+          "followUp": "Urgent eye referral 1-2 weeks"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Severe NPDR \u2014 1 haemorrhage at 88/100 quality, 91% confidence. Risk 92/100.",
+          "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "4-quadrant haemorrhages + 1 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (91%) \u2014 quality 88/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "10.1%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 10.1% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "162/98",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 162 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "15y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 15y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision, eye pain",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 88/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
+        }
       }
     ],
-    "lastScreened": "2026-01-18"
+    "lastScreened": "2026-01-18",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-01-18",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-01-18",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Insulin Glargine",
+        "dosage": "10U",
+        "frequency": "HS",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta",
+        "prescribedOn": "2026-01-18",
+        "indication": "Basal add-on for HbA1c 10%+",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-18",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-18",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-18",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-18",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "discontinued"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-01-18",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-01-18",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-18",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-01-18",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg",
+      "Glimipride 2mg",
+      "Insulin Glargine"
+    ]
   },
   {
     "id": "GV-004",
@@ -374,74 +891,172 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-004-left",
+        "id": "vGV-004-auto-1",
         "date": "2026-08-20",
         "drStage": 0,
-        "confidence": 0.86,
+        "confidence": 0.93,
         "heatmapRegions": [],
-        "notes": "No DR, healthy retina",
-        "imageQuality": 90,
-        "imageUrl": "/images/fundus-normal.jpg",
-        "eye": "left",
+        "notes": "No DR, healthy retina \u2014 annual rescreen",
+        "imageQuality": 92,
         "analysis": {
-          "summary": "No DR \u2014 eye left",
-          "lesionsDetected": [],
-          "stageJustification": "No lesions",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
+          "summary": "No DR \u2014 no lesions at 92/100 quality, 93% confidence. Risk 18/100.",
+          "lesionsDetected": [
+            {
+              "type": "none",
+              "count": 0,
+              "locations": "entire retina clear",
+              "severity": "none"
+            }
+          ],
+          "stageJustification": "No microaneurysms, haemorrhages, or exudates detected. Retina shows uniform reflex, sharp disc margins. Absence of lesions across all quadrants confirms No DR (ETDRS 10).",
+          "confidenceExplanation": "High confidence (93%) because image quality 92/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.4%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.4% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "118/76",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 118 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "3y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 3y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "asymptomatic",
+              "contribution": "Asymptomatic \u2014 typical early DR, screening still essential"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 92/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "No DR is clinically significant as a true negative \u2014 confirms good metabolic control is protecting retina. No referral, but annual rescreen essential as 11y DM still at risk.",
+          "recommendedActions": [
+            "Continue annual screening",
+            "Maintain HbA1c <7%, BP <130/80",
+            "Annual foot check + lipid control"
+          ],
           "urgency": "routine"
         },
+        "imageUrl": "/images/fundus-normal.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Balanced plate to keep sugar steady and protect eyes.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "Whole grains: jowar, bajra, brown rice (1.5 cups)",
+            "Dal + veg daily, 2 tsp oil",
+            "Fruit: 1 small guava/papaya",
+            "Walk 30 min daily"
           ],
           "donts": [
-            "Avoid sugar"
+            "Avoid sugary tea, cold drinks, sweets",
+            "Avoid fried snacks",
+            "Avoid skipping meals"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Annual eye check"
+        },
+        "eye": "left"
       },
       {
-        "id": "vGV-004-right",
+        "id": "vGV-004-auto-1-other",
         "date": "2026-08-20",
         "drStage": 0,
-        "confidence": 0.85,
+        "confidence": 0.94,
         "heatmapRegions": [],
-        "notes": "No DR, healthy retina",
-        "imageQuality": 89,
+        "notes": "No DR, healthy retina \u2014 annual rescreen (right eye)",
+        "imageQuality": 92,
         "imageUrl": "/images/fundus-normal.jpg",
         "eye": "right",
-        "analysis": {
-          "summary": "No DR \u2014 eye right",
-          "lesionsDetected": [],
-          "stageJustification": "No lesions",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
-        },
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Balanced plate to keep sugar steady and protect eyes.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "Whole grains: jowar, bajra, brown rice (1.5 cups)",
+            "Dal + veg daily, 2 tsp oil",
+            "Fruit: 1 small guava/papaya",
+            "Walk 30 min daily"
           ],
           "donts": [
-            "Avoid sugar"
+            "Avoid sugary tea, cold drinks, sweets",
+            "Avoid fried snacks",
+            "Avoid skipping meals"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Annual eye check"
+        },
+        "analysis": {
+          "summary": "No DR \u2014 no lesions at 92/100 quality, 93% confidence. Risk 18/100.",
+          "lesionsDetected": [
+            {
+              "type": "none",
+              "count": 0,
+              "locations": "entire retina clear",
+              "severity": "none"
+            }
+          ],
+          "stageJustification": "No microaneurysms, haemorrhages, or exudates detected. Retina shows uniform reflex, sharp disc margins. Absence of lesions across all quadrants confirms No DR (ETDRS 10).",
+          "confidenceExplanation": "High confidence (93%) because image quality 92/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.4%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.4% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "118/76",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 118 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "3y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 3y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "asymptomatic",
+              "contribution": "Asymptomatic \u2014 typical early DR, screening still essential"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 92/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "No DR is clinically significant as a true negative \u2014 confirms good metabolic control is protecting retina. No referral, but annual rescreen essential as 11y DM still at risk.",
+          "recommendedActions": [
+            "Continue annual screening",
+            "Maintain HbA1c <7%, BP <130/80",
+            "Annual foot check + lipid control"
+          ],
+          "urgency": "routine"
         }
       }
-    ]
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Maintenance",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg"
+    ],
+    "lastScreened": "2026-08-20"
   },
   {
     "id": "GV-005",
@@ -499,25 +1114,79 @@ export const patients: Patient[] = [
         ],
         "notes": "Moderate NPDR, exudates",
         "imageQuality": 78,
-        "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
-          "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 microaneurysm, microaneurysm at 78/100 quality, 93% confidence. Risk 76/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (38%,72%)",
+              "severity": "moderate"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (45%,37%) near macula",
+              "severity": "moderate"
+            }
           ],
-          "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months",
-            "HB high, avoid any sweets until next HbA1c check"
+          "stageJustification": "2 focal lesions: microaneurysm, microaneurysm within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "High confidence (93%) because image quality 78/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.8%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.8% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "127/79",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 127 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "1y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 1y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "fluctuating vision, blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1300-1500 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "imageQualityAssessment": "Good 78/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
         },
         "imageUrl": "/images/fundus-scatter.jpg",
+        "dietPlan": {
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
+          "dos": [
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check",
+            "Extra: no sugar at all"
+          ],
+          "donts": [
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines",
+            "HB high, avoid sweets"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Eye check in 3 months"
+        },
         "eye": "right"
       },
       {
@@ -541,30 +1210,161 @@ export const patients: Patient[] = [
         ],
         "notes": "Moderate NPDR, exudates",
         "imageQuality": 81,
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 microaneurysm, haemorrhage at 81/100 quality, 80% confidence. Risk 76/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (50%,50%) near macula",
+              "severity": "moderate"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (30%,57%)",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: microaneurysm, haemorrhage within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Lower confidence (80%) due to quality 81/100 (soft focus at periphery), 1 haemorrhage near disc obscured by glare. Lesion count borderline between stages 2/3. Advise repeat capture in 2 weeks.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.8%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.8% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "127/79",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 127 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "1y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 1y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "fluctuating vision, blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 81/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
+        },
+        "imageUrl": "/images/fundus-scatter.jpg",
         "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1300-1500 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "followUp": "Eye check in 3 months"
         },
-        "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "left"
+        "eye": "right"
       }
     ],
     "lastScreened": "2026-05-10",
-    "footLastCheck": "2026-08-18"
+    "footLastCheck": "2026-08-18",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-05-10",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-05-10",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-05-10",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "completed"
+      },
+      {
+        "drug": "Mupirocin 2% ointment",
+        "dosage": "thin layer",
+        "frequency": "BD",
+        "duration": "7d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Foot care \u2014 post-screening",
+        "status": "completed"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg",
+      "Glimipride 2mg",
+      "Atorvastatin 10mg"
+    ]
   },
   {
     "id": "GV-006",
@@ -636,32 +1436,86 @@ export const patients: Patient[] = [
         ],
         "notes": "Moderate NPDR, exudates",
         "imageQuality": 79,
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 neovascularization, microaneurysm at 79/100 quality, 90% confidence. Risk 89/100.",
+          "lesionsDetected": [
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "inferonasal (42%,30%)",
+              "severity": "moderate"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (45%,32%)",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: neovascularization, microaneurysm within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (90%) \u2014 quality 79/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.6%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.6% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "114/93",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 114 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "7y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 7y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 79/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
         "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1500-1700 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "followUp": "Eye check in 3 months"
         },
-        "imageUrl": "/images/fundus-scatter.jpg",
-        "eye": "left"
+        "eye": "right"
       },
       {
         "id": "vGV-006-0-other",
         "date": "2026-04-08",
         "drStage": 2,
-        "confidence": 0.91,
+        "confidence": 0.92,
         "heatmapRegions": [
           {
             "x": 42,
@@ -670,34 +1524,161 @@ export const patients: Patient[] = [
             "label": "neovascularization"
           }
         ],
-        "notes": "Moderate NPDR, exudates (right eye)",
+        "notes": "Moderate NPDR, exudates (left eye)",
         "imageQuality": 79,
-        "imageUrl": "/images/fundus-scatter.jpg",
-        "eye": "right",
+        "imageUrl": "/images/eye-macro.jpg",
+        "eye": "left",
         "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1500-1700 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "followUp": "Eye check in 3 months"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 neovascularization, microaneurysm at 79/100 quality, 90% confidence. Risk 89/100.",
+          "lesionsDetected": [
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "inferonasal (42%,30%)",
+              "severity": "moderate"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (45%,32%)",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: neovascularization, microaneurysm within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (90%) \u2014 quality 79/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.6%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.6% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "114/93",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 114 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "7y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 7y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 79/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
+        }
       }
     ],
     "lastScreened": "2026-04-08",
     "medication": [
-      "Insulin Glargine"
+      "Metformin 500mg",
+      "Glimipride 2mg",
+      "Atorvastatin 10mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-04-08",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-04-08",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-04-08",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-04-08",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-04-08",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-04-08",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "completed"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-04-08",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      }
     ]
   },
   {
@@ -764,31 +1745,78 @@ export const patients: Patient[] = [
         ],
         "notes": "Mild NPDR, microaneurysms",
         "imageQuality": 88,
-        "dietPlan": {
-          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
-          "dos": [
-            "Millet-based meals (jowar/bajra) + dal + green veg",
-            "1 fruit (guava, apple) and 5 soaked almonds",
-            "Salt <5g/day, BP check weekly",
-            "Walk 30-45 min, 5 days/week",
-            "Extra: less salt, check BP twice weekly at PHC"
+        "analysis": {
+          "summary": "Mild NPDR \u2014 1 exudates at 88/100 quality, 92% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (35%,46%)",
+              "severity": "mild"
+            }
           ],
-          "donts": [
-            "No added sugar, jaggery, honey, or sweetened drinks",
-            "Limit salt, pickle, papad, and packaged snacks",
-            "No smoking or tobacco"
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 35%/46% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "High confidence (92%) because image quality 88/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "8.7%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 8.7% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "159/90",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 159 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "18y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 18y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1400-1500 kcal",
-          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+          "imageQualityAssessment": "Good 88/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
+          "urgency": "routine"
         },
         "imageUrl": "/images/fundus-mild.jpg",
+        "dietPlan": {
+          "summary": "Tighten control to stop mild changes from growing.",
+          "dos": [
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
+          ],
+          "donts": [
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Eye check in 6 months"
+        },
         "eye": "left"
       },
       {
         "id": "vGV-007-0-other",
         "date": "2026-05-10",
         "drStage": 1,
-        "confidence": 0.91,
+        "confidence": 0.92,
         "heatmapRegions": [
           {
             "x": 35,
@@ -802,31 +1830,160 @@ export const patients: Patient[] = [
         "imageUrl": "/images/fundus-mild.jpg",
         "eye": "right",
         "dietPlan": {
-          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "summary": "Tighten control to stop mild changes from growing.",
           "dos": [
-            "Millet-based meals (jowar/bajra) + dal + green veg",
-            "1 fruit (guava, apple) and 5 soaked almonds",
-            "Salt <5g/day, BP check weekly",
-            "Walk 30-45 min, 5 days/week",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
           ],
           "donts": [
-            "No added sugar, jaggery, honey, or sweetened drinks",
-            "Limit salt, pickle, papad, and packaged snacks",
-            "No smoking or tobacco"
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
           ],
           "dailyCalories": "1400-1500 kcal",
-          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+          "followUp": "Eye check in 6 months"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Mild NPDR \u2014 1 exudates at 88/100 quality, 92% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (35%,46%)",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 35%/46% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "High confidence (92%) because image quality 88/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "8.7%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 8.7% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "159/90",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 159 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "18y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 18y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 88/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
+          "urgency": "routine"
+        }
       }
     ],
     "lastScreened": "2026-05-10",
     "medication": [
       "Metformin 500mg",
-      "Sitagliptin 100mg"
+      "Sitagliptin 100mg",
+      "Telmisartan 40mg"
     ],
-    "footLastCheck": "2026-08-18"
+    "footLastCheck": "2026-08-18",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "First-line",
+        "status": "active"
+      },
+      {
+        "drug": "Sitagliptin 100mg",
+        "dosage": "100mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "DPP4 add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Mupirocin 2% ointment",
+        "dosage": "thin layer",
+        "frequency": "BD",
+        "duration": "7d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Foot care \u2014 post-screening",
+        "status": "completed"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "GV-008",
@@ -863,106 +2020,298 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-008-left",
+        "id": "vGV-008-auto-1",
         "date": "2026-08-20",
         "drStage": 3,
-        "confidence": 0.9,
+        "confidence": 0.84,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
+            "x": 55,
+            "y": 45,
+            "r": 20,
+            "label": "haemorrhage"
+          },
+          {
+            "x": 42,
+            "y": 38,
+            "r": 16,
+            "label": "exudates"
+          },
+          {
+            "x": 60,
+            "y": 30,
             "r": 14,
             "label": "microaneurysm"
           }
         ],
-        "notes": "Severe NPDR",
-        "imageQuality": 92,
-        "imageUrl": "/images/fundus-proliferative.jpg",
-        "eye": "left",
+        "notes": "Severe NPDR, 4-quadrant haemorrhages",
+        "imageQuality": 80,
         "analysis": {
-          "summary": "Severe NPDR \u2014 eye left",
+          "summary": "Severe NPDR \u2014 3 haemorrhage, exudates, microaneurysm at 80/100 quality, 84% confidence. Risk 95/100.",
           "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "severe"
+            },
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "inferonasal (60%,30%)",
+              "severity": "severe"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 80/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.1%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.1% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "121/83",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 121 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "17y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 17y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 80/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
         },
+        "imageUrl": "/images/fundus-proliferative.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food",
+            "HB high, avoid sweets"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
+        "eye": "left"
       },
       {
-        "id": "vGV-008-right",
+        "id": "vGV-008-auto-1-other",
         "date": "2026-08-20",
         "drStage": 3,
-        "confidence": 0.85,
+        "confidence": 0.82,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 55,
+            "y": 45,
+            "r": 20,
+            "label": "haemorrhage"
           }
         ],
-        "notes": "Severe NPDR",
-        "imageQuality": 92,
-        "imageUrl": "/images/fundus-proliferative.jpg",
+        "notes": "Severe NPDR, 4-quadrant haemorrhages (right eye)",
+        "imageQuality": 80,
+        "imageUrl": "/images/eye-macro.jpg",
         "eye": "right",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated",
+            "Extra: no sugar at all"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food",
+            "HB high, avoid sweets"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
         "analysis": {
-          "summary": "Severe NPDR \u2014 eye right",
+          "summary": "Severe NPDR \u2014 3 haemorrhage, exudates, microaneurysm at 80/100 quality, 84% confidence. Risk 95/100.",
           "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "severe"
+            },
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "inferonasal (60%,30%)",
+              "severity": "severe"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
-        },
-        "dietPlan": {
-          "summary": "Balanced plate",
-          "dos": [
-            "Whole grains",
-            "Dal + veg"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 80/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.1%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.1% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "121/83",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 121 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "17y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 17y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "donts": [
-            "Avoid sugar"
+          "imageQualityAssessment": "Good 80/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
+          "urgency": "urgent"
         }
       }
     ],
     "medication": [
       "Metformin 500mg",
-      "Glimipride 2mg"
-    ]
+      "Glimipride 2mg",
+      "Atorvastatin 10mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-08-20",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-08-20",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
+    ],
+    "lastScreened": "2026-08-20"
   },
   {
     "id": "GV-009",
@@ -1010,105 +2359,318 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-009-left",
+        "id": "vGV-009-auto-1",
         "date": "2026-08-20",
         "drStage": 3,
-        "confidence": 0.91,
+        "confidence": 0.84,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
+            "x": 55,
+            "y": 45,
+            "r": 20,
+            "label": "haemorrhage"
+          },
+          {
+            "x": 42,
+            "y": 38,
+            "r": 16,
+            "label": "exudates"
+          },
+          {
+            "x": 60,
+            "y": 30,
             "r": 14,
             "label": "microaneurysm"
           }
         ],
-        "notes": "Severe NPDR",
-        "imageQuality": 90,
-        "imageUrl": "/images/fundus-proliferative.jpg",
-        "eye": "left",
+        "notes": "Severe NPDR, 4-quadrant haemorrhages",
+        "imageQuality": 80,
         "analysis": {
-          "summary": "Severe NPDR \u2014 eye left",
+          "summary": "Severe NPDR \u2014 3 haemorrhage, exudates, microaneurysm at 80/100 quality, 84% confidence. Risk 95/100.",
           "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "severe"
+            },
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "inferonasal (60%,30%)",
+              "severity": "severe"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 80/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "10.5%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 10.5% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "139/102",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 139 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "17y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 17y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "eye pain, headache",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 80/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
         },
+        "imageUrl": "/images/fundus-proliferative.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food",
+            "HB high, avoid sweets"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1200-1400 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
+        "eye": "left"
       },
       {
-        "id": "vGV-009-right",
+        "id": "vGV-009-auto-1-other",
         "date": "2026-08-20",
         "drStage": 3,
-        "confidence": 0.86,
+        "confidence": 0.84,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 55,
+            "y": 45,
+            "r": 20,
+            "label": "haemorrhage"
           }
         ],
-        "notes": "Severe NPDR",
-        "imageQuality": 93,
-        "imageUrl": "/images/fundus-proliferative.jpg",
+        "notes": "Severe NPDR, 4-quadrant haemorrhages (right eye)",
+        "imageQuality": 80,
+        "imageUrl": "/images/eye-macro.jpg",
         "eye": "right",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated",
+            "Extra: no sugar at all"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food",
+            "HB high, avoid sweets"
+          ],
+          "dailyCalories": "1200-1400 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
         "analysis": {
-          "summary": "Severe NPDR \u2014 eye right",
+          "summary": "Severe NPDR \u2014 3 haemorrhage, exudates, microaneurysm at 80/100 quality, 84% confidence. Risk 95/100.",
           "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "severe"
+            },
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "inferonasal (60%,30%)",
+              "severity": "severe"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
-        },
-        "dietPlan": {
-          "summary": "Balanced plate",
-          "dos": [
-            "Whole grains",
-            "Dal + veg"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 80/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "10.5%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 10.5% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "139/102",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 139 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "17y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 17y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "eye pain, headache",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "donts": [
-            "Avoid sugar"
+          "imageQualityAssessment": "Good 80/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
+          "urgency": "urgent"
         }
       }
     ],
     "medication": [
-      "Glimipride 2mg"
-    ]
+      "Metformin 500mg",
+      "Glimipride 2mg",
+      "Insulin Glargine"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-08-20",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Insulin Glargine",
+        "dosage": "10U",
+        "frequency": "HS",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta",
+        "prescribedOn": "2026-08-20",
+        "indication": "Basal add-on for HbA1c 10%+",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "BP control",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "discontinued"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-08-20",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
+    ],
+    "lastScreened": "2026-08-20"
   },
   {
     "id": "GV-010",
@@ -1186,25 +2748,85 @@ export const patients: Patient[] = [
         ],
         "notes": "Proliferative DR, neovascularization",
         "imageQuality": 82,
+        "analysis": {
+          "summary": "Proliferative DR \u2014 3 neovascularization, haemorrhage, haemorrhage at 82/100 quality, 88% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "posterior pole (55%,39%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (43%,32%)",
+              "severity": "severe"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (31%,69%)",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "Neovascularization at disc/elsewhere + preretinal haemorrhage, 3 proliferative lesions. ETDRS 61-75 Proliferative DR \u2014 high-risk PDR, imminent vitreous haemorrhage/tractional detachment risk.",
+          "confidenceExplanation": "Moderate confidence (88%) \u2014 quality 82/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 3/4. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.4%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.4% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "125/89",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 125 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "9y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 9y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 82/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Proliferative DR is sight-threatening \u2014 neovascular fronds bleed easily, tractional detachment risk. Immediate PRP/anti-VEGF needed, avoid Valsalva, urgent referral.",
+          "recommendedActions": [
+            "Emergency eSanjeevani <1w, PRP + anti-VEGF",
+            "No strenuous activity, head elevation",
+            "Admit if vitreous haemorrhage, FFA/OCT planned"
+          ],
+          "urgency": "emergency"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
         "dietPlan": {
-          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "summary": "Very strict diet and urgent eye care.",
           "dos": [
-            "Very strict: small millet portions, dal, boiled veg, curd small",
-            "Salt <3g, oil <2 tsp, no added sugar at all",
-            "Fruit only 50-80g if sugar allows, otherwise avoid",
-            "Light activity only as doctor advises, no strain",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+            "Very strict small portions",
+            "Salt <3g, oil <2 tsp",
+            "Fruit 50-80g only",
+            "Light activity only",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sugar, fried, salty, processed, or outside food",
-            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
-            "Do not delay eye treatment, do not miss any dose",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sugar or fried foods",
+            "No alcohol or smoking",
+            "Do not delay treatment",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1300-1500 kcal",
-          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+          "followUp": "Emergency eye referral 1 week"
         },
-        "imageUrl": "/images/fundus-laser.jpg",
         "eye": "right"
       },
       {
@@ -1234,32 +2856,185 @@ export const patients: Patient[] = [
         ],
         "notes": "Proliferative DR, neovascularization",
         "imageQuality": 85,
+        "analysis": {
+          "summary": "Proliferative DR \u2014 3 neovascularization, exudates, microaneurysm at 85/100 quality, 95% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "posterior pole (38%,54%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (41%,53%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (52%,28%)",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "Neovascularization at disc/elsewhere + preretinal haemorrhage, 3 proliferative lesions. ETDRS 61-75 Proliferative DR \u2014 high-risk PDR, imminent vitreous haemorrhage/tractional detachment risk.",
+          "confidenceExplanation": "High confidence (95%) because image quality 85/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.4%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.4% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "125/89",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 125 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "9y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 9y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 85/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Proliferative DR is sight-threatening \u2014 neovascular fronds bleed easily, tractional detachment risk. Immediate PRP/anti-VEGF needed, avoid Valsalva, urgent referral.",
+          "recommendedActions": [
+            "Emergency eSanjeevani <1w, PRP + anti-VEGF",
+            "No strenuous activity, head elevation",
+            "Admit if vitreous haemorrhage, FFA/OCT planned"
+          ],
+          "urgency": "emergency"
+        },
+        "imageUrl": "/images/fundus-laser.jpg",
         "dietPlan": {
-          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "summary": "Very strict diet and urgent eye care.",
           "dos": [
-            "Very strict: small millet portions, dal, boiled veg, curd small",
-            "Salt <3g, oil <2 tsp, no added sugar at all",
-            "Fruit only 50-80g if sugar allows, otherwise avoid",
-            "Light activity only as doctor advises, no strain",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+            "Very strict small portions",
+            "Salt <3g, oil <2 tsp",
+            "Fruit 50-80g only",
+            "Light activity only",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sugar, fried, salty, processed, or outside food",
-            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
-            "Do not delay eye treatment, do not miss any dose",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sugar or fried foods",
+            "No alcohol or smoking",
+            "Do not delay treatment",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1300-1500 kcal",
-          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+          "followUp": "Emergency eye referral 1 week"
         },
-        "imageUrl": "/images/fundus-proliferative.jpg",
         "eye": "left"
       }
     ],
     "lastScreened": "2026-04-08",
     "medication": [
-      "Sitagliptin 100mg",
-      "Insulin Glargine"
+      "Metformin 500mg",
+      "Glimipride 2mg",
+      "Atorvastatin 10mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-04-08",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-04-08",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-04-08",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-04-08",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-04-08",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-04-08",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-04-08",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Ranibizumab 0.5mg intravitreal",
+        "dosage": "0.5mg/0.05mL",
+        "frequency": "single injection",
+        "duration": "1 dose, review 4w",
+        "prescribedBy": "Dr. Mehta, Retina Specialist",
+        "prescribedOn": "2026-02-20",
+        "indication": "PDR stage 4 \u2014 neovascularization on 2026-02-20",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-02-20",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
     ]
   },
   {
@@ -1313,10 +3088,10 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-011-left",
+        "id": "vGV-011-auto-1",
         "date": "2026-08-20",
         "drStage": 1,
-        "confidence": 0.86,
+        "confidence": 0.88,
         "heatmapRegions": [
           {
             "x": 38,
@@ -1325,46 +3100,80 @@ export const patients: Patient[] = [
             "label": "microaneurysm"
           }
         ],
-        "notes": "Mild NPDR",
-        "imageQuality": 93,
-        "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "left",
+        "notes": "Mild NPDR, single microaneurysm",
+        "imageQuality": 85,
         "analysis": {
-          "summary": "Mild NPDR \u2014 eye left",
+          "summary": "Mild NPDR \u2014 1 microaneurysm at 85/100 quality, 88% confidence. Risk 57/100.",
           "lesionsDetected": [
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
+              "locations": "posterior pole (38%,42%) near macula",
               "severity": "mild"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 38%/42% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "Moderate confidence (88%) \u2014 quality 85/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 0/1. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.8%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.8% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "125/102",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 125 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "5y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 5y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "eye pain, blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 85/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
           "urgency": "routine"
         },
+        "imageUrl": "/images/fundus-mild.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Tighten control to stop mild changes from growing.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
           ],
           "donts": [
-            "Avoid sugar"
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Eye check in 6 months"
+        },
+        "eye": "left"
       },
       {
-        "id": "vGV-011-right",
+        "id": "vGV-011-auto-1-other",
         "date": "2026-08-20",
         "drStage": 1,
-        "confidence": 0.9,
+        "confidence": 0.87,
         "heatmapRegions": [
           {
             "x": 38,
@@ -1373,42 +3182,92 @@ export const patients: Patient[] = [
             "label": "microaneurysm"
           }
         ],
-        "notes": "Mild NPDR",
-        "imageQuality": 92,
+        "notes": "Mild NPDR, single microaneurysm (right eye)",
+        "imageQuality": 85,
         "imageUrl": "/images/fundus-mild.jpg",
         "eye": "right",
+        "dietPlan": {
+          "summary": "Tighten control to stop mild changes from growing.",
+          "dos": [
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
+          ],
+          "donts": [
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Eye check in 6 months"
+        },
         "analysis": {
-          "summary": "Mild NPDR \u2014 eye right",
+          "summary": "Mild NPDR \u2014 1 microaneurysm at 85/100 quality, 88% confidence. Risk 57/100.",
           "lesionsDetected": [
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
+              "locations": "posterior pole (38%,42%) near macula",
               "severity": "mild"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 38%/42% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "Moderate confidence (88%) \u2014 quality 85/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 0/1. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.8%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.8% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "125/102",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 125 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "5y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 5y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "eye pain, blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 85/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
           "urgency": "routine"
-        },
-        "dietPlan": {
-          "summary": "Balanced plate",
-          "dos": [
-            "Whole grains",
-            "Dal + veg"
-          ],
-          "donts": [
-            "Avoid sugar"
-          ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
         }
       }
-    ]
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Maintenance",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg"
+    ],
+    "lastScreened": "2026-08-20"
   },
   {
     "id": "GV-012",
@@ -1480,31 +3339,84 @@ export const patients: Patient[] = [
         ],
         "notes": "Moderate NPDR, exudates",
         "imageQuality": 94,
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 microaneurysm, microaneurysm at 94/100 quality, 89% confidence. Risk 82/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (28%,70%)",
+              "severity": "moderate"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "superotemporal quadrant (70%,34%)",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: microaneurysm, microaneurysm within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (89%) \u2014 quality 94/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.9%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.9% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "157/82",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 157 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "9y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 9y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 94/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
+        },
+        "imageUrl": "/images/fundus-scatter.jpg",
         "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check"
           ],
           "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines"
           ],
           "dailyCalories": "1500-1700 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "followUp": "Eye check in 3 months"
         },
-        "imageUrl": "/images/fundus-mild.jpg",
         "eye": "left"
       },
       {
         "id": "vGV-012-0-other",
         "date": "2026-05-10",
         "drStage": 2,
-        "confidence": 0.89,
+        "confidence": 0.9,
         "heatmapRegions": [
           {
             "x": 28,
@@ -1515,31 +3427,167 @@ export const patients: Patient[] = [
         ],
         "notes": "Moderate NPDR, exudates (right eye)",
         "imageQuality": 94,
-        "imageUrl": "/images/fundus-mild.jpg",
+        "imageUrl": "/images/fundus-scatter.jpg",
         "eye": "right",
         "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check"
           ],
           "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines"
           ],
           "dailyCalories": "1500-1700 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "followUp": "Eye check in 3 months"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 microaneurysm, microaneurysm at 94/100 quality, 89% confidence. Risk 82/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (28%,70%)",
+              "severity": "moderate"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "superotemporal quadrant (70%,34%)",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: microaneurysm, microaneurysm within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (89%) \u2014 quality 94/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.9%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.9% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "157/82",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 157 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "9y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 9y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 94/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
+        }
       }
     ],
     "lastScreened": "2026-05-10",
     "medication": [
-      "Metformin 500mg"
+      "Metformin 500mg",
+      "Telmisartan 40mg",
+      "Amlodipine 5mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Maintenance",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-05-10",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-05-10",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "completed"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      }
     ]
   },
   {
@@ -1587,105 +3635,304 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-013-left",
+        "id": "vGV-013-auto-1",
         "date": "2026-08-20",
         "drStage": 3,
-        "confidence": 0.88,
+        "confidence": 0.84,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
+            "x": 55,
+            "y": 45,
+            "r": 20,
+            "label": "haemorrhage"
+          },
+          {
+            "x": 42,
+            "y": 38,
+            "r": 16,
+            "label": "exudates"
+          },
+          {
+            "x": 60,
+            "y": 30,
             "r": 14,
             "label": "microaneurysm"
           }
         ],
-        "notes": "Severe NPDR",
-        "imageQuality": 91,
-        "imageUrl": "/images/fundus-proliferative.jpg",
-        "eye": "left",
+        "notes": "Severe NPDR, 4-quadrant haemorrhages",
+        "imageQuality": 80,
         "analysis": {
-          "summary": "Severe NPDR \u2014 eye left",
+          "summary": "Severe NPDR \u2014 3 haemorrhage, exudates, microaneurysm at 80/100 quality, 84% confidence. Risk 88/100.",
           "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "severe"
+            },
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "inferonasal (60%,30%)",
+              "severity": "severe"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 80/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.9%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.9% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "152/99",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 152 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "11y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 11y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 80/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
         },
+        "imageUrl": "/images/fundus-scatter.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1200-1400 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
+        "eye": "right"
       },
       {
-        "id": "vGV-013-right",
+        "id": "vGV-013-auto-1-other",
         "date": "2026-08-20",
         "drStage": 3,
-        "confidence": 0.92,
+        "confidence": 0.83,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 55,
+            "y": 45,
+            "r": 20,
+            "label": "haemorrhage"
           }
         ],
-        "notes": "Severe NPDR",
-        "imageQuality": 91,
-        "imageUrl": "/images/fundus-proliferative.jpg",
-        "eye": "right",
+        "notes": "Severe NPDR, 4-quadrant haemorrhages (left eye)",
+        "imageQuality": 80,
+        "imageUrl": "/images/fundus-scatter.jpg",
+        "eye": "left",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food"
+          ],
+          "dailyCalories": "1200-1400 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
         "analysis": {
-          "summary": "Severe NPDR \u2014 eye right",
+          "summary": "Severe NPDR \u2014 3 haemorrhage, exudates, microaneurysm at 80/100 quality, 84% confidence. Risk 88/100.",
           "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "severe"
+            },
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "inferonasal (60%,30%)",
+              "severity": "severe"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
-        },
-        "dietPlan": {
-          "summary": "Balanced plate",
-          "dos": [
-            "Whole grains",
-            "Dal + veg"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 80/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.9%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.9% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "152/99",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 152 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "11y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 11y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "donts": [
-            "Avoid sugar"
+          "imageQualityAssessment": "Good 80/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
+          "urgency": "urgent"
         }
       }
     ],
     "medication": [
-      "Atorvastatin 10mg"
-    ]
+      "Metformin 500mg",
+      "Telmisartan 40mg",
+      "Amlodipine 5mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Maintenance",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-08-20",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
+    ],
+    "lastScreened": "2026-08-20"
   },
   {
     "id": "GV-014",
@@ -1734,24 +3981,72 @@ export const patients: Patient[] = [
         "heatmapRegions": [],
         "notes": "No DR, healthy retina",
         "imageQuality": 91,
-        "dietPlan": {
-          "summary": "Balanced diabetes plate to keep sugar and BP steady and protect eyes.",
-          "dos": [
-            "Whole grains: jowar, bajra, brown rice (1.5 cups cooked per meal)",
-            "Dal + seasonal veg daily, 2 tsp oil max",
-            "Fruit: 1 small guava or papaya (100g) \u2014 avoid mango/banana in excess",
-            "Walk 30 min daily, check sugar as advised"
+        "analysis": {
+          "summary": "No DR \u2014 no lesions at 91/100 quality, 92% confidence. Risk 59/100.",
+          "lesionsDetected": [
+            {
+              "type": "none",
+              "count": 0,
+              "locations": "entire retina clear",
+              "severity": "none"
+            }
           ],
-          "donts": [
-            "Avoid sugary tea, cold drinks, sweets, and white rice in large portions",
-            "Avoid fried snacks (samosa, pakora) and reusing oil",
-            "Avoid skipping meals \u2014 eat on time"
+          "stageJustification": "No microaneurysms, haemorrhages, or exudates detected. Retina shows uniform reflex, sharp disc margins. Absence of lesions across all quadrants confirms No DR (ETDRS 10).",
+          "confidenceExplanation": "High confidence (92%) because image quality 91/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "135/100",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 135 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "5y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 5y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1600-1800 kcal",
-          "followUp": "Continue same plan, annual eye rescreen"
+          "imageQualityAssessment": "Excellent 91/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "No DR is clinically significant as a true negative \u2014 confirms good metabolic control is protecting retina. No referral, but annual rescreen essential as 11y DM still at risk.",
+          "recommendedActions": [
+            "Continue annual screening",
+            "Maintain HbA1c <7%, BP <130/80",
+            "Annual foot check + lipid control"
+          ],
+          "urgency": "routine"
         },
         "imageUrl": "/images/fundus-normal.jpg",
-        "eye": "left"
+        "dietPlan": {
+          "summary": "Balanced plate to keep sugar steady and protect eyes.",
+          "dos": [
+            "Whole grains: jowar, bajra, brown rice (1.5 cups)",
+            "Dal + veg daily, 2 tsp oil",
+            "Fruit: 1 small guava/papaya",
+            "Walk 30 min daily"
+          ],
+          "donts": [
+            "Avoid sugary tea, cold drinks, sweets",
+            "Avoid fried snacks",
+            "Avoid skipping meals"
+          ],
+          "dailyCalories": "1600-1800 kcal",
+          "followUp": "Annual eye check"
+        },
+        "eye": "right"
       },
       {
         "id": "vGV-014-0-other",
@@ -1759,31 +4054,115 @@ export const patients: Patient[] = [
         "drStage": 0,
         "confidence": 0.93,
         "heatmapRegions": [],
-        "notes": "No DR, healthy retina (right eye)",
+        "notes": "No DR, healthy retina (left eye)",
         "imageQuality": 91,
         "imageUrl": "/images/fundus-normal.jpg",
-        "eye": "right",
+        "eye": "left",
         "dietPlan": {
-          "summary": "Balanced diabetes plate to keep sugar and BP steady and protect eyes.",
+          "summary": "Balanced plate to keep sugar steady and protect eyes.",
           "dos": [
-            "Whole grains: jowar, bajra, brown rice (1.5 cups cooked per meal)",
-            "Dal + seasonal veg daily, 2 tsp oil max",
-            "Fruit: 1 small guava or papaya (100g) \u2014 avoid mango/banana in excess",
-            "Walk 30 min daily, check sugar as advised"
+            "Whole grains: jowar, bajra, brown rice (1.5 cups)",
+            "Dal + veg daily, 2 tsp oil",
+            "Fruit: 1 small guava/papaya",
+            "Walk 30 min daily"
           ],
           "donts": [
-            "Avoid sugary tea, cold drinks, sweets, and white rice in large portions",
-            "Avoid fried snacks (samosa, pakora) and reusing oil",
-            "Avoid skipping meals \u2014 eat on time"
+            "Avoid sugary tea, cold drinks, sweets",
+            "Avoid fried snacks",
+            "Avoid skipping meals"
           ],
           "dailyCalories": "1600-1800 kcal",
-          "followUp": "Continue same plan, annual eye rescreen"
+          "followUp": "Annual eye check"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "No DR \u2014 no lesions at 91/100 quality, 92% confidence. Risk 59/100.",
+          "lesionsDetected": [
+            {
+              "type": "none",
+              "count": 0,
+              "locations": "entire retina clear",
+              "severity": "none"
+            }
+          ],
+          "stageJustification": "No microaneurysms, haemorrhages, or exudates detected. Retina shows uniform reflex, sharp disc margins. Absence of lesions across all quadrants confirms No DR (ETDRS 10).",
+          "confidenceExplanation": "High confidence (92%) because image quality 91/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "135/100",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 135 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "5y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 5y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 91/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "No DR is clinically significant as a true negative \u2014 confirms good metabolic control is protecting retina. No referral, but annual rescreen essential as 11y DM still at risk.",
+          "recommendedActions": [
+            "Continue annual screening",
+            "Maintain HbA1c <7%, BP <130/80",
+            "Annual foot check + lipid control"
+          ],
+          "urgency": "routine"
+        }
       }
     ],
     "lastScreened": "2026-06-18",
-    "footLastCheck": "2026-08-02"
+    "footLastCheck": "2026-08-02",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-06-18",
+        "indication": "Maintenance",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-06-18",
+        "indication": "BP control",
+        "status": "active"
+      },
+      {
+        "drug": "Mupirocin 2% ointment",
+        "dosage": "thin layer",
+        "frequency": "BD",
+        "duration": "7d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-06-18",
+        "indication": "Foot care \u2014 post-screening",
+        "status": "completed"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg",
+      "Telmisartan 40mg",
+      "Mupirocin 2% ointment"
+    ]
   },
   {
     "id": "GV-015",
@@ -1839,31 +4218,78 @@ export const patients: Patient[] = [
         ],
         "notes": "Mild NPDR, microaneurysms",
         "imageQuality": 81,
-        "dietPlan": {
-          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
-          "dos": [
-            "Millet-based meals (jowar/bajra) + dal + green veg",
-            "1 fruit (guava, apple) and 5 soaked almonds",
-            "Salt <5g/day, BP check weekly",
-            "Walk 30-45 min, 5 days/week",
-            "Extra: less salt, check BP twice weekly at PHC"
+        "analysis": {
+          "summary": "Mild NPDR \u2014 1 microaneurysm at 81/100 quality, 95% confidence. Risk 67/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (44%,39%) near macula",
+              "severity": "mild"
+            }
           ],
-          "donts": [
-            "No added sugar, jaggery, honey, or sweetened drinks",
-            "Limit salt, pickle, papad, and packaged snacks",
-            "No smoking or tobacco"
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 44%/39% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "High confidence (95%) because image quality 81/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.9%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.9% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "114/99",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 114 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "4y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 4y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "eye pain",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1400-1500 kcal",
-          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+          "imageQualityAssessment": "Good 81/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
+          "urgency": "routine"
         },
         "imageUrl": "/images/fundus-mild.jpg",
+        "dietPlan": {
+          "summary": "Tighten control to stop mild changes from growing.",
+          "dos": [
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
+          ],
+          "donts": [
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Eye check in 6 months"
+        },
         "eye": "left"
       },
       {
         "id": "vGV-015-0-other",
         "date": "2026-06-18",
         "drStage": 1,
-        "confidence": 0.95,
+        "confidence": 0.93,
         "heatmapRegions": [
           {
             "x": 44,
@@ -1877,26 +4303,98 @@ export const patients: Patient[] = [
         "imageUrl": "/images/fundus-mild.jpg",
         "eye": "right",
         "dietPlan": {
-          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "summary": "Tighten control to stop mild changes from growing.",
           "dos": [
-            "Millet-based meals (jowar/bajra) + dal + green veg",
-            "1 fruit (guava, apple) and 5 soaked almonds",
-            "Salt <5g/day, BP check weekly",
-            "Walk 30-45 min, 5 days/week",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
           ],
           "donts": [
-            "No added sugar, jaggery, honey, or sweetened drinks",
-            "Limit salt, pickle, papad, and packaged snacks",
-            "No smoking or tobacco"
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
           ],
           "dailyCalories": "1400-1500 kcal",
-          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+          "followUp": "Eye check in 6 months"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Mild NPDR \u2014 1 microaneurysm at 81/100 quality, 95% confidence. Risk 67/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (44%,39%) near macula",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 44%/39% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "High confidence (95%) because image quality 81/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.9%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.9% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "114/99",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 114 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "4y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 4y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "eye pain",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 81/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
+          "urgency": "routine"
+        }
       }
     ],
-    "lastScreened": "2026-06-18"
+    "lastScreened": "2026-06-18",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-06-18",
+        "indication": "First-line",
+        "status": "active"
+      },
+      {
+        "drug": "Sitagliptin 100mg",
+        "dosage": "100mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-06-18",
+        "indication": "DPP4 add-on",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg",
+      "Sitagliptin 100mg"
+    ]
   },
   {
     "id": "GV-016",
@@ -1964,33 +4462,92 @@ export const patients: Patient[] = [
         ],
         "notes": "Severe NPDR, haemorrhages",
         "imageQuality": 90,
-        "dietPlan": {
-          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
-          "dos": [
-            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
-            "Small frequent meals, millet + dal, no large rice plates",
-            "Fruit limited to 80-100g, no juice/dry fruits",
-            "Daily walk as tolerated, plus BP and sugar log",
-            "Extra: no sugar at all, use sugar-free for tea if needed",
-            "Extra: less salt, check BP twice weekly at PHC"
+        "analysis": {
+          "summary": "Severe NPDR \u2014 3 microaneurysm, microaneurysm, microaneurysm at 90/100 quality, 81% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "superotemporal quadrant (71%,39%)",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (53%,63%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (46%,41%) near macula",
+              "severity": "severe"
+            }
           ],
-          "donts": [
-            "No sugar, fried, salty, or processed foods",
-            "No smoking, alcohol, or missing doses",
-            "Avoid long gaps without food or heavy feasts",
-            "HB high, avoid any sweets until next HbA1c check"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Lower confidence (81%) due to quality 90/100 (soft focus at periphery), 1 haemorrhage near disc obscured by glare. Lesion count borderline between stages 3/4. Advise repeat capture in 2 weeks.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.1%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.1% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "144/75",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 144 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "14y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 14y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1400-1600 kcal",
-          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+          "imageQualityAssessment": "Excellent 90/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
         },
         "imageUrl": "/images/fundus-proliferative.jpg",
-        "eye": "left"
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated",
+            "Extra: no sugar at all"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food",
+            "HB high, avoid sweets"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
+        "eye": "right"
       },
       {
         "id": "vGV-016-0-other",
         "date": "2026-03-14",
         "drStage": 3,
-        "confidence": 0.79,
+        "confidence": 0.82,
         "heatmapRegions": [
           {
             "x": 71,
@@ -1999,38 +4556,209 @@ export const patients: Patient[] = [
             "label": "microaneurysm"
           }
         ],
-        "notes": "Severe NPDR, haemorrhages (right eye)",
+        "notes": "Severe NPDR, haemorrhages (left eye)",
         "imageQuality": 90,
-        "imageUrl": "/images/eye-macro.jpg",
-        "eye": "right",
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left",
         "dietPlan": {
-          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
-            "Small frequent meals, millet + dal, no large rice plates",
-            "Fruit limited to 80-100g, no juice/dry fruits",
-            "Daily walk as tolerated, plus BP and sugar log",
-            "Extra: no sugar at all, use sugar-free for tea if needed",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sugar, fried, salty, or processed foods",
-            "No smoking, alcohol, or missing doses",
-            "Avoid long gaps without food or heavy feasts",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1400-1600 kcal",
-          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+          "followUp": "Urgent eye referral 1-2 weeks"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Severe NPDR \u2014 3 microaneurysm, microaneurysm, microaneurysm at 90/100 quality, 81% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "superotemporal quadrant (71%,39%)",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (53%,63%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (46%,41%) near macula",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Lower confidence (81%) due to quality 90/100 (soft focus at periphery), 1 haemorrhage near disc obscured by glare. Lesion count borderline between stages 3/4. Advise repeat capture in 2 weeks.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "9.1%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 9.1% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "144/75",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 144 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "14y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 14y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 90/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
+        }
       }
     ],
     "lastScreened": "2026-03-14",
     "medication": [
-      "Insulin Glargine",
-      "Atorvastatin 10mg"
+      "Metformin 500mg",
+      "Glimipride 2mg",
+      "Telmisartan 40mg"
     ],
-    "footLastCheck": "2026-08-18"
+    "footLastCheck": "2026-08-18",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-03-14",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-03-14",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-03-14",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Mupirocin 2% ointment",
+        "dosage": "thin layer",
+        "frequency": "BD",
+        "duration": "7d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "Foot care \u2014 post-screening",
+        "status": "completed"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-03-14",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "GV-017",
@@ -2089,25 +4817,72 @@ export const patients: Patient[] = [
         ],
         "notes": "Mild NPDR, microaneurysms",
         "imageQuality": 78,
-        "dietPlan": {
-          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
-          "dos": [
-            "Millet-based meals (jowar/bajra) + dal + green veg",
-            "1 fruit (guava, apple) and 5 soaked almonds",
-            "Salt <5g/day, BP check weekly",
-            "Walk 30-45 min, 5 days/week",
-            "Extra: less salt, check BP twice weekly at PHC"
+        "analysis": {
+          "summary": "Mild NPDR \u2014 1 exudates at 78/100 quality, 90% confidence. Risk 70/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (34%,55%)",
+              "severity": "mild"
+            }
           ],
-          "donts": [
-            "No added sugar, jaggery, honey, or sweetened drinks",
-            "Limit salt, pickle, papad, and packaged snacks",
-            "No smoking or tobacco"
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 34%/55% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "Moderate confidence (90%) \u2014 quality 78/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 0/1. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.3%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.3% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "154/92",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 154 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "3y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 3y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "asymptomatic",
+              "contribution": "Asymptomatic \u2014 typical early DR, screening still essential"
+            }
           ],
-          "dailyCalories": "1400-1500 kcal",
-          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+          "imageQualityAssessment": "Good 78/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
+          "urgency": "routine"
         },
         "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "left"
+        "dietPlan": {
+          "summary": "Tighten control to stop mild changes from growing.",
+          "dos": [
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
+          ],
+          "donts": [
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Eye check in 6 months"
+        },
+        "eye": "right"
       },
       {
         "id": "vGV-017-0-other",
@@ -2122,31 +4897,134 @@ export const patients: Patient[] = [
             "label": "exudates"
           }
         ],
-        "notes": "Mild NPDR, microaneurysms (right eye)",
+        "notes": "Mild NPDR, microaneurysms (left eye)",
         "imageQuality": 78,
         "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "right",
+        "eye": "left",
         "dietPlan": {
-          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "summary": "Tighten control to stop mild changes from growing.",
           "dos": [
-            "Millet-based meals (jowar/bajra) + dal + green veg",
-            "1 fruit (guava, apple) and 5 soaked almonds",
-            "Salt <5g/day, BP check weekly",
-            "Walk 30-45 min, 5 days/week",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
           ],
           "donts": [
-            "No added sugar, jaggery, honey, or sweetened drinks",
-            "Limit salt, pickle, papad, and packaged snacks",
-            "No smoking or tobacco"
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
           ],
           "dailyCalories": "1400-1500 kcal",
-          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+          "followUp": "Eye check in 6 months"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Mild NPDR \u2014 1 exudates at 78/100 quality, 90% confidence. Risk 70/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (34%,55%)",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 34%/55% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "Moderate confidence (90%) \u2014 quality 78/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 0/1. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.3%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.3% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "154/92",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 154 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "3y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 3y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "asymptomatic",
+              "contribution": "Asymptomatic \u2014 typical early DR, screening still essential"
+            }
+          ],
+          "imageQualityAssessment": "Good 78/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
+          "urgency": "routine"
+        }
       }
     ],
-    "lastScreened": "2026-03-14"
+    "lastScreened": "2026-03-14",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "Maintenance",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-03-14",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg",
+      "Telmisartan 40mg",
+      "Amlodipine 5mg"
+    ]
   },
   {
     "id": "GV-018",
@@ -2198,102 +5076,314 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-018-left",
+        "id": "vGV-018-auto-1",
         "date": "2026-08-20",
         "drStage": 3,
-        "confidence": 0.86,
+        "confidence": 0.84,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
+            "x": 55,
+            "y": 45,
+            "r": 20,
+            "label": "haemorrhage"
+          },
+          {
+            "x": 42,
+            "y": 38,
+            "r": 16,
+            "label": "exudates"
+          },
+          {
+            "x": 60,
+            "y": 30,
             "r": 14,
             "label": "microaneurysm"
           }
         ],
-        "notes": "Severe NPDR",
-        "imageQuality": 89,
-        "imageUrl": "/images/fundus-proliferative.jpg",
-        "eye": "left",
+        "notes": "Severe NPDR, 4-quadrant haemorrhages",
+        "imageQuality": 80,
         "analysis": {
-          "summary": "Severe NPDR \u2014 eye left",
+          "summary": "Severe NPDR \u2014 3 haemorrhage, exudates, microaneurysm at 80/100 quality, 84% confidence. Risk 90/100.",
           "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "severe"
+            },
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "inferonasal (60%,30%)",
+              "severity": "severe"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 80/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "8.3%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 8.3% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "163/86",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 163 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "4y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 4y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "fluctuating vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 80/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
         },
+        "imageUrl": "/images/fundus-scatter.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
+        "eye": "left"
       },
       {
-        "id": "vGV-018-right",
+        "id": "vGV-018-auto-1-other",
         "date": "2026-08-20",
         "drStage": 3,
-        "confidence": 0.86,
+        "confidence": 0.83,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 55,
+            "y": 45,
+            "r": 20,
+            "label": "haemorrhage"
           }
         ],
-        "notes": "Severe NPDR",
-        "imageQuality": 89,
-        "imageUrl": "/images/fundus-proliferative.jpg",
+        "notes": "Severe NPDR, 4-quadrant haemorrhages (right eye)",
+        "imageQuality": 80,
+        "imageUrl": "/images/fundus-scatter.jpg",
         "eye": "right",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
         "analysis": {
-          "summary": "Severe NPDR \u2014 eye right",
+          "summary": "Severe NPDR \u2014 3 haemorrhage, exudates, microaneurysm at 80/100 quality, 84% confidence. Risk 90/100.",
           "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (55%,45%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (42%,38%) near macula",
+              "severity": "severe"
+            },
             {
               "type": "microaneurysm",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "inferonasal (60%,30%)",
+              "severity": "severe"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
-        },
-        "dietPlan": {
-          "summary": "Balanced plate",
-          "dos": [
-            "Whole grains",
-            "Dal + veg"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 80/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "8.3%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 8.3% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "163/86",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 163 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "4y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 4y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "fluctuating vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "donts": [
-            "Avoid sugar"
+          "imageQualityAssessment": "Good 80/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
+          "urgency": "urgent"
         }
       }
-    ]
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "First-line",
+        "status": "active"
+      },
+      {
+        "drug": "Sitagliptin 100mg",
+        "dosage": "100mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "DPP4 add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-08-20",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg",
+      "Sitagliptin 100mg",
+      "Telmisartan 40mg"
+    ],
+    "lastScreened": "2026-08-20"
   },
   {
     "id": "GV-019",
@@ -2367,26 +5457,86 @@ export const patients: Patient[] = [
         ],
         "notes": "Proliferative DR, neovascularization",
         "imageQuality": 91,
+        "analysis": {
+          "summary": "Proliferative DR \u2014 3 exudates, neovascularization, microaneurysm at 91/100 quality, 93% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (62%,62%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "posterior pole (59%,42%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (59%,29%)",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "Neovascularization at disc/elsewhere + preretinal haemorrhage, 3 proliferative lesions. ETDRS 61-75 Proliferative DR \u2014 high-risk PDR, imminent vitreous haemorrhage/tractional detachment risk.",
+          "confidenceExplanation": "High confidence (93%) because image quality 91/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "10.6%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 10.6% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "117/76",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 117 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "11y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 11y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters, fluctuating vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 91/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Proliferative DR is sight-threatening \u2014 neovascular fronds bleed easily, tractional detachment risk. Immediate PRP/anti-VEGF needed, avoid Valsalva, urgent referral.",
+          "recommendedActions": [
+            "Emergency eSanjeevani <1w, PRP + anti-VEGF",
+            "No strenuous activity, head elevation",
+            "Admit if vitreous haemorrhage, FFA/OCT planned"
+          ],
+          "urgency": "emergency"
+        },
+        "imageUrl": "/images/fundus-laser.jpg",
         "dietPlan": {
-          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "summary": "Very strict diet and urgent eye care.",
           "dos": [
-            "Very strict: small millet portions, dal, boiled veg, curd small",
-            "Salt <3g, oil <2 tsp, no added sugar at all",
-            "Fruit only 50-80g if sugar allows, otherwise avoid",
-            "Light activity only as doctor advises, no strain",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+            "Very strict small portions",
+            "Salt <3g, oil <2 tsp",
+            "Fruit 50-80g only",
+            "Light activity only",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sugar, fried, salty, processed, or outside food",
-            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
-            "Do not delay eye treatment, do not miss any dose",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sugar or fried foods",
+            "No alcohol or smoking",
+            "Do not delay treatment",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1200-1300 kcal",
-          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+          "followUp": "Emergency eye referral 1 week"
         },
-        "imageUrl": "/images/fundus-proliferative.jpg",
-        "eye": "left"
+        "eye": "right"
       },
       {
         "id": "vGV-019-1",
@@ -2415,32 +5565,195 @@ export const patients: Patient[] = [
         ],
         "notes": "Proliferative DR, neovascularization",
         "imageQuality": 92,
-        "dietPlan": {
-          "summary": "Very strict diet and urgent eye care to protect vision.",
-          "dos": [
-            "Very strict: small millet portions, dal, boiled veg, curd small",
-            "Salt <3g, oil <2 tsp, no added sugar at all",
-            "Fruit only 50-80g if sugar allows, otherwise avoid",
-            "Light activity only as doctor advises, no strain",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+        "analysis": {
+          "summary": "Proliferative DR \u2014 3 haemorrhage, haemorrhage, exudates at 92/100 quality, 91% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (36%,67%)",
+              "severity": "severe"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (53%,65%)",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (33%,69%)",
+              "severity": "severe"
+            }
           ],
-          "donts": [
-            "No sugar, fried, salty, processed, or outside food",
-            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
-            "Do not delay eye treatment, do not miss any dose",
-            "HB high, avoid any sweets until next HbA1c check"
+          "stageJustification": "Neovascularization at disc/elsewhere + preretinal haemorrhage, 3 proliferative lesions. ETDRS 61-75 Proliferative DR \u2014 high-risk PDR, imminent vitreous haemorrhage/tractional detachment risk.",
+          "confidenceExplanation": "Moderate confidence (91%) \u2014 quality 92/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 3/4. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "10.6%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 10.6% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "117/76",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 117 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "11y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 11y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters, fluctuating vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1200-1300 kcal",
-          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+          "imageQualityAssessment": "Excellent 92/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Proliferative DR is sight-threatening \u2014 neovascular fronds bleed easily, tractional detachment risk. Immediate PRP/anti-VEGF needed, avoid Valsalva, urgent referral.",
+          "recommendedActions": [
+            "Emergency eSanjeevani <1w, PRP + anti-VEGF",
+            "No strenuous activity, head elevation",
+            "Admit if vitreous haemorrhage, FFA/OCT planned"
+          ],
+          "urgency": "emergency"
         },
         "imageUrl": "/images/fundus-proliferative.jpg",
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care.",
+          "dos": [
+            "Very strict small portions",
+            "Salt <3g, oil <2 tsp",
+            "Fruit 50-80g only",
+            "Light activity only",
+            "Extra: no sugar at all"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No alcohol or smoking",
+            "Do not delay treatment",
+            "HB high, avoid sweets"
+          ],
+          "dailyCalories": "1200-1300 kcal",
+          "followUp": "Emergency eye referral 1 week"
+        },
         "eye": "right"
       }
     ],
     "lastScreened": "2026-07-22",
     "medication": [
+      "Metformin 500mg",
       "Glimipride 2mg",
-      "Metformin 500mg"
+      "Insulin Glargine"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-07-22",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Insulin Glargine",
+        "dosage": "10U",
+        "frequency": "HS",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta",
+        "prescribedOn": "2026-07-22",
+        "indication": "Basal add-on for HbA1c 10%+",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "discontinued"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-07-22",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-07-22",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Ranibizumab 0.5mg intravitreal",
+        "dosage": "0.5mg/0.05mL",
+        "frequency": "single injection",
+        "duration": "1 dose, review 4w",
+        "prescribedBy": "Dr. Mehta, Retina Specialist",
+        "prescribedOn": "2026-07-22",
+        "indication": "PDR stage 4 \u2014 neovascularization on 2026-07-22",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-07-22",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
     ]
   },
   {
@@ -2488,105 +5801,276 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-020-left",
+        "id": "vGV-020-auto-1",
         "date": "2026-08-20",
         "drStage": 2,
-        "confidence": 0.88,
+        "confidence": 0.86,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 44,
+            "y": 38,
+            "r": 16,
+            "label": "haemorrhage"
+          },
+          {
+            "x": 52,
+            "y": 45,
+            "r": 12,
+            "label": "exudates"
           }
         ],
-        "notes": "Moderate NPDR",
-        "imageQuality": 89,
-        "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "left",
+        "notes": "Moderate NPDR, haemorrhage + exudates",
+        "imageQuality": 82,
         "analysis": {
-          "summary": "Moderate NPDR \u2014 eye left",
+          "summary": "Moderate NPDR \u2014 2 haemorrhage, exudates at 82/100 quality, 86% confidence. Risk 84/100.",
           "lesionsDetected": [
             {
-              "type": "microaneurysm",
+              "type": "haemorrhage",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "posterior pole (44%,38%) near macula",
+              "severity": "moderate"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (52%,45%) near macula",
+              "severity": "moderate"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
+          "stageJustification": "2 focal lesions: haemorrhage, exudates within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (86%) \u2014 quality 82/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.3%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.3% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "165/85",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 165 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "13y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 13y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 82/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
         },
+        "imageUrl": "/images/fundus-mild.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye check in 3 months"
+        },
+        "eye": "left"
       },
       {
-        "id": "vGV-020-right",
+        "id": "vGV-020-auto-1-other",
         "date": "2026-08-20",
         "drStage": 2,
-        "confidence": 0.87,
+        "confidence": 0.85,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 44,
+            "y": 38,
+            "r": 16,
+            "label": "haemorrhage"
           }
         ],
-        "notes": "Moderate NPDR",
-        "imageQuality": 93,
-        "imageUrl": "/images/fundus-mild.jpg",
+        "notes": "Moderate NPDR, haemorrhage + exudates (right eye)",
+        "imageQuality": 82,
+        "imageUrl": "/images/eye-macro.jpg",
         "eye": "right",
-        "analysis": {
-          "summary": "Moderate NPDR \u2014 eye right",
-          "lesionsDetected": [
-            {
-              "type": "microaneurysm",
-              "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
-            }
-          ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
-        },
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye check in 3 months"
+        },
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 haemorrhage, exudates at 82/100 quality, 86% confidence. Risk 84/100.",
+          "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (44%,38%) near macula",
+              "severity": "moderate"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (52%,45%) near macula",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: haemorrhage, exudates within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (86%) \u2014 quality 82/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.3%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.3% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "165/85",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 165 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "13y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 13y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 82/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
         }
       }
     ],
     "medication": [
-      "Insulin Glargine"
-    ]
+      "Metformin 500mg",
+      "Telmisartan 40mg",
+      "Amlodipine 5mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Maintenance",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "completed"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      }
+    ],
+    "lastScreened": "2026-08-20"
   },
   {
     "id": "GV-021",
@@ -2644,32 +6128,86 @@ export const patients: Patient[] = [
         ],
         "notes": "Moderate NPDR, exudates",
         "imageQuality": 91,
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 microaneurysm, haemorrhage at 91/100 quality, 84% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "superotemporal quadrant (70%,51%)",
+              "severity": "moderate"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (28%,54%)",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: microaneurysm, haemorrhage within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 91/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "11%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 11% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "118/90",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 118 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "6y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 6y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "headache, fluctuating vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 91/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
+        },
+        "imageUrl": "/images/fundus-scatter.jpg",
         "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1300-1500 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "followUp": "Eye check in 3 months"
         },
-        "imageUrl": "/images/fundus-mild.jpg",
         "eye": "left"
       },
       {
         "id": "vGV-021-0-other",
         "date": "2026-01-12",
         "drStage": 2,
-        "confidence": 0.84,
+        "confidence": 0.82,
         "heatmapRegions": [
           {
             "x": 70,
@@ -2680,35 +6218,181 @@ export const patients: Patient[] = [
         ],
         "notes": "Moderate NPDR, exudates (right eye)",
         "imageQuality": 91,
-        "imageUrl": "/images/eye-macro.jpg",
+        "imageUrl": "/images/fundus-scatter.jpg",
         "eye": "right",
         "dietPlan": {
-          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
-            "Low salt, lean protein (egg white, fish, dal), curd small cup",
-            "Fruit: 100g papaya or guava only, avoid juice",
-            "Walk 30 min + foot check daily",
-            "Extra: no sugar at all, use sugar-free for tea if needed"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sweets, sweet tea, cold drinks, alcohol",
-            "No deep fried, re-fried oil, red meat, high-salt foods",
-            "Do not miss medicines, do not skip eye follow-up in 3 months",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1300-1500 kcal",
-          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+          "followUp": "Eye check in 3 months"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 microaneurysm, haemorrhage at 91/100 quality, 84% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "superotemporal quadrant (70%,51%)",
+              "severity": "moderate"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (28%,54%)",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: microaneurysm, haemorrhage within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (84%) \u2014 quality 91/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "11%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 11% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "118/90",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 118 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "6y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 6y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "headache, fluctuating vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 91/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
+        }
       }
     ],
     "lastScreened": "2026-01-12",
     "medication": [
-      "Sitagliptin 100mg",
+      "Metformin 500mg",
+      "Glimipride 2mg",
       "Insulin Glargine"
     ],
-    "footLastCheck": "2026-08-18"
+    "footLastCheck": "2026-08-18",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-01-12",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-01-12",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Insulin Glargine",
+        "dosage": "10U",
+        "frequency": "HS",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta",
+        "prescribedOn": "2026-01-12",
+        "indication": "Basal add-on for HbA1c 10%+",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-12",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-12",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "discontinued"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-01-12",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-01-12",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "completed"
+      },
+      {
+        "drug": "Mupirocin 2% ointment",
+        "dosage": "thin layer",
+        "frequency": "BD",
+        "duration": "7d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-12",
+        "indication": "Foot care \u2014 post-screening",
+        "status": "completed"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-01-12",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "GV-022",
@@ -2781,33 +6465,92 @@ export const patients: Patient[] = [
         ],
         "notes": "Proliferative DR, neovascularization",
         "imageQuality": 94,
-        "dietPlan": {
-          "summary": "Very strict diet and urgent eye care to protect vision.",
-          "dos": [
-            "Very strict: small millet portions, dal, boiled veg, curd small",
-            "Salt <3g, oil <2 tsp, no added sugar at all",
-            "Fruit only 50-80g if sugar allows, otherwise avoid",
-            "Light activity only as doctor advises, no strain",
-            "Extra: no sugar at all, use sugar-free for tea if needed",
-            "Extra: less salt, check BP twice weekly at PHC"
+        "analysis": {
+          "summary": "Proliferative DR \u2014 3 neovascularization, neovascularization, haemorrhage at 94/100 quality, 88% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "inferonasal (40%,33%)",
+              "severity": "severe"
+            },
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "posterior pole (59%,63%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "superotemporal quadrant (69%,59%)",
+              "severity": "severe"
+            }
           ],
-          "donts": [
-            "No sugar, fried, salty, processed, or outside food",
-            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
-            "Do not delay eye treatment, do not miss any dose",
-            "HB high, avoid any sweets until next HbA1c check"
+          "stageJustification": "Neovascularization at disc/elsewhere + preretinal haemorrhage, 3 proliferative lesions. ETDRS 61-75 Proliferative DR \u2014 high-risk PDR, imminent vitreous haemorrhage/tractional detachment risk.",
+          "confidenceExplanation": "Moderate confidence (88%) \u2014 quality 94/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 3/4. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "10%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 10% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "141/85",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 141 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "18y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 18y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1300-1500 kcal",
-          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+          "imageQualityAssessment": "Excellent 94/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Proliferative DR is sight-threatening \u2014 neovascular fronds bleed easily, tractional detachment risk. Immediate PRP/anti-VEGF needed, avoid Valsalva, urgent referral.",
+          "recommendedActions": [
+            "Emergency eSanjeevani <1w, PRP + anti-VEGF",
+            "No strenuous activity, head elevation",
+            "Admit if vitreous haemorrhage, FFA/OCT planned"
+          ],
+          "urgency": "emergency"
         },
         "imageUrl": "/images/fundus-proliferative.jpg",
-        "eye": "left"
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care.",
+          "dos": [
+            "Very strict small portions",
+            "Salt <3g, oil <2 tsp",
+            "Fruit 50-80g only",
+            "Light activity only",
+            "Extra: no sugar at all"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No alcohol or smoking",
+            "Do not delay treatment",
+            "HB high, avoid sweets"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Emergency eye referral 1 week"
+        },
+        "eye": "right"
       },
       {
         "id": "vGV-022-0-other",
         "date": "2026-05-10",
         "drStage": 4,
-        "confidence": 0.87,
+        "confidence": 0.88,
         "heatmapRegions": [
           {
             "x": 40,
@@ -2816,35 +6559,217 @@ export const patients: Patient[] = [
             "label": "neovascularization"
           }
         ],
-        "notes": "Proliferative DR, neovascularization (right eye)",
+        "notes": "Proliferative DR, neovascularization (left eye)",
         "imageQuality": 94,
-        "imageUrl": "/images/eye-macro.jpg",
-        "eye": "right",
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left",
         "dietPlan": {
-          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "summary": "Very strict diet and urgent eye care.",
           "dos": [
-            "Very strict: small millet portions, dal, boiled veg, curd small",
-            "Salt <3g, oil <2 tsp, no added sugar at all",
-            "Fruit only 50-80g if sugar allows, otherwise avoid",
-            "Light activity only as doctor advises, no strain",
-            "Extra: no sugar at all, use sugar-free for tea if needed",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Very strict small portions",
+            "Salt <3g, oil <2 tsp",
+            "Fruit 50-80g only",
+            "Light activity only",
+            "Extra: no sugar at all"
           ],
           "donts": [
-            "No sugar, fried, salty, processed, or outside food",
-            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
-            "Do not delay eye treatment, do not miss any dose",
-            "HB high, avoid any sweets until next HbA1c check"
+            "No sugar or fried foods",
+            "No alcohol or smoking",
+            "Do not delay treatment",
+            "HB high, avoid sweets"
           ],
           "dailyCalories": "1300-1500 kcal",
-          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+          "followUp": "Emergency eye referral 1 week"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Proliferative DR \u2014 3 neovascularization, neovascularization, haemorrhage at 94/100 quality, 88% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "inferonasal (40%,33%)",
+              "severity": "severe"
+            },
+            {
+              "type": "neovascularization",
+              "count": 1,
+              "locations": "posterior pole (59%,63%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "superotemporal quadrant (69%,59%)",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "Neovascularization at disc/elsewhere + preretinal haemorrhage, 3 proliferative lesions. ETDRS 61-75 Proliferative DR \u2014 high-risk PDR, imminent vitreous haemorrhage/tractional detachment risk.",
+          "confidenceExplanation": "Moderate confidence (88%) \u2014 quality 94/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 3/4. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "10%",
+              "contribution": "high \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 10% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "141/85",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 141 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "18y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 18y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 94/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Proliferative DR is sight-threatening \u2014 neovascular fronds bleed easily, tractional detachment risk. Immediate PRP/anti-VEGF needed, avoid Valsalva, urgent referral.",
+          "recommendedActions": [
+            "Emergency eSanjeevani <1w, PRP + anti-VEGF",
+            "No strenuous activity, head elevation",
+            "Admit if vitreous haemorrhage, FFA/OCT planned"
+          ],
+          "urgency": "emergency"
+        }
       }
     ],
     "lastScreened": "2026-05-10",
     "medication": [
-      "Sitagliptin 100mg"
+      "Metformin 500mg",
+      "Glimipride 2mg",
+      "Insulin Glargine"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "1g",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni, PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Glycemic control \u2014 HbA1c 9%+",
+        "status": "active"
+      },
+      {
+        "drug": "Glimipride 2mg",
+        "dosage": "2mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "Dr. Kulkarni",
+        "prescribedOn": "2026-05-10",
+        "indication": "Sulfonylurea add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Insulin Glargine",
+        "dosage": "10U",
+        "frequency": "HS",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta",
+        "prescribedOn": "2026-05-10",
+        "indication": "Basal add-on for HbA1c 10%+",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "discontinued"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-05-10",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-05-10",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Ranibizumab 0.5mg intravitreal",
+        "dosage": "0.5mg/0.05mL",
+        "frequency": "single injection",
+        "duration": "1 dose, review 4w",
+        "prescribedBy": "Dr. Mehta, Retina Specialist",
+        "prescribedOn": "2026-05-10",
+        "indication": "PDR stage 4 \u2014 neovascularization on 2026-05-10",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-05-10",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
     ]
   },
   {
@@ -2913,23 +6838,83 @@ export const patients: Patient[] = [
         ],
         "notes": "Severe NPDR, haemorrhages",
         "imageQuality": 84,
-        "dietPlan": {
-          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
-          "dos": [
-            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
-            "Small frequent meals, millet + dal, no large rice plates",
-            "Fruit limited to 80-100g, no juice/dry fruits",
-            "Daily walk as tolerated, plus BP and sugar log"
+        "analysis": {
+          "summary": "Severe NPDR \u2014 3 exudates, exudates, microaneurysm at 84/100 quality, 96% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (46%,42%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (47%,28%)",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (45%,30%)",
+              "severity": "severe"
+            }
           ],
-          "donts": [
-            "No sugar, fried, salty, or processed foods",
-            "No smoking, alcohol, or missing doses",
-            "Avoid long gaps without food or heavy feasts"
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "High confidence (96%) because image quality 84/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "8.8%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 8.8% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "134/85",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 134 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "16y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 16y Type 1"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "headache",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1200-1400 kcal",
-          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+          "imageQualityAssessment": "Good 84/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
         },
         "imageUrl": "/images/fundus-proliferative.jpg",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food"
+          ],
+          "dailyCalories": "1200-1400 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks"
+        },
         "eye": "left"
       },
       {
@@ -2950,27 +6935,120 @@ export const patients: Patient[] = [
         "imageUrl": "/images/fundus-proliferative.jpg",
         "eye": "right",
         "dietPlan": {
-          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
-            "Small frequent meals, millet + dal, no large rice plates",
-            "Fruit limited to 80-100g, no juice/dry fruits",
-            "Daily walk as tolerated, plus BP and sugar log"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated"
           ],
           "donts": [
-            "No sugar, fried, salty, or processed foods",
-            "No smoking, alcohol, or missing doses",
-            "Avoid long gaps without food or heavy feasts"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food"
           ],
           "dailyCalories": "1200-1400 kcal",
-          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+          "followUp": "Urgent eye referral 1-2 weeks"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Severe NPDR \u2014 3 exudates, exudates, microaneurysm at 84/100 quality, 96% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (46%,42%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (47%,28%)",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (45%,30%)",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "High confidence (96%) because image quality 84/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "8.8%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 8.8% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "134/85",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 134 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "16y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 16y Type 1"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "headache",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 84/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
+        }
       }
     ],
     "lastScreened": "2026-05-10",
     "medication": [
-      "Insulin Glargine"
+      "Insulin Glargine",
+      "Insulin Aspart",
+      "Laser photocoagulation (PRP)"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Insulin Glargine",
+        "dosage": "16U",
+        "frequency": "HS",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta, GMC Dhule",
+        "prescribedOn": "2026-05-10",
+        "indication": "Basal insulin \u2014 Type 1 DM",
+        "status": "active"
+      },
+      {
+        "drug": "Insulin Aspart",
+        "dosage": "6U",
+        "frequency": "TID pre-meal",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta",
+        "prescribedOn": "2026-05-10",
+        "indication": "Bolus insulin",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-05-10",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
     ]
   },
   {
@@ -3049,30 +7127,90 @@ export const patients: Patient[] = [
         ],
         "notes": "Severe NPDR, haemorrhages",
         "imageQuality": 79,
+        "analysis": {
+          "summary": "Severe NPDR \u2014 3 exudates, exudates, haemorrhage at 79/100 quality, 83% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "superotemporal quadrant (67%,34%)",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (44%,70%)",
+              "severity": "severe"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (43%,39%) near macula",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (83%) \u2014 quality 79/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.6%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.6% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "115/80",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 115 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "15y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 15y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 79/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
+        },
+        "imageUrl": "/images/fundus-scatter.jpg",
         "dietPlan": {
-          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
-            "Small frequent meals, millet + dal, no large rice plates",
-            "Fruit limited to 80-100g, no juice/dry fruits",
-            "Daily walk as tolerated, plus BP and sugar log"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated"
           ],
           "donts": [
-            "No sugar, fried, salty, or processed foods",
-            "No smoking, alcohol, or missing doses",
-            "Avoid long gaps without food or heavy feasts"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food"
           ],
           "dailyCalories": "1400-1600 kcal",
-          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+          "followUp": "Urgent eye referral 1-2 weeks"
         },
-        "imageUrl": "/images/fundus-proliferative.jpg",
         "eye": "left"
       },
       {
         "id": "vGV-024-0-other",
         "date": "2026-07-22",
         "drStage": 3,
-        "confidence": 0.84,
+        "confidence": 0.85,
         "heatmapRegions": [
           {
             "x": 67,
@@ -3083,30 +7221,173 @@ export const patients: Patient[] = [
         ],
         "notes": "Severe NPDR, haemorrhages (right eye)",
         "imageQuality": 79,
-        "imageUrl": "/images/fundus-proliferative.jpg",
+        "imageUrl": "/images/eye-macro.jpg",
         "eye": "right",
         "dietPlan": {
-          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "summary": "Strict control to protect eye from further bleeding.",
           "dos": [
-            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
-            "Small frequent meals, millet + dal, no large rice plates",
-            "Fruit limited to 80-100g, no juice/dry fruits",
-            "Daily walk as tolerated, plus BP and sugar log"
+            "Strict salt <4g, oil <2 tsp",
+            "Small frequent meals",
+            "Fruit 80-100g only",
+            "Daily walk as tolerated"
           ],
           "donts": [
-            "No sugar, fried, salty, or processed foods",
-            "No smoking, alcohol, or missing doses",
-            "Avoid long gaps without food or heavy feasts"
+            "No sugar or fried foods",
+            "No smoking or alcohol",
+            "Avoid long gaps without food"
           ],
           "dailyCalories": "1400-1600 kcal",
-          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+          "followUp": "Urgent eye referral 1-2 weeks"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Severe NPDR \u2014 3 exudates, exudates, haemorrhage at 79/100 quality, 83% confidence. Risk 95/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "superotemporal quadrant (67%,34%)",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (44%,70%)",
+              "severity": "severe"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (43%,39%) near macula",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "4-quadrant haemorrhages + 3 severe lesions, intraretinal haemorrhages in 2+ quadrants. Venous beading suspected. Qualifies Severe NPDR (ETDRS 53) \u2014 high progression risk to PDR within 12m (50% without treatment).",
+          "confidenceExplanation": "Moderate confidence (83%) \u2014 quality 79/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 2/3. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.6%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.6% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "115/80",
+              "contribution": "low \u2014 HTN accelerates DR; systolic 115 mmHg controlled"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "15y",
+              "contribution": "high \u2014 longer duration increases cumulative exposure; 15y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 79/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Severe NPDR is pre-proliferative \u2014 ischaemia extensive, neovascular drive imminent. Without PRP laser, 50% progress to PDR within 12 months, high risk of vitreous haemorrhage.",
+          "recommendedActions": [
+            "Urgent eSanjeevani 1-2w, PRP laser counselling",
+            "Strict DM/HTN, avoid NSAIDs, HbA1c 2-weekly",
+            "Telepharmacy holds meds until PRP decision"
+          ],
+          "urgency": "urgent"
+        }
       }
     ],
     "lastScreened": "2026-07-22",
     "medication": [
-      "Metformin 500mg"
+      "Metformin 500mg",
+      "Sitagliptin 100mg",
+      "Atorvastatin 10mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "First-line",
+        "status": "active"
+      },
+      {
+        "drug": "Sitagliptin 100mg",
+        "dosage": "100mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "DPP4 add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-07-22",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-07-22",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-07-22",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-07-22",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
     ]
   },
   {
@@ -3150,106 +7431,256 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-025-left",
+        "id": "vGV-025-auto-1",
         "date": "2026-08-20",
         "drStage": 2,
-        "confidence": 0.87,
+        "confidence": 0.86,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 44,
+            "y": 38,
+            "r": 16,
+            "label": "haemorrhage"
+          },
+          {
+            "x": 52,
+            "y": 45,
+            "r": 12,
+            "label": "exudates"
           }
         ],
-        "notes": "Moderate NPDR",
-        "imageQuality": 88,
-        "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "left",
+        "notes": "Moderate NPDR, haemorrhage + exudates",
+        "imageQuality": 82,
         "analysis": {
-          "summary": "Moderate NPDR \u2014 eye left",
+          "summary": "Moderate NPDR \u2014 2 haemorrhage, exudates at 82/100 quality, 86% confidence. Risk 75/100.",
           "lesionsDetected": [
             {
-              "type": "microaneurysm",
+              "type": "haemorrhage",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "posterior pole (44%,38%) near macula",
+              "severity": "moderate"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (52%,45%) near macula",
+              "severity": "moderate"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
+          "stageJustification": "2 focal lesions: haemorrhage, exudates within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (86%) \u2014 quality 82/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.4%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.4% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "130/94",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 130 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "8y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 8y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters, eye pain",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 82/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
         },
+        "imageUrl": "/images/fundus-mild.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Eye check in 3 months"
+        },
+        "eye": "left"
       },
       {
-        "id": "vGV-025-right",
+        "id": "vGV-025-auto-1-other",
         "date": "2026-08-20",
         "drStage": 2,
-        "confidence": 0.88,
+        "confidence": 0.86,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 44,
+            "y": 38,
+            "r": 16,
+            "label": "haemorrhage"
           }
         ],
-        "notes": "Moderate NPDR",
-        "imageQuality": 89,
+        "notes": "Moderate NPDR, haemorrhage + exudates (right eye)",
+        "imageQuality": 82,
         "imageUrl": "/images/fundus-mild.jpg",
         "eye": "right",
-        "analysis": {
-          "summary": "Moderate NPDR \u2014 eye right",
-          "lesionsDetected": [
-            {
-              "type": "microaneurysm",
-              "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
-            }
-          ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
-        },
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Eye check in 3 months"
+        },
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 haemorrhage, exudates at 82/100 quality, 86% confidence. Risk 75/100.",
+          "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (44%,38%) near macula",
+              "severity": "moderate"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (52%,45%) near macula",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: haemorrhage, exudates within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (86%) \u2014 quality 82/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.4%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.4% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "130/94",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 130 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "8y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 8y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "floaters, eye pain",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 82/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
         }
       }
     ],
     "medication": [
-      "Atorvastatin 10mg",
-      "Sitagliptin 100mg"
-    ]
+      "Metformin 500mg",
+      "Telmisartan 40mg",
+      "Atorvastatin 10mg"
+    ],
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Maintenance",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "BP control",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-20",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-20",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "completed"
+      }
+    ],
+    "lastScreened": "2026-08-20"
   },
   {
     "id": "GV-026",
@@ -3312,24 +7743,83 @@ export const patients: Patient[] = [
         ],
         "notes": "Proliferative DR, neovascularization",
         "imageQuality": 83,
-        "dietPlan": {
-          "summary": "Very strict diet and urgent eye care to protect vision.",
-          "dos": [
-            "Very strict: small millet portions, dal, boiled veg, curd small",
-            "Salt <3g, oil <2 tsp, no added sugar at all",
-            "Fruit only 50-80g if sugar allows, otherwise avoid",
-            "Light activity only as doctor advises, no strain",
-            "Extra: less salt, check BP twice weekly at PHC"
+        "analysis": {
+          "summary": "Proliferative DR \u2014 3 haemorrhage, microaneurysm, exudates at 83/100 quality, 94% confidence. Risk 81/100.",
+          "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "superotemporal quadrant (65%,55%)",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole (58%,50%) near macula",
+              "severity": "severe"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "inferonasal (48%,70%)",
+              "severity": "severe"
+            }
           ],
-          "donts": [
-            "No sugar, fried, salty, processed, or outside food",
-            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
-            "Do not delay eye treatment, do not miss any dose"
+          "stageJustification": "Neovascularization at disc/elsewhere + preretinal haemorrhage, 3 proliferative lesions. ETDRS 61-75 Proliferative DR \u2014 high-risk PDR, imminent vitreous haemorrhage/tractional detachment risk.",
+          "confidenceExplanation": "High confidence (94%) because image quality 83/100 is sharp, lesions are conspicuous with distinct borders, and model agreement across 5 folds >0.90. Heatmap intensity peaks >0.85 over lesions, no artefacts.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "8.5%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 8.5% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "143/86",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 143 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "9y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 9y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "eye pain",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1300-1500 kcal",
-          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+          "imageQualityAssessment": "Good 83/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Proliferative DR is sight-threatening \u2014 neovascular fronds bleed easily, tractional detachment risk. Immediate PRP/anti-VEGF needed, avoid Valsalva, urgent referral.",
+          "recommendedActions": [
+            "Emergency eSanjeevani <1w, PRP + anti-VEGF",
+            "No strenuous activity, head elevation",
+            "Admit if vitreous haemorrhage, FFA/OCT planned"
+          ],
+          "urgency": "emergency"
         },
         "imageUrl": "/images/fundus-proliferative.jpg",
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care.",
+          "dos": [
+            "Very strict small portions",
+            "Salt <3g, oil <2 tsp",
+            "Fruit 50-80g only",
+            "Light activity only"
+          ],
+          "donts": [
+            "No sugar or fried foods",
+            "No alcohol or smoking",
+            "Do not delay treatment"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Emergency eye referral 1 week"
+        },
         "eye": "right"
       },
       {
@@ -3359,33 +7849,215 @@ export const patients: Patient[] = [
         ],
         "notes": "Proliferative DR, neovascularization",
         "imageQuality": 93,
+        "analysis": {
+          "summary": "Proliferative DR \u2014 3 haemorrhage, microaneurysm, haemorrhage at 93/100 quality, 85% confidence. Risk 81/100.",
+          "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (46%,70%)",
+              "severity": "severe"
+            },
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "inferonasal (57%,33%)",
+              "severity": "severe"
+            },
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "inferonasal (48%,35%)",
+              "severity": "severe"
+            }
+          ],
+          "stageJustification": "Neovascularization at disc/elsewhere + preretinal haemorrhage, 3 proliferative lesions. ETDRS 61-75 Proliferative DR \u2014 high-risk PDR, imminent vitreous haemorrhage/tractional detachment risk.",
+          "confidenceExplanation": "Moderate confidence (85%) \u2014 quality 93/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 3/4. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "8.5%",
+              "contribution": "moderate \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 8.5% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "143/86",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 143 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "9y",
+              "contribution": "moderate \u2014 longer duration increases cumulative exposure; 9y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "eye pain",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Excellent 93/100 \u2014 sharp focus fovea to periphery, even illumination, no motion artefact, optic disc and macula centred. Suitable for grading.",
+          "clinicalSignificance": "Proliferative DR is sight-threatening \u2014 neovascular fronds bleed easily, tractional detachment risk. Immediate PRP/anti-VEGF needed, avoid Valsalva, urgent referral.",
+          "recommendedActions": [
+            "Emergency eSanjeevani <1w, PRP + anti-VEGF",
+            "No strenuous activity, head elevation",
+            "Admit if vitreous haemorrhage, FFA/OCT planned"
+          ],
+          "urgency": "emergency"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
         "dietPlan": {
-          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "summary": "Very strict diet and urgent eye care.",
           "dos": [
-            "Very strict: small millet portions, dal, boiled veg, curd small",
-            "Salt <3g, oil <2 tsp, no added sugar at all",
-            "Fruit only 50-80g if sugar allows, otherwise avoid",
-            "Light activity only as doctor advises, no strain",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Very strict small portions",
+            "Salt <3g, oil <2 tsp",
+            "Fruit 50-80g only",
+            "Light activity only"
           ],
           "donts": [
-            "No sugar, fried, salty, processed, or outside food",
-            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
-            "Do not delay eye treatment, do not miss any dose"
+            "No sugar or fried foods",
+            "No alcohol or smoking",
+            "Do not delay treatment"
           ],
           "dailyCalories": "1300-1500 kcal",
-          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+          "followUp": "Emergency eye referral 1 week"
         },
-        "imageUrl": "/images/fundus-laser.jpg",
-        "eye": "left"
+        "eye": "right"
       }
     ],
     "lastScreened": "2026-08-10",
     "medication": [
-      "Insulin Glargine",
-      "Metformin 500mg"
+      "Metformin 500mg",
+      "Sitagliptin 100mg",
+      "Telmisartan 40mg"
     ],
-    "footLastCheck": "2026-08-18"
+    "footLastCheck": "2026-08-18",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "BD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-10",
+        "indication": "First-line",
+        "status": "active"
+      },
+      {
+        "drug": "Sitagliptin 100mg",
+        "dosage": "100mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-10",
+        "indication": "DPP4 add-on",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-10",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-10",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-10",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-10",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      },
+      {
+        "drug": "Fenofibrate 145mg",
+        "dosage": "145mg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-10",
+        "indication": "DR adjunct \u2014 FIELD trial",
+        "status": "active"
+      },
+      {
+        "drug": "Nepafenac 0.1% eye drops",
+        "dosage": "1 drop",
+        "frequency": "TID",
+        "duration": "7d",
+        "prescribedBy": "Ophthalmologist",
+        "prescribedOn": "2026-08-10",
+        "indication": "Peri-laser anti-inflammatory (if PRP)",
+        "status": "active"
+      },
+      {
+        "drug": "Mupirocin 2% ointment",
+        "dosage": "thin layer",
+        "frequency": "BD",
+        "duration": "7d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-10",
+        "indication": "Foot care \u2014 post-screening",
+        "status": "completed"
+      },
+      {
+        "drug": "Vitamin B12 1500mcg",
+        "dosage": "1500mcg",
+        "frequency": "OD",
+        "duration": "60d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-08-10",
+        "indication": "Metformin-induced B12 check",
+        "status": "active"
+      },
+      {
+        "drug": "Ranibizumab 0.5mg intravitreal",
+        "dosage": "0.5mg/0.05mL",
+        "frequency": "single injection",
+        "duration": "1 dose, review 4w",
+        "prescribedBy": "Dr. Mehta, Retina Specialist",
+        "prescribedOn": "2026-06-18",
+        "indication": "PDR stage 4 \u2014 neovascularization on 2026-06-18",
+        "status": "active"
+      },
+      {
+        "drug": "Laser photocoagulation (PRP)",
+        "dosage": "1200-1500 burns",
+        "frequency": "2 sessions",
+        "duration": "2w interval",
+        "prescribedBy": "Ophthalmologist, GMC Dhule",
+        "prescribedOn": "2026-06-18",
+        "indication": "Severe NPDR/PDR \u2014 prevent progression",
+        "status": "active"
+      }
+    ]
   },
   {
     "id": "GV-027",
@@ -3442,31 +8114,78 @@ export const patients: Patient[] = [
         ],
         "notes": "Mild NPDR, microaneurysms",
         "imageQuality": 86,
-        "dietPlan": {
-          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
-          "dos": [
-            "Millet-based meals (jowar/bajra) + dal + green veg",
-            "1 fruit (guava, apple) and 5 soaked almonds",
-            "Salt <5g/day, BP check weekly",
-            "Walk 30-45 min, 5 days/week",
-            "Extra: less salt, check BP twice weekly at PHC"
+        "analysis": {
+          "summary": "Mild NPDR \u2014 1 exudates at 86/100 quality, 87% confidence. Risk 76/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (54%,58%) near macula",
+              "severity": "mild"
+            }
           ],
-          "donts": [
-            "No added sugar, jaggery, honey, or sweetened drinks",
-            "Limit salt, pickle, papad, and packaged snacks",
-            "No smoking or tobacco"
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 54%/58% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "Moderate confidence (87%) \u2014 quality 86/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 0/1. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.9%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.9% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "147/76",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 147 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "2y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 2y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "headache, blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
           ],
-          "dailyCalories": "1400-1500 kcal",
-          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+          "imageQualityAssessment": "Good 86/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
+          "urgency": "routine"
         },
         "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "left"
+        "dietPlan": {
+          "summary": "Tighten control to stop mild changes from growing.",
+          "dos": [
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
+          ],
+          "donts": [
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Eye check in 6 months"
+        },
+        "eye": "right"
       },
       {
         "id": "vGV-027-0-other",
         "date": "2026-05-10",
         "drStage": 1,
-        "confidence": 0.89,
+        "confidence": 0.87,
         "heatmapRegions": [
           {
             "x": 54,
@@ -3475,31 +8194,134 @@ export const patients: Patient[] = [
             "label": "exudates"
           }
         ],
-        "notes": "Mild NPDR, microaneurysms (right eye)",
+        "notes": "Mild NPDR, microaneurysms (left eye)",
         "imageQuality": 86,
         "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "right",
+        "eye": "left",
         "dietPlan": {
-          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "summary": "Tighten control to stop mild changes from growing.",
           "dos": [
-            "Millet-based meals (jowar/bajra) + dal + green veg",
-            "1 fruit (guava, apple) and 5 soaked almonds",
-            "Salt <5g/day, BP check weekly",
-            "Walk 30-45 min, 5 days/week",
-            "Extra: less salt, check BP twice weekly at PHC"
+            "Millet + dal + green veg",
+            "1 fruit and almonds",
+            "Salt <5g, BP check",
+            "Walk 30-45 min"
           ],
           "donts": [
-            "No added sugar, jaggery, honey, or sweetened drinks",
-            "Limit salt, pickle, papad, and packaged snacks",
-            "No smoking or tobacco"
+            "No added sugar or sweet drinks",
+            "Limit salt and packaged snacks",
+            "No tobacco"
           ],
           "dailyCalories": "1400-1500 kcal",
-          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+          "followUp": "Eye check in 6 months"
         },
-        "analysis": null
+        "analysis": {
+          "summary": "Mild NPDR \u2014 1 exudates at 86/100 quality, 87% confidence. Risk 76/100.",
+          "lesionsDetected": [
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (54%,58%) near macula",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "1\u20133 microaneurysms in posterior pole (heatmap 54%/58% if present). No haemorrhage or exudate beyond. Single lesion cluster = Mild NPDR (ETDRS 20-35).",
+          "confidenceExplanation": "Moderate confidence (87%) \u2014 quality 86/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 0/1. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "6.9%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 6.9% is at target"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "147/76",
+              "contribution": "moderate \u2014 HTN accelerates DR; systolic 147 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "2y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 2y Type 2"
+            },
+            {
+              "factor": "Family history",
+              "value": "Yes",
+              "contribution": "Genetic predisposition adds baseline risk"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "headache, blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 86/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Mild NPDR is earliest visible DR \u2014 microaneurysms only, no macular threat. Indicates end-organ damage has begun; systemic control must tighten to prevent progression to moderate.",
+          "recommendedActions": [
+            "Re-screen 6m, tighten glycemic control",
+            "BP/lipid optimization, smoking cessation",
+            "Patient education: report floaters/flashes immediately"
+          ],
+          "urgency": "routine"
+        }
       }
     ],
-    "lastScreened": "2026-05-10"
+    "lastScreened": "2026-05-10",
+    "prescriptions": [
+      {
+        "drug": "Metformin 500mg",
+        "dosage": "500mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Maintenance",
+        "status": "active"
+      },
+      {
+        "drug": "Telmisartan 40mg",
+        "dosage": "40mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "HTN \u2014 BP 140+",
+        "status": "active"
+      },
+      {
+        "drug": "Amlodipine 5mg",
+        "dosage": "5mg",
+        "frequency": "OD",
+        "duration": "30d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "HTN adjunct",
+        "status": "active"
+      },
+      {
+        "drug": "Atorvastatin 10mg",
+        "dosage": "10mg",
+        "frequency": "HS",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "ASCVD risk \u2014 DR high risk",
+        "status": "active"
+      },
+      {
+        "drug": "Aspirin 75mg",
+        "dosage": "75mg",
+        "frequency": "OD",
+        "duration": "90d",
+        "prescribedBy": "PHC Shirpur",
+        "prescribedOn": "2026-05-10",
+        "indication": "Antiplatelet if no bleed risk",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Metformin 500mg",
+      "Telmisartan 40mg",
+      "Amlodipine 5mg"
+    ]
   },
   {
     "id": "GV-028",
@@ -3551,107 +8373,236 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-028-left",
+        "id": "vGV-028-auto-1",
         "date": "2026-08-20",
         "drStage": 2,
-        "confidence": 0.88,
+        "confidence": 0.86,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 44,
+            "y": 38,
+            "r": 16,
+            "label": "haemorrhage"
+          },
+          {
+            "x": 52,
+            "y": 45,
+            "r": 12,
+            "label": "exudates"
           }
         ],
-        "notes": "Moderate NPDR",
-        "imageQuality": 91,
-        "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "left",
+        "notes": "Moderate NPDR, haemorrhage + exudates",
+        "imageQuality": 82,
         "analysis": {
-          "summary": "Moderate NPDR \u2014 eye left",
+          "summary": "Moderate NPDR \u2014 2 haemorrhage, exudates at 82/100 quality, 86% confidence. Risk 80/100.",
           "lesionsDetected": [
             {
-              "type": "microaneurysm",
+              "type": "haemorrhage",
               "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
+              "locations": "posterior pole (44%,38%) near macula",
+              "severity": "moderate"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (52%,45%) near macula",
+              "severity": "moderate"
             }
           ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
+          "stageJustification": "2 focal lesions: haemorrhage, exudates within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (86%) \u2014 quality 82/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.3%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.3% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "162/99",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 162 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "3y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 3y Type 1"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 82/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
         },
+        "imageUrl": "/images/fundus-scatter.jpg",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
-        }
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye check in 3 months"
+        },
+        "eye": "right"
       },
       {
-        "id": "vGV-028-right",
+        "id": "vGV-028-auto-1-other",
         "date": "2026-08-20",
         "drStage": 2,
-        "confidence": 0.88,
+        "confidence": 0.87,
         "heatmapRegions": [
           {
-            "x": 38,
-            "y": 42,
-            "r": 14,
-            "label": "microaneurysm"
+            "x": 44,
+            "y": 38,
+            "r": 16,
+            "label": "haemorrhage"
           }
         ],
-        "notes": "Moderate NPDR",
-        "imageQuality": 93,
-        "imageUrl": "/images/fundus-mild.jpg",
-        "eye": "right",
-        "analysis": {
-          "summary": "Moderate NPDR \u2014 eye right",
-          "lesionsDetected": [
-            {
-              "type": "microaneurysm",
-              "count": 1,
-              "locations": "posterior pole",
-              "severity": "mild"
-            }
-          ],
-          "stageJustification": "Mild changes",
-          "confidenceExplanation": "High confidence",
-          "riskScoreBreakdown": [],
-          "imageQualityAssessment": "Good",
-          "clinicalSignificance": "Routine",
-          "recommendedActions": [],
-          "urgency": "routine"
-        },
+        "notes": "Moderate NPDR, haemorrhage + exudates (left eye)",
+        "imageQuality": 82,
+        "imageUrl": "/images/fundus-scatter.jpg",
+        "eye": "left",
         "dietPlan": {
-          "summary": "Balanced plate",
+          "summary": "Steady sugar and eye follow up helps prevent worsening.",
           "dos": [
-            "Whole grains",
-            "Dal + veg"
+            "1 cup millet + dal + 2 cups veg",
+            "Low salt, lean protein",
+            "Fruit 100g only",
+            "Walk 30 min + foot check"
           ],
           "donts": [
-            "Avoid sugar"
+            "No sweets or fried foods",
+            "No deep fried or high salt",
+            "Do not miss medicines"
           ],
-          "dailyCalories": "1500 kcal",
-          "followUp": "Annual"
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye check in 3 months"
+        },
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 2 haemorrhage, exudates at 82/100 quality, 86% confidence. Risk 80/100.",
+          "lesionsDetected": [
+            {
+              "type": "haemorrhage",
+              "count": 1,
+              "locations": "posterior pole (44%,38%) near macula",
+              "severity": "moderate"
+            },
+            {
+              "type": "exudates",
+              "count": 1,
+              "locations": "posterior pole (52%,45%) near macula",
+              "severity": "moderate"
+            }
+          ],
+          "stageJustification": "2 focal lesions: haemorrhage, exudates within 2DD of macula, scattered. Meets Moderate NPDR criteria (ETDRS 43-47): haemorrhage/exudate without venous beading.",
+          "confidenceExplanation": "Moderate confidence (86%) \u2014 quality 82/100 is adequate, lesions visible but 1-2 are subtle near arcades, borderline with stage 1/2. Heatmap moderately focused (0.65-0.80). Senior review recommended if stage \u22652.",
+          "riskScoreBreakdown": [
+            {
+              "factor": "HbA1c",
+              "value": "7.3%",
+              "contribution": "low \u2014 chronic hyperglycemia drives microvascular damage; HbA1c 7.3% is above target <7%"
+            },
+            {
+              "factor": "Blood pressure",
+              "value": "162/99",
+              "contribution": "high \u2014 HTN accelerates DR; systolic 162 mmHg elevated"
+            },
+            {
+              "factor": "Diabetes duration",
+              "value": "3y",
+              "contribution": "low \u2014 longer duration increases cumulative exposure; 3y Type 1"
+            },
+            {
+              "factor": "Family history",
+              "value": "No",
+              "contribution": "No familial clustering"
+            },
+            {
+              "factor": "Symptoms",
+              "value": "blurred vision",
+              "contribution": "Symptomatic (blur/floaters) correlates with macular involvement"
+            }
+          ],
+          "imageQualityAssessment": "Good 82/100 \u2014 adequate focus, slight under-illumination at temporal periphery but lesions remain gradable. No blur gate block.",
+          "clinicalSignificance": "Moderate NPDR is action threshold \u2014 haemorrhage/exudate near macula risks centre-involving DME. 15-20% progress to PDR within 1y without control optimization.",
+          "recommendedActions": [
+            "Routine ophthalmology 4-8w via eSanjeevani",
+            "Optimize DM/HTN, HbA1c recheck 3m",
+            "Foot screening same day, SMS reminder queued"
+          ],
+          "urgency": "soon"
         }
       }
     ],
-    "footLastCheck": "2026-08-18"
+    "footLastCheck": "2026-08-18",
+    "prescriptions": [
+      {
+        "drug": "Insulin Glargine",
+        "dosage": "16U",
+        "frequency": "HS",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta, GMC Dhule",
+        "prescribedOn": "2026-08-20",
+        "indication": "Basal insulin \u2014 Type 1 DM",
+        "status": "active"
+      },
+      {
+        "drug": "Insulin Aspart",
+        "dosage": "6U",
+        "frequency": "TID pre-meal",
+        "duration": "30d",
+        "prescribedBy": "Dr. Mehta",
+        "prescribedOn": "2026-08-20",
+        "indication": "Bolus insulin",
+        "status": "active"
+      }
+    ],
+    "medication": [
+      "Insulin Glargine",
+      "Insulin Aspart"
+    ],
+    "lastScreened": "2026-08-20"
   }
 ];
 
 export const referrals: Referral[] = [
+  {
+    "id": "REF-102",
+    "patientId": "GV-003",
+    "date": "2026-08-28",
+    "stage": 3,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-107",
+    "patientId": "GV-014",
+    "date": "2026-08-22",
+    "stage": 1,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
   {
     "id": "REF-101",
     "patientId": "GV-001",
@@ -3662,11 +8613,52 @@ export const referrals: Referral[] = [
     "via": "eSanjeevani"
   },
   {
-    "id": "REF-102",
-    "patientId": "GV-003",
-    "date": "2026-08-28",
+    "id": "REF-008",
+    "patientId": "GV-008",
+    "date": "2026-08-20",
     "stage": 3,
     "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-013",
+    "patientId": "GV-013",
+    "date": "2026-08-20",
+    "stage": 3,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-020",
+    "patientId": "GV-020",
+    "date": "2026-08-20",
+    "stage": 2,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-025",
+    "patientId": "GV-025",
+    "date": "2026-08-20",
+    "stage": 2,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-028",
+    "patientId": "GV-028",
+    "date": "2026-08-20",
+    "stage": 2,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-108",
+    "patientId": "GV-018",
+    "date": "2026-08-19",
+    "stage": 3,
+    "status": "confirmed",
+    "doctor": "Dr. Reddy \u2014 Adilabad",
     "via": "eSanjeevani"
   },
   {
@@ -3687,6 +8679,14 @@ export const referrals: Referral[] = [
     "via": "eSanjeevani"
   },
   {
+    "id": "REF-026",
+    "patientId": "GV-026",
+    "date": "2026-08-10",
+    "stage": 4,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
     "id": "REF-105",
     "patientId": "GV-009",
     "date": "2026-08-05",
@@ -3704,25 +8704,80 @@ export const referrals: Referral[] = [
     "via": "eSanjeevani"
   },
   {
-    "id": "REF-107",
-    "patientId": "GV-014",
-    "date": "2026-08-22",
-    "stage": 1,
+    "id": "REF-019",
+    "patientId": "GV-019",
+    "date": "2026-07-22",
+    "stage": 4,
     "status": "pending",
     "via": "eSanjeevani"
   },
   {
-    "id": "REF-108",
-    "patientId": "GV-018",
-    "date": "2026-08-19",
+    "id": "REF-024",
+    "patientId": "GV-024",
+    "date": "2026-07-22",
     "stage": 3,
-    "status": "confirmed",
-    "doctor": "Dr. Reddy \u2014 Adilabad",
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-022",
+    "patientId": "GV-022",
+    "date": "2026-05-10",
+    "stage": 4,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-023",
+    "patientId": "GV-023",
+    "date": "2026-05-10",
+    "stage": 3,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-006",
+    "patientId": "GV-006",
+    "date": "2026-04-08",
+    "stage": 2,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-010",
+    "patientId": "GV-010",
+    "date": "2026-04-08",
+    "stage": 4,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-016",
+    "patientId": "GV-016",
+    "date": "2026-03-14",
+    "stage": 3,
+    "status": "pending",
+    "via": "eSanjeevani"
+  },
+  {
+    "id": "REF-021",
+    "patientId": "GV-021",
+    "date": "2026-01-12",
+    "stage": 2,
+    "status": "pending",
     "via": "eSanjeevani"
   }
 ];
 
 export const pharmacyOrders: PharmacyOrder[] = [
+  {
+    "id": "RX-202",
+    "patientId": "GV-003",
+    "patientName": "Arjun Yadav",
+    "prescription": "Awaiting ophthalmologist confirmation",
+    "status": "pending",
+    "date": "2026-08-28"
+  },
   {
     "id": "RX-201",
     "patientId": "GV-001",
@@ -3733,12 +8788,12 @@ export const pharmacyOrders: PharmacyOrder[] = [
     "date": "2026-08-22"
   },
   {
-    "id": "RX-202",
-    "patientId": "GV-003",
-    "patientName": "Arjun Yadav",
-    "prescription": "Awaiting ophthalmologist confirmation",
+    "id": "RX-208",
+    "patientId": "GV-019",
+    "patientName": "Rekha Patel",
+    "prescription": "Awaiting referral",
     "status": "pending",
-    "date": "2026-08-28"
+    "date": "2026-08-21"
   },
   {
     "id": "RX-203",
@@ -3748,6 +8803,87 @@ export const pharmacyOrders: PharmacyOrder[] = [
     "status": "verified",
     "pharmacist": "Ph. Kavita Desai",
     "date": "2026-08-20"
+  },
+  {
+    "id": "RX-004",
+    "patientId": "GV-004",
+    "patientName": "Lakshmi Rao",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "verified",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "RX-008",
+    "patientId": "GV-008",
+    "patientName": "Suresh Kumar",
+    "prescription": "Metformin 500mg 1g BD \u2014 Glycemic control \u2014 HbA1c 9%+",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "RX-011",
+    "patientId": "GV-011",
+    "patientName": "Kavita Joshi",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "verified",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "RX-013",
+    "patientId": "GV-013",
+    "patientName": "Sunita Reddy",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "RX-018",
+    "patientId": "GV-018",
+    "patientName": "Rohit Meena",
+    "prescription": "Metformin 500mg 500mg BD \u2014 First-line",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "RX-020",
+    "patientId": "GV-020",
+    "patientName": "Harish Rao",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "RX-025",
+    "patientId": "GV-025",
+    "patientName": "Anjali Mishra",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "RX-028",
+    "patientId": "GV-028",
+    "patientName": "Mahesh Babu",
+    "prescription": "Insulin Glargine 16U HS \u2014 Basal insulin \u2014 Type 1 DM",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-20"
+  },
+  {
+    "id": "RX-207",
+    "patientId": "GV-015",
+    "patientName": "Sarita Devi",
+    "prescription": "Metformin 500mg, Glibenclamide 5mg",
+    "status": "verified",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-18"
   },
   {
     "id": "RX-204",
@@ -3767,6 +8903,15 @@ export const pharmacyOrders: PharmacyOrder[] = [
     "date": "2026-08-10"
   },
   {
+    "id": "RX-026",
+    "patientId": "GV-026",
+    "patientName": "Sanjay Patil",
+    "prescription": "Metformin 500mg 500mg BD \u2014 First-line",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-08-10"
+  },
+  {
     "id": "RX-206",
     "patientId": "GV-012",
     "patientName": "Geeta Nair",
@@ -3776,20 +8921,102 @@ export const pharmacyOrders: PharmacyOrder[] = [
     "date": "2026-07-30"
   },
   {
-    "id": "RX-207",
-    "patientId": "GV-015",
-    "patientName": "Sarita Devi",
-    "prescription": "Metformin 500mg, Glibenclamide 5mg",
-    "status": "verified",
+    "id": "RX-024",
+    "patientId": "GV-024",
+    "patientName": "Vinod Kumar",
+    "prescription": "Metformin 500mg 500mg BD \u2014 First-line",
+    "status": "pending",
     "pharmacist": "Ph. Sunil Joshi",
-    "date": "2026-08-18"
+    "date": "2026-07-22"
   },
   {
-    "id": "RX-208",
-    "patientId": "GV-019",
-    "patientName": "Rekha Patel",
-    "prescription": "Awaiting referral",
+    "id": "RX-014",
+    "patientId": "GV-014",
+    "patientName": "Deepak Yadav",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "verified",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-06-18"
+  },
+  {
+    "id": "RX-022",
+    "patientId": "GV-022",
+    "patientName": "Naresh Chandra",
+    "prescription": "Metformin 500mg 1g BD \u2014 Glycemic control \u2014 HbA1c 9%+",
     "status": "pending",
-    "date": "2026-08-21"
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-05-10"
+  },
+  {
+    "id": "RX-023",
+    "patientId": "GV-023",
+    "patientName": "Rekha Patel",
+    "prescription": "Insulin Glargine 16U HS \u2014 Basal insulin \u2014 Type 1 DM",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-05-10"
+  },
+  {
+    "id": "RX-027",
+    "patientId": "GV-027",
+    "patientName": "Lata Joshi",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "verified",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-05-10"
+  },
+  {
+    "id": "RX-002",
+    "patientId": "GV-002",
+    "patientName": "Sunita Devi",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "verified",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-04-12"
+  },
+  {
+    "id": "RX-006",
+    "patientId": "GV-006",
+    "patientName": "Vikram Singh",
+    "prescription": "Metformin 500mg 1g BD \u2014 Glycemic control \u2014 HbA1c 9%+",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-04-08"
+  },
+  {
+    "id": "RX-010",
+    "patientId": "GV-010",
+    "patientName": "Rajesh Gupta",
+    "prescription": "Metformin 500mg 1g BD \u2014 Glycemic control \u2014 HbA1c 9%+",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-04-08"
+  },
+  {
+    "id": "RX-016",
+    "patientId": "GV-016",
+    "patientName": "Manoj Tiwari",
+    "prescription": "Metformin 500mg 1g BD \u2014 Glycemic control \u2014 HbA1c 9%+",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-03-14"
+  },
+  {
+    "id": "RX-017",
+    "patientId": "GV-017",
+    "patientName": "Pooja Singh",
+    "prescription": "Metformin 500mg 500mg OD \u2014 Maintenance",
+    "status": "verified",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-03-14"
+  },
+  {
+    "id": "RX-021",
+    "patientId": "GV-021",
+    "patientName": "Usha Rani",
+    "prescription": "Metformin 500mg 1g BD \u2014 Glycemic control \u2014 HbA1c 9%+",
+    "status": "pending",
+    "pharmacist": "Ph. Sunil Joshi",
+    "date": "2026-01-12"
   }
 ];

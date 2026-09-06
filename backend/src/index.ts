@@ -29,6 +29,7 @@ type PatientRow = {
   risk_score: number;
   last_screened: string | null;
   medication: string;
+  prescriptions: string | null;
   foot_last_check: string | null;
 };
 
@@ -61,6 +62,12 @@ mountChat(app);
 
 // Helpers
 function toPatient(row: PatientRow, glucose: { date: string; fasting: number; post_meal: number | null }[], visits: unknown[]) {
+  let prescriptions: unknown[] | undefined;
+  try {
+    prescriptions = row.prescriptions ? JSON.parse(row.prescriptions) : undefined;
+  } catch {
+    prescriptions = undefined;
+  }
   return {
     id: row.id,
     name: row.name,
@@ -79,6 +86,7 @@ function toPatient(row: PatientRow, glucose: { date: string; fasting: number; po
     visits,
     lastScreened: row.last_screened || undefined,
     medication: JSON.parse(row.medication || "[]"),
+    prescriptions,
     footLastCheck: row.foot_last_check || undefined,
   };
 }
@@ -114,19 +122,32 @@ app.get("/api/patients", async (c) => {
       const glucose = await c.env.DB.prepare("SELECT date, fasting, post_meal FROM glucose_readings WHERE patient_id = ? ORDER BY date")
         .bind(row.id)
         .all<{ date: string; fasting: number; post_meal: number | null }>();
-      const visits = await c.env.DB.prepare("SELECT id, date, dr_stage, confidence, heatmap_regions, notes, image_quality, image_url FROM visits WHERE patient_id = ? ORDER BY date DESC")
+      const visits = await c.env.DB.prepare("SELECT id, date, dr_stage, confidence, heatmap_regions, notes, image_quality, image_url, eye, analysis FROM visits WHERE patient_id = ? ORDER BY date DESC")
         .bind(row.id)
         .all();
-      const mappedVisits = (visits.results || []).map((v: Record<string, unknown>) => ({
-        id: v.id,
-        date: v.date,
-        drStage: v.dr_stage,
-        confidence: v.confidence,
-        heatmapRegions: JSON.parse((v.heatmap_regions as string) || "[]"),
-        notes: v.notes,
-        imageQuality: v.image_quality,
-        imageUrl: v.image_url,
-      }));
+      const mappedVisits = (visits.results || []).map((v: Record<string, unknown>) => {
+        let analysis: unknown = undefined;
+        try {
+          analysis = v.analysis ? JSON.parse(v.analysis as string) : undefined;
+        } catch {}
+        let dietPlan: unknown = undefined;
+        if (analysis && typeof analysis === "object" && "dietPlan" in (analysis as Record<string, unknown>)) {
+          dietPlan = (analysis as Record<string, unknown>).dietPlan;
+        }
+        return {
+          id: v.id,
+          date: v.date,
+          drStage: v.dr_stage,
+          confidence: v.confidence,
+          heatmapRegions: JSON.parse((v.heatmap_regions as string) || "[]"),
+          notes: v.notes,
+          imageQuality: v.image_quality,
+          imageUrl: v.image_url,
+          eye: (v.eye as string) || "left",
+          analysis,
+          dietPlan,
+        };
+      });
       return toPatient(row, (glucose.results || []) as never, mappedVisits);
     })
   );
@@ -138,27 +159,63 @@ app.get("/api/patients/:id", async (c) => {
   const row = await c.env.DB.prepare("SELECT * FROM patients WHERE id = ?").bind(id).first<PatientRow>();
   if (!row) return c.json({ error: "Not found" }, 404);
   const glucose = await c.env.DB.prepare("SELECT date, fasting, post_meal FROM glucose_readings WHERE patient_id = ? ORDER BY date").bind(id).all();
-  const visits = await c.env.DB.prepare("SELECT id, date, dr_stage, confidence, heatmap_regions, notes, image_quality, image_url FROM visits WHERE patient_id = ? ORDER BY date DESC").bind(id).all();
-  const mappedVisits = (visits.results || []).map((v: Record<string, unknown>) => ({
-    id: v.id,
-    date: v.date,
-    drStage: v.dr_stage,
-    confidence: v.confidence,
-    heatmapRegions: JSON.parse((v.heatmap_regions as string) || "[]"),
-    notes: v.notes,
-    imageQuality: v.image_quality,
-    imageUrl: v.image_url,
-  }));
+  const visits = await c.env.DB.prepare("SELECT id, date, dr_stage, confidence, heatmap_regions, notes, image_quality, image_url, eye, analysis FROM visits WHERE patient_id = ? ORDER BY date DESC").bind(id).all();
+  const mappedVisits = (visits.results || []).map((v: Record<string, unknown>) => {
+    let analysis: unknown = undefined;
+    try {
+      analysis = v.analysis ? JSON.parse(v.analysis as string) : undefined;
+    } catch {}
+    let dietPlan: unknown = undefined;
+    if (analysis && typeof analysis === "object" && "dietPlan" in (analysis as Record<string, unknown>)) {
+      dietPlan = (analysis as Record<string, unknown>).dietPlan;
+    }
+    return {
+      id: v.id,
+      date: v.date,
+      drStage: v.dr_stage,
+      confidence: v.confidence,
+      heatmapRegions: JSON.parse((v.heatmap_regions as string) || "[]"),
+      notes: v.notes,
+      imageQuality: v.image_quality,
+      imageUrl: v.image_url,
+      eye: (v.eye as string) || "left",
+      analysis,
+      dietPlan,
+    };
+  });
   const patient = toPatient(row, (glucose.results || []) as never, mappedVisits);
   return c.json({ patient });
 });
 
 app.patch("/api/patients/:id", async (c) => {
   const id = c.req.param("id");
-  const body = await c.req.json<{ footLastCheck?: string; foot_last_check?: string }>();
-  const date = body.footLastCheck || body.foot_last_check;
-  if (date) {
-    await c.env.DB.prepare("UPDATE patients SET foot_last_check = ?, updated_at = ? WHERE id = ?").bind(date, new Date().toISOString(), id).run();
+  const body = await c.req.json<Record<string, unknown>>();
+  const updates: string[] = [];
+  const binds: unknown[] = [];
+  const now = new Date().toISOString();
+  if (body.footLastCheck || body.foot_last_check) {
+    const date = (body.footLastCheck || body.foot_last_check) as string;
+    updates.push("foot_last_check = ?");
+    binds.push(date);
+  }
+  if (body.medication) {
+    updates.push("medication = ?");
+    binds.push(JSON.stringify(body.medication));
+  }
+  if (body.prescriptions) {
+    updates.push("prescriptions = ?");
+    binds.push(JSON.stringify(body.prescriptions));
+  }
+  if (body.riskScore !== undefined || body.risk_score !== undefined) {
+    const v = (body.riskScore ?? body.risk_score) as number;
+    updates.push("risk_score = ?");
+    binds.push(v);
+  }
+  if (updates.length) {
+    updates.push("updated_at = ?");
+    binds.push(now);
+    binds.push(id);
+    await c.env.DB.prepare(`UPDATE patients SET ${updates.join(", ")} WHERE id = ?`).bind(...binds).run();
   }
   const row = await c.env.DB.prepare("SELECT * FROM patients WHERE id = ?").bind(id).first<PatientRow>();
   if (!row) return c.json({ error: "Not found" }, 404);
@@ -181,13 +238,14 @@ app.post("/api/patients", async (c) => {
     symptoms?: string[];
     riskScore: number;
     medication?: string[];
+    prescriptions?: unknown[];
   }>();
   if (!body.name || !body.village) return c.json({ error: "name and village required" }, 400);
   const id = body.id || `GV-${Date.now().toString().slice(-6)}`;
   const now = new Date().toISOString().slice(0, 10);
   await c.env.DB.prepare(
-    `INSERT INTO patients (id, name, age, gender, village, phone, diabetes_years, diabetes_type, bp, hba1c, family_history, symptoms, risk_score, medication, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    `INSERT INTO patients (id, name, age, gender, village, phone, diabetes_years, diabetes_type, bp, hba1c, family_history, symptoms, risk_score, medication, prescriptions, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
   )
     .bind(
       id,
@@ -204,6 +262,7 @@ app.post("/api/patients", async (c) => {
       JSON.stringify(body.symptoms ?? []),
       body.riskScore ?? 50,
       JSON.stringify(body.medication ?? []),
+      JSON.stringify(body.prescriptions ?? []),
       now,
       now
     )
@@ -216,7 +275,7 @@ app.post("/api/patients", async (c) => {
   return c.json({ patient: row ? toPatient(row, [], []) : { id } }, 201);
 });
 
-// POST /api/patients/:id/visits  { drStage, confidence, heatmapRegions, notes, imageQuality, imageUrl }
+// POST /api/patients/:id/visits  { drStage, confidence, heatmapRegions, notes, imageQuality, imageUrl, eye, analysis, dietPlan }
 app.post("/api/patients/:id/visits", async (c) => {
   const patientId = c.req.param("id");
   const exists = await c.env.DB.prepare("SELECT id FROM patients WHERE id = ?").bind(patientId).first();
@@ -228,15 +287,19 @@ app.post("/api/patients/:id/visits", async (c) => {
     notes?: string;
     imageQuality: number;
     imageUrl?: string;
+    eye?: string;
+    analysis?: unknown;
+    dietPlan?: unknown;
     date?: string;
   }>();
   const id = `v${Date.now()}`;
   const date = body.date || new Date().toISOString().slice(0, 10);
+  const analysisToStore = body.analysis || (body.dietPlan ? { dietPlan: body.dietPlan } : null);
   await c.env.DB.prepare(
-    `INSERT INTO visits (id, patient_id, date, dr_stage, confidence, heatmap_regions, notes, image_quality, image_url)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    `INSERT INTO visits (id, patient_id, date, dr_stage, confidence, heatmap_regions, notes, image_quality, image_url, eye, analysis)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
   )
-    .bind(id, patientId, date, body.drStage, body.confidence, JSON.stringify(body.heatmapRegions || []), body.notes || "", body.imageQuality, body.imageUrl || null)
+    .bind(id, patientId, date, body.drStage, body.confidence, JSON.stringify(body.heatmapRegions || []), body.notes || "", body.imageQuality, body.imageUrl || null, body.eye || "left", analysisToStore ? JSON.stringify(analysisToStore) : null)
     .run();
   await c.env.DB.prepare("UPDATE patients SET last_screened = ?, updated_at = ? WHERE id = ?").bind(date, new Date().toISOString(), patientId).run();
   // auto-referral if stage >=2

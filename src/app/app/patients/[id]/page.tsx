@@ -100,16 +100,26 @@ function AddVisitInline({ patientId }: { patientId: string }) {
       urgency: (["routine", "routine", "soon", "urgent", "emergency"][stage] as "routine" | "soon" | "urgent" | "emergency"),
     };
 
+    const dietPlan = (() => {
+      if (stage === 0) return { summary: "Balanced plate", dos: ["Whole grains, dal, veg", "Fruit 100g"], donts: ["Avoid sugar"], dailyCalories: patient.gender === "F" ? "1400-1600 kcal" : "1600-1800 kcal", followUp: "Annual eye check" };
+      if (stage === 1) return { summary: "Tighten control", dos: ["Millet + veg", "Walk 30 min"], donts: ["No sugar"], dailyCalories: "1400-1500 kcal", followUp: "Eye check in 6 months" };
+      if (stage === 2) return { summary: "Steady sugar and eye follow up", dos: ["Millet + dal + veg", "Walk + foot check"], donts: ["No sweets"], dailyCalories: "1300-1500 kcal", followUp: "Eye check in 3 months" };
+      if (stage === 3) return { summary: "Strict control", dos: ["Strict salt <4g", "Small meals"], donts: ["No sugar"], dailyCalories: "1200-1400 kcal", followUp: "Urgent referral 1-2 weeks" };
+      return { summary: "Very strict", dos: ["Very strict small portions"], donts: ["No sugar"], dailyCalories: "1200-1300 kcal", followUp: "Emergency 1 week" };
+    })();
+    const eyeVal = (form as unknown as { eye?: string }).eye || "left";
     const visit = {
       id: `v${Date.now()}`,
-      date: form.date,
+      date: new Date(form.date).toISOString(),
       drStage: stage,
       confidence: conf,
       heatmapRegions: lesions,
       notes: form.notes || `${["No DR", "Mild NPDR", "Moderate NPDR", "Severe NPDR", "Proliferative DR"][stage]}, manual entry. Quality ${quality}/100.`,
       imageQuality: quality,
       imageUrl,
-      analysis,
+      eye: eyeVal as "left" | "right",
+      analysis: { ...analysis, dietPlan },
+      dietPlan,
     };
     addVisit(patientId, visit);
     setOpen(false);
