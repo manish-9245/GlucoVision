@@ -20,14 +20,18 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const { user, loading, logout } = useAuth();
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
+  useEffect(() => setMounted(true), []);
   useEffect(() => {
     if (!loading && !user) router.replace("/login");
   }, [user, loading, router]);
 
-  if (loading) {
+  // Hydration fix: server and initial client must render identical loading UI
+  // Auth state (localStorage / D1) is only known after mount, so keep loading UI until mounted
+  if (!mounted || loading) {
     return (
-      <div className="min-h-screen grid place-items-center bg-[#FCFCF9]">
+      <div suppressHydrationWarning className="min-h-screen grid place-items-center bg-[#FCFCF9]">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 rounded-full border-2 border-zinc-200 border-t-teal-600 animate-spin" />
           <div className="text-sm font-medium text-zinc-500">Loading GlucoVision…</div>
@@ -37,7 +41,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
   }
   if (!user) return null;
   return (
-    <div className="min-h-screen flex bg-white">
+    <div suppressHydrationWarning className="min-h-screen flex bg-white">
       {/* sidebar desktop - solid, no blur, no gradient, single radius system */}
       <aside className="hidden lg:flex w-[256px] shrink-0 flex-col border-r border-zinc-200 bg-white sticky top-0 h-screen">
         <div className="px-5 py-5 border-b border-zinc-200">
@@ -49,7 +53,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               <div className="font-bold tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
                 GlucoVision
               </div>
-              <div className="text-[11px] font-medium text-zinc-500">PHC Edition • Offline</div>
+              <div className="text-[11px] font-medium text-zinc-500">PHC Edition • Ready</div>
             </div>
           </Link>
         </div>
@@ -76,7 +80,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </nav>
-        <div className="p-3 border-t border-zinc-200 text-[11px] leading-relaxed text-zinc-600">Preliminary AI screening — requires ophthalmologist confirmation before treatment.</div>
+        <div className="p-3 border-t border-zinc-200 text-[11px] leading-relaxed text-zinc-600">Preliminary AI screening, requires eye doctor confirmation before treatment.</div>
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -108,7 +112,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         )}
         <main className="flex-1 min-w-0">{children}</main>
-        <footer className="px-6 py-4 text-center text-xs text-zinc-500 border-t border-zinc-200">Built for Smart India Hackathon • Offline-first • Explainable AI • eSanjeevani integrated</footer>
+        <footer className="px-6 py-4 text-center text-xs text-zinc-500 border-t border-zinc-200">© 2026 GlucoVision</footer>
       </div>
     </div>
   );

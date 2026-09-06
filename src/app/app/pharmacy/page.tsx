@@ -4,6 +4,7 @@ import { useStore } from "@/lib/store";
 import { Pill, ShieldCheck, CheckCircle2, Clock, Truck, PackageCheck, AlertTriangle, Search, Plus, Beaker, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { CustomSelect } from "@/components/CustomSelect";
 
 const STATUS_STEPS = ["pending", "verified", "dispatched", "delivered"] as const;
 
@@ -51,7 +52,7 @@ export default function PharmacyPage() {
   };
 
   return (
-    <div className="p-4 md:p-6 max-w-[1220px] mx-auto space-y-5">
+    <div className="w-full max-w-[1220px] mx-auto p-4 md:p-6 min-w-0 overflow-x-hidden space-y-5">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">
@@ -72,7 +73,7 @@ export default function PharmacyPage() {
 
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="flex flex-wrap items-center gap-2 text-xs font-semibold">
         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 shadow-sm">
-          <AlertTriangle className="w-3.5 h-3.5" /> No auto-prescription — licensed pharmacist verification required
+          <AlertTriangle className="w-3.5 h-3.5" /> No auto prescription, pharmacist must verify
         </span>
         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 shadow-sm">
           <Beaker className="w-3.5 h-3.5" /> Interaction check built-in
@@ -154,13 +155,7 @@ export default function PharmacyPage() {
           <motion.div initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.98 }} transition={{ duration: 0.3 }} className="border bg-white border border-stone-200 p-5 grid md:grid-cols-[1.1fr_1.6fr_0.9fr_auto] gap-3 items-end shadow-sm">
             <label className="text-sm">
               <span className="text-xs font-bold text-stone-500">Patient</span>
-              <select value={form.patientId} onChange={(e) => setForm({ ...form, patientId: e.target.value })} className="mt-1 w-full px-3 py-3 rounded-xl border border-stone-200 text-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none bg-white">
-                {patients.map((p) => (
-                  <option key={p.id} value={p.id}>
-                    {p.name} — {p.village}
-                  </option>
-                ))}
-              </select>
+              <CustomSelect value={form.patientId} onChange={(v) => setForm({ ...form, patientId: v })} options={patients.map((p) => ({ value: p.id, label: p.name, desc: p.village }))} placeholder="Select patient" searchable />
             </label>
             <label className="text-sm">
               <span className="text-xs font-bold text-stone-500">Prescription (after doctor confirm)</span>
@@ -253,7 +248,7 @@ export default function PharmacyPage() {
                       </motion.button>
                     ) : (
                       <span className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-bold">
-                        <PackageCheck className="w-4 h-4" /> Completed — refill reminder set
+                        <PackageCheck className="w-4 h-4" /> Completed, refill reminder set
                       </span>
                     )}
                     <Link href={`/app/screening?patient=${o.patientId}`} className="px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">

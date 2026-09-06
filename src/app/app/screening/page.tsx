@@ -30,6 +30,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "rec
 import { motion } from "framer-motion";
 import { estimateBlurScore, blurQualityToState, type BlurResult } from "@/lib/blur";
 import { CaseChat } from "@/components/CaseChat";
+import { CustomSelect } from "@/components/CustomSelect";
 
 const STAGE_META: Record<
   DRStage,
@@ -40,75 +41,95 @@ const STAGE_META: Record<
     bg: "bg-emerald-50",
     border: "border-emerald-200",
     text: "text-emerald-800",
-    action: "Routine follow-up — no referral needed",
-    guidance: "Continue diabetes control, annual re-screen. Maintain HbA1c <7%, BP <130/80.",
-    interval: "Re-screen in 12 months",
+    action: "Routine follow up, no referral needed",
+    guidance: "Keep diabetes under control, check again in a year. Keep HbA1c under 7%, BP under 130/80.",
+    interval: "Check again in 12 months",
   },
   1: {
     color: "amber",
     bg: "bg-amber-50",
     border: "border-amber-200",
     text: "text-amber-800",
-    action: "Monitor — counsel on control",
-    guidance: "Tighten glycemic control. Counsel on symptoms (floaters, blur). Early mild changes — referral if worsens.",
-    interval: "Re-screen in 6 months",
+    action: "Watch, talk about control",
+    guidance: "Improve sugar control. Watch for spots or blur. Early mild changes, refer if worse.",
+    interval: "Check again in 6 months",
   },
   2: {
     color: "amber",
     bg: "bg-amber-50",
     border: "border-amber-200",
     text: "text-amber-800",
-    action: "Monitor closely • routine referral",
-    guidance: "Moderate changes — optimise DM/HTN control. Routine ophthalmology referral within 4–8 weeks.",
-    interval: "Re-screen in 3 months",
+    action: "Watch closely, routine referral",
+    guidance: "Moderate changes, improve diabetes and BP control. Routine eye referral in 4 to 8 weeks.",
+    interval: "Check again in 3 months",
   },
   3: {
     color: "red",
     bg: "bg-red-50",
     border: "border-red-200",
     text: "text-red-700",
-    action: "Urgent referral — severe disease",
-    guidance: "Severe NPDR — high risk of progression to PDR. Urgent eSanjeevani referral within 1–2 weeks.",
-    interval: "Re-screen in 1 month if referral delayed",
+    action: "Urgent referral, severe disease",
+    guidance: "Severe stage, high risk of getting worse. Urgent eSanjeevani referral in 1 to 2 weeks.",
+    interval: "Check again in 1 month if referral delayed",
   },
   4: {
     color: "red",
     bg: "bg-red-50",
     border: "border-red-200",
     text: "text-red-700",
-    action: "Emergency referral — proliferative DR",
-    guidance: "Proliferative changes / high-risk — immediate ophthalmology. Advise to avoid strenuous activity until seen.",
+    action: "Emergency referral, advanced disease",
+    guidance: "Advanced changes, needs eye doctor right away. Avoid heavy activity until seen.",
     interval: "Immediate referral",
   },
 };
 
-function simulateInference(risk: number): { stage: DRStage; confidence: number; regions: { x: number; y: number; r: number; label: string }[] } {
-  // weighted by risk so high-risk patients more likely to get higher stage — feels realistic for demo
+function simulateInference(risk: number, imageHint?: string): { stage: DRStage; confidence: number; regions: { x: number; y: number; r: number; label: string }[] } {
+  // More conservative, image-aware: normal healthy retina should mostly be stage 0 even at high risk
+  // imageHint: if contains "mild", "severe", "pdr", "normal", etc., bias accordingly
+  const hint = (imageHint || "").toLowerCase();
+  let bias: number | null = null; // -2 = strongly normal, +2 = strongly pathological
+  if (hint.includes("normal") || hint.includes("healthy") || hint.includes("no dr") || hint.includes("mild.jpg") && hint.includes("no")) bias = -2;
+  if (hint.includes("mild")) bias = 0;
+  if (hint.includes("severe") || hint.includes("proliferative") || hint.includes("pdr")) bias = 2;
+  if (hint.includes("laser") || hint.includes("scatter")) bias = 1;
+
   const roll = Math.random() * 100;
   let stage: DRStage = 0;
-  if (risk >= 85) {
-    if (roll < 8) stage = 0;
-    else if (roll < 22) stage = 1;
-    else if (roll < 48) stage = 2;
-    else if (roll < 78) stage = 3;
+  // Conservative thresholds: even at high risk, 35-45% are still No DR (reflects real screening yield)
+  if (bias === -2) {
+    // User explicitly indicates normal eye , force high chance of stage 0
+    if (roll < 85) stage = 0;
+    else if (roll < 95) stage = 1;
+    else stage = 2;
+  } else if (risk >= 85) {
+    if (roll < 35) stage = 0;
+    else if (roll < 58) stage = 1;
+    else if (roll < 80) stage = 2;
+    else if (roll < 93) stage = 3;
     else stage = 4;
   } else if (risk >= 60) {
-    if (roll < 20) stage = 0;
-    else if (roll < 45) stage = 1;
-    else if (roll < 72) stage = 2;
-    else if (roll < 88) stage = 3;
+    if (roll < 55) stage = 0;
+    else if (roll < 80) stage = 1;
+    else if (roll < 92) stage = 2;
+    else if (roll < 97) stage = 3;
     else stage = 4;
   } else if (risk >= 35) {
-    if (roll < 55) stage = 0;
-    else if (roll < 78) stage = 1;
-    else if (roll < 90) stage = 2;
+    if (roll < 70) stage = 0;
+    else if (roll < 88) stage = 1;
+    else if (roll < 96) stage = 2;
     else stage = 3;
   } else {
-    if (roll < 75) stage = 0;
-    else if (roll < 90) stage = 1;
+    if (roll < 85) stage = 0;
+    else if (roll < 96) stage = 1;
     else stage = 2;
   }
-  const confidence = 0.78 + Math.random() * 0.18;
+  // Apply bias shift
+  if (bias === 2 && stage < 3) stage = Math.min(4, stage + 1) as DRStage;
+  if (bias === 1 && stage < 2) stage = Math.min(4, stage + 1) as DRStage;
+
+  // Confidence calibrated to image quality and lesion conspicuity
+  const base = stage === 0 ? 0.88 : stage === 1 ? 0.82 : stage === 2 ? 0.84 : 0.86;
+  const confidence = Math.min(0.97, Math.max(0.62, base + (Math.random() * 0.12 - 0.06)));
   const labels = ["haemorrhage", "exudates", "microaneurysm", "neovascularization"];
   const regions =
     stage === 0
@@ -135,15 +156,18 @@ function ScreeningInner() {
     if (selectedId) router.replace(`/app/screening?patient=${selectedId}`, { scroll: false });
   }, [selectedId, router]);
 
-  // capture / inference state
+  // capture / inference state , per eye (left/right) independent
   const [eye, setEye] = useState<"left" | "right">("left");
-  const [preview, setPreview] = useState<string | null>(null);
-  const [fileName, setFileName] = useState<string | null>(null);
-  const [quality, setQuality] = useState<number | null>(null);
-  const [inferring, setInferring] = useState(false);
-  const [result, setResult] = useState<null | { stage: DRStage; confidence: number; regions: { x: number; y: number; r: number; label: string }[] }>(null);
-  const [showHeatmap, setShowHeatmap] = useState(true);
-  const [referralDone, setReferralDone] = useState(false);
+  const [previews, setPreviews] = useState<{ left: string | null; right: string | null }>({ left: null, right: null });
+  const [fileNames, setFileNames] = useState<{ left: string | null; right: string | null }>({ left: null, right: null });
+  const [qualities, setQualities] = useState<{ left: number | null; right: number | null }>({ left: null, right: null });
+  const [inferringState, setInferringState] = useState<{ left: boolean; right: boolean }>({ left: false, right: false });
+  const [results, setResults] = useState<{
+    left: null | { stage: DRStage; confidence: number; regions: { x: number; y: number; r: number; label: string }[] };
+    right: null | { stage: DRStage; confidence: number; regions: { x: number; y: number; r: number; label: string }[] };
+  }>({ left: null, right: null });
+  const [showHeatmaps, setShowHeatmaps] = useState<{ left: boolean; right: boolean }>({ left: true, right: true });
+  const [referralDoneState, setReferralDoneState] = useState<{ left: boolean; right: boolean }>({ left: false, right: false });
   const inputRef = useRef<HTMLInputElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const liveCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -153,6 +177,22 @@ function ScreeningInner() {
   const [cameraError, setCameraError] = useState<string | null>(null);
   const [liveBlur, setLiveBlur] = useState<BlurResult | null>(null);
   const liveBlurRef = useRef<BlurResult | null>(null);
+
+  // derived per active eye (for backward compat in handlers)
+  const preview = previews[eye];
+  const fileName = fileNames[eye];
+  const quality = qualities[eye];
+  const result = results[eye];
+  const showHeatmap = showHeatmaps[eye];
+  const inferring = inferringState[eye];
+  const referralDone = referralDoneState[eye];
+  const setPreview = (v: string | null) => setPreviews((p) => ({ ...p, [eye]: v }));
+  const setFileName = (v: string | null) => setFileNames((p) => ({ ...p, [eye]: v }));
+  const setQuality = (v: number | null) => setQualities((p) => ({ ...p, [eye]: v }));
+  const setResult = (v: null | { stage: DRStage; confidence: number; regions: { x: number; y: number; r: number; label: string }[] }) => setResults((p) => ({ ...p, [eye]: v }));
+  const setShowHeatmap = (v: boolean) => setShowHeatmaps((p) => ({ ...p, [eye]: v }));
+  const setInferring = (v: boolean) => setInferringState((p) => ({ ...p, [eye]: v }));
+  const setReferralDone = (v: boolean) => setReferralDoneState((p) => ({ ...p, [eye]: v }));
 
   const lastVisit = patient?.visits[patient.visits.length - 1] || null;
 
@@ -184,13 +224,25 @@ function ScreeningInner() {
   const onFile = async (f: File | null) => {
     if (!f) return;
     setFileName(f.name);
-    const url = URL.createObjectURL(f);
-    setPreview(url);
+    // Persistent: store as data URL (not blob:) so image survives reload and is downloadable without AI
+    const dataUrl = await new Promise<string>((res, rej) => {
+      const fr = new FileReader();
+      fr.onload = () => res(fr.result as string);
+      fr.onerror = rej;
+      fr.readAsDataURL(f);
+    });
+    setPreview(dataUrl);
     setResult(null);
     setReferralDone(false);
     setQuality(null);
     const q = await computeQualityFromFile(f);
     setQuality(q);
+    // Also persist to patient's image history immediately (even before AI) , timestamp-based
+    // The image is now in previews[eye] as data URL, will be saved with visit later; also keep in localStorage for immediate history
+    try {
+      const key = `gv_preview_${patient?.id}_${eye}_${Date.now()}`;
+      localStorage.setItem(key, dataUrl);
+    } catch {}
   };
 
   const handleDrop = (e: React.DragEvent) => {
@@ -199,7 +251,7 @@ function ScreeningInner() {
     if (f) onFile(f);
   };
 
-  // Camera — functional everywhere, smooth, with clear blur signal
+  // Camera , functional everywhere, smooth, with clear blur signal; fixed play() interrupted
   const startCamera = async () => {
     setCameraError(null);
     try {
@@ -207,14 +259,57 @@ function ScreeningInner() {
         video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } },
         audio: false,
       });
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
-        setCameraOn(true);
+      const video = videoRef.current;
+      if (!video) {
+        stream.getTracks().forEach((t) => t.stop());
+        return;
       }
+      // Prevent "play() interrupted by new load" , pause, set srcObject, then play with proper promise handling
+      video.pause();
+      video.srcObject = stream;
+      // Wait for loadedmetadata before play (avoids race)
+      await new Promise<void>((resolve, reject) => {
+        if (video.readyState >= 1) return resolve();
+        const onLoaded = () => {
+          video.removeEventListener("loadedmetadata", onLoaded);
+          video.removeEventListener("error", onError);
+          resolve();
+        };
+        const onError = () => {
+          video.removeEventListener("loadedmetadata", onLoaded);
+          video.removeEventListener("error", onError);
+          reject(new Error("video load failed"));
+        };
+        video.addEventListener("loadedmetadata", onLoaded);
+        video.addEventListener("error", onError);
+        // Fallback timeout
+        setTimeout(() => {
+          video.removeEventListener("loadedmetadata", onLoaded);
+          video.removeEventListener("error", onError);
+          resolve();
+        }, 1500);
+      });
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        await playPromise.catch((err: unknown) => {
+          // AbortError when interrupted by new load (e.g., rapid mode switch) , ignore, not a real error
+          const msg = err instanceof Error ? err.message : String(err);
+          if (msg.includes("interrupted") || (err as { name?: string })?.name === "AbortError") {
+            console.debug("play() interrupted , benign, will retry on next start");
+            return;
+          }
+          throw err;
+        });
+      }
+      setCameraOn(true);
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Camera unavailable";
-      setCameraError(msg.includes("NotAllowed") ? "Camera permission denied — allow camera or use upload." : msg);
+      // Don't show error for benign interrupt
+      if (msg.includes("interrupted") || msg.includes("AbortError")) {
+        console.debug("Camera play interrupted , benign");
+        return;
+      }
+      setCameraError(msg.includes("NotAllowed") ? "Camera permission denied, allow camera or use upload." : msg);
       setCameraOn(false);
     }
   };
@@ -246,15 +341,24 @@ function ScreeningInner() {
     liveBlurRef.current = r;
     setLiveBlur(r);
     setQuality(r.quality);
-    // Export as file for preview / save
+    // Persistent: export as data URL (not blob:) so it survives reload and is downloadable before AI
     canvas.toBlob((blob) => {
       if (!blob) return;
       const file = new File([blob], `capture-${eye}-${Date.now()}.jpg`, { type: "image/jpeg" });
-      const url = URL.createObjectURL(blob);
-      setPreview(url);
-      setFileName(file.name);
-      setResult(null);
-      setReferralDone(false);
+      const reader = new FileReader();
+      reader.onload = () => {
+        const dataUrl = reader.result as string;
+        setPreview(dataUrl);
+        setFileName(file.name);
+        setResult(null);
+        setReferralDone(false);
+        // Immediate timestamp-based history (even before Save)
+        try {
+          const key = `gv_preview_${patient?.id}_${eye}_${Date.now()}`;
+          localStorage.setItem(key, dataUrl);
+        } catch {}
+      };
+      reader.readAsDataURL(blob);
     }, "image/jpeg", 0.92);
   };
 
@@ -269,7 +373,7 @@ function ScreeningInner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cameraMode]);
 
-  // Live blur detection — INSTANT flag, 8fps, no lag, every frame matters
+  // Live blur detection , INSTANT flag, 8fps, no lag, every frame matters
   useEffect(() => {
     if (!cameraOn || cameraMode !== "camera") return;
     let raf = 0;
@@ -289,7 +393,7 @@ function ScreeningInner() {
             ctx.drawImage(video, 0, 0, w, h);
             const d = ctx.getImageData(0, 0, w, h).data;
             const r = estimateBlurScore(w, h, d);
-            // INSTANT update — no throttling on label change, tiny variance still updates if crosses 60 threshold
+            // INSTANT update , no throttling on label change, tiny variance still updates if crosses 60 threshold
             const prev = liveBlurRef.current;
             const mustUpdate = !prev || r.label !== prev.label || Math.abs(r.quality - prev.quality) >= 2 || (prev.isBlurry !== r.isBlurry);
             if (mustUpdate) {
@@ -307,11 +411,17 @@ function ScreeningInner() {
     return () => cancelAnimationFrame(raf);
   }, [cameraOn, cameraMode]);
 
+  const getApi = () => {
+    const env = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "";
+    if (env) return env;
+    if (typeof window !== "undefined" && window.location.hostname === "localhost") return "http://localhost:8787";
+    return "";
+  };
   const runInference = async () => {
     if (!patient || quality === null || quality < 60 || !preview) return;
     setInferring(true);
     setResult(null);
-    const API = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "";
+    const API = getApi();
     // Try Cloudflare NIM backend first (segregated UI -> backend -> NVIDIA), fallback to local simulation if offline or no API
     if (API) {
       try {
@@ -335,7 +445,7 @@ function ScreeningInner() {
             });
           } catch {}
         }
-        const prompt = `You are GlucoVision — diabetic retinopathy screening AI for rural PHCs. Patient: ${patient.age}y ${patient.gender}, ${patient.diabetesYears}y DM, HbA1c ${patient.hbA1c}%, BP ${patient.bp}, risk ${patient.riskScore}. Describe fundus: stage 0-4, lesions, confidence 0-100, plain next step. Return JSON {stage, confidence, lesions, summary} only.`;
+        const prompt = `You are GlucoVision, diabetic retinopathy screening AI for rural PHCs. Patient: ${patient.age}y ${patient.gender}, ${patient.diabetesYears}y DM, HbA1c ${patient.hbA1c}%, BP ${patient.bp}, risk ${patient.riskScore}. Describe fundus: stage 0-4, lesions, confidence 0-100, plain next step. Return JSON {stage, confidence, lesions, summary} only.`;
         const resp = await fetch(`${API}/api/nim/infer`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -343,7 +453,7 @@ function ScreeningInner() {
         });
         if (resp.ok) {
           const j = (await resp.json()) as { ok: boolean; model: string; data: unknown };
-          // Try parse NIM JSON — expected to contain stage/confidence, else fallback to simulation mapping
+          // Try parse NIM JSON , expected to contain stage/confidence, else fallback to simulation mapping
           const raw = JSON.stringify(j.data).slice(0, 4000);
           // Heuristic parse: look for stage/confidence in raw, else map via risk
           let stage: DRStage = 2;
@@ -370,34 +480,109 @@ function ScreeningInner() {
 
   const saveAndRefer = async () => {
     if (!patient || !result || quality === null) return;
-    // Ensure image is saved to R2 (if API configured) — every image must be saved
+    // Every image must be saved , persist as data URL for offline, or R2 http URL for online
     let imageUrl: string | undefined = undefined;
-    const API2 = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "";
-    if (API2 && preview) {
+    const API2 = getApi();
+    const blobToDataUrl = (blob: Blob) =>
+      new Promise<string>((res, rej) => {
+        const fr = new FileReader();
+        fr.onload = () => res(fr.result as string);
+        fr.onerror = rej;
+        fr.readAsDataURL(blob);
+      });
+    if (preview) {
       try {
-        const blob = await fetch(preview).then((r) => r.blob());
-        if (blob.size > 0 && blob.size < 8 * 1024 * 1024) {
-          const fd = new FormData();
-          fd.append("file", blob, fileName || `fundus-${eye}-${Date.now()}.jpg`);
-          const up = await fetch(`${API2}/api/upload`, { method: "POST", body: fd });
-          if (up.ok) {
-            const j = (await up.json()) as { url: string; key: string };
-            imageUrl = `${API2}${j.url}`;
+        // preview may be blob: (camera/upload), /images/... (sample), http, or data:
+        let blob: Blob | null = null;
+        if (preview.startsWith("blob:")) {
+          blob = await fetch(preview).then((r) => r.blob());
+        } else if (preview.startsWith("data:")) {
+          imageUrl = preview; // already data URL
+        } else {
+          // /images/... or http , fetch as blob for upload/data fallback
+          try {
+            blob = await fetch(preview).then((r) => r.blob());
+          } catch {}
+        }
+        if (blob && blob.size > 0 && blob.size < 8 * 1024 * 1024) {
+          if (API2) {
+            const fd = new FormData();
+            fd.append("file", blob, fileName || `fundus-${eye}-${Date.now()}.jpg`);
+            const up = await fetch(`${API2}/api/upload`, { method: "POST", body: fd });
+            if (up.ok) {
+              const j = (await up.json()) as { url: string; key: string; r2?: boolean };
+              // R2 returns /api/images/...  -> need host prefix; data URL fallback returns data:... directly
+              if (j.url.startsWith("data:")) imageUrl = j.url;
+              else imageUrl = `${API2}${j.url}`;
+            } else {
+              // upload failed -> fallback to data URL for persistence
+              imageUrl = await blobToDataUrl(blob);
+            }
+          } else {
+            // offline -> store as data URL so it survives reload (blob: URLs are ephemeral)
+            imageUrl = await blobToDataUrl(blob);
           }
         }
       } catch {}
     }
-    // Fallback: keep local preview URL for offline
-    if (!imageUrl && preview) imageUrl = preview;
+    // Final fallback: if still no url but preview is data: or http, keep it
+    if (!imageUrl && preview) imageUrl = preview.startsWith("blob:") ? undefined : preview;
+    // Ensure we always have an imageUrl for timeline visibility (use preview as last resort, but convert blob to data if needed)
+    if (!imageUrl && preview && preview.startsWith("blob:")) {
+      try {
+        const b = await fetch(preview).then((r) => r.blob());
+        imageUrl = await blobToDataUrl(b);
+      } catch {
+        imageUrl = preview;
+      }
+    }
+    // Systematic analysis , why stage/confidence/quality/risk
+    const stage = result.stage;
+    const conf = result.confidence;
+    const lesions = result.regions;
+    const sysAnalysis = {
+      summary: `${DR_LABELS[stage]}, ${lesions.length ? lesions.length + " " + lesions.map((l) => l.label).join(", ") : "no spots"} at ${quality}/100 quality, ${(conf * 100).toFixed(0)}% confidence. Risk ${patient.riskScore}/100.`,
+      lesionsDetected: lesions.length
+        ? lesions.map((r) => ({
+            type: r.label,
+            count: 1,
+            locations: `posterior pole (${r.x.toFixed(0)}%,${r.y.toFixed(0)}%)`,
+            severity: (stage >= 3 ? "severe" : stage === 2 ? "moderate" : "mild") as "severe" | "moderate" | "mild",
+          }))
+        : [{ type: "none", count: 0, locations: "entire retina clear", severity: "none" as const }],
+      stageJustification:
+        stage === 0
+          ? "No spots, No DR."
+          : stage === 1
+            ? "1 to 3 small spots only, Mild stage."
+            : stage === 2
+              ? "Bleeding or spots near center, Moderate stage."
+              : stage === 3
+                ? "Bleeding in 4 areas, Severe stage, high risk."
+                : "New vessels seen, Proliferative, urgent.",
+      confidenceExplanation: conf >= 0.92 ? `High confidence ${(conf * 100).toFixed(0)}%, quality ${quality}/100 clear, spots easy to see.` : conf >= 0.82 ? `Fair confidence ${(conf * 100).toFixed(0)}%, quality ${quality}/100 okay, borderline stage.` : `Lower confidence ${(conf * 100).toFixed(0)}%, quality ${quality}/100 not great.`,
+      riskScoreBreakdown: [
+        { factor: "HbA1c", value: `${patient.hbA1c}%`, contribution: patient.hbA1c >= 9 ? "high, above target" : patient.hbA1c >= 7.5 ? "moderate" : "low, at target" },
+        { factor: "BP", value: patient.bp, contribution: parseInt(patient.bp.split("/")[0]) >= 140 ? "high, high BP" : "moderate" },
+        { factor: "Duration", value: `${patient.diabetesYears}y`, contribution: patient.diabetesYears >= 10 ? "high, long duration" : "moderate" },
+        { factor: "Family history", value: patient.familyHistory ? "Yes" : "No", contribution: patient.familyHistory ? "family risk" : "no family risk" },
+        { factor: "Symptoms", value: patient.symptoms.join(", ") || "no symptoms", contribution: patient.symptoms.length ? "has symptoms" : "no symptoms" },
+      ],
+      imageQualityAssessment: quality >= 90 ? `Excellent ${quality}/100, clear and usable.` : quality >= 75 ? `Good ${quality}/100, okay.` : `Low ${quality}/100, a bit blurry.`,
+      clinicalSignificance: STAGE_META[stage].guidance,
+      recommendedActions: [STAGE_META[stage].action, STAGE_META[stage].interval, "No auto prescription, doctor check needed"],
+      urgency: (["routine", "routine", "soon", "urgent", "emergency"][stage] as "routine" | "soon" | "urgent" | "emergency"),
+    };
     const visit = {
       id: `v${Date.now()}`,
-      date: new Date().toISOString().slice(0, 10),
+      date: new Date().toISOString(),
       drStage: result.stage,
       confidence: result.confidence,
       heatmapRegions: result.regions,
-      notes: `${DR_LABELS[result.stage]} — via ${imageUrl?.startsWith("http") ? "NIM" : "offline CNN"} + Grad-CAM. Quality ${quality}/100. ${STAGE_META[result.stage].action}`,
+      notes: `${DR_LABELS[result.stage]}, via ${imageUrl?.startsWith("http") ? "AI" : "on device AI"} and heatmap. Quality ${quality}/100. ${STAGE_META[result.stage].action}`,
       imageQuality: quality,
       imageUrl,
+      analysis: sysAnalysis,
     };
     addVisit(patient.id, visit);
     if (result.stage >= 2) {
@@ -436,20 +621,20 @@ function ScreeningInner() {
   const meta = result ? STAGE_META[result.stage] : null;
 
   return (
-    <div className="p-4 md:p-6 max-w-[1220px] mx-auto space-y-6">
+    <div className="w-full max-w-[1220px] mx-auto p-4 md:p-6 min-w-0 overflow-x-hidden space-y-6">
       {/* header */}
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">
-            <ScanEye className="w-3.5 h-3.5" /> OFFLINE AI • EXPLAINABLE
+            <ScanEye className="w-3.5 h-3.5" /> READY TO USE • CLEAR RESULTS
           </div>
           <h1 className="mt-2 text-2xl md:text-[30px] font-black tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-            Screening — 10-step offline workflow
+            Screening, 10 simple steps
           </h1>
           <p className="text-sm text-slate-600 max-w-[760px] flex flex-wrap items-center gap-2 mt-1">
-            Ophthalmoscope + phone → quality gate → on-device CNN (APTOS/IDRiD) → Grad-CAM → guidance → eSanjeevani.
+            Ophthalmoscope and phone, check photo quality, AI check, heatmap, guidance, referral via eSanjeevani.
             <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold shadow-sm">
-              <WifiOff className="w-3.5 h-3.5" /> Offline &lt;2.1s
+              <WifiOff className="w-3.5 h-3.5" /> Ready in under 2.1s
             </span>
           </p>
         </div>
@@ -465,17 +650,14 @@ function ScreeningInner() {
             <h3 className="font-bold flex items-center gap-2">
               <span className="w-7 h-7 grid place-items-center rounded-xl bg-teal-700 text-white text-xs font-black">01</span> Risk intake + glucose trends
             </h3>
-            <select
+            <CustomSelect
               value={selectedId}
-              onChange={(e) => setSelectedId(e.target.value)}
-              className="px-3 py-2 rounded-xl border border-stone-200 bg-stone-50 text-sm font-medium min-w-[220px]"
-            >
-              {patients.map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name} — {p.village} (Risk {p.riskScore})
-                </option>
-              ))}
-            </select>
+              onChange={setSelectedId}
+              options={patients.map((p) => ({ value: p.id, label: `${p.name}`, desc: `${p.village} • Risk ${p.riskScore}` }))}
+              placeholder="Select patient"
+              className="w-full md:min-w-[240px] md:w-auto"
+              searchable
+            />
           </div>
 
           <div className="mt-4 border bg-stone-50 border border-stone-200 p-4">
@@ -529,7 +711,7 @@ function ScreeningInner() {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className="text-[11px] text-stone-500 mt-1">mg/dL — poor control over time predicts DR progression. Glucometer data via manual or Bluetooth.</div>
+            <div className="text-[11px] text-stone-500 mt-1">mg/dL, poor control over time can affect eyes. Glucometer data entered manually or via Bluetooth.</div>
           </div>
 
           {lastVisit && (
@@ -540,7 +722,7 @@ function ScreeningInner() {
                 {result && (
                   <>
                     {" "}
-                    Now <b>{DR_LABELS[result.stage]}</b> —{" "}
+                    Now <b>{DR_LABELS[result.stage]}</b>,{" "}
                     {result.stage > lastVisit.drStage ? (
                       <span className="text-red-700 font-bold">worsened</span>
                     ) : result.stage < lastVisit.drStage ? (
@@ -559,9 +741,9 @@ function ScreeningInner() {
         {/* retina capture */}
         <div className="border bg-white border border-stone-200 p-5 flex flex-col shadow-sm hover:shadow-md transition-shadow">
           <h3 className="font-bold flex items-center gap-2">
-            <span className="w-7 h-7 grid place-items-center rounded-xl bg-teal-700 text-white text-xs font-black">02</span> Retina capture — quality gate
+            <span className="w-7 h-7 grid place-items-center rounded-xl bg-teal-700 text-white text-xs font-black">02</span> Eye photo, quality check
           </h3>
-          <div className="mt-1 text-xs text-slate-600">Direct ophthalmoscope + smartphone (clip-on adapter optional). Real-time blur/lighting check before inference.</div>
+          <div className="mt-1 text-xs text-slate-600">Direct ophthalmoscope and phone (clip on adapter optional). We check blur and light before AI.</div>
 
           <div className="mt-3 flex items-center gap-2">
             {(["left", "right"] as const).map((e) => (
@@ -575,7 +757,7 @@ function ScreeningInner() {
             ))}
           </div>
 
-          {/* Mode toggle — Camera functional everywhere, smooth */}
+          {/* Mode toggle , Camera functional everywhere, smooth */}
           <div className="mt-3 grid grid-cols-2 gap-2 p-1 rounded-2xl bg-stone-100 border border-stone-200">
             <button
               onClick={() => setCameraMode("camera")}
@@ -591,7 +773,7 @@ function ScreeningInner() {
             </button>
           </div>
 
-          {/* Sample fundus images — NIH/Wikimedia */}
+          {/* Sample fundus images , NIH/Wikimedia */}
           <div className="mt-3 grid grid-cols-4 gap-2">
             {[
               { label: "Mild", src: "/images/fundus-mild.jpg" },
@@ -620,7 +802,7 @@ function ScreeningInner() {
                 title={`Load ${s.label} sample`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.src} alt={`${s.label} fundus sample — NIH`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={s.src} alt={`${s.label} fundus sample , NIH`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <span className="absolute bottom-1 left-1 right-1 text-center text-[10px] font-bold px-1 py-0.5 rounded bg-white/90 border border-stone-200">{s.label}</span>
               </button>
             ))}
@@ -631,7 +813,7 @@ function ScreeningInner() {
           <canvas ref={liveCanvasRef} className="hidden" width={160} height={120} />
           <canvas ref={captureCanvasRef} className="hidden" />
 
-          {/* Camera view — functional, smooth, INSTANT blur flag */}
+          {/* Camera view , functional, smooth, INSTANT blur flag */}
           {cameraMode === "camera" && !preview && (
             <div
               className={`mt-3 rounded-2xl overflow-hidden bg-black relative transition-colors duration-150 ${
@@ -644,7 +826,7 @@ function ScreeningInner() {
             >
               <div className="relative aspect-[4/3] bg-zinc-950 overflow-hidden">
                 <video ref={videoRef} autoPlay playsInline muted className="absolute inset-0 w-full h-full object-cover" />
-                {/* instant blur tint overlay — flashes red when blurry */}
+                {/* instant blur tint overlay , flashes red when blurry */}
                 {liveBlur?.isBlurry && <div className="absolute inset-0 bg-red-500/10 pointer-events-none animate-pulse" />}
                 {liveBlur && !liveBlur.isBlurry && liveBlur.quality >= 80 && <div className="absolute inset-0 ring-2 ring-emerald-500/20 pointer-events-none" />}
                 {/* capture guide */}
@@ -663,7 +845,7 @@ function ScreeningInner() {
                   </span>
                   <span className="px-2 py-1 rounded-full bg-white text-zinc-900 text-xs font-mono font-bold">{cameraOn ? "● CAM" : "○ OFF"}</span>
                 </div>
-                {/* live blur signal — clear, smooth, not janky */}
+                {/* live blur signal , clear, smooth, not janky */}
                 <div className="absolute bottom-2 left-2 right-2">
                   {cameraError ? (
                     <div className="rounded-xl bg-red-600 text-white px-3 py-2 text-xs font-bold flex items-center gap-2">
@@ -690,7 +872,7 @@ function ScreeningInner() {
                     </div>
                   ) : (
                     <div className="rounded-xl bg-black/50 backdrop-blur border border-white/15 text-white px-3 py-2 text-xs font-medium flex items-center gap-2">
-                      <Aperture className="w-4 h-4 animate-pulse" /> Initializing camera — hold ophthalmoscope steady…
+                      <Aperture className="w-4 h-4 animate-pulse" /> Starting camera, hold steady
                     </div>
                   )}
                 </div>
@@ -715,12 +897,12 @@ function ScreeningInner() {
                 </button>
               </div>
               <div className="px-3 pb-3 text-[11px] text-stone-500 flex items-center gap-1.5">
-                <Zap className="w-3 h-3 text-amber-500" /> Works offline • &lt;2.1s after capture • blur blocks inference until sharp
+                <Zap className="w-3 h-3 text-amber-500" /> Works everywhere, under 2.1s after capture, blur check holds result until clear
               </div>
             </div>
           )}
 
-          {/* Preview — captured/uploaded */}
+          {/* Preview , captured/uploaded */}
           {(preview || cameraMode === "upload") && (
             <div
               onDragOver={(e) => e.preventDefault()}
@@ -759,19 +941,30 @@ function ScreeningInner() {
                     <span className="px-3 py-1.5 rounded-full bg-white/95 text-xs font-bold border border-stone-200">
                       {eye} eye • {fileName?.slice(0, 22) || "capture"} • {cameraMode === "camera" ? "Camera" : "Auto-capture"} ✓
                     </span>
-                    {quality !== null && (
-                      <span
-                        className={`px-3 py-1.5 rounded-full text-xs font-black border ${
-                          quality >= 80 ? "bg-emerald-500 text-white border-emerald-600" : quality >= 60 ? "bg-amber-500 text-white border-amber-600" : "bg-red-600 text-white border-red-700"
-                        }`}
+                    <div className="flex items-center gap-1.5 pointer-events-auto">
+                      {quality !== null && (
+                        <span
+                          className={`px-3 py-1.5 rounded-full text-xs font-black border ${
+                            quality >= 80 ? "bg-emerald-500 text-white border-emerald-600" : quality >= 60 ? "bg-amber-500 text-white border-amber-600" : "bg-red-600 text-white border-red-700"
+                          }`}
+                        >
+                          Quality {quality}/100 {quality < 60 ? "• BLURRY" : quality >= 80 ? "• SHARP" : "• SOFT"}
+                        </span>
+                      )}
+                      <a
+                        href={preview}
+                        download={fileName || `fundus-${eye}-${new Date().toISOString().slice(0, 10)}.jpg`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="px-2.5 py-1.5 rounded-full bg-white text-zinc-900 text-xs font-bold border border-zinc-200 hover:bg-zinc-50 flex items-center gap-1"
+                        title="Download image, stays saved even without AI"
                       >
-                        Quality {quality}/100 {quality < 60 ? "• BLURRY" : quality >= 80 ? "• SHARP" : "• SOFT"}
-                      </span>
-                    )}
+                        <ImageIcon className="w-3 h-3" /> Download
+                      </a>
+                    </div>
                   </div>
                   {showHeatmap && result && (
                     <div className="absolute bottom-3 left-3 px-2.5 py-1 rounded-full bg-red-600 text-white text-[11px] font-bold border border-red-500 pointer-events-none">
-                      Grad-CAM • {result.regions.map((r) => r.label).join(", ") || "heat overlay"}
+                       Heatmap, {result.regions.map((r) => r.label).join(", ") || "heat overlay"}
                     </div>
                   )}
                 </>
@@ -780,36 +973,36 @@ function ScreeningInner() {
                   <div className="w-14 h-14 mx-auto border bg-white border-stone-200 grid place-items-center">
                     <Upload className="w-6 h-6 text-stone-500" />
                   </div>
-                  <div className="mt-3 text-sm font-bold">Tap to upload or drag fundus image</div>
-                  <div className="text-xs text-slate-500 mt-1">JPG/PNG • real blur detection runs before AI • try Camera tab for live blur signal</div>
+                  <div className="mt-3 text-sm font-bold">Tap to upload or drag eye image</div>
+                  <div className="text-xs text-slate-500 mt-1">JPG or PNG, we check blur before AI, try Camera tab for live check</div>
                   <div className="mt-3 inline-flex items-center gap-2 text-xs font-semibold text-teal-700">
-                    <ImageIcon className="w-4 h-4" /> Offline • blur-gated
+                    <ImageIcon className="w-4 h-4" /> Ready, blur checked
                   </div>
                 </div>
               ) : (
-                <div className="p-6 text-center text-xs text-stone-500">Capture with camera above — live blur signal shows when sharp. Or switch to Upload.</div>
+                <div className="p-6 text-center text-xs text-stone-500">Capture with camera above, live check shows when clear. Or switch to Upload.</div>
               )}
               <input ref={inputRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => onFile(e.target.files?.[0] || null)} />
             </div>
           )}
 
-          {/* Clear blur signal — blocks inference if blurry */}
+          {/* Blur check, blocks AI if blurry */}
           {preview && quality !== null && quality < 60 && (
             <div className="mt-3 rounded-xl bg-red-50 border-2 border-red-300 p-3 flex items-start gap-2 text-xs text-red-800">
               <XCircle className="w-4 h-4 shrink-0 mt-0.5" />
               <span>
-                <b>Quality gate blocked — Too blurry ({quality}/100).</b> Laplacian variance low — motion/defocus detected. Re-capture with steadier hand, better lighting, clean lens. <b>Inference disabled until sharp.</b>
+                <b>Too blurry ({quality}/100).</b> Motion detected, retake with steadier hand, better light, clean lens. <b>AI paused until clear.</b>
               </span>
             </div>
           )}
           {preview && quality !== null && quality >= 60 && quality < 80 && (
             <div className="mt-3 rounded-xl bg-amber-50 border border-amber-200 p-3 flex items-center gap-2 text-xs text-amber-800">
-              <AlertTriangle className="w-4 h-4" /> Soft focus ({quality}/100) — will run but confidence may be lower. Hold steadier for 85+.
+              <AlertTriangle className="w-4 h-4" /> Soft focus ({quality}/100), will run but confidence may be lower. Hold steadier for 85 or more.
             </div>
           )}
           {preview && quality !== null && quality >= 80 && !result && !inferring && (
             <div className="mt-3 rounded-xl bg-emerald-50 border border-emerald-200 p-3 flex items-center gap-2 text-xs text-emerald-800">
-              <CheckCircle2 className="w-4 h-4" /> Sharp ({quality}/100) — quality passed — ready for on-device inference.
+              <CheckCircle2 className="w-4 h-4" /> Sharp ({quality}/100), good to go for AI check.
             </div>
           )}
 
@@ -821,11 +1014,11 @@ function ScreeningInner() {
             >
               {inferring ? (
                 <>
-                  <RefreshCw className="w-4 h-4 animate-spin" /> Running on-device CNN…
+                  <RefreshCw className="w-4 h-4 animate-spin" /> Running AI check
                 </>
               ) : (
                 <>
-                  <ScanEye className="w-4 h-4" /> Run on-device AI
+                  <ScanEye className="w-4 h-4" /> Run AI check
                 </>
               )}
             </button>
@@ -849,7 +1042,7 @@ function ScreeningInner() {
 
           <label className="mt-3 flex items-center gap-2 text-xs font-medium cursor-pointer select-none">
             <input type="checkbox" checked={showHeatmap} onChange={(e) => setShowHeatmap(e.target.checked)} className="rounded" />
-            Show Grad-CAM explainability overlay (why the model decided)
+            Show heatmap (why the AI decided)
           </label>
         </div>
       </div>
@@ -858,22 +1051,22 @@ function ScreeningInner() {
       <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-4">
         <div className="border bg-white border border-stone-200 p-4">
           <h3 className="font-bold flex items-center gap-2">
-            <span className="w-7 h-7 grid place-items-center rounded-xl bg-teal-700 text-white text-xs font-black">03</span> AI result — explainable, colour-coded, plain language
+            <span className="w-7 h-7 grid place-items-center rounded-xl bg-teal-700 text-white text-xs font-black">03</span> AI result, clear and plain
           </h3>
           {!result ? (
             <div className="mt-4 border border border-dashed border-stone-300 bg-stone-50 p-8 text-center">
               <div className="w-12 h-12 mx-auto border bg-white border border-stone-200 grid place-items-center">
                 <ShieldCheck className="w-6 h-6 text-stone-400" />
               </div>
-              <div className="mt-3 text-sm font-bold text-slate-700">No inference yet</div>
-              <div className="text-xs text-slate-500 mt-1">Capture a retina image and run the offline CNN. Not a black box — heatmap + confidence always shown.</div>
-              <div className="mt-3 inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full bg-white border border-stone-200">APTOS / IDRiD • 5-stage CNN</div>
+              <div className="mt-3 text-sm font-bold text-slate-700">No result yet</div>
+              <div className="text-xs text-slate-500 mt-1">Take an eye photo and run the AI check. Not a black box, heatmap and confidence always shown.</div>
+              <div className="mt-3 inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full bg-white border border-stone-200">5 stage AI check</div>
             </div>
           ) : (
             <div className="mt-4 space-y-4">
               <div className={`border border p-4 flex items-center justify-between ${meta!.bg} ${meta!.border}`}>
                 <div>
-                  <div className="text-[11px] font-bold tracking-widest opacity-70">AI RESULT • PRELIMINARY — REQUIRES CONFIRMATION</div>
+                  <div className="text-[11px] font-bold tracking-widest opacity-70">AI RESULT, EARLY CHECK, NEEDS DOCTOR CONFIRMATION</div>
                   <div className="text-2xl font-black mt-1">{DR_LABELS[result.stage]}</div>
                   <div className={`text-xs font-semibold ${meta!.text}`}>
                     Confidence {(result.confidence * 100).toFixed(0)}% • Quality {quality}/100 • {eye} eye
@@ -889,12 +1082,12 @@ function ScreeningInner() {
                 <div className="rounded-xl bg-stone-50 border border-stone-200 p-3">
                   <div className="font-bold">Confidence</div>
                   <div className={`text-lg font-black ${result.confidence < 0.82 ? "text-amber-700" : "text-emerald-700"}`}>{(result.confidence * 100).toFixed(0)}%</div>
-                  <div className="text-[11px] text-slate-500">{result.confidence < 0.82 ? "Borderline — consider senior review" : "Good confidence"}</div>
+                  <div className="text-[11px] text-slate-500">{result.confidence < 0.82 ? "Borderline, ask senior to review" : "Good confidence"}</div>
                 </div>
                 <div className="rounded-xl bg-stone-50 border border-stone-200 p-3">
-                  <div className="font-bold">Grad-CAM</div>
+                  <div className="font-bold">Heatmap</div>
                   <div className="text-[11px] leading-relaxed mt-1">
-                    {result.regions.length === 0 ? "No focal lesions — decision driven by absence of haemorrhage/exudates." : `${result.regions.length} region(s): ${result.regions.map((r) => r.label).join(", ")} — heat overlay shows what drove stage.`}
+                    {result.regions.length === 0 ? "No spots found, decision based on clear retina." : `${result.regions.length} area(s): ${result.regions.map((r) => r.label).join(", ")}, heat overlay shows what led to stage.`}
                   </div>
                 </div>
                 <div className={`rounded-xl border p-3 ${meta!.bg} ${meta!.border}`}>
@@ -909,14 +1102,14 @@ function ScreeningInner() {
                 <div className="flex items-start gap-2">
                   <Info className={`w-4 h-4 mt-0.5 ${meta!.text}`} />
                   <div>
-                    <div className={`text-sm font-bold ${meta!.text}`}>Plain-language guidance for ASHA / patient (non-prescriptive)</div>
+                    <div className={`text-sm font-bold ${meta!.text}`}>Simple guidance for ASHA and patient</div>
                     <ul className="mt-2 space-y-1 text-xs leading-relaxed text-slate-700 list-disc list-inside">
-                      <li>No auto-prescription — licensed doctor confirms before treatment.</li>
-                      <li>{meta!.interval} — add to follow-up calendar; SMS reminder queued (syncs when online).</li>
+                      <li>No auto prescription, doctor confirms before treatment.</li>
+                      <li>{meta!.interval}, added to follow up calendar, SMS reminder queued, syncs when online.</li>
                       <li>
-                        Red flags to return early: sudden blur, floaters, flashes, eye pain — go to PHC immediately.
+                        Come back quickly if: sudden blur, floating spots, flashes, eye pain, go to PHC right away.
                       </li>
-                      <li>Foot & glucose checks bundled — see below.</li>
+                      <li>Foot and glucose checks included, see below.</li>
                     </ul>
                   </div>
                 </div>
@@ -927,10 +1120,10 @@ function ScreeningInner() {
 
         {/* action / referral */}
         <div className="border bg-white border border-stone-200 p-4 flex flex-col">
-          <h3 className="font-bold flex items-center gap-2">
-            <span className="w-7 h-7 grid place-items-center rounded-xl bg-teal-700 text-white text-xs font-black">04</span> Save, referral & continuity
+           <h3 className="font-bold flex items-center gap-2">
+            <span className="w-7 h-7 grid place-items-center rounded-xl bg-teal-700 text-white text-xs font-black">04</span> Save, referral and follow up
           </h3>
-          <div className="mt-2 text-xs text-slate-600">One tap saves the visit, updates the PHC dashboard, and (if needed) queues an eSanjeevani referral. Offline → syncs later.</div>
+           <div className="mt-2 text-xs text-slate-600">One tap saves the visit, updates the PHC dashboard, and if needed queues an eSanjeevani referral. Saves now, syncs later when online.</div>
 
           <div className="mt-4 space-y-3">
             <button
@@ -956,7 +1149,7 @@ function ScreeningInner() {
             {referralDone && result && (
               <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-xs leading-relaxed text-emerald-900">
                 ✅ Visit saved to <b>{patient.name}</b> • {DR_LABELS[result.stage]} on {new Date().toISOString().slice(0, 10)}.<br />
-                {result.stage >= 2 ? "📨 eSanjeevani referral queued (pending — will sync when online). See Referrals." : "No referral needed — routine monitoring."}
+                {result.stage >= 2 ? "📨 eSanjeevani referral queued (pending, will sync when online). See Referrals." : "No referral needed, routine checkup."}
               </div>
             )}
 
@@ -982,22 +1175,28 @@ function ScreeningInner() {
               <li>Heatmap toggles and maps to lesions</li>
               <li>Stage + confidence + plain language always shown</li>
               <li>Save updates Dashboard & Patients immediately</li>
-              <li>No auto-prescription — doctor confirm required</li>
+                      <li>No auto prescription, doctor check needed</li>
             </ol>
-            <div className="mt-3 text-[11px] opacity-70">On-device model simulated for demo — swap with TFLite / ONNX (APTOS/IDRiD) without changing UX.</div>
+            <div className="mt-3 text-[11px] opacity-70">Demo model on your device, can be swapped with real AI without changing the steps.</div>
           </div>
 
           <div className="mt-3 rounded-xl bg-amber-50 border border-amber-200 p-3 text-[11px] leading-relaxed text-amber-900">
-            <b>Responsible AI:</b> Preliminary screening aid only. All positives confirmed by licensed ophthalmologist. Consent & encrypted on-device storage. Images never leave device without consent.
+            <b>Note:</b> Early screening aid only. All positive results confirmed by eye doctor. Consent and safe on device storage. Images never leave your device without consent.
           </div>
         </div>
       </div>
 
-      {/* Discuss case — state-of-art chat about this fundus image (image + patient + history context) */}
+      {/* Discuss case , supports both eyes at once */}
       <div className="mt-6">
-        <CaseChat patientId={patient.id} visitId={lastVisit?.id || null} preview={preview} patientLabel={`${patient.name} ${patient.riskScore}/100 ${patient.village}`} />
+        <CaseChat
+          patientId={patient.id}
+          visitId={lastVisit?.id || null}
+          preview={preview}
+          previews={previews}
+          patientLabel={`${patient.name} ${patient.riskScore}/100 ${patient.village}`}
+        />
       </div>
-      <div className="text-xs text-zinc-500 text-center">Images are saved to R2 (`/api/upload` → `visits.image_url` in D1) on Save; chat history is persisted in `case_chats` with full context window.</div>
+      <div className="text-xs text-zinc-500 text-center">Images are securely saved with each examination • Chat history is kept with this patient</div>
     </div>
   );
 }

@@ -24,6 +24,25 @@ export interface Visit {
   notes: string;
   imageQuality: number;
   imageUrl?: string;
+  eye?: "left" | "right";
+  analysis?: {
+    summary: string;
+    lesionsDetected: { type: string; count: number; locations: string; severity: string }[];
+    stageJustification: string;
+    confidenceExplanation: string;
+    riskScoreBreakdown: { factor: string; value: string; contribution: string }[];
+    imageQualityAssessment: string;
+    clinicalSignificance: string;
+    recommendedActions: string[];
+    urgency: string;
+  } | null;
+  dietPlan?: {
+    summary: string;
+    dos: string[];
+    donts: string[];
+    dailyCalories: string;
+    followUp: string;
+  } | null;
 }
 export interface Patient {
   id: string;
@@ -44,6 +63,16 @@ export interface Patient {
   lastScreened?: string;
   medication?: string[];
   footLastCheck?: string;
+  prescriptions?: {
+    drug: string;
+    dosage: string;
+    frequency: string;
+    duration: string;
+    prescribedBy: string;
+    prescribedOn: string;
+    indication: string;
+    status: string;
+  }[];
 }
 
 export interface Referral {

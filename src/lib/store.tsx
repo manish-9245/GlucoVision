@@ -71,7 +71,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       cancelled = true;
     };
   }, []);
-  // persist local (for offline) — only when not using API or as cache
+  // persist local (for offline), only when not using API or as cache
   useEffect(() => {
     if (USE_API) {
       localStorage.setItem("gv_store_api", JSON.stringify({ patients, referrals, pharmacy }));

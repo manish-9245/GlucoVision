@@ -11,8 +11,8 @@ const outfit = Outfit({ variable: "--font-outfit", subsets: ["latin"], weight: [
 const instrument = Instrument_Serif({ variable: "--font-display", subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
-  title: "GlucoVision — Explainable DR Screening for Rural India",
-  description: "AI-assisted diabetic retinopathy screening & care-continuity platform for PHCs. Offline-first, explainable, eSanjeevani-ready. Works with ophthalmoscope + phone, <2.1s on-device.",
+  title: "GlucoVision, Clear DR Screening for Rural India",
+  description: "AI diabetic retinopathy screening and care platform for PHCs. Ready to use, explainable, eSanjeevani ready. Works with ophthalmoscope and phone, results in under 2.1s on your device.",
   manifest: "/manifest.json",
   icons: {
     icon: [

@@ -1,4 +1,4 @@
-// Blur detection via Variance of Laplacian — lightweight, runs on 200x200 downscaled canvas
+// Blur detection via Variance of Laplacian , lightweight, runs on 200x200 downscaled canvas
 // Higher variance = sharper. Thresholds tuned for fundus/eye captures on phone.
 
 export type BlurResult = {
@@ -13,7 +13,7 @@ export function estimateBlurScore(sourceW: number, sourceH: number, data: Uint8C
   const w = 160;
   const h = Math.round((sourceH / sourceW) * w) || 160;
 
-  // Grayscale + downscale via nearest neighbor (fast) — we already have full data, so do simple sampling
+  // Grayscale + downscale via nearest neighbor (fast) , we already have full data, so do simple sampling
   // If source is larger, sample every Nth pixel
   const gray = new Float32Array(w * h);
   const stepX = sourceW / w;
@@ -31,7 +31,7 @@ export function estimateBlurScore(sourceW: number, sourceH: number, data: Uint8C
     }
   }
 
-  // Laplacian kernel [0,1,0; 1,-4,1; 0,1,0] — compute response then variance
+  // Laplacian kernel [0,1,0; 1,-4,1; 0,1,0] , compute response then variance
   const lap = new Float32Array(w * h);
   let sum = 0;
   let count = 0;
@@ -88,7 +88,7 @@ export function estimateBlurScore(sourceW: number, sourceH: number, data: Uint8C
 
 export function blurQualityToState(quality: number) {
   if (quality < 60) return { color: "red", text: "Too blurry", action: "Hold steady, move closer, clean lens" };
-  if (quality < 80) return { color: "amber", text: "Soft focus", action: "Slight motion — hold steady" };
+  if (quality < 80) return { color: "amber", text: "Soft focus", action: "Slight motion, hold steady" };
   return { color: "emerald", text: "Sharp", action: "Ready for inference" };
 }
 

@@ -56,7 +56,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string) => {
     if (!USE_API) {
-      // offline demo — accept any demo account, create mock user
+      // offline demo, accept any demo account, create mock user
       const mock: User = { id: "local_" + email, name: email.split("@")[0], email, role: "asha", phc: "Shirpur Rural", village: "Shirpur, Dhule", phone: null };
       // try to infer role from email prefix
       if (email.startsWith("mo@")) mock.role = "mo";

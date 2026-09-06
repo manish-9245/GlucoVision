@@ -65,7 +65,7 @@ gsap.registerPlugin(ScrollTrigger);
 </design_plan>
 */
 
-// Retina SVG — enhanced, premium, anatomically suggestive
+// Retina SVG , enhanced, premium, anatomically suggestive
 const RetinaSVG = () => (
   <svg viewBox="0 0 200 200" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -112,7 +112,7 @@ const RetinaSVG = () => (
     {/* optic disc highlight */}
     <ellipse cx="100" cy="100" rx="6" ry="5" fill="#fef3c7" opacity="0.95" filter="url(#glow)" />
     <circle cx="100" cy="100" r="2.2" fill="#fffbeb" />
-    {/* lesions — haemorrhages / exudates */}
+    {/* lesions , haemorrhages / exudates */}
     <g filter="url(#softGlow)">
       <circle cx="72" cy="80" r="5.2" fill="#ef4444" opacity="0.92" />
       <circle cx="130" cy="114" r="6.8" fill="#ef4444" opacity="0.88" />
@@ -132,6 +132,8 @@ const RetinaSVG = () => (
 
 const PhoneMockup = () => {
   const tiltRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const onMove = (e: React.MouseEvent) => {
     const el = tiltRef.current;
     if (!el) return;
@@ -146,13 +148,22 @@ const PhoneMockup = () => {
     el.style.transform = `perspective(900px) rotateY(0deg) rotateX(0deg) translateY(0px)`;
   };
 
+  // Hydration fix: use clamp() for responsive sizing instead of Tailwind responsive prefixes
+  // which were being stripped by stale chunks / browser extensions causing mismatch
+  // w-[clamp(200px,48vw,240px)] handles 200px@mobile → 240px@desktop without sm:/lg: prefixes
+  // suppressHydrationWarning as fallback for extensions
   return (
-    <div className="relative mx-auto w-[200px] h-[400px] sm:w-[220px] sm:h-[440px] lg:w-[240px] lg:h-[480px] select-none" onMouseMove={onMove} onMouseLeave={onLeave}>
-      {/* ambient glow behind phone — showcases on-device AI */}
+    <div
+      suppressHydrationWarning
+      className="relative mx-auto select-none w-[clamp(200px,48vw,240px)] h-[clamp(400px,96vw,480px)]"
+      onMouseMove={mounted ? onMove : undefined}
+      onMouseLeave={mounted ? onLeave : undefined}
+    >
+      {/* ambient glow behind phone , showcases on-device AI */}
       <div className="absolute -inset-6 -z-10 bg-gradient-to-br from-teal-500/20 via-amber-500/15 to-cyan-500/10 blur-[28px] rounded-[40px] opacity-80" />
       <div className="absolute -inset-2 -z-10 bg-teal-500/10 blur-[18px] rounded-[36px]" />
 
-      {/* floating feature pills around phone — showcase all features */}
+      {/* floating feature pills around phone , showcase all features */}
       <div className="absolute -left-8 top-[18%] hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white border border-zinc-200 shadow-[0_8px_24px_rgba(0,0,0,0.12)] text-[10px] font-bold z-20">
         <span className="w-5 h-5 rounded-full bg-emerald-500 text-white grid place-items-center">
           <Eye className="w-3 h-3" />
@@ -167,21 +178,21 @@ const PhoneMockup = () => {
         <span className="w-4 h-4 rounded-full bg-white text-amber-600 grid place-items-center text-[9px] font-black">II</span> Stage II • 87%
       </div>
       <div className="absolute -left-6 bottom-[22%] hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white border border-zinc-200 shadow-[0_8px_24px_rgba(0,0,0,0.12)] text-[10px] font-bold z-20">
-        <ShieldCheck className="w-3.5 h-3.5 text-teal-600" /> Grad-CAM
+        <ShieldCheck className="w-3.5 h-3.5 text-teal-600" /> Heatmap
         <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
       </div>
       <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-zinc-200 shadow-[0_8px_24px_rgba(0,0,0,0.12)] text-[10px] font-bold z-20">
-        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Offline sync • queued
+        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Sync queued
         <WifiOff className="w-3 h-3 text-zinc-400" />
       </div>
 
-      {/* phone body — premium, impactful */}
+      {/* phone body , premium, impactful */}
       <div
         ref={tiltRef}
         className="relative w-full h-full bg-[#0a0a0f] rounded-[38px] p-[10px] shadow-[0_32px_80px_rgba(0,0,0,0.45),0_18px_40px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.12)] border border-zinc-800 will-change-transform transition-transform duration-300 ease-out"
         style={{ transform: "perspective(900px) rotateY(0deg) rotateX(0deg)" }}
       >
-        {/* side buttons — tactile */}
+        {/* side buttons , tactile */}
         <div className="absolute -left-[3px] top-[88px] w-[3px] h-[28px] bg-zinc-700 rounded-l-md shadow-inner" />
         <div className="absolute -left-[3px] top-[124px] w-[3px] h-[54px] bg-zinc-700 rounded-l-md shadow-inner" />
         <div className="absolute -left-[3px] top-[186px] w-[3px] h-[54px] bg-zinc-700 rounded-l-md shadow-inner" />
@@ -199,15 +210,15 @@ const PhoneMockup = () => {
 
         {/* screen */}
         <div className="w-full h-full bg-white rounded-[28px] overflow-hidden relative flex flex-col shadow-[inset_0_0_0_1px_rgba(0,0,0,0.06)]">
-          {/* status header — PHC + battery */}
+          {/* status header , PHC + battery */}
           <div className="h-[44px] flex items-center justify-between px-5 pt-2 bg-zinc-50 border-b border-zinc-100 shrink-0">
             <div className="flex items-center gap-2">
               <span className="w-6 h-6 rounded-full bg-emerald-500 text-white grid place-items-center">
                 <Activity className="w-3 h-3" />
               </span>
               <div className="leading-none">
-                <div className="text-[10px] font-black tracking-widest">PHC • OFFLINE</div>
-                <div className="text-[9px] font-medium text-zinc-500">Shirpur Rural • 94% batt</div>
+                <div className="text-[10px] font-black tracking-widest">PHC • READY</div>
+                <div className="text-[9px] font-medium text-zinc-500">Shirpur Rural • 94% battery</div>
               </div>
             </div>
             <div className="flex items-center gap-1.5">
@@ -220,9 +231,9 @@ const PhoneMockup = () => {
             </div>
           </div>
 
-          {/* retina viewport — capture showcase */}
+          {/* retina viewport , capture showcase */}
           <div className="flex-1 relative bg-[#050508] overflow-hidden">
-            {/* fundus image behind SVG for photorealism — healthy normal for inline, but phone shows pathological */}
+            {/* fundus image behind SVG for photorealism , healthy normal for inline, but phone shows pathological */}
             <img src="/images/fundus-mild.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-[0.45] mix-blend-luminosity grayscale contrast-125" />
             <div className="absolute inset-0 opacity-30" style={{ background: "radial-gradient(ellipse 320px 240px at 50% 38%, rgba(251,146,60,0.35), transparent 60%), radial-gradient(ellipse 240px 200px at 50% 70%, rgba(15,118,110,0.25), transparent 60%)" }} />
             {/* retina SVG */}
@@ -231,7 +242,7 @@ const PhoneMockup = () => {
                 <RetinaSVG />
               </div>
             </div>
-            {/* corner brackets — capture guide */}
+            {/* corner brackets , capture guide */}
             <div className="absolute top-3 left-3 w-5 h-5 border-l-[2.5px] border-t-[2.5px] border-white/90 rounded-tl-[3px] shadow-[0_1px_8px_rgba(0,0,0,0.45)]" />
             <div className="absolute top-3 right-3 w-5 h-5 border-r-[2.5px] border-t-[2.5px] border-white/90 rounded-tr-[3px] shadow-[0_1px_8px_rgba(0,0,0,0.45)]" />
             <div className="absolute bottom-[44px] left-3 w-5 h-5 border-l-[2.5px] border-b-[2.5px] border-white/90 rounded-bl-[3px] shadow-[0_1px_8px_rgba(0,0,0,0.45)]" />
@@ -244,15 +255,15 @@ const PhoneMockup = () => {
               <div className="absolute top-1/2 right-0 -translate-y-1/2 w-2 h-[1px] bg-white/80" />
               <div className="absolute inset-0 border border-white/30 rounded-full" />
             </div>
-            {/* scan line — quality gate, eye-level */}
+            {/* scan line , quality gate, eye-level */}
             <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_16px_rgba(34,211,238,0.95)] opacity-95 animate-[scan_2.8s_linear_infinite]" style={{ top: "36%" }} />
             <style>{`@keyframes scan{0%{transform:translateY(-68px);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(68px);opacity:0}}`}</style>
-            {/* heatmap pulses — inference showcase */}
+            {/* heatmap pulses , inference showcase */}
             <div className="absolute top-[30%] left-[34%] w-9 h-9 rounded-full bg-red-500/30 border border-red-400/50 blur-[0.5px] animate-[pulse_1.9s_ease-in-out_infinite]" style={{ boxShadow: "0 0 18px rgba(239,68,68,0.55)" }} />
             <div className="absolute top-[58%] right-[30%] w-11 h-11 rounded-full bg-amber-500/30 border border-amber-400/50 blur-[0.5px] animate-[pulse_2.3s_ease-in-out_infinite_0.4s]" style={{ boxShadow: "0 0 18px rgba(245,158,11,0.5)" }} />
             <style>{`@keyframes pulse{0%,100%{transform:scale(1);opacity:0.85}50%{transform:scale(1.08);opacity:1}}`}</style>
 
-            {/* bottom bar inside viewport — quality + eye */}
+            {/* bottom bar inside viewport , quality + eye */}
             <div className="absolute bottom-0 left-0 right-0 h-[44px] bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
             <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between gap-2">
               <span className="px-2 py-1 rounded-full bg-white text-zinc-900 text-[10px] font-black shadow-[0_4px_12px_rgba(0,0,0,0.25)] flex items-center gap-1">
@@ -265,23 +276,23 @@ const PhoneMockup = () => {
             {/* top meta */}
             <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
               <span className="px-2 py-1 rounded-full bg-black/55 backdrop-blur-md border border-white/15 text-white text-[9px] font-bold flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> APTOS • 5-stage
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> 5 stage • AI
               </span>
               <span className="px-1.5 py-1 rounded-full bg-white/90 backdrop-blur text-zinc-900 text-[9px] font-mono font-bold">94%</span>
             </div>
           </div>
 
-          {/* result — inference showcase */}
+          {/* result , inference showcase */}
           <div className="p-3 bg-white border-t border-zinc-100 shrink-0">
             <div className="rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 p-2.5 flex items-center justify-between shadow-[0_4px_12px_rgba(245,158,11,0.12)]">
               <div>
                 <div className="text-[10px] font-black tracking-[0.14em] text-amber-700">MODERATE NPDR • STAGE II</div>
                 <div className="text-[12px] font-black leading-none mt-0.5">87% confidence</div>
-                <div className="text-[9px] font-medium text-zinc-500 mt-0.5">Bleeding spots near macula • Grad-CAM</div>
+                <div className="text-[9px] font-medium text-zinc-500 mt-0.5">Bleeding spots near macula • Heatmap</div>
               </div>
               <div className="w-10 h-10 rounded-xl bg-amber-500 text-white grid place-items-center font-black text-sm shadow-[0_4px_12px_rgba(245,158,11,0.35)] border border-amber-400">II</div>
             </div>
-            {/* three micro-metrics — showcase all features */}
+            {/* three micro-metrics , showcase all features */}
             <div className="grid grid-cols-3 gap-1.5 mt-2">
               <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-1.5 text-center hover:border-zinc-300 transition-colors">
                 <div className="text-[7.5px] font-black tracking-widest text-zinc-500 uppercase">Progression</div>
@@ -329,7 +340,7 @@ const FloatingNav = () => {
             <div className="font-bold tracking-tight text-[15px]" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
               GlucoVision
             </div>
-            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">Smart India Hackathon ’26</div>
+            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">GlucoVision</div>
           </div>
         </Link>
 
@@ -468,21 +479,21 @@ export default function Landing() {
 
   const testimonials = [
     {
-      quote: "We screened 47 patients in one camp with just a phone. The heatmap lets me explain the result — villagers finally trust the AI.",
+      quote: "We screened 47 patients in one camp with just a phone. The heatmap lets me explain the result , villagers finally trust the AI.",
       name: "Asha Kokate",
       role: "ASHA Worker, Shirpur PHC",
       place: "Dhule District",
       img: "/images/asha-portrait.jpg",
     },
     {
-      quote: "Grad-CAM is non-negotiable. I need to see haemorrhages, not a black-box label. This is how you build clinical trust.",
+      quote: "Heatmap is a must. I need to see bleeding spots, not just a label. This is how you build trust.",
       name: "Dr. Mehta",
       role: "Ophthalmologist",
       place: "GMC Dhule • eSanjeevani",
       img: "/images/doctor-portrait.jpg",
     },
     {
-      quote: "Offline first means we don’t wait for network. Screen in the morning, sync at night. That’s rural reality.",
+      quote: "We screen in the morning, sync at night. No need to wait for network, that is rural reality.",
       name: "Sunil Joshi",
       role: "Pharmacist, Telepharmacy",
       place: "Adilabad",
@@ -494,13 +505,13 @@ export default function Landing() {
     <main className="overflow-x-hidden w-full max-w-full bg-[#FCFCF9]">
       <FloatingNav />
 
-      {/* HERO — Cinematic Center */}
+      {/* HERO , Cinematic Center */}
       <section ref={heroRef} className="relative min-h-[88vh] flex flex-col items-center justify-center text-center px-6 pt-28 pb-16 md:pt-36 md:pb-24 overflow-hidden bg-[#040407]">
         {/* Full-bleed background */}
         <div className="hero-bg absolute inset-0">
           <img
             src="/images/fundus-proliferative.jpg"
-            alt="Fundus photograph showing diabetic retinopathy – National Eye Institute"
+            alt="Fundus photograph showing diabetic retinopathy, National Eye Institute"
             className="w-full h-[120%] object-cover grayscale contrast-125 opacity-[0.38]"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#040407]/40 via-[#040407]/55 to-[#040407]/95" />
@@ -512,7 +523,7 @@ export default function Landing() {
         <div className="hero-content relative z-10 w-full max-w-[1080px] mx-auto flex flex-col items-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/15 text-white text-xs font-semibold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Explainable AI • Works fully offline • eSanjeevani ready
+            Clear AI results • Works everywhere • eSanjeevani ready
           </div>
 
           <h1 className="hero-title mt-6 text-white text-balance max-w-[1080px] w-full">
@@ -533,7 +544,7 @@ export default function Landing() {
 
           <p className="mt-6 max-w-[640px] text-[17px] md:text-[19px] leading-7 md:leading-8 text-white/70 font-light text-balance">
             AI diabetic retinopathy screening for rural PHCs.{" "}
-            <span className="text-white font-medium">Works with your ophthalmoscope and phone.</span> Every result shows why — no black box.
+            <span className="text-white font-medium">Works with your ophthalmoscope and phone.</span> Every result shows why, no black box.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-3">
@@ -556,7 +567,7 @@ export default function Landing() {
               <WifiOff className="w-3.5 h-3.5" /> &lt; 2.1s on-device
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/10">
-              <ShieldCheck className="w-3.5 h-3.5" /> APTOS • 5-stage CNN
+              <ShieldCheck className="w-3.5 h-3.5" /> 5 stage AI check
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 border border-white/10">
               <HeartPulse className="w-3.5 h-3.5" /> PHC • CHC • District
@@ -587,11 +598,11 @@ export default function Landing() {
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
                 <span className="flex items-center gap-2 text-sm font-bold whitespace-nowrap text-teal-700">
-                  <WifiOff className="w-4 h-4" /> Offline-first • Explainable AI
+                  <WifiOff className="w-4 h-4" /> Ready to use • Clear AI
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
                 <span className="flex items-center gap-2 text-sm font-bold whitespace-nowrap">
-                  <ShieldCheck className="w-4 h-4" /> APTOS • IDRiD • 5-stage CNN
+                  <ShieldCheck className="w-4 h-4" /> 5 stage AI check
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
                 <span className="flex items-center gap-2 text-sm font-bold whitespace-nowrap">
@@ -604,8 +615,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* STATS STRIP — lifted glass */}
-      <section className="max-w-[1120px] mx-auto px-6 mt-6 relative z-10">
+      {/* STATS STRIP , lifted glass */}
+      <section className="w-full max-w-[1120px] mx-auto px-6 min-w-0 overflow-x-hidden mt-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {[
             { k: "100M+", label: "diabetics in India", sub: "Largest burden globally" },
@@ -628,8 +639,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* INTEREST — Gapless Bento Grid + Prototype Mockup */}
-      <section ref={bentoRef} id="how" className="max-w-[1120px] mx-auto px-6 py-24 md:py-32">
+      {/* INTEREST , Gapless Bento Grid + Prototype Mockup */}
+      <section ref={bentoRef} id="how" className="w-full max-w-[1120px] mx-auto px-6 min-w-0 overflow-x-hidden py-24 md:py-32">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-[640px]">
             <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-700">
@@ -642,15 +653,15 @@ export default function Landing() {
             </h2>
           </div>
           <p className="max-w-[380px] text-[15px] leading-6 text-zinc-600">
-            Not just diagnosis — intake, glucose trends, capture, AI, guidance, referral, pharmacy and foot checks in a single offline flow.
+            Not just diagnosis, intake, glucose trends, capture, AI, guidance, referral, pharmacy and foot checks in one simple flow.
           </p>
         </div>
 
         <div className="grid grid-cols-12 auto-rows-[minmax(300px,auto)] gap-4 grid-flow-dense">
-          {/* Card 1 — Prototype mockup dark */}
+          {/* Card 1 , Prototype mockup dark */}
           <div className="bento-card card-hover group col-span-12 lg:col-span-7 row-span-2 relative overflow-hidden rounded-[28px] bg-zinc-900 text-white border border-zinc-800">
             <div className="absolute inset-0 opacity-40">
-              <img src="/images/fundus-proliferative.jpg" alt="Proliferative diabetic retinopathy fundus – NIH National Eye Institute" className="w-full h-full object-cover mix-blend-luminosity opacity-60 group-hover:scale-105 transition-transform duration-700 ease-out" />
+              <img src="/images/fundus-proliferative.jpg" alt="Proliferative diabetic retinopathy fundus, NIH National Eye Institute" className="w-full h-full object-cover mix-blend-luminosity opacity-60 group-hover:scale-105 transition-transform duration-700 ease-out" />
               <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/70 to-zinc-900/20" />
             </div>
             <div className="absolute inset-0" style={{ background: "radial-gradient(600px 400px at 30% 20%, rgba(20,184,166,0.18), transparent 70%)" }} />
@@ -662,9 +673,9 @@ export default function Landing() {
                 <h3 className="mt-3 text-[28px] font-bold leading-tight tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
                   Ophthalmoscope + phone is enough
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-zinc-300">Clip-on adapter optional. Real-time blur & lighting check blocks bad images before the CNN ever runs — then on-device inference in &lt;2.1s.</p>
+                <p className="mt-3 text-sm leading-6 text-zinc-300">Clip-on adapter optional. We check blur and light to block bad photos before AI runs, then results in under 2.1s on your device.</p>
 
-                {/* feature showcase — all steps visible */}
+                {/* feature showcase , all steps visible */}
                 <div className="mt-6 grid gap-2.5">
                   <div className="flex items-start gap-3 rounded-2xl bg-white/[0.06] border border-white/10 backdrop-blur px-3 py-2.5">
                     <span className="w-7 h-7 rounded-full bg-white text-zinc-900 grid place-items-center shrink-0">
@@ -681,7 +692,7 @@ export default function Landing() {
                     </span>
                     <div>
                       <div className="text-xs font-black tracking-wide">Quality gate</div>
-                      <div className="text-xs leading-4 text-zinc-300">Real-time blur & light check • blocks &lt;60 quality • shows 94/100</div>
+                       <div className="text-xs leading-4 text-zinc-300">We check blur and light, blocks under 60, shows 94/100</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 rounded-2xl bg-white/[0.06] border border-white/10 backdrop-blur px-3 py-2.5">
@@ -690,7 +701,7 @@ export default function Landing() {
                     </span>
                     <div>
                       <div className="text-xs font-black tracking-wide">Inference • Explainable</div>
-                      <div className="text-xs leading-4 text-zinc-300">&lt;2.1s on-device • 5-stage CNN • Grad-CAM heatmap • 87% conf</div>
+                       <div className="text-xs leading-4 text-zinc-300">Under 2.1s on your device, 5 stage AI, heatmap, 87% confidence</div>
                     </div>
                   </div>
                 </div>
@@ -699,11 +710,11 @@ export default function Landing() {
                   <span className="px-3 py-1.5 rounded-full bg-white text-zinc-900 text-xs font-bold flex items-center gap-1.5">
                     <WifiOff className="w-3 h-3" /> No internet required
                   </span>
-                  <span className="px-3 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur text-white text-xs font-semibold">Offline sync • queued</span>
+                  <span className="px-3 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur text-white text-xs font-semibold">Sync queued</span>
                 </div>
                 <div className="mt-auto pt-6 flex items-center gap-3 text-xs text-zinc-400">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> PHC Tablet • Offline mode
-                  <span className="ml-auto px-2 py-1 rounded-full bg-teal-600 text-white font-bold text-[10px]">APTOS • 5-STAGE</span>
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> PHC Tablet • Ready
+                  <span className="ml-auto px-2 py-1 rounded-full bg-teal-600 text-white font-bold text-[10px]">5 STAGE AI</span>
                 </div>
               </div>
               <div className="relative flex items-center justify-center">
@@ -711,13 +722,13 @@ export default function Landing() {
                   <PhoneMockup />
                 </div>
                 <div className="absolute -bottom-2 -right-2 hidden md:flex items-center gap-2 px-3 py-2 rounded-full bg-white text-zinc-900 text-xs font-bold shadow-xl">
-                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" /> Offline sync • queued
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" /> Sync queued
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Card 2 — Explainable */}
+          {/* Card 2 , Explainable */}
           <div className="bento-card card-hover group col-span-12 lg:col-span-5 relative overflow-hidden rounded-[28px] bg-white border border-zinc-200 p-8 flex flex-col">
             <div className="absolute top-0 right-0 w-40 h-40 bg-teal-50 rounded-full blur-3xl opacity-60 pointer-events-none" />
             <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-700">
@@ -729,40 +740,40 @@ export default function Landing() {
               Heatmaps show why.
             </h3>
             <p className="mt-3 text-sm leading-6 text-zinc-600">
-              Grad-CAM highlights haemorrhages and exudates that drove the decision — so ASHA workers and doctors can verify, not just trust.
+              Heatmap highlights bleeding and spots that led to the decision, so ASHA workers and doctors can verify, not just trust.
             </p>
             <div className="mt-6 relative overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 h-[180px] grid place-items-center">
-              <img src="/images/fundus-mild.jpg" alt="Fundus with hemorrhages and cotton wool spots – early NPDR" className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:scale-105 transition-transform duration-700" />
+              <img src="/images/fundus-mild.jpg" alt="Fundus with hemorrhages and cotton wool spots, early NPDR" className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:scale-105 transition-transform duration-700" />
               <div className="relative w-28 h-28 rounded-full border border-red-300/50 bg-red-500/15 backdrop-blur-sm grid place-items-center">
                 <div className="w-16 h-16 rounded-full bg-red-500/20 border border-red-400/40 blur-[1px] animate-pulse" />
                 <div className="absolute w-3 h-3 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.8)]" />
               </div>
-              <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-full bg-red-600 text-white text-[10px] font-bold">Grad-CAM • haemorrhage</div>
+              <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-full bg-red-600 text-white text-[10px] font-bold">Heatmap, bleeding</div>
               <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-white border border-zinc-200 grid place-items-center">
                 <ScanEye className="w-3.5 h-3.5" />
               </div>
             </div>
             <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-zinc-700">
-              <ShieldCheck className="w-4 h-4 text-teal-700" /> Preliminary • requires ophthalmologist confirm
+              <ShieldCheck className="w-4 h-4 text-teal-700" /> Early result, needs eye doctor to confirm
             </div>
           </div>
 
-          {/* Card 3 — Offline */}
+          {/* Card 3, Ready */}
           <div className="bento-card card-hover group col-span-12 lg:col-span-5 relative overflow-hidden rounded-[28px] bg-[#ffede9] border border-orange-200 p-8">
             <div className="absolute -right-8 -bottom-8 w-48 h-48 bg-orange-400/10 rounded-full blur-2xl" />
             <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-orange-700">
-              <Zap className="w-3.5 h-3.5" /> Offline-first
+              <Zap className="w-3.5 h-3.5" /> Ready to use
             </div>
             <h3 className="mt-3 text-[22px] font-bold leading-tight tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
               Zero bars.
               <br />
               Full screening.
             </h3>
-            <p className="mt-3 text-sm leading-6 text-zinc-700">On-device CNN, encrypted storage, SMS reminders queued and synced later. Built for villages, not Wi-Fi.</p>
+            <p className="mt-3 text-sm leading-6 text-zinc-700">AI on your device, safe storage, SMS reminders queued and synced later. Built for villages, not WiFi.</p>
             <div className="mt-6 grid grid-cols-3 gap-2">
               {[
                 { v: "<2.1s", l: "Inference" },
-                { v: "Offline", l: "Storage" },
+                { v: "Ready", l: "Storage" },
                 { v: "Sync", l: "When online" },
               ].map((s) => (
                 <div key={s.v} className="rounded-2xl bg-white border border-orange-200 p-3 text-center">
@@ -778,7 +789,7 @@ export default function Landing() {
             </div>
           </div>
 
-          {/* Card 4 — Referral */}
+          {/* Card 4 , Referral */}
           <div className="bento-card card-hover group col-span-12 lg:col-span-7 relative overflow-hidden rounded-[28px] bg-white border border-zinc-200 p-8 md:p-10 flex flex-col md:flex-row gap-8">
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-700">
@@ -789,11 +800,11 @@ export default function Landing() {
                 <br />
                 without the lost follow-up.
               </h3>
-              <p className="mt-3 text-sm leading-6 text-zinc-600">One tap generates an eSanjeevani report with heatmap and history. Pharmacist verifies and delivers — no paper chase.</p>
+              <p className="mt-3 text-sm leading-6 text-zinc-600">One tap creates an eSanjeevani report with heatmap and history. Pharmacist checks and delivers, no paper needed.</p>
               <div className="mt-6 space-y-2">
                 {[
                   ["Auto-report", "Stage, confidence, heatmap, HbA1c trends"],
-                  ["Telepharmacy", "Pharmacist verifies → dispatches → tracks"],
+                  ["Telepharmacy", "Pharmacist checks, sends and tracks"],
                   ["Continuity", "Glucose, eye, foot in one record"],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-center gap-3 rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2.5">
@@ -833,12 +844,12 @@ export default function Landing() {
       </section>
 
       {/* HORIZONTAL ACCORDIONS */}
-      <section className="max-w-[1120px] mx-auto px-6 pb-24 md:pb-32">
+      <section className="w-full max-w-[1120px] mx-auto px-6 min-w-0 overflow-x-hidden pb-24 md:pb-32">
         <div className="flex items-end justify-between gap-6 mb-8">
           <h3 className="text-[28px] md:text-[36px] font-black tracking-tight leading-none" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
             Ten steps. One flow.
           </h3>
-          <p className="hidden md:block max-w-[420px] text-sm text-zinc-600">Hover to expand. Every step works offline and syncs later.</p>
+          <p className="hidden md:block max-w-[420px] text-sm text-zinc-600">Hover to expand. Every step works anywhere and syncs later.</p>
         </div>
 
         <div className="flex flex-col md:flex-row gap-3 h-auto md:h-[420px]">
@@ -869,8 +880,8 @@ export default function Landing() {
             },
             {
               n: "04",
-              title: "AI + Grad-CAM",
-              desc: "CNN staging + heatmap + progression vs last visit. Preliminary, always explained.",
+              title: "AI and Heatmap",
+              desc: "AI staging, heatmap, and change vs last visit. Early check, always explained simply.",
               icon: ScanEye,
               img: "/images/fundus-laser.jpg",
               color: "bg-teal-600",
@@ -878,7 +889,7 @@ export default function Landing() {
             {
               n: "05",
               title: "Refer • Deliver • Follow",
-              desc: "eSanjeevani referral, telepharmacy, foot screening and PHC dashboard — zero drop-off.",
+              desc: "eSanjeevani referral, pharmacy, foot screening and PHC dashboard, no missed follow ups.",
               icon: Pill,
               img: "/images/pharmacy.jpg",
               color: "bg-zinc-800",
@@ -926,30 +937,26 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* DESIRE — Pinned Scroll Split (GSAP pin + Image Scale & Fade) */}
+      {/* DESIRE , Pinned Scroll Split (GSAP pin + Image Scale & Fade) */}
       <section ref={pinnedRef} id="evidence" className="relative bg-zinc-950 text-white">
-        <div className="max-w-[1120px] mx-auto px-6">
+        <div className="w-full max-w-[1120px] mx-auto px-6 min-w-0 overflow-x-hidden">
           <div className="grid lg:grid-cols-[480px_1fr] gap-10 md:gap-16">
             {/* Pinned left */}
-            <div className="pinned-left lg:h-screen lg:sticky lg:top-0 flex flex-col justify-center py-16 lg:py-0">
+            <div className="pinned-left lg:h-screen lg:sticky lg:top-0 flex flex-col justify-center py-16 lg:py-0 relative z-20">
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-300">
                 <Sparkles className="w-3.5 h-3.5" /> Evidence you can verify
               </div>
-              <h2 className="mt-4 text-[40px] md:text-[56px] font-black leading-[0.88] tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-                Every
-                <br />
-                <span className="text-zinc-500">decision</span>
-                <br />
-                is shown.
+              <h2 className="mt-4 text-[32px] sm:text-[40px] md:text-[56px] font-black leading-[0.88] tracking-tight text-balance" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
+                Every <span className="text-zinc-500">decision</span> is shown.
               </h2>
               <p className="mt-6 text-[15px] leading-7 text-zinc-400 max-w-[420px]">
-                Confidence, heatmap, progression and plain-language guidance on every screen — so verification is the default, not an afterthought.
+                Confidence, heatmap, progress and simple guidance on every screen, so checking is built in, not an afterthought.
               </p>
 
               <div className="mt-8 space-y-3 max-w-[420px]">
                 {[
-                  ["Stage + Confidence", "0 — No DR to 4 — Proliferative, with calibrated confidence"],
-                  ["Grad-CAM heatmap", "Pinpoints haemorrhages and exudates that drove staging"],
+                  ["Stage and Confidence", "0 to 4, No DR to Proliferative, with clear confidence"],
+                  ["Heatmap", "Highlights bleeding and spots that led to the stage"],
                   ["Progression vs last", "Worsened / stable / improved at a glance"],
                 ].map(([k, v]) => (
                   <div key={k} className="flex gap-3 rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-4">
@@ -972,35 +979,35 @@ export default function Landing() {
               </div>
             </div>
 
-            {/* Scrolling gallery right */}
-            <div ref={galleryRef} className="py-8 lg:py-16 space-y-6 lg:space-y-10">
+            {/* Scrolling gallery right — super high z so cards never hide behind text */}
+            <div ref={galleryRef} className="py-8 lg:py-16 space-y-6 lg:space-y-10 relative z-[60]">
               {[
                 {
                   img: "/images/fundus-mild.jpg",
-                  label: "Grad-CAM • Moderate NPDR",
-                  title: "Heatmap pins haemorrhages near the macula",
-                  desc: "Confidence 87% • Quality 94/100 • Left eye • Offline <2.1s",
+                  label: "Heatmap • Moderate NPDR",
+                  title: "Heatmap shows bleeding near the center",
+                  desc: "Confidence 87% • Quality 94/100 • Left eye • Ready in under 2.1s",
                 },
                 {
                   img: "/images/fundus-proliferative.jpg",
                   label: "Progression • Worsened since Feb",
                   title: "Timeline shows drift from Mild to Moderate",
-                  desc: "HbA1c 9.2 → 9.4 • BP 148/92 • 11y Type 2 DM • Refer in 4–8 weeks",
+                  desc: "HbA1c 9.2 to 9.4 • BP 148/92 • 11y Type 2 DM • Refer in 4 to 8 weeks",
                 },
                 {
                   img: "/images/eye-macro.jpg",
                   label: "No DR • Healthy retina",
-                  title: "Negatives are explained too — absence of lesions",
+                  title: "Healthy results are also explained",
                   desc: "Confidence 94% • No referral • Re-screen in 12 months",
                 },
                 {
                   img: "/images/telehealth.jpg",
                   label: "eSanjeevani • Referral packet",
-                  title: "One tap queues report with heatmap and trends",
-                  desc: "Encrypted, consent-first • Syncs when online • Doctor confirms before treatment",
+                  title: "One tap saves report with heatmap and trends",
+                  desc: "Safe and private, syncs when online, doctor confirms before treatment",
                 },
               ].map((card, idx) => (
-                <div key={idx} className="gallery-img group overflow-hidden rounded-[28px] bg-zinc-900 border border-white/10">
+                <div key={idx} className="gallery-img group overflow-hidden rounded-[28px] bg-zinc-900 border border-white/10 relative z-[70]">
                   <div className="relative h-[320px] md:h-[420px] overflow-hidden">
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover will-change-transform" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
@@ -1016,7 +1023,7 @@ export default function Landing() {
                     <h4 className="text-[18px] font-bold leading-tight">{card.title}</h4>
                     <p className="mt-2 text-sm text-zinc-400 leading-relaxed">{card.desc}</p>
                     <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-white/70">
-                      <Database className="w-3.5 h-3.5" /> On-device TFLite • APTOS / IDRiD
+                      <Database className="w-3.5 h-3.5" /> On device AI
                       <span className="ml-auto inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white text-zinc-900 font-bold text-xs">
                         View <ArrowUpRight className="w-3 h-3" />
                       </span>
@@ -1026,9 +1033,9 @@ export default function Landing() {
               ))}
 
               <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-                <div className="text-xs font-bold tracking-widest uppercase text-teal-300">Responsible AI</div>
+                <div className="text-xs font-bold tracking-widest uppercase text-teal-300">Safe AI</div>
                 <p className="mt-2 text-sm leading-6 text-zinc-300">
-                  All results are preliminary. Ophthalmologist confirms via eSanjeevani before treatment. No auto-prescription. Consent and encrypted on-device storage.
+                  All results are early checks. Eye doctor confirms via eSanjeevani before treatment. No auto prescription. Consent and safe storage on your device.
                 </p>
                 <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
                   <div className="rounded-xl bg-white text-zinc-900 p-3 text-center">
@@ -1047,7 +1054,7 @@ export default function Landing() {
       </section>
 
       {/* TESTIMONIAL CAROUSEL */}
-      <section className="max-w-[1120px] mx-auto px-6 py-24 md:py-32">
+      <section className="w-full max-w-[1120px] mx-auto px-6 min-w-0 overflow-x-hidden py-24 md:py-32">
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 md:gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-700">
@@ -1119,7 +1126,7 @@ export default function Landing() {
                   <div className="w-8 h-8 rounded-full bg-white/15 grid place-items-center">
                     <ShieldCheck className="w-4 h-4" />
                   </div>
-                  <div className="mt-4 text-sm font-semibold leading-relaxed">Explainable every time — villagers see the heatmap, not a score.</div>
+                  <div className="mt-4 text-sm font-semibold leading-relaxed">Clear every time, villagers see the heatmap, not just a score.</div>
                 </div>
                 <div className="overflow-hidden rounded-[24px] border border-zinc-200 h-[260px] relative group">
                   <img src="/images/clinic.jpg" alt="clinic" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
@@ -1145,8 +1152,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* IMPACT — large editorial + real photography */}
-      <section id="impact" className="max-w-[1120px] mx-auto px-6 pb-16">
+      {/* IMPACT , large editorial + real photography */}
+      <section id="impact" className="w-full max-w-[1120px] mx-auto px-6 min-w-0 overflow-x-hidden pb-16">
         <div className="grid md:grid-cols-3 gap-4">
           {[
             {
@@ -1175,7 +1182,7 @@ export default function Landing() {
             </div>
           ))}
         </div>
-        <div className="text-xs text-zinc-500 mt-3">Field imagery sourced via Google Search — representative rural PHC screening camps (Shirpur / Bhainsa representative).</div>
+        <div className="text-xs text-zinc-500 mt-3">Field images are representative rural PHC screening camps (Shirpur and Bhainsa).</div>
 
         <div className="mt-10 grid lg:grid-cols-[1.2fr_0.85fr] gap-6">
           <div className="rounded-[28px] bg-zinc-900 text-white p-8 md:p-10 relative overflow-hidden">
@@ -1187,13 +1194,13 @@ export default function Landing() {
               </h3>
               <ul className="mt-6 space-y-2.5 text-sm text-zinc-300">
                 <li className="flex gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> No new hardware to procure — use the ophthalmoscope you already have
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> No new hardware, use the ophthalmoscope you already have
                 </li>
                 <li className="flex gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> Works in zero-connectivity villages, syncs when back online
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> Works in villages with no signal, syncs when back online
                 </li>
                 <li className="flex gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> Builds trust with heatmaps and plain-language guidance
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> Builds trust with heatmaps and simple guidance
                 </li>
                 <li className="flex gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> Continuity: glucose, eye, foot and pharmacy in one record
@@ -1232,16 +1239,16 @@ export default function Landing() {
               <div className="w-10 h-10 rounded-full bg-emerald-600 text-white grid place-items-center">
                 <ScanEye className="w-5 h-5" />
               </div>
-              <div className="text-xs">
-                <div className="font-bold">On-device • No cloud needed</div>
-                <div className="text-zinc-500">TFLite / ONNX • drop-in model swap</div>
-              </div>
+                <div className="text-xs">
+                  <div className="font-bold">On your device, no cloud needed</div>
+                  <div className="text-zinc-500">Easy model swap</div>
+                </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ACTION — Massive CTA */}
+      {/* ACTION , Massive CTA */}
       <section className="relative mt-8 bg-zinc-950 text-white overflow-hidden">
         <div className="absolute inset-0">
           <img src="/images/fundus-scatter.jpg" alt="" className="w-full h-full object-cover opacity-[0.12] grayscale" />
@@ -1259,7 +1266,7 @@ export default function Landing() {
                 <span className="text-zinc-500">village</span> today.
               </h2>
               <p className="mt-6 max-w-[520px] text-sm md:text-[15px] leading-6 text-zinc-400">
-                No procurement, no waiting for connectivity. Your PHC can start with the phone in your pocket. Explainable, offline, and built for Bharat.
+                No new orders, no waiting for signal. Your PHC can start with the phone in your pocket. Clear results, ready to use, built for Bharat.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/app/screening" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-zinc-900 font-black text-sm hover:bg-zinc-100 transition shadow-[0_12px_32px_rgba(255,255,255,0.12)]">
@@ -1270,8 +1277,8 @@ export default function Landing() {
                 </Link>
               </div>
               <div className="mt-6 flex flex-wrap gap-2 text-xs text-zinc-500">
-                <span className="px-3 py-1.5 rounded-full border border-white/10">Offline • &lt;2.1s</span>
-                <span className="px-3 py-1.5 rounded-full border border-white/10">Explainable • Grad-CAM</span>
+                <span className="px-3 py-1.5 rounded-full border border-white/10">Ready • under 2.1s</span>
+                <span className="px-3 py-1.5 rounded-full border border-white/10">Clear • Heatmap</span>
                 <span className="px-3 py-1.5 rounded-full border border-white/10">eSanjeevani ready</span>
               </div>
             </div>
@@ -1279,7 +1286,7 @@ export default function Landing() {
             <div className="relative">
               <div className="rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 md:p-7">
                 <div className="flex items-center justify-between">
-                  <div className="text-xs font-bold tracking-widest uppercase text-zinc-400">PHC Shirpur — live</div>
+                  <div className="text-xs font-bold tracking-widest uppercase text-zinc-400">PHC Shirpur , live</div>
                   <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500 text-white text-xs font-bold">
                     <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" /> Demo data
                   </span>
@@ -1305,7 +1312,7 @@ export default function Landing() {
                   </div>
                   <span className="px-2.5 py-1 rounded-full bg-zinc-900 text-white text-xs font-bold">Online</span>
                 </div>
-                <div className="mt-3 text-[11px] leading-relaxed text-zinc-400 text-center">Preliminary AI screening — requires ophthalmologist confirmation before treatment.</div>
+                <div className="mt-3 text-[11px] leading-relaxed text-zinc-400 text-center">Early AI check, needs eye doctor confirmation before treatment.</div>
               </div>
               <div className="absolute -bottom-3 -right-3 hidden md:flex items-center gap-2 px-3 py-2 rounded-full bg-amber-500 text-white text-xs font-bold shadow-xl">
                 <Footprints className="w-3.5 h-3.5" /> Foot + Pharmacy bundled
@@ -1341,7 +1348,7 @@ export default function Landing() {
                 Telepharmacy
               </Link>
               <a href="#" className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full border border-white/10 hover:bg-white hover:text-zinc-900 transition">
-                Smart India Hackathon 2026
+                GlucoVision 2026
               </a>
             </div>
           </div>

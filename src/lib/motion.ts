@@ -1,7 +1,7 @@
 "use client";
 import { Variants } from "framer-motion";
 
-// premium easing — keep consistent rhtyhm
+// premium easing, keep consistent rhythm
 export const easeOut = [0.16, 1, 0.3, 1] as const;
 export const easeSpring = [0.34, 1.56, 0.64, 1] as const;
 

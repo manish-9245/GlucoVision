@@ -31,7 +31,7 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen bg-[#FCFCF9] flex flex-col">
-      <header className="max-w-[1120px] mx-auto w-full px-6 py-6 flex items-center justify-between">
+      <header className="w-full max-w-[1120px] mx-auto min-w-0 overflow-x-hidden px-6 py-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-white border border-zinc-200 grid place-items-center shadow-sm">
             <Logo size={22} />
@@ -40,7 +40,7 @@ export default function LoginPage() {
             <div className="font-bold tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
               GlucoVision
             </div>
-            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">Smart India Hackathon ’26</div>
+            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">GlucoVision</div>
           </div>
         </Link>
         <Link href="/signup" className="text-sm font-semibold px-4 py-2 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50">
@@ -51,7 +51,7 @@ export default function LoginPage() {
       <div className="flex-1 grid lg:grid-cols-[1.05fr_0.95fr] max-w-[1120px] mx-auto w-full px-6 gap-10 items-center py-10">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> PHC Edition • Offline-first
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> PHC Edition • Ready to use
           </div>
           <h1 className="mt-4 text-[40px] md:text-[52px] font-black leading-[0.9] tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
             Welcome back
@@ -59,7 +59,7 @@ export default function LoginPage() {
             <span className="text-zinc-400">to your PHC</span>
           </h1>
           <p className="mt-4 text-[15px] leading-6 text-zinc-600 max-w-[520px]">
-            Sign in to continue screening. Works offline — your last session is cached. All data is encrypted, and every AI result needs ophthalmologist confirmation.
+            Sign in to continue screening. Works everywhere, your last session is saved. All data is safe, and every AI result needs an eye doctor to confirm.
           </p>
           <div className="mt-6 grid grid-cols-3 gap-3 max-w-[520px]">
             {[
@@ -82,7 +82,7 @@ export default function LoginPage() {
             ))}
           </div>
           <div className="mt-4 flex items-center gap-2 text-xs text-zinc-500">
-            <WifiOff className="w-3 h-3" /> Demo works without backend — or set <code className="px-1 py-0.5 rounded bg-zinc-100 border border-zinc-200">NEXT_PUBLIC_API_URL</code> for Cloudflare D1
+            <WifiOff className="w-3 h-3" /> Works everywhere, no setup needed. Demo data loads instantly.
           </div>
         </div>
 
@@ -147,7 +147,7 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-6 rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-xs leading-relaxed text-zinc-600">
-            <b>Demo credentials:</b> any demo email above with <code>demo123</code>. Works offline (mock). With Cloudflare D1, real accounts are PBKDF2-hashed and JWT-issued via <code>/api/auth/*</code>.
+            <b>Demo credentials:</b> any email above with <code>demo123</code>. Works anywhere with demo data.
           </div>
         </form>
       </div>

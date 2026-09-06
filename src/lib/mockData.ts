@@ -65,7 +65,66 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Moderate NPDR, scattered exudates",
-        "imageQuality": 92
+        "imageQuality": 92,
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: no sugar at all, use sugar-free for tea if needed",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "v1-other",
+        "date": "2026-02-10",
+        "drStage": 2,
+        "confidence": 0.85,
+        "heatmapRegions": [
+          {
+            "x": 42,
+            "y": 38,
+            "r": 18,
+            "label": "exudates"
+          }
+        ],
+        "notes": "Moderate NPDR, scattered exudates (right eye)",
+        "imageQuality": 92,
+        "imageUrl": "/images/eye-macro.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: no sugar at all, use sugar-free for tea if needed",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-02-10",
@@ -118,7 +177,53 @@ export const patients: Patient[] = [
         "confidence": 0.94,
         "heatmapRegions": [],
         "notes": "No DR, healthy retina",
-        "imageQuality": 95
+        "imageQuality": 95,
+        "dietPlan": {
+          "summary": "Balanced diabetes plate to keep sugar and BP steady and protect eyes.",
+          "dos": [
+            "Whole grains: jowar, bajra, brown rice (1.5 cups cooked per meal)",
+            "Dal + seasonal veg daily, 2 tsp oil max",
+            "Fruit: 1 small guava or papaya (100g) \u2014 avoid mango/banana in excess",
+            "Walk 30 min daily, check sugar as advised"
+          ],
+          "donts": [
+            "Avoid sugary tea, cold drinks, sweets, and white rice in large portions",
+            "Avoid fried snacks (samosa, pakora) and reusing oil",
+            "Avoid skipping meals \u2014 eat on time"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Continue same plan, annual eye rescreen"
+        },
+        "imageUrl": "/images/fundus-normal.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "v2-other",
+        "date": "2026-04-12",
+        "drStage": 0,
+        "confidence": 0.93,
+        "heatmapRegions": [],
+        "notes": "No DR, healthy retina (right eye)",
+        "imageQuality": 95,
+        "imageUrl": "/images/fundus-normal.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Balanced diabetes plate to keep sugar and BP steady and protect eyes.",
+          "dos": [
+            "Whole grains: jowar, bajra, brown rice (1.5 cups cooked per meal)",
+            "Dal + seasonal veg daily, 2 tsp oil max",
+            "Fruit: 1 small guava or papaya (100g) \u2014 avoid mango/banana in excess",
+            "Walk 30 min daily, check sugar as advised"
+          ],
+          "donts": [
+            "Avoid sugary tea, cold drinks, sweets, and white rice in large portions",
+            "Avoid fried snacks (samosa, pakora) and reusing oil",
+            "Avoid skipping meals \u2014 eat on time"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Continue same plan, annual eye rescreen"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-04-12"
@@ -177,7 +282,66 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Severe NPDR, intraretinal haemorrhages",
-        "imageQuality": 88
+        "imageQuality": 88,
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
+            "Small frequent meals, millet + dal, no large rice plates",
+            "Fruit limited to 80-100g, no juice/dry fruits",
+            "Daily walk as tolerated, plus BP and sugar log",
+            "Extra: no sugar at all, use sugar-free for tea if needed",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sugar, fried, salty, or processed foods",
+            "No smoking, alcohol, or missing doses",
+            "Avoid long gaps without food or heavy feasts",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "v3-other",
+        "date": "2026-01-18",
+        "drStage": 3,
+        "confidence": 0.92,
+        "heatmapRegions": [
+          {
+            "x": 55,
+            "y": 45,
+            "r": 22,
+            "label": "haemorrhage"
+          }
+        ],
+        "notes": "Severe NPDR, intraretinal haemorrhages (right eye)",
+        "imageQuality": 88,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
+            "Small frequent meals, millet + dal, no large rice plates",
+            "Fruit limited to 80-100g, no juice/dry fruits",
+            "Daily walk as tolerated, plus BP and sugar log",
+            "Extra: no sugar at all, use sugar-free for tea if needed",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sugar, fried, salty, or processed foods",
+            "No smoking, alcohol, or missing doses",
+            "Avoid long gaps without food or heavy feasts",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-01-18"
@@ -208,7 +372,76 @@ export const patients: Patient[] = [
         "postMeal": 148
       }
     ],
-    "visits": []
+    "visits": [
+      {
+        "id": "vGV-004-left",
+        "date": "2026-08-20",
+        "drStage": 0,
+        "confidence": 0.86,
+        "heatmapRegions": [],
+        "notes": "No DR, healthy retina",
+        "imageQuality": 90,
+        "imageUrl": "/images/fundus-normal.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "No DR \u2014 eye left",
+          "lesionsDetected": [],
+          "stageJustification": "No lesions",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-004-right",
+        "date": "2026-08-20",
+        "drStage": 0,
+        "confidence": 0.85,
+        "heatmapRegions": [],
+        "notes": "No DR, healthy retina",
+        "imageQuality": 89,
+        "imageUrl": "/images/fundus-normal.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "No DR \u2014 eye right",
+          "lesionsDetected": [],
+          "stageJustification": "No lesions",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ]
   },
   {
     "id": "GV-005",
@@ -246,28 +479,6 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-005-1",
-        "date": "2026-02-20",
-        "drStage": 2,
-        "confidence": 0.8,
-        "heatmapRegions": [
-          {
-            "x": 50,
-            "y": 50,
-            "r": 20,
-            "label": "microaneurysm"
-          },
-          {
-            "x": 30,
-            "y": 57,
-            "r": 19,
-            "label": "haemorrhage"
-          }
-        ],
-        "notes": "Moderate NPDR, exudates",
-        "imageQuality": 81
-      },
-      {
         "id": "vGV-005-0",
         "date": "2026-05-10",
         "drStage": 2,
@@ -287,7 +498,69 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Moderate NPDR, exudates",
-        "imageQuality": 78
+        "imageQuality": 78,
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "imageUrl": "/images/fundus-scatter.jpg",
+        "eye": "right"
+      },
+      {
+        "id": "vGV-005-1",
+        "date": "2026-02-20",
+        "drStage": 2,
+        "confidence": 0.8,
+        "heatmapRegions": [
+          {
+            "x": 50,
+            "y": 50,
+            "r": 20,
+            "label": "microaneurysm"
+          },
+          {
+            "x": 30,
+            "y": 57,
+            "r": 19,
+            "label": "haemorrhage"
+          }
+        ],
+        "notes": "Moderate NPDR, exudates",
+        "imageQuality": 81,
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left"
       }
     ],
     "lastScreened": "2026-05-10",
@@ -362,7 +635,64 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Moderate NPDR, exudates",
-        "imageQuality": 79
+        "imageQuality": 79,
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "imageUrl": "/images/fundus-scatter.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-006-0-other",
+        "date": "2026-04-08",
+        "drStage": 2,
+        "confidence": 0.91,
+        "heatmapRegions": [
+          {
+            "x": 42,
+            "y": 30,
+            "r": 16,
+            "label": "neovascularization"
+          }
+        ],
+        "notes": "Moderate NPDR, exudates (right eye)",
+        "imageQuality": 79,
+        "imageUrl": "/images/fundus-scatter.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-04-08",
@@ -433,7 +763,62 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Mild NPDR, microaneurysms",
-        "imageQuality": 88
+        "imageQuality": 88,
+        "dietPlan": {
+          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "dos": [
+            "Millet-based meals (jowar/bajra) + dal + green veg",
+            "1 fruit (guava, apple) and 5 soaked almonds",
+            "Salt <5g/day, BP check weekly",
+            "Walk 30-45 min, 5 days/week",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No added sugar, jaggery, honey, or sweetened drinks",
+            "Limit salt, pickle, papad, and packaged snacks",
+            "No smoking or tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-007-0-other",
+        "date": "2026-05-10",
+        "drStage": 1,
+        "confidence": 0.91,
+        "heatmapRegions": [
+          {
+            "x": 35,
+            "y": 46,
+            "r": 17,
+            "label": "exudates"
+          }
+        ],
+        "notes": "Mild NPDR, microaneurysms (right eye)",
+        "imageQuality": 88,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "dos": [
+            "Millet-based meals (jowar/bajra) + dal + green veg",
+            "1 fruit (guava, apple) and 5 soaked almonds",
+            "Salt <5g/day, BP check weekly",
+            "Walk 30-45 min, 5 days/week",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No added sugar, jaggery, honey, or sweetened drinks",
+            "Limit salt, pickle, papad, and packaged snacks",
+            "No smoking or tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-05-10",
@@ -476,7 +861,104 @@ export const patients: Patient[] = [
         "postMeal": 245
       }
     ],
-    "visits": [],
+    "visits": [
+      {
+        "id": "vGV-008-left",
+        "date": "2026-08-20",
+        "drStage": 3,
+        "confidence": 0.9,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR",
+        "imageQuality": 92,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "Severe NPDR \u2014 eye left",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-008-right",
+        "date": "2026-08-20",
+        "drStage": 3,
+        "confidence": 0.85,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR",
+        "imageQuality": 92,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "Severe NPDR \u2014 eye right",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ],
     "medication": [
       "Metformin 500mg",
       "Glimipride 2mg"
@@ -526,7 +1008,104 @@ export const patients: Patient[] = [
         "postMeal": 279
       }
     ],
-    "visits": [],
+    "visits": [
+      {
+        "id": "vGV-009-left",
+        "date": "2026-08-20",
+        "drStage": 3,
+        "confidence": 0.91,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR",
+        "imageQuality": 90,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "Severe NPDR \u2014 eye left",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-009-right",
+        "date": "2026-08-20",
+        "drStage": 3,
+        "confidence": 0.86,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR",
+        "imageQuality": 93,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "Severe NPDR \u2014 eye right",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ],
     "medication": [
       "Glimipride 2mg"
     ]
@@ -581,34 +1160,6 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-010-1",
-        "date": "2026-02-20",
-        "drStage": 4,
-        "confidence": 0.95,
-        "heatmapRegions": [
-          {
-            "x": 38,
-            "y": 54,
-            "r": 18,
-            "label": "neovascularization"
-          },
-          {
-            "x": 41,
-            "y": 53,
-            "r": 11,
-            "label": "exudates"
-          },
-          {
-            "x": 52,
-            "y": 28,
-            "r": 17,
-            "label": "microaneurysm"
-          }
-        ],
-        "notes": "Proliferative DR, neovascularization",
-        "imageQuality": 85
-      },
-      {
         "id": "vGV-010-0",
         "date": "2026-04-08",
         "drStage": 4,
@@ -634,7 +1185,75 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Proliferative DR, neovascularization",
-        "imageQuality": 82
+        "imageQuality": 82,
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "dos": [
+            "Very strict: small millet portions, dal, boiled veg, curd small",
+            "Salt <3g, oil <2 tsp, no added sugar at all",
+            "Fruit only 50-80g if sugar allows, otherwise avoid",
+            "Light activity only as doctor advises, no strain",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sugar, fried, salty, processed, or outside food",
+            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
+            "Do not delay eye treatment, do not miss any dose",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+        },
+        "imageUrl": "/images/fundus-laser.jpg",
+        "eye": "right"
+      },
+      {
+        "id": "vGV-010-1",
+        "date": "2026-02-20",
+        "drStage": 4,
+        "confidence": 0.95,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 54,
+            "r": 18,
+            "label": "neovascularization"
+          },
+          {
+            "x": 41,
+            "y": 53,
+            "r": 11,
+            "label": "exudates"
+          },
+          {
+            "x": 52,
+            "y": 28,
+            "r": 17,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Proliferative DR, neovascularization",
+        "imageQuality": 85,
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "dos": [
+            "Very strict: small millet portions, dal, boiled veg, curd small",
+            "Salt <3g, oil <2 tsp, no added sugar at all",
+            "Fruit only 50-80g if sugar allows, otherwise avoid",
+            "Light activity only as doctor advises, no strain",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sugar, fried, salty, processed, or outside food",
+            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
+            "Do not delay eye treatment, do not miss any dose",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left"
       }
     ],
     "lastScreened": "2026-04-08",
@@ -692,7 +1311,104 @@ export const patients: Patient[] = [
         "postMeal": 223
       }
     ],
-    "visits": []
+    "visits": [
+      {
+        "id": "vGV-011-left",
+        "date": "2026-08-20",
+        "drStage": 1,
+        "confidence": 0.86,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Mild NPDR",
+        "imageQuality": 93,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "Mild NPDR \u2014 eye left",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-011-right",
+        "date": "2026-08-20",
+        "drStage": 1,
+        "confidence": 0.9,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Mild NPDR",
+        "imageQuality": 92,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "Mild NPDR \u2014 eye right",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ]
   },
   {
     "id": "GV-012",
@@ -763,7 +1479,62 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Moderate NPDR, exudates",
-        "imageQuality": 94
+        "imageQuality": 94,
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months"
+          ],
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-012-0-other",
+        "date": "2026-05-10",
+        "drStage": 2,
+        "confidence": 0.89,
+        "heatmapRegions": [
+          {
+            "x": 28,
+            "y": 70,
+            "r": 19,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Moderate NPDR, exudates (right eye)",
+        "imageQuality": 94,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months"
+          ],
+          "dailyCalories": "1500-1700 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-05-10",
@@ -814,7 +1585,104 @@ export const patients: Patient[] = [
         "postMeal": 241
       }
     ],
-    "visits": [],
+    "visits": [
+      {
+        "id": "vGV-013-left",
+        "date": "2026-08-20",
+        "drStage": 3,
+        "confidence": 0.88,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR",
+        "imageQuality": 91,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "Severe NPDR \u2014 eye left",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-013-right",
+        "date": "2026-08-20",
+        "drStage": 3,
+        "confidence": 0.92,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR",
+        "imageQuality": 91,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "Severe NPDR \u2014 eye right",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ],
     "medication": [
       "Atorvastatin 10mg"
     ]
@@ -829,7 +1697,7 @@ export const patients: Patient[] = [
     "diabetesYears": 5,
     "diabetesType": "Type 2",
     "bp": "135/100",
-    "hbA1c": 6.0,
+    "hbA1c": 6,
     "familyHistory": true,
     "symptoms": [
       "floaters"
@@ -865,7 +1733,53 @@ export const patients: Patient[] = [
         "confidence": 0.92,
         "heatmapRegions": [],
         "notes": "No DR, healthy retina",
-        "imageQuality": 91
+        "imageQuality": 91,
+        "dietPlan": {
+          "summary": "Balanced diabetes plate to keep sugar and BP steady and protect eyes.",
+          "dos": [
+            "Whole grains: jowar, bajra, brown rice (1.5 cups cooked per meal)",
+            "Dal + seasonal veg daily, 2 tsp oil max",
+            "Fruit: 1 small guava or papaya (100g) \u2014 avoid mango/banana in excess",
+            "Walk 30 min daily, check sugar as advised"
+          ],
+          "donts": [
+            "Avoid sugary tea, cold drinks, sweets, and white rice in large portions",
+            "Avoid fried snacks (samosa, pakora) and reusing oil",
+            "Avoid skipping meals \u2014 eat on time"
+          ],
+          "dailyCalories": "1600-1800 kcal",
+          "followUp": "Continue same plan, annual eye rescreen"
+        },
+        "imageUrl": "/images/fundus-normal.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-014-0-other",
+        "date": "2026-06-18",
+        "drStage": 0,
+        "confidence": 0.93,
+        "heatmapRegions": [],
+        "notes": "No DR, healthy retina (right eye)",
+        "imageQuality": 91,
+        "imageUrl": "/images/fundus-normal.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Balanced diabetes plate to keep sugar and BP steady and protect eyes.",
+          "dos": [
+            "Whole grains: jowar, bajra, brown rice (1.5 cups cooked per meal)",
+            "Dal + seasonal veg daily, 2 tsp oil max",
+            "Fruit: 1 small guava or papaya (100g) \u2014 avoid mango/banana in excess",
+            "Walk 30 min daily, check sugar as advised"
+          ],
+          "donts": [
+            "Avoid sugary tea, cold drinks, sweets, and white rice in large portions",
+            "Avoid fried snacks (samosa, pakora) and reusing oil",
+            "Avoid skipping meals \u2014 eat on time"
+          ],
+          "dailyCalories": "1600-1800 kcal",
+          "followUp": "Continue same plan, annual eye rescreen"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-06-18",
@@ -924,7 +1838,62 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Mild NPDR, microaneurysms",
-        "imageQuality": 81
+        "imageQuality": 81,
+        "dietPlan": {
+          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "dos": [
+            "Millet-based meals (jowar/bajra) + dal + green veg",
+            "1 fruit (guava, apple) and 5 soaked almonds",
+            "Salt <5g/day, BP check weekly",
+            "Walk 30-45 min, 5 days/week",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No added sugar, jaggery, honey, or sweetened drinks",
+            "Limit salt, pickle, papad, and packaged snacks",
+            "No smoking or tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-015-0-other",
+        "date": "2026-06-18",
+        "drStage": 1,
+        "confidence": 0.95,
+        "heatmapRegions": [
+          {
+            "x": 44,
+            "y": 39,
+            "r": 20,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Mild NPDR, microaneurysms (right eye)",
+        "imageQuality": 81,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "dos": [
+            "Millet-based meals (jowar/bajra) + dal + green veg",
+            "1 fruit (guava, apple) and 5 soaked almonds",
+            "Salt <5g/day, BP check weekly",
+            "Walk 30-45 min, 5 days/week",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No added sugar, jaggery, honey, or sweetened drinks",
+            "Limit salt, pickle, papad, and packaged snacks",
+            "No smoking or tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-06-18"
@@ -994,7 +1963,66 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Severe NPDR, haemorrhages",
-        "imageQuality": 90
+        "imageQuality": 90,
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
+            "Small frequent meals, millet + dal, no large rice plates",
+            "Fruit limited to 80-100g, no juice/dry fruits",
+            "Daily walk as tolerated, plus BP and sugar log",
+            "Extra: no sugar at all, use sugar-free for tea if needed",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sugar, fried, salty, or processed foods",
+            "No smoking, alcohol, or missing doses",
+            "Avoid long gaps without food or heavy feasts",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-016-0-other",
+        "date": "2026-03-14",
+        "drStage": 3,
+        "confidence": 0.79,
+        "heatmapRegions": [
+          {
+            "x": 71,
+            "y": 39,
+            "r": 20,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR, haemorrhages (right eye)",
+        "imageQuality": 90,
+        "imageUrl": "/images/eye-macro.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
+            "Small frequent meals, millet + dal, no large rice plates",
+            "Fruit limited to 80-100g, no juice/dry fruits",
+            "Daily walk as tolerated, plus BP and sugar log",
+            "Extra: no sugar at all, use sugar-free for tea if needed",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sugar, fried, salty, or processed foods",
+            "No smoking, alcohol, or missing doses",
+            "Avoid long gaps without food or heavy feasts",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-03-14",
@@ -1060,7 +2088,62 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Mild NPDR, microaneurysms",
-        "imageQuality": 78
+        "imageQuality": 78,
+        "dietPlan": {
+          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "dos": [
+            "Millet-based meals (jowar/bajra) + dal + green veg",
+            "1 fruit (guava, apple) and 5 soaked almonds",
+            "Salt <5g/day, BP check weekly",
+            "Walk 30-45 min, 5 days/week",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No added sugar, jaggery, honey, or sweetened drinks",
+            "Limit salt, pickle, papad, and packaged snacks",
+            "No smoking or tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-017-0-other",
+        "date": "2026-03-14",
+        "drStage": 1,
+        "confidence": 0.89,
+        "heatmapRegions": [
+          {
+            "x": 34,
+            "y": 55,
+            "r": 14,
+            "label": "exudates"
+          }
+        ],
+        "notes": "Mild NPDR, microaneurysms (right eye)",
+        "imageQuality": 78,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "dos": [
+            "Millet-based meals (jowar/bajra) + dal + green veg",
+            "1 fruit (guava, apple) and 5 soaked almonds",
+            "Salt <5g/day, BP check weekly",
+            "Walk 30-45 min, 5 days/week",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No added sugar, jaggery, honey, or sweetened drinks",
+            "Limit salt, pickle, papad, and packaged snacks",
+            "No smoking or tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-03-14"
@@ -1113,7 +2196,104 @@ export const patients: Patient[] = [
         "postMeal": 234
       }
     ],
-    "visits": []
+    "visits": [
+      {
+        "id": "vGV-018-left",
+        "date": "2026-08-20",
+        "drStage": 3,
+        "confidence": 0.86,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR",
+        "imageQuality": 89,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "Severe NPDR \u2014 eye left",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-018-right",
+        "date": "2026-08-20",
+        "drStage": 3,
+        "confidence": 0.86,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Severe NPDR",
+        "imageQuality": 89,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "Severe NPDR \u2014 eye right",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ]
   },
   {
     "id": "GV-019",
@@ -1186,7 +2366,27 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Proliferative DR, neovascularization",
-        "imageQuality": 91
+        "imageQuality": 91,
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "dos": [
+            "Very strict: small millet portions, dal, boiled veg, curd small",
+            "Salt <3g, oil <2 tsp, no added sugar at all",
+            "Fruit only 50-80g if sugar allows, otherwise avoid",
+            "Light activity only as doctor advises, no strain",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sugar, fried, salty, processed, or outside food",
+            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
+            "Do not delay eye treatment, do not miss any dose",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1200-1300 kcal",
+          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left"
       },
       {
         "id": "vGV-019-1",
@@ -1214,7 +2414,27 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Proliferative DR, neovascularization",
-        "imageQuality": 92
+        "imageQuality": 92,
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "dos": [
+            "Very strict: small millet portions, dal, boiled veg, curd small",
+            "Salt <3g, oil <2 tsp, no added sugar at all",
+            "Fruit only 50-80g if sugar allows, otherwise avoid",
+            "Light activity only as doctor advises, no strain",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sugar, fried, salty, processed, or outside food",
+            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
+            "Do not delay eye treatment, do not miss any dose",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1200-1300 kcal",
+          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right"
       }
     ],
     "lastScreened": "2026-07-22",
@@ -1266,7 +2486,104 @@ export const patients: Patient[] = [
         "postMeal": 194
       }
     ],
-    "visits": [],
+    "visits": [
+      {
+        "id": "vGV-020-left",
+        "date": "2026-08-20",
+        "drStage": 2,
+        "confidence": 0.88,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Moderate NPDR",
+        "imageQuality": 89,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 eye left",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-020-right",
+        "date": "2026-08-20",
+        "drStage": 2,
+        "confidence": 0.87,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Moderate NPDR",
+        "imageQuality": 93,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 eye right",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ],
     "medication": [
       "Insulin Glargine"
     ]
@@ -1281,7 +2598,7 @@ export const patients: Patient[] = [
     "diabetesYears": 6,
     "diabetesType": "Type 2",
     "bp": "118/90",
-    "hbA1c": 11.0,
+    "hbA1c": 11,
     "familyHistory": false,
     "symptoms": [
       "headache",
@@ -1326,7 +2643,64 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Moderate NPDR, exudates",
-        "imageQuality": 91
+        "imageQuality": 91,
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-021-0-other",
+        "date": "2026-01-12",
+        "drStage": 2,
+        "confidence": 0.84,
+        "heatmapRegions": [
+          {
+            "x": 70,
+            "y": 51,
+            "r": 12,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Moderate NPDR, exudates (right eye)",
+        "imageQuality": 91,
+        "imageUrl": "/images/eye-macro.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Steady sugar and BP plus eye follow-up helps prevent worsening near the center of vision.",
+          "dos": [
+            "1 cup cooked millet + 1 cup dal + 2 cups veg per meal",
+            "Low salt, lean protein (egg white, fish, dal), curd small cup",
+            "Fruit: 100g papaya or guava only, avoid juice",
+            "Walk 30 min + foot check daily",
+            "Extra: no sugar at all, use sugar-free for tea if needed"
+          ],
+          "donts": [
+            "No sweets, sweet tea, cold drinks, alcohol",
+            "No deep fried, re-fried oil, red meat, high-salt foods",
+            "Do not miss medicines, do not skip eye follow-up in 3 months",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Eye re-screen in 3 months, routine referral 4-8 weeks"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-01-12",
@@ -1346,7 +2720,7 @@ export const patients: Patient[] = [
     "diabetesYears": 18,
     "diabetesType": "Type 2",
     "bp": "141/85",
-    "hbA1c": 10.0,
+    "hbA1c": 10,
     "familyHistory": true,
     "symptoms": [
       "floaters"
@@ -1406,7 +2780,66 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Proliferative DR, neovascularization",
-        "imageQuality": 94
+        "imageQuality": 94,
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "dos": [
+            "Very strict: small millet portions, dal, boiled veg, curd small",
+            "Salt <3g, oil <2 tsp, no added sugar at all",
+            "Fruit only 50-80g if sugar allows, otherwise avoid",
+            "Light activity only as doctor advises, no strain",
+            "Extra: no sugar at all, use sugar-free for tea if needed",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sugar, fried, salty, processed, or outside food",
+            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
+            "Do not delay eye treatment, do not miss any dose",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-022-0-other",
+        "date": "2026-05-10",
+        "drStage": 4,
+        "confidence": 0.87,
+        "heatmapRegions": [
+          {
+            "x": 40,
+            "y": 33,
+            "r": 14,
+            "label": "neovascularization"
+          }
+        ],
+        "notes": "Proliferative DR, neovascularization (right eye)",
+        "imageQuality": 94,
+        "imageUrl": "/images/eye-macro.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "dos": [
+            "Very strict: small millet portions, dal, boiled veg, curd small",
+            "Salt <3g, oil <2 tsp, no added sugar at all",
+            "Fruit only 50-80g if sugar allows, otherwise avoid",
+            "Light activity only as doctor advises, no strain",
+            "Extra: no sugar at all, use sugar-free for tea if needed",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sugar, fried, salty, processed, or outside food",
+            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
+            "Do not delay eye treatment, do not miss any dose",
+            "HB high, avoid any sweets until next HbA1c check"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-05-10",
@@ -1479,7 +2912,60 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Severe NPDR, haemorrhages",
-        "imageQuality": 84
+        "imageQuality": 84,
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
+            "Small frequent meals, millet + dal, no large rice plates",
+            "Fruit limited to 80-100g, no juice/dry fruits",
+            "Daily walk as tolerated, plus BP and sugar log"
+          ],
+          "donts": [
+            "No sugar, fried, salty, or processed foods",
+            "No smoking, alcohol, or missing doses",
+            "Avoid long gaps without food or heavy feasts"
+          ],
+          "dailyCalories": "1200-1400 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-023-0-other",
+        "date": "2026-05-10",
+        "drStage": 3,
+        "confidence": 0.96,
+        "heatmapRegions": [
+          {
+            "x": 46,
+            "y": 42,
+            "r": 16,
+            "label": "exudates"
+          }
+        ],
+        "notes": "Severe NPDR, haemorrhages (right eye)",
+        "imageQuality": 84,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
+            "Small frequent meals, millet + dal, no large rice plates",
+            "Fruit limited to 80-100g, no juice/dry fruits",
+            "Daily walk as tolerated, plus BP and sugar log"
+          ],
+          "donts": [
+            "No sugar, fried, salty, or processed foods",
+            "No smoking, alcohol, or missing doses",
+            "Avoid long gaps without food or heavy feasts"
+          ],
+          "dailyCalories": "1200-1400 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-05-10",
@@ -1562,7 +3048,60 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Severe NPDR, haemorrhages",
-        "imageQuality": 79
+        "imageQuality": 79,
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
+            "Small frequent meals, millet + dal, no large rice plates",
+            "Fruit limited to 80-100g, no juice/dry fruits",
+            "Daily walk as tolerated, plus BP and sugar log"
+          ],
+          "donts": [
+            "No sugar, fried, salty, or processed foods",
+            "No smoking, alcohol, or missing doses",
+            "Avoid long gaps without food or heavy feasts"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-024-0-other",
+        "date": "2026-07-22",
+        "drStage": 3,
+        "confidence": 0.84,
+        "heatmapRegions": [
+          {
+            "x": 67,
+            "y": 34,
+            "r": 14,
+            "label": "exudates"
+          }
+        ],
+        "notes": "Severe NPDR, haemorrhages (right eye)",
+        "imageQuality": 79,
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Strict control to protect eye from further bleeding and reduce PDR risk.",
+          "dos": [
+            "Strict salt <4g, oil <2 tsp/day, high fiber veg",
+            "Small frequent meals, millet + dal, no large rice plates",
+            "Fruit limited to 80-100g, no juice/dry fruits",
+            "Daily walk as tolerated, plus BP and sugar log"
+          ],
+          "donts": [
+            "No sugar, fried, salty, or processed foods",
+            "No smoking, alcohol, or missing doses",
+            "Avoid long gaps without food or heavy feasts"
+          ],
+          "dailyCalories": "1400-1600 kcal",
+          "followUp": "Urgent eye referral 1-2 weeks, re-screen 1 month"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-07-22",
@@ -1609,7 +3148,104 @@ export const patients: Patient[] = [
         "postMeal": 235
       }
     ],
-    "visits": [],
+    "visits": [
+      {
+        "id": "vGV-025-left",
+        "date": "2026-08-20",
+        "drStage": 2,
+        "confidence": 0.87,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Moderate NPDR",
+        "imageQuality": 88,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 eye left",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-025-right",
+        "date": "2026-08-20",
+        "drStage": 2,
+        "confidence": 0.88,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Moderate NPDR",
+        "imageQuality": 89,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 eye right",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ],
     "medication": [
       "Atorvastatin 10mg",
       "Sitagliptin 100mg"
@@ -1650,34 +3286,6 @@ export const patients: Patient[] = [
     ],
     "visits": [
       {
-        "id": "vGV-026-1",
-        "date": "2026-06-18",
-        "drStage": 4,
-        "confidence": 0.85,
-        "heatmapRegions": [
-          {
-            "x": 46,
-            "y": 70,
-            "r": 17,
-            "label": "haemorrhage"
-          },
-          {
-            "x": 57,
-            "y": 33,
-            "r": 16,
-            "label": "microaneurysm"
-          },
-          {
-            "x": 48,
-            "y": 35,
-            "r": 17,
-            "label": "haemorrhage"
-          }
-        ],
-        "notes": "Proliferative DR, neovascularization",
-        "imageQuality": 93
-      },
-      {
         "id": "vGV-026-0",
         "date": "2026-08-10",
         "drStage": 4,
@@ -1703,7 +3311,73 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Proliferative DR, neovascularization",
-        "imageQuality": 83
+        "imageQuality": 83,
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "dos": [
+            "Very strict: small millet portions, dal, boiled veg, curd small",
+            "Salt <3g, oil <2 tsp, no added sugar at all",
+            "Fruit only 50-80g if sugar allows, otherwise avoid",
+            "Light activity only as doctor advises, no strain",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sugar, fried, salty, processed, or outside food",
+            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
+            "Do not delay eye treatment, do not miss any dose"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+        },
+        "imageUrl": "/images/fundus-proliferative.jpg",
+        "eye": "right"
+      },
+      {
+        "id": "vGV-026-1",
+        "date": "2026-06-18",
+        "drStage": 4,
+        "confidence": 0.85,
+        "heatmapRegions": [
+          {
+            "x": 46,
+            "y": 70,
+            "r": 17,
+            "label": "haemorrhage"
+          },
+          {
+            "x": 57,
+            "y": 33,
+            "r": 16,
+            "label": "microaneurysm"
+          },
+          {
+            "x": 48,
+            "y": 35,
+            "r": 17,
+            "label": "haemorrhage"
+          }
+        ],
+        "notes": "Proliferative DR, neovascularization",
+        "imageQuality": 93,
+        "dietPlan": {
+          "summary": "Very strict diet and urgent eye care to protect vision.",
+          "dos": [
+            "Very strict: small millet portions, dal, boiled veg, curd small",
+            "Salt <3g, oil <2 tsp, no added sugar at all",
+            "Fruit only 50-80g if sugar allows, otherwise avoid",
+            "Light activity only as doctor advises, no strain",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No sugar, fried, salty, processed, or outside food",
+            "No alcohol, smoking, or strenuous exercise until eye doctor clears",
+            "Do not delay eye treatment, do not miss any dose"
+          ],
+          "dailyCalories": "1300-1500 kcal",
+          "followUp": "Emergency eye referral within 1 week, weekly follow-up"
+        },
+        "imageUrl": "/images/fundus-laser.jpg",
+        "eye": "left"
       }
     ],
     "lastScreened": "2026-08-10",
@@ -1767,7 +3441,62 @@ export const patients: Patient[] = [
           }
         ],
         "notes": "Mild NPDR, microaneurysms",
-        "imageQuality": 86
+        "imageQuality": 86,
+        "dietPlan": {
+          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "dos": [
+            "Millet-based meals (jowar/bajra) + dal + green veg",
+            "1 fruit (guava, apple) and 5 soaked almonds",
+            "Salt <5g/day, BP check weekly",
+            "Walk 30-45 min, 5 days/week",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No added sugar, jaggery, honey, or sweetened drinks",
+            "Limit salt, pickle, papad, and packaged snacks",
+            "No smoking or tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+        },
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left"
+      },
+      {
+        "id": "vGV-027-0-other",
+        "date": "2026-05-10",
+        "drStage": 1,
+        "confidence": 0.89,
+        "heatmapRegions": [
+          {
+            "x": 54,
+            "y": 58,
+            "r": 18,
+            "label": "exudates"
+          }
+        ],
+        "notes": "Mild NPDR, microaneurysms (right eye)",
+        "imageQuality": 86,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "dietPlan": {
+          "summary": "Tighten sugar and BP control to stop mild changes from growing.",
+          "dos": [
+            "Millet-based meals (jowar/bajra) + dal + green veg",
+            "1 fruit (guava, apple) and 5 soaked almonds",
+            "Salt <5g/day, BP check weekly",
+            "Walk 30-45 min, 5 days/week",
+            "Extra: less salt, check BP twice weekly at PHC"
+          ],
+          "donts": [
+            "No added sugar, jaggery, honey, or sweetened drinks",
+            "Limit salt, pickle, papad, and packaged snacks",
+            "No smoking or tobacco"
+          ],
+          "dailyCalories": "1400-1500 kcal",
+          "followUp": "Re-screen eye in 6 months, tighten HbA1c"
+        },
+        "analysis": null
       }
     ],
     "lastScreened": "2026-05-10"
@@ -1820,7 +3549,104 @@ export const patients: Patient[] = [
         "postMeal": 256
       }
     ],
-    "visits": [],
+    "visits": [
+      {
+        "id": "vGV-028-left",
+        "date": "2026-08-20",
+        "drStage": 2,
+        "confidence": 0.88,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Moderate NPDR",
+        "imageQuality": 91,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "left",
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 eye left",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      },
+      {
+        "id": "vGV-028-right",
+        "date": "2026-08-20",
+        "drStage": 2,
+        "confidence": 0.88,
+        "heatmapRegions": [
+          {
+            "x": 38,
+            "y": 42,
+            "r": 14,
+            "label": "microaneurysm"
+          }
+        ],
+        "notes": "Moderate NPDR",
+        "imageQuality": 93,
+        "imageUrl": "/images/fundus-mild.jpg",
+        "eye": "right",
+        "analysis": {
+          "summary": "Moderate NPDR \u2014 eye right",
+          "lesionsDetected": [
+            {
+              "type": "microaneurysm",
+              "count": 1,
+              "locations": "posterior pole",
+              "severity": "mild"
+            }
+          ],
+          "stageJustification": "Mild changes",
+          "confidenceExplanation": "High confidence",
+          "riskScoreBreakdown": [],
+          "imageQualityAssessment": "Good",
+          "clinicalSignificance": "Routine",
+          "recommendedActions": [],
+          "urgency": "routine"
+        },
+        "dietPlan": {
+          "summary": "Balanced plate",
+          "dos": [
+            "Whole grains",
+            "Dal + veg"
+          ],
+          "donts": [
+            "Avoid sugar"
+          ],
+          "dailyCalories": "1500 kcal",
+          "followUp": "Annual"
+        }
+      }
+    ],
     "footLastCheck": "2026-08-18"
   }
 ];

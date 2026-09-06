@@ -5,6 +5,7 @@ import { Footprints, Upload, ShieldCheck, AlertTriangle, CheckCircle2, XCircle, 
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { estimateBlurScore, type BlurResult } from "@/lib/blur";
+import { CustomSelect } from "@/components/CustomSelect";
 
 type FootFlag = { id: string; label: string; severity: "low" | "med" | "high" };
 
@@ -83,7 +84,7 @@ export default function FootScreeningPage() {
       }
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Camera unavailable";
-      setCameraError(msg.includes("NotAllowed") ? "Camera permission denied — allow camera or use upload." : msg);
+      setCameraError(msg.includes("NotAllowed") ? "Camera permission denied, allow camera or use upload." : msg);
       setCameraOn(false);
     }
   };
@@ -169,26 +170,26 @@ export default function FootScreeningPage() {
     else if (yesCount >= 2) risk = "moderate";
     else if (yesCount === 1) risk = "moderate";
     const flags: FootFlag[] = [];
-    if (answers.numbness) flags.push({ id: "1", label: "Possible neuropathy — monofilament test advised", severity: "med" });
-    if (answers.wound) flags.push({ id: "2", label: "Non-healing lesion — ulcer risk, needs dressing & offloading", severity: "high" });
-    if (answers.swelling) flags.push({ id: "3", label: "Inflammation / infection flag — urgent review", severity: "high" });
-    if (answers.color) flags.push({ id: "4", label: "Possible ischaemia — check pulses, ABI if available", severity: "high" });
-    if (answers.callus) flags.push({ id: "5", label: "Callus / fissure — debride, moisturise, footwear advice", severity: "med" });
-    if (quality !== null && quality < 60) flags.push({ id: "6", label: "Image quality low — retake in better light", severity: "low" });
+    if (answers.numbness) flags.push({ id: "1", label: "Possible nerve loss, simple touch test advised", severity: "med" });
+    if (answers.wound) flags.push({ id: "2", label: "Wound not healing, ulcer risk, needs dressing and less pressure", severity: "high" });
+    if (answers.swelling) flags.push({ id: "3", label: "Swelling or infection, needs urgent check", severity: "high" });
+    if (answers.color) flags.push({ id: "4", label: "Possible low blood flow, check pulses if possible", severity: "high" });
+    if (answers.callus) flags.push({ id: "5", label: "Hard skin or cracks, needs care and better footwear", severity: "med" });
+    if (quality !== null && quality < 60) flags.push({ id: "6", label: "Photo too blurry, retake in better light", severity: "low" });
     setResult({ risk, flags });
     if (patient) updatePatient(patient.id, { footLastCheck: new Date().toISOString().slice(0, 10) });
   };
 
   if (!patient) {
     return (
-      <div className="p-6 max-w-[1220px] mx-auto text-sm text-slate-600">
+      <div className="w-full max-w-[1220px] mx-auto p-6 min-w-0 overflow-x-hidden text-sm text-slate-600">
         No patients. <Link href="/app/patients" className="text-teal-700 font-bold underline">Register one</Link>
       </div>
     );
   }
 
   return (
-    <div className="p-4 md:p-6 max-w-[1220px] mx-auto space-y-5">
+    <div className="w-full max-w-[1220px] mx-auto p-4 md:p-6 min-w-0 overflow-x-hidden space-y-5">
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">
@@ -197,7 +198,7 @@ export default function FootScreeningPage() {
           <h1 className="mt-2 text-2xl md:text-[30px] font-black tracking-tight flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
             Foot screening
           </h1>
-          <p className="text-sm text-slate-600 max-w-[760px]">Diabetic foot flags in &lt;3 min: 5-question check + phone photo + colour-coded guidance. No extra hardware — works like the eye workflow.</p>
+          <p className="text-sm text-slate-600 max-w-[760px]">Diabetic foot check in under 3 minutes: 5 quick questions, phone photo, clear color guidance. No extra device, works like the eye check.</p>
         </div>
         <Link href="/app/screening" className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 hover:border-stone-300 hover:shadow-sm transition">
           Back to eye screening <ArrowRight className="w-4 h-4" />
@@ -220,13 +221,7 @@ export default function FootScreeningPage() {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 group-focus-within:text-teal-600 transition" />
               <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search patient…" className="w-full pl-10 pr-3 py-3 rounded-xl border border-stone-200 bg-stone-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none transition" />
             </div>
-            <select value={selectedId} onChange={(e) => setSelectedId(e.target.value)} className="mt-2 w-full px-3.5 py-3 rounded-xl border border-stone-200 bg-white text-sm font-medium focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none">
-              {(q ? filteredPatients : patients).map((p) => (
-                <option key={p.id} value={p.id}>
-                  {p.name} — {p.village} {p.footLastCheck ? `• foot ${p.footLastCheck}` : "• no foot record"}
-                </option>
-              ))}
-            </select>
+            <CustomSelect value={selectedId} onChange={setSelectedId} options={(q ? filteredPatients : patients).map((p) => ({ value: p.id, label: p.name, desc: `${p.village} ${p.footLastCheck ? `• foot ${p.footLastCheck}` : "• no foot record"}` }))} placeholder="Select patient" searchable />
             <motion.div layout className="mt-3 rounded-xl bg-stone-50 border border-stone-200 p-3.5 text-xs leading-relaxed">
               <div className="font-bold">{patient.name} • {patient.age}y • {patient.diabetesYears}y DM • HbA1c {patient.hbA1c}%</div>
               <div className="text-slate-600">{patient.village} • Risk {patient.riskScore} • {patient.symptoms.join(", ") || "no eye symptoms"}</div>
@@ -264,7 +259,7 @@ export default function FootScreeningPage() {
               ))}
             </div>
             <div className="mt-2 text-[11px] text-stone-500 flex items-start gap-1.5">
-              <Info className="w-3.5 h-3.5 mt-0.5 shrink-0" /> Tap “yes” for any that apply. This is a risk flag, not a diagnosis — referral decides treatment.
+              <Info className="w-3.5 h-3.5 mt-0.5 shrink-0" /> Tap yes for any that apply. This is a risk flag, not a final diagnosis, referral decides treatment.
             </div>
           </div>
         </motion.div>
@@ -275,9 +270,9 @@ export default function FootScreeningPage() {
               <span className="w-7 h-7 rounded-lg bg-teal-50 border border-teal-200 grid place-items-center text-teal-700">
                 <Camera className="w-4 h-4" />
               </span>
-              Foot photo — quality gate (same as retina)
+              Foot photo, quality check (same as eye photo)
             </h3>
-            <div className="text-xs text-slate-600 mt-1">Place foot on plain background, good light, include sole + dorsum. Offline check before flagging.</div>
+            <div className="text-xs text-slate-600 mt-1">Place foot on plain background, good light, include sole and top. Quick check before flagging.</div>
 
             <div className="mt-3 grid grid-cols-2 gap-2 p-1 rounded-2xl bg-stone-100 border border-stone-200">
               <button onClick={() => setCameraMode("camera")} className={`flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-bold transition ${cameraMode === "camera" ? "bg-zinc-900 text-white shadow" : "bg-transparent text-stone-600 hover:bg-white"}`}>
@@ -331,7 +326,7 @@ export default function FootScreeningPage() {
                       </div>
                     ) : (
                       <div className="rounded-xl bg-black/50 backdrop-blur border border-white/15 text-white px-3 py-2 text-xs font-medium flex items-center gap-2">
-                        <Aperture className="w-4 h-4 animate-pulse" /> Initializing — hold foot steady…
+                        <Aperture className="w-4 h-4 animate-pulse" /> Starting, hold foot steady
                       </div>
                     )}
                   </div>
@@ -386,12 +381,12 @@ export default function FootScreeningPage() {
             <AnimatePresence>
               {quality !== null && quality < 60 && (
                 <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="mt-3 rounded-xl bg-red-50 border-2 border-red-300 p-3 flex items-start gap-2 text-xs text-red-800">
-                  <XCircle className="w-4 h-4 mt-0.5 shrink-0" /> Quality {quality}/100 — <b>Too blurry</b>. Laplacian variance low — retake with steadier hand, better light, plain background.
+                  <XCircle className="w-4 h-4 mt-0.5 shrink-0" /> Quality {quality}/100, <b>Too blurry</b>. Retake with steadier hand, better light, plain background.
                 </motion.div>
               )}
               {quality !== null && quality >= 60 && quality < 80 && (
                 <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="mt-3 rounded-xl bg-amber-50 border border-amber-200 p-3 flex items-center gap-2 text-xs text-amber-800">
-                  <AlertTriangle className="w-4 h-4" /> Soft focus {quality}/100 — will flag but hold steadier for 85+.
+                  <AlertTriangle className="w-4 h-4" /> Soft focus {quality}/100, will flag but hold steadier for 85 or more.
                 </motion.div>
               )}
             </AnimatePresence>
@@ -399,11 +394,11 @@ export default function FootScreeningPage() {
             <motion.button whileHover={{ y: -1, scale: 1.01 }} whileTap={{ scale: 0.98 }} onClick={runCheck} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-teal-700 text-white font-bold hover:bg-teal-800 shadow-lg shadow-teal-700/20 hover:shadow-xl transition">
               <ShieldCheck className="w-4 h-4" /> Run foot risk flag
             </motion.button>
-            <div className="mt-2 text-[11px] text-center text-stone-500">Offline rule-based flag — no cloud needed. Image stays on device.</div>
+            <div className="mt-2 text-[11px] text-center text-stone-500">On device check, no cloud needed. Image stays on your device.</div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} className="border bg-white border border-stone-200 p-5 shadow-sm">
-            <h3 className="font-bold text-sm">Result — colour-coded guidance</h3>
+            <h3 className="font-bold text-sm">Result, color coded guidance</h3>
             {!result ? (
               <div className="mt-3 rounded-xl border border-dashed border-stone-300 bg-stone-50 p-6 text-center">
                 <div className="w-10 h-10 mx-auto rounded-xl bg-white border border-stone-200 grid place-items-center">
@@ -417,8 +412,8 @@ export default function FootScreeningPage() {
                 <motion.div initial={{ scale: 0.96 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className={`border border p-4 flex items-center justify-between ${result.risk === "low" ? "bg-emerald-50 border-emerald-200" : result.risk === "moderate" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
                   <div>
                     <div className="text-[11px] font-bold tracking-widest opacity-60">FOOT RISK FLAG • PRELIMINARY</div>
-                    <div className={`text-xl font-black mt-1 ${result.risk === "low" ? "text-emerald-700" : result.risk === "moderate" ? "text-amber-800" : "text-red-700"}`}>{result.risk === "low" ? "Low risk — self-care" : result.risk === "moderate" ? "Moderate — PHC review" : "High — urgent referral"}</div>
-                    <div className="text-xs text-slate-700 mt-1">{result.flags.length === 0 ? "No flags — reinforce foot-care education." : `${result.flags.length} flag(s) detected`}</div>
+                    <div className={`text-xl font-black mt-1 ${result.risk === "low" ? "text-emerald-700" : result.risk === "moderate" ? "text-amber-800" : "text-red-700"}`}>{result.risk === "low" ? "Low risk, self care" : result.risk === "moderate" ? "Moderate, PHC review" : "High, urgent referral"}</div>
+                    <div className="text-xs text-slate-700 mt-1">{result.flags.length === 0 ? "No flags, keep up foot care." : `${result.flags.length} flag(s) found`}</div>
                   </div>
                   <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring" }} className={`w-14 h-14 border grid place-items-center text-white font-black text-xl shadow-lg ${result.risk === "low" ? "bg-emerald-600 shadow-emerald-600/20" : result.risk === "moderate" ? "bg-amber-500 shadow-amber-500/20" : "bg-red-600 shadow-red-600/20"}`}>{result.risk === "low" ? "✓" : result.risk === "moderate" ? "!" : "!!"}</motion.div>
                 </motion.div>
@@ -459,14 +454,14 @@ export default function FootScreeningPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.12),transparent_50%)]" />
         <div className="relative">
           <h3 className="font-bold flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-300" /> Why bundled?</h3>
-          <p className="text-sm opacity-90 mt-1 leading-relaxed">Diabetic eye + foot share the same risk engine (duration, HbA1c, BP). One visit, one record, one ASHA workflow — doubles the preventive value without extra trips.</p>
+          <p className="text-sm opacity-90 mt-1 leading-relaxed">Eye and foot risk share the same factors (duration, HbA1c, BP). One visit, one record, one ASHA workflow, double the benefit without extra trips.</p>
         </div>
         <div className="relative border bg-white text-slate-900 p-4 shadow-xl">
-          <div className="text-xs font-black tracking-widest text-teal-700">FOR JUDGES — TRY IN 60s</div>
+          <div className="text-xs font-black tracking-widest text-teal-700">TRY IN 60 SECONDS</div>
           <ol className="mt-2 space-y-1 text-sm list-decimal list-inside">
-            <li>Pick a high-risk patient (Arjun/Ramesh) → check “wound” + upload any photo → High flag</li>
-            <li>Toggle to a low-risk patient → no flags → Low risk</li>
-            <li>See “last foot check” update on the patient card</li>
+            <li>Pick a high risk patient (Arjun or Ramesh), check wound and upload any photo, see High flag</li>
+            <li>Pick a low risk patient, no flags, see Low risk</li>
+            <li>See last foot check update on the patient card</li>
           </ol>
         </div>
       </motion.div>

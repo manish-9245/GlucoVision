@@ -5,7 +5,7 @@ export function Logo({ size = 32, className = "" }: { size?: number; className?:
       height={size}
       viewBox="0 0 512 512"
       role="img"
-      aria-label="GlucoVision logo — concentric retina"
+      aria-label="GlucoVision logo, concentric retina"
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >

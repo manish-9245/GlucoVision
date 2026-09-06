@@ -4,22 +4,40 @@ import { Send, Loader2, Trash2, Image as ImageIcon, Sparkles, ShieldCheck, Alert
 
 type ChatMsg = { id: string; role: "user" | "assistant"; content: string; image_url?: string | null; model?: string; created_at?: string };
 
+function getApiUrl(): string {
+  const env = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "";
+  if (env) return env;
+  if (typeof window !== "undefined" && window.location.hostname === "localhost") return "http://localhost:8787";
+  return "";
+}
+
 export function CaseChat({
   patientId,
   visitId,
   preview,
+  previews,
   patientLabel,
 }: {
   patientId: string;
   visitId?: string | null;
-  preview: string | null;
+  preview?: string | null;
+  previews?: { left: string | null; right: string | null };
   patientLabel?: string;
 }) {
-  const API = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "";
+  // Normalize to both eyes , support single preview (old) or both (new)
+  const bothPreviews = previews || (preview ? { left: preview, right: null } : { left: null, right: null });
+  const hasLeft = !!bothPreviews.left;
+  const hasRight = !!bothPreviews.right;
+  const hasAny = hasLeft || hasRight;
+  const hasBoth = hasLeft && hasRight;
+  // Backward compat: preview prop still works, but prefer both
+  const API = getApiUrl();
   const [msgs, setMsgs] = useState<ChatMsg[]>([]);
   const [input, setInput] = useState("");
   const [sending, setSending] = useState(false);
   const [includeImage, setIncludeImage] = useState(true);
+  const [includeLeft, setIncludeLeft] = useState(true);
+  const [includeRight, setIncludeRight] = useState(true);
   const listRef = useRef<HTMLDivElement>(null);
 
   const load = async () => {
@@ -43,33 +61,53 @@ export function CaseChat({
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight, behavior: "smooth" });
   }, [msgs]);
 
-  // Convert preview blob:/local to data URL for NIM (so backend can forward as image_url)
+  // Convert previews to data URLs (supports both eyes)
+  const getImageDataUrls = async (): Promise<{ left: string | null; right: string | null; primary: string | null }> => {
+    if (!includeImage || !hasAny) return { left: null, right: null, primary: null };
+    const toDataUrl = async (url: string | null): Promise<string | null> => {
+      if (!url) return null;
+      try {
+        if (url.startsWith("data:")) return url;
+        const blob = await fetch(url).then((r) => r.blob());
+        return await new Promise<string>((res) => {
+          const fr = new FileReader();
+          fr.onload = () => res(fr.result as string);
+          fr.readAsDataURL(blob);
+        });
+      } catch {
+        return null;
+      }
+    };
+    const leftUrl = includeLeft ? await toDataUrl(bothPreviews.left) : null;
+    const rightUrl = includeRight ? await toDataUrl(bothPreviews.right) : null;
+    // Primary for single-image backends: prefer left if available, else right
+    const primary = leftUrl || rightUrl || null;
+    return { left: leftUrl, right: rightUrl, primary };
+  };
+
+  // Backward compat single
   const getImageDataUrl = async (): Promise<string | null> => {
-    if (!includeImage || !preview) return null;
-    try {
-      if (preview.startsWith("data:")) return preview;
-      const blob = await fetch(preview).then((r) => r.blob());
-      return await new Promise<string>((res) => {
-        const fr = new FileReader();
-        fr.onload = () => res(fr.result as string);
-        fr.readAsDataURL(blob);
-      });
-    } catch {
-      return null;
-    }
+    const r = await getImageDataUrls();
+    return r.primary;
   };
 
   const send = async () => {
     const text = input.trim();
     if (!text) return;
     setInput("");
-    const imageUrl = await getImageDataUrl();
-    const optimistic: ChatMsg = { id: `tmp_${Date.now()}`, role: "user", content: text, image_url: imageUrl };
+    const { left: leftUrl, right: rightUrl, primary: imageUrl } = await getImageDataUrls();
+    const hasBoth = !!(leftUrl && rightUrl);
+    const optimistic: ChatMsg = {
+      id: `tmp_${Date.now()}`,
+      role: "user",
+      content: text + (hasBoth ? " [both eyes attached]" : leftUrl ? " [left eye attached]" : rightUrl ? " [right eye attached]" : ""),
+      image_url: imageUrl,
+    };
     setMsgs((m) => [...m, optimistic]);
     setSending(true);
     try {
       if (!API) {
-        // Offline fallback — local echo with disclaimer
+        // No connection, use local guidance
         await new Promise((r) => setTimeout(r, 700));
         setMsgs((m) => [
           ...m,
@@ -77,23 +115,28 @@ export function CaseChat({
             id: `asst_${Date.now()}`,
             role: "assistant",
             content:
-              `**Offline fallback** — no \`NEXT_PUBLIC_API_URL\` configured. Based on local rule: risk ${patientLabel || patientId} — if image quality <60, retake; if stage ≥2, routine eSanjeevani referral 4-8w; else annual. ` +
-              `Your question: "${text}". Attach image and set API to get NIM vision analysis.\n\n*Disclaimer: Preliminary AI — ophthalmologist confirmation required.*`,
+              `No connection, using local guidance for ${patientLabel || patientId}${hasBoth ? " (both eyes)" : hasAny ? " (one eye)" : ""}: if image quality is under 60, retake the photo. If the screening showed stage 2 or higher, a routine referral within 4 to 8 weeks is advised, otherwise yearly checkup. ` +
+              `Your question: "${text}". Connect for detailed image check.\n\n*Early guidance, an eye doctor must confirm.*`,
           },
         ]);
         return;
       }
+      // Send both eyes if available: primary image_url + left_image_url/right_image_url for bilateral
+      const payload: Record<string, unknown> = { message: text, image_url: imageUrl, visitId };
+      if (leftUrl) payload.left_image_url = leftUrl;
+      if (rightUrl) payload.right_image_url = rightUrl;
+      if (hasBoth) payload.bilateral = true;
       const res = await fetch(`${API}/api/cases/${patientId}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text, image_url: imageUrl, visitId }),
+        body: JSON.stringify(payload),
       });
       const j = (await res.json()) as { content?: string; error?: string; model?: string };
       if (!res.ok) throw new Error(j.error || `HTTP ${res.status}`);
       setMsgs((m) => [...m, { id: `asst_${Date.now()}`, role: "assistant", content: j.content || "", model: j.model }]);
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e);
-      setMsgs((m) => [...m, { id: `asst_${Date.now()}`, role: "assistant", content: `All 3 NIM models failed — local fallback: ${msg.slice(0, 400)}\n\n*Tip: check NVIDIA_API_KEY and ENCRYPTION_KEY secrets, and that image is https or data URL.*` }]);
+      setMsgs((m) => [...m, { id: `asst_${Date.now()}`, role: "assistant", content: `AI models not responding, using local help: ${msg.slice(0, 400)}\n\n*Tip: check API keys and that image is https or data URL.*` }]);
     } finally {
       setSending(false);
     }
@@ -119,7 +162,7 @@ export function CaseChat({
           </span>
           <div>
             <div className="text-sm font-bold leading-none">Discuss this case</div>
-            <div className="text-xs text-zinc-500">Chat about the fundus image — patient context is auto-included</div>
+            <div className="text-xs text-zinc-500">Chat about the eye image, patient details are added automatically</div>
           </div>
         </div>
         <button onClick={clear} className="px-2.5 py-1.5 rounded-full border border-zinc-200 bg-white text-xs font-semibold hover:bg-zinc-50 flex items-center gap-1">
@@ -127,27 +170,59 @@ export function CaseChat({
         </button>
       </div>
 
-      {preview && (
-        <div className="px-4 py-3 border-b border-zinc-200 bg-white flex items-center gap-3">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={preview} alt="case image" className="w-14 h-14 rounded-xl object-cover border border-zinc-200" />
-          <div className="flex-1">
-            <div className="text-xs font-bold">Current fundus attached</div>
-            <div className="text-xs text-zinc-500">Will be sent to NIM with your question</div>
+      {hasAny && (
+        <div className="px-4 py-3 border-b border-zinc-200 bg-white space-y-3">
+          <div className="flex items-center gap-3">
+            {hasLeft && bothPreviews.left && (
+              <div className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={bothPreviews.left} alt="left eye" className="w-14 h-14 rounded-xl object-cover border-2 border-teal-600" />
+                <span className="absolute -bottom-1 -right-1 px-1 py-0.5 rounded-full bg-teal-600 text-white text-[10px] font-bold">L</span>
+              </div>
+            )}
+            {hasRight && bothPreviews.right && (
+              <div className="relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={bothPreviews.right} alt="right eye" className="w-14 h-14 rounded-xl object-cover border-2 border-amber-500" />
+                <span className="absolute -bottom-1 -right-1 px-1 py-0.5 rounded-full bg-amber-500 text-white text-[10px] font-bold">R</span>
+              </div>
+            )}
+            {!hasLeft && !hasRight && preview && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={preview} alt="case image" className="w-14 h-14 rounded-xl object-cover border border-zinc-200" />
+            )}
+            <div className="flex-1">
+              <div className="text-xs font-bold">{hasBoth ? "Both eyes attached" : hasLeft ? "Left eye attached" : hasRight ? "Right eye attached" : "Fundus attached"}</div>
+              <div className="text-xs text-zinc-500">{hasBoth ? "Both will be sent for AI check, ask to compare" : "Will be sent with your question"}</div>
+            </div>
+            <label className="flex items-center gap-1.5 text-xs font-medium cursor-pointer">
+              <input type="checkbox" checked={includeImage} onChange={(e) => setIncludeImage(e.target.checked)} className="rounded" />
+              Include
+            </label>
           </div>
-          <label className="flex items-center gap-1.5 text-xs font-medium cursor-pointer">
-            <input type="checkbox" checked={includeImage} onChange={(e) => setIncludeImage(e.target.checked)} className="rounded" />
-            Include image
-          </label>
-          <span className="px-2 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-1">
-            <ImageIcon className="w-3 h-3" /> {includeImage ? "Yes" : "No"}
-          </span>
+          {hasAny && (
+            <div className="flex items-center gap-3 text-xs">
+              <label className="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" checked={includeLeft} onChange={(e) => setIncludeLeft(e.target.checked)} disabled={!hasLeft} className="rounded" />
+                <span className={hasLeft ? "" : "text-zinc-400"}>Left {hasLeft ? "✓" : "Not set"}</span>
+              </label>
+              <label className="flex items-center gap-1.5 cursor-pointer">
+                <input type="checkbox" checked={includeRight} onChange={(e) => setIncludeRight(e.target.checked)} disabled={!hasRight} className="rounded" />
+                <span className={hasRight ? "" : "text-zinc-400"}>Right {hasRight ? "✓" : "Not set"}</span>
+              </label>
+              <span className="ml-auto text-[11px] text-zinc-500">{hasBoth ? "Tip: Ask “Compare left vs right”" : "Upload the other eye to compare"}</span>
+            </div>
+          )}
         </div>
       )}
 
-      {!API && (
+      {!API ? (
         <div className="mx-4 mt-3 rounded-xl bg-amber-50 border border-amber-200 px-3 py-2 text-xs text-amber-800 flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4" /> No `NEXT_PUBLIC_API_URL` — chatting in offline fallback mode (local mock). Set Worker URL to enable real NIM vision.
+          <AlertTriangle className="w-4 h-4" /> Chat using local guidance. Connect for image analysis.
+        </div>
+      ) : (
+        <div className="mx-4 mt-3 rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-2 text-xs text-emerald-800 flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> AI chat ready, image analysis on
         </div>
       )}
 
@@ -169,18 +244,19 @@ export function CaseChat({
           </div>
         ) : (
           msgs.map((m) => (
-            <div key={m.id} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
+            <div key={m.id} className={`flex flex-col ${m.role === "user" ? "items-end" : "items-start"}`}>
               <div className={`max-w-[82%] rounded-2xl px-3.5 py-2.5 text-sm leading-6 whitespace-pre-wrap border ${m.role === "user" ? "bg-zinc-900 text-white border-zinc-900" : "bg-white border-zinc-200"}`}>
                 {m.content}
                 {m.model && <div className="mt-1 text-[10px] opacity-60 font-mono">via {m.model}</div>}
               </div>
+              {m.created_at && <div className="text-[10px] text-zinc-400 mt-1 px-1">{new Date(m.created_at).toLocaleString()}</div>}
             </div>
           ))
         )}
         {sending && (
           <div className="flex justify-start">
             <div className="rounded-2xl bg-white border border-zinc-200 px-3.5 py-2.5 text-sm flex items-center gap-2">
-              <Loader2 className="w-4 h-4 animate-spin" /> Thinking — trying 3 NIM models with fallback…
+              <Loader2 className="w-4 h-4 animate-spin" /> Thinking, checking AI models
             </div>
           </div>
         )}
@@ -196,7 +272,7 @@ export function CaseChat({
               send();
             }
           }}
-          placeholder="Ask about this fundus — e.g. Is there a car in this image? (vision test) or What stage?"
+          placeholder="Ask about this eye image, e.g. What stage is this or What is seen"
           className="flex-1 px-3.5 py-2.5 rounded-full border border-zinc-200 bg-zinc-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none"
         />
         <button onClick={send} disabled={!input.trim() || sending} className="px-5 py-2.5 rounded-full bg-teal-700 text-white font-bold hover:bg-teal-800 disabled:opacity-40 flex items-center gap-1.5">
@@ -204,7 +280,7 @@ export function CaseChat({
         </button>
       </div>
       <div className="px-3 pb-2 text-[10px] text-zinc-500 flex items-center gap-1">
-        <ShieldCheck className="w-3 h-3" /> Preliminary AI — ophthalmologist must confirm. Context window: last 8 turns + patient + image.
+        <ShieldCheck className="w-3 h-3" /> Early AI check, eye doctor must confirm.
       </div>
     </div>
   );

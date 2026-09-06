@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
 import { Eye, EyeOff, ArrowRight, ShieldCheck } from "lucide-react";
+import { CustomSelect } from "@/components/CustomSelect";
 
 const ROLES = [
   { value: "asha", label: "ASHA Worker", desc: "Village screening, intake" },
@@ -37,7 +38,7 @@ export default function SignupPage() {
 
   return (
     <main className="min-h-screen bg-[#FCFCF9] flex flex-col">
-      <header className="max-w-[1120px] mx-auto w-full px-6 py-6 flex items-center justify-between">
+      <header className="w-full max-w-[1120px] mx-auto min-w-0 overflow-x-hidden px-6 py-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-white border border-zinc-200 grid place-items-center shadow-sm">
             <Logo size={22} />
@@ -46,7 +47,7 @@ export default function SignupPage() {
             <div className="font-bold tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
               GlucoVision
             </div>
-            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">Smart India Hackathon ’26</div>
+            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">GlucoVision</div>
           </div>
         </Link>
         <Link href="/login" className="text-sm font-semibold px-4 py-2 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50">
@@ -59,7 +60,7 @@ export default function SignupPage() {
           <h1 className="text-[32px] font-black leading-none tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
             Create account
           </h1>
-          <p className="text-sm text-zinc-600 mt-2">Join your PHC. Role controls what you see — ASHA screens, MO reviews, Eye confirms, Pharma dispenses.</p>
+          <p className="text-sm text-zinc-600 mt-2">Join your PHC. Your role decides what you see: ASHA screens, Medical Officer reviews, Eye doctor confirms, Pharmacy delivers.</p>
 
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
@@ -69,13 +70,7 @@ export default function SignupPage() {
               </div>
               <div>
                 <label className="text-xs font-bold tracking-widest uppercase">Role</label>
-                <select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value as never })} className="mt-1 w-full px-4 py-3 rounded-xl border border-zinc-200 bg-white text-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none">
-                  {ROLES.map((r) => (
-                    <option key={r.value} value={r.value}>
-                      {r.label} — {r.desc}
-                    </option>
-                  ))}
-                </select>
+                <CustomSelect value={form.role} onChange={(v) => setForm({ ...form, role: v as never })} options={ROLES.map((r) => ({ value: r.value, label: r.label, desc: r.desc }))} />
               </div>
             </div>
 
@@ -92,7 +87,7 @@ export default function SignupPage() {
                   {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
-              <div className="text-xs text-zinc-500 mt-1">Min 6 chars, PBKDF2-hashed in D1 (Cloudflare) or local mock offline.</div>
+              <div className="text-xs text-zinc-500 mt-1">Min 6 characters, your data is handled securely.</div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
