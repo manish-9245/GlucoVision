@@ -6,8 +6,10 @@ import Link from "next/link";
 import { Send, CheckCircle2, Clock, Stethoscope, MapPin, Phone, Filter, ArrowRight, ShieldCheck, WifiOff, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CustomSelect } from "@/components/CustomSelect";
+import { useLang } from "@/lib/i18n";
 
 export default function ReferralsPage() {
+  const { t } = useLang();
   const { referrals, patients, addReferral } = useStore();
   const [filter, setFilter] = useState<"all" | "pending" | "confirmed" | "completed">("all");
   const [showForm, setShowForm] = useState(false);
@@ -47,12 +49,12 @@ export default function ReferralsPage() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">
-            <Send className="w-3.5 h-3.5" /> ESANJEEVANI QUEUE • {counts.pending} PENDING
+            <Send className="w-3.5 h-3.5" /> {t("referralsQueueBadge")} • {counts.pending} {t("referralsFilterPending2").toUpperCase()}
           </div>
           <h1 className="mt-2 text-2xl md:text-[30px] font-black tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-            Referrals
+            {t("referralsHeading2")}
           </h1>
-          <p className="text-sm text-slate-600 max-w-[720px]">Auto created from screening (stage 2 or more). Queued and syncs when online. No treatment without eye doctor confirmation.</p>
+          <p className="text-sm text-slate-600 max-w-[720px]">{t("referralsSubText2")}</p>
         </div>
         <motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} onClick={() => setShowForm(!showForm)} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-teal-700 text-white font-bold hover:bg-teal-800 shadow-lg shadow-teal-700/20">
           <motion.span animate={{ rotate: showForm ? 45 : 0 }}>
@@ -64,10 +66,10 @@ export default function ReferralsPage() {
 
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="flex flex-wrap items-center gap-2 text-xs font-semibold">
         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 shadow-sm">
-          <WifiOff className="w-3.5 h-3.5" /> Queue, {counts.pending} waiting to sync
+          <WifiOff className="w-3.5 h-3.5" /> {counts.pending} {t("referralsQueueWaiting2")}
         </span>
         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-stone-200 shadow-sm">
-          <ShieldCheck className="w-3.5 h-3.5" /> Preliminary only
+          <ShieldCheck className="w-3.5 h-3.5" /> {t("referralsPreliminaryBadge")}
         </span>
       </motion.div>
 
@@ -113,10 +115,10 @@ export default function ReferralsPage() {
               <div className="w-12 h-12 mx-auto rounded-xl bg-stone-50 border border-stone-200 grid place-items-center">
                 <Send className="w-6 h-6 text-stone-400" />
               </div>
-              <div className="mt-3 font-bold">No referrals in this filter</div>
-              <div className="text-sm text-slate-600">Screen a patient (stage ≥2) and a referral is auto-queued here.</div>
+              <div className="mt-3 font-bold">{t("referralsNoFilteredTitle")}</div>
+              <div className="text-sm text-slate-600">{t("referralsNoFilteredDesc")}</div>
               <Link href="/app/patients" className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal-700 text-white text-sm font-bold">
-                Go to screening <ArrowRight className="w-4 h-4" />
+                {t("referralsGoScreening")} <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
           ) : (
@@ -162,7 +164,7 @@ export default function ReferralsPage() {
                           : "bg-emerald-50 border-emerald-200 text-emerald-700"
                     }`}
                   >
-                    {r.status === "pending" ? "⏳ pending" : r.status === "confirmed" ? "✓ confirmed" : "✅ completed"}
+                    {r.status === "pending" ? t("referralsPendingLabel") : r.status === "confirmed" ? t("referralsConfirmedLabel") : t("referralsCompletedLabel")}
                   </span>
                 </div>
 
@@ -175,14 +177,14 @@ export default function ReferralsPage() {
                 </div>
 
                 <div className="rounded-xl bg-stone-50 border border-stone-200 p-3.5 text-xs leading-relaxed">
-                  {r.status === "pending" && <span>⏳ <b>Queued</b>, will auto sync to {r.via} when connection returns. Patient SMS: “Your eye screening needs a doctor review, we will call you.”</span>}
-                  {r.status === "confirmed" && <span><b>Confirmed</b> {r.doctor ? `by ${r.doctor}` : ""}, appointment sent to patient via SMS or call. ASHA will follow up.</span>}
-                  {r.status === "completed" && <span>✅ Specialist reviewed, report sent back to PHC. Continue checkups as advised.</span>}
+                  {r.status === "pending" && <span>⏳ <b>{t("referralsQueued")}</b>, {t("referralsHowStep2b")}</span>}
+                  {r.status === "confirmed" && <span><b>{t("referralsConfirmed")}</b> {r.doctor ? `by ${r.doctor}` : ""}, {t("referralsHowStep3b")}</span>}
+                  {r.status === "completed" && <span>✅ {t("referralsCompleted")}, {t("referralsHowStep3b")}</span>}
                 </div>
 
                 <div className="flex gap-2 pt-1">
                   <Link href={`/app/patients?patient=${r.patientId}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-black transition">
-                    View patient <ArrowRight className="w-3.5 h-3.5" />
+                    {t("referralsViewPatient")} <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                   <span className="inline-flex items-center gap-1 px-3 py-2.5 rounded-full bg-white border border-stone-200 text-xs font-semibold shadow-sm">
                     <Stethoscope className="w-3.5 h-3.5" /> PHC → {r.via}
@@ -198,19 +200,19 @@ export default function ReferralsPage() {
         <div className="absolute inset-0 bg-gradient-to-br from-teal-900/30 via-transparent to-transparent" />
         <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-white/5 blur-2xl" />
         <div className="relative">
-          <h3 className="font-bold flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-300" /> How eSanjeevani handoff works</h3>
+          <h3 className="font-bold flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-300" /> {t("referralsHowTitle")}</h3>
           <ol className="mt-3 space-y-2 text-sm opacity-90 list-decimal list-inside">
-            <li>Screening saves report (images, heatmap and vitals) to safe storage on your device.</li>
-            <li>Referral is queued with SMS fallback; syncs over FHIR when online.</li>
-            <li>Eye doctor confirms stage, decision sent back to PHC dashboard.</li>
-            <li>Pharmacy only after doctor confirmation, never auto prescribed.</li>
+            <li>{t("referralsHowStep1b")}</li>
+            <li>{t("referralsHowStep2b")}</li>
+            <li>{t("referralsHowStep3b")}</li>
+            <li>{t("referralsHowStep4b")}</li>
           </ol>
         </div>
         <div className="relative border bg-white text-slate-900 p-5 border border-stone-200 shadow-xl">
-          <div className="text-xs font-black tracking-widest text-teal-700">FOR JUDGES</div>
-          <p className="text-sm mt-2 leading-relaxed">Try: Screening → run AI on a high-risk patient (Ramesh/Arjun) → see referral auto-appear here as “pending”. Filter by status to show pipeline.</p>
+          <div className="text-xs font-black tracking-widest text-teal-700">{t("referralsForJudges")}</div>
+          <p className="text-sm mt-2 leading-relaxed">{t("referralsForJudgesDesc")}</p>
           <Link href="/app/patients" className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal-700 text-white text-sm font-bold hover:bg-teal-800 shadow-md transition">
-            Run a screening now <CheckCircle2 className="w-4 h-4" />
+            {t("referralsRunScreening")} <CheckCircle2 className="w-4 h-4" />
           </Link>
         </div>
       </motion.div>

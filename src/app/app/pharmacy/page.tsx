@@ -5,10 +5,12 @@ import { Pill, ShieldCheck, CheckCircle2, Clock, Truck, PackageCheck, AlertTrian
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { CustomSelect } from "@/components/CustomSelect";
+import { useLang } from "@/lib/i18n";
 
 const STATUS_STEPS = ["pending", "verified", "dispatched", "delivered"] as const;
 
 export default function PharmacyPage() {
+  const { t } = useLang();
   const { pharmacy, patients, addPharmacy, updatePharmacy } = useStore();
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<(typeof STATUS_STEPS)[number] | "all">("all");
@@ -59,9 +61,9 @@ export default function PharmacyPage() {
             <Pill className="w-3.5 h-3.5" /> TELEPHARMACY • VERIFY, NOT AUTO-PRESCRIBE
           </div>
           <h1 className="mt-2 text-2xl md:text-[30px] font-black tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-            Telepharmacy
+            {t("pharmacyHeading2")}
           </h1>
-          <p className="text-sm text-slate-600 max-w-[740px]">Closes the loop after screening + referral. Pharmacist verifies, checks interactions, counsels, then dispatches. Refill reminders via SMS.</p>
+          <p className="text-sm text-slate-600 max-w-[740px]">{t("pharmacySubText2")}</p>
         </div>
         <motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.98 }} onClick={() => setShowForm(!showForm)} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-teal-700 text-white font-bold hover:bg-teal-800 shadow-lg shadow-teal-700/20">
           <motion.span animate={{ rotate: showForm ? 45 : 0 }}>
@@ -73,16 +75,16 @@ export default function PharmacyPage() {
 
       <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="flex flex-wrap items-center gap-2 text-xs font-semibold">
         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 shadow-sm">
-          <AlertTriangle className="w-3.5 h-3.5" /> No auto prescription, pharmacist must verify
+          <AlertTriangle className="w-3.5 h-3.5" /> {t("pharmacyNoAutoBadge2")}
         </span>
         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 shadow-sm">
-          <Beaker className="w-3.5 h-3.5" /> Interaction check built-in
+          <Beaker className="w-3.5 h-3.5" /> {t("pharmacyInteractionBadge2")}
         </span>
       </motion.div>
 
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }} className="border bg-white border border-stone-200 p-5 shadow-sm">
         <div className="flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700">
-          <Pill className="w-4 h-4" /> PIPELINE
+          <Pill className="w-4 h-4" /> {t("pharmacyPipeline")}
         </div>
         <div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3">
           {STATUS_STEPS.map((s, i) => (
@@ -105,10 +107,10 @@ export default function PharmacyPage() {
               </div>
               <div className={`text-[28px] font-black mt-2 tracking-tight ${filter === s ? "text-white" : "text-slate-900"}`}>{counts[s]}</div>
               <div className={`text-xs mt-1 font-medium ${filter === s ? "text-white/70" : "text-slate-500"}`}>
-                {s === "pending" && "Awaiting pharmacist"}
-                {s === "verified" && "Checked & counselled"}
-                {s === "dispatched" && "Out for delivery"}
-                {s === "delivered" && "With patient"}
+                {s === "pending" && t("pharmacyPipelinePending")}
+                {s === "verified" && t("pharmacyPipelineVerified")}
+                {s === "dispatched" && t("pharmacyPipelineDispatched")}
+                {s === "delivered" && t("pharmacyPipelineDelivered")}
               </div>
             </motion.button>
           ))}
@@ -133,7 +135,7 @@ export default function PharmacyPage() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search patient, prescription or RX ID…"
+            placeholder={t("pharmacySearchPh2")}
             className="w-full pl-10 pr-4 py-3 rounded-xl border border-stone-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-teal-600/20 focus:border-teal-600"
           />
         </div>
@@ -154,15 +156,15 @@ export default function PharmacyPage() {
         {showForm && (
           <motion.div initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.98 }} transition={{ duration: 0.3 }} className="border bg-white border border-stone-200 p-5 grid md:grid-cols-[1.1fr_1.6fr_0.9fr_auto] gap-3 items-end shadow-sm">
             <label className="text-sm">
-              <span className="text-xs font-bold text-stone-500">Patient</span>
+              <span className="text-xs font-bold text-stone-500">{t("pharmacyPatientLabel2")}</span>
               <CustomSelect value={form.patientId} onChange={(v) => setForm({ ...form, patientId: v })} options={patients.map((p) => ({ value: p.id, label: p.name, desc: p.village }))} placeholder="Select patient" searchable />
             </label>
             <label className="text-sm">
-              <span className="text-xs font-bold text-stone-500">Prescription (after doctor confirm)</span>
+              <span className="text-xs font-bold text-stone-500">{t("pharmacyPrescriptionLabel2")}</span>
               <input value={form.prescription} onChange={(e) => setForm({ ...form, prescription: e.target.value })} placeholder="e.g. Metformin 500mg BD, Atorvastatin 10mg OD × 30d" className="mt-1 w-full px-3 py-3 rounded-xl border border-stone-200 text-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none" />
             </label>
             <label className="text-sm">
-              <span className="text-xs font-bold text-stone-500">Pharmacist</span>
+              <span className="text-xs font-bold text-stone-500">{t("pharmacyPharmacistLabel2")}</span>
               <input value={form.pharmacist} onChange={(e) => setForm({ ...form, pharmacist: e.target.value })} className="mt-1 w-full px-3 py-3 rounded-xl border border-stone-200 text-sm focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none" />
             </label>
             <div className="flex gap-2">
@@ -184,8 +186,8 @@ export default function PharmacyPage() {
               <div className="w-12 h-12 mx-auto rounded-xl bg-stone-50 border border-stone-200 grid place-items-center">
                 <Pill className="w-6 h-6 text-stone-400" />
               </div>
-              <div className="mt-3 font-bold">No orders here</div>
-              <div className="text-sm text-slate-600">Complete a screening → referral → pharmacist verifies before any medicine is dispatched.</div>
+              <div className="mt-3 font-bold">{t("pharmacyNoOrdersTitle2")}</div>
+              <div className="text-sm text-slate-600">{t("pharmacyNoOrdersDesc2")}</div>
             </motion.div>
           ) : (
             filtered.map((o, i) => {
@@ -215,7 +217,7 @@ export default function PharmacyPage() {
                   </div>
 
                   <div className="rounded-xl bg-stone-50 border border-stone-200 p-3.5">
-                    <div className="text-[11px] font-bold tracking-widest text-stone-500">PRESCRIPTION</div>
+                    <div className="text-[11px] font-bold tracking-widest text-stone-500">{t("pharmacyPrescriptionHeading")}</div>
                     <div className="text-sm leading-relaxed mt-1 font-medium">{o.prescription}</div>
                   </div>
 
@@ -237,18 +239,18 @@ export default function PharmacyPage() {
 
                   {o.status === "pending" && (
                     <div className="rounded-xl bg-amber-50 border border-amber-200 p-3 text-xs leading-relaxed text-amber-900">
-                      <b>Pharmacist action:</b> verify prescription, check drug interactions vs history ({patients.find((p) => p.id === o.patientId)?.medication?.join(", ") || "check record"}), counsel dose/adherence, then verify.
+                      <b>{t("pharmacyPharmacistAction")}</b> {t("pharmacyQualityGateDesc2")} ({patients.find((p) => p.id === o.patientId)?.medication?.join(", ") || "check record"}), counsel dose/adherence, then verify.
                     </div>
                   )}
 
                   <div className="flex gap-2">
                     {idx < STATUS_STEPS.length - 1 ? (
                       <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => advance(o.id, o.status)} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-full bg-teal-700 text-white text-sm font-bold hover:bg-teal-800 shadow-md hover:shadow-lg transition">
-                        <CheckCircle2 className="w-4 h-4" /> Mark {STATUS_STEPS[idx + 1]}
+                        <CheckCircle2 className="w-4 h-4" /> {t("pharmacyMarkNext")} {STATUS_STEPS[idx + 1]}
                       </motion.button>
                     ) : (
                       <span className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-bold">
-                        <PackageCheck className="w-4 h-4" /> Completed, refill reminder set
+                        <PackageCheck className="w-4 h-4" /> {t("pharmacyCompletedNote2")}
                       </span>
                     )}
                     <Link href={`/app/patients?patient=${o.patientId}`} className="px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">
@@ -267,7 +269,7 @@ export default function PharmacyPage() {
           <Sparkles className="w-4 h-4" />
         </span>
         <span>
-          <b>Quality gate:</b> No medicine moves to “verified” without a licensed pharmacist sign-off. Interaction checker flags metformin + contrast / statin interactions, renal dose adjustments, and duplicate therapy before dispatch.
+          <b>{t("pharmacyQualityGate")}</b> {t("pharmacyQualityGateDesc2")}
         </span>
       </motion.div>
     </div>

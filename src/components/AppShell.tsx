@@ -5,20 +5,22 @@ import { LayoutDashboard, Users, ScanEye, Send, Pill, Footprints, Menu, X, LogOu
 import { useState, useEffect } from "react";
 import { useAuth } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
-import { LanguageSwitcher } from "@/lib/i18n";
+import { LanguageSwitcher, useLang } from "@/lib/i18n";
 
-const nav = [
-  { href: "/app/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/app/patients", label: "Patients", icon: Users },
-  { href: "/app/referrals", label: "Referrals", icon: Send },
-  { href: "/app/pharmacy", label: "Telepharmacy", icon: Pill },
-  { href: "/app/foot", label: "Foot Screening", icon: Footprints },
+const navConfig = [
+  { href: "/app/dashboard", key: "dashboard", icon: LayoutDashboard },
+  { href: "/app/patients", key: "patients", icon: Users },
+  { href: "/app/referrals", key: "referrals", icon: Send },
+  { href: "/app/pharmacy", key: "pharmacy", icon: Pill },
+  { href: "/app/foot", key: "foot", icon: Footprints },
 ];
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const router = useRouter();
   const { user, loading, logout } = useAuth();
+  const { t } = useLang();
+  const nav = navConfig.map((n) => ({ ...n, label: t(n.key) }));
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
@@ -34,7 +36,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       <div suppressHydrationWarning className="min-h-screen grid place-items-center bg-[#FCFCF9]">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 rounded-full border-2 border-zinc-200 border-t-teal-600 animate-spin" />
-          <div className="text-sm font-medium text-zinc-500">Loading GlucoVision…</div>
+          <div className="text-sm font-medium text-zinc-500">{t("loading")}</div>
         </div>
       </div>
     );
@@ -53,9 +55,12 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
               <div className="font-bold tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
                 GlucoVision
               </div>
-              <div className="text-[11px] font-medium text-zinc-500">PHC Edition • Ready</div>
+              <div className="text-[11px] font-medium text-zinc-500">{t("phcEdition")}</div>
             </div>
           </Link>
+          <div className="mt-3">
+            <LanguageSwitcher className="w-full" />
+          </div>
         </div>
         <nav className="p-3 flex-1 overflow-auto">
           {nav.map((n) => {
@@ -71,16 +76,16 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             );
           })}
           <div className="mt-6 border border-zinc-200 p-4 bg-zinc-50">
-            <div className="text-sm font-semibold">PHC: Shirpur Rural</div>
-            <div className="text-xs text-zinc-500">Dhule District • MH</div>
+            <div className="text-sm font-semibold">{t("phcLocation")}</div>
+            <div className="text-xs text-zinc-500">{t("phcLocation")}</div>
             <div className="mt-3 text-xs leading-relaxed text-zinc-600">
-              Health worker: <b className="text-zinc-900">Asha Kokate</b>
+              {t("healthWorker")}: <b className="text-zinc-900">Asha Kokate</b>
               <br />
-              112 patients screened this month
+              112 {t("patientsScreened")}
             </div>
           </div>
         </nav>
-        <div className="p-3 border-t border-zinc-200 text-[11px] leading-relaxed text-zinc-600">Preliminary AI screening, requires eye doctor confirmation before treatment.</div>
+        <div className="p-3 border-t border-zinc-200 text-[11px] leading-relaxed text-zinc-600">{t("preliminaryNote")}</div>
       </aside>
 
       <div className="flex-1 flex flex-col min-w-0">
@@ -115,7 +120,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
           </div>
         )}
         <main className="flex-1 min-w-0">{children}</main>
-        <footer className="px-6 py-4 text-center text-xs text-zinc-500 border-t border-zinc-200">© 2026 GlucoVision</footer>
+        <footer className="px-6 py-4 text-center text-xs text-zinc-500 border-t border-zinc-200">{t("rightsReserved")}</footer>
       </div>
     </div>
   );

@@ -5,8 +5,10 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
 import { Eye, EyeOff, LogIn, ArrowRight, ShieldCheck, WifiOff } from "lucide-react";
+import { useLang } from "@/lib/i18n";
 
 export default function LoginPage() {
+  const { t } = useLang();
   const { login } = useAuth();
   const router = useRouter();
   const [email, setEmail] = useState("asha@glucovision.in");
@@ -44,22 +46,22 @@ export default function LoginPage() {
           </div>
         </Link>
         <Link href="/signup" className="text-sm font-semibold px-4 py-2 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50">
-          Create account
+          {t("loginHeaderCreate2")}
         </Link>
       </header>
 
       <div className="flex-1 grid lg:grid-cols-[1.05fr_0.95fr] max-w-[1120px] mx-auto w-full px-6 gap-10 items-center py-10">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> PHC Edition • Ready to use
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> {t("loginBadge2")}
           </div>
           <h1 className="mt-4 text-[40px] md:text-[52px] font-black leading-[0.9] tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-            Welcome back
+            {t("loginWelcomeTitle1b")}
             <br />
-            <span className="text-zinc-400">to your PHC</span>
+            <span className="text-zinc-400">{t("loginWelcomeTitle2b")}</span>
           </h1>
           <p className="mt-4 text-[15px] leading-6 text-zinc-600 max-w-[520px]">
-            Sign in to continue screening. Works everywhere, your last session is saved. All data is safe, and every AI result needs an eye doctor to confirm.
+            {t("loginWelcomeDesc2")}
           </p>
           <div className="mt-6 grid grid-cols-3 gap-3 max-w-[520px]">
             {[
@@ -82,7 +84,7 @@ export default function LoginPage() {
             ))}
           </div>
           <div className="mt-4 flex items-center gap-2 text-xs text-zinc-500">
-            <WifiOff className="w-3 h-3" /> Works everywhere, no setup needed. Demo data loads instantly.
+            <WifiOff className="w-3 h-3" /> {t("loginWorksNote2")}
           </div>
         </div>
 
@@ -90,11 +92,11 @@ export default function LoginPage() {
           <h2 className="text-xl font-black tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
             Sign in
           </h2>
-          <p className="text-sm text-zinc-600 mt-1">Use a demo account or your registered email.</p>
+          <p className="text-sm text-zinc-600 mt-1">{t("loginSignInDesc2")}</p>
 
           <div className="mt-6 space-y-4">
             <div>
-              <label className="text-xs font-bold tracking-widest uppercase">Email</label>
+              <label className="text-xs font-bold tracking-widest uppercase">{t("loginEmailLabel2")}</label>
               <input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -105,7 +107,7 @@ export default function LoginPage() {
               />
             </div>
             <div>
-              <label className="text-xs font-bold tracking-widest uppercase">Password</label>
+              <label className="text-xs font-bold tracking-widest uppercase">{t("loginPasswordLabel2")}</label>
               <div className="relative">
                 <input
                   value={password}
@@ -133,21 +135,21 @@ export default function LoginPage() {
               className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-teal-700 text-white font-bold hover:bg-teal-800 disabled:opacity-40"
             >
               {loading ? (
-                "Signing in…"
+                t("loginSigningIn2")
               ) : (
                 <>
-                  <LogIn className="w-4 h-4" /> Sign in <ArrowRight className="w-4 h-4" />
+                  <LogIn className="w-4 h-4" /> {t("loginSignInBtn2")} <ArrowRight className="w-4 h-4" />
                 </>
               )}
             </button>
 
             <div className="text-center text-sm">
-              <span className="text-zinc-500">No account?</span> <Link href="/signup" className="font-bold text-teal-700 hover:underline">Create one</Link>
+              <span className="text-zinc-500">{t("loginNoAccount")}</span> <Link href="/signup" className="font-bold text-teal-700 hover:underline">{t("loginCreateLink2")}</Link>
             </div>
           </div>
 
           <div className="mt-6 rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-xs leading-relaxed text-zinc-600">
-            <b>Demo credentials:</b> any email above with <code>demo123</code>. Works anywhere with demo data.
+            <b>{t("loginDemoCredsTitle2")}</b> {t("loginDemoCredsDesc2")}
           </div>
         </form>
       </div>

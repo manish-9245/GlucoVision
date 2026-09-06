@@ -6,21 +6,22 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { estimateBlurScore, type BlurResult } from "@/lib/blur";
 import { CustomSelect } from "@/components/CustomSelect";
+import { useLang } from "@/lib/i18n";
 
 type FootFlag = { id: string; label: string; severity: "low" | "med" | "high" };
 
-const QUESTIONS: { key: string; label: string; hint: string }[] = [
-  { key: "numbness", label: "Numbness / tingling in feet?", hint: "Peripheral neuropathy screen" },
-  { key: "wound", label: "Non-healing wound / blister >1 week?", hint: "Ulcer risk" },
-  { key: "swelling", label: "Swelling, redness or warmth?", hint: "Infection / Charcot flag" },
-  { key: "color", label: "Colour change (pale / bluish)?", hint: "Ischaemia flag" },
-  { key: "callus", label: "Callus / cracked skin?", hint: "Pressure points" },
-];
-
 export default function FootScreeningPage() {
+  const { t } = useLang();
   const { patients, updatePatient } = useStore();
   const [selectedId, setSelectedId] = useState(patients[0]?.id || "");
   const patient = useMemo(() => patients.find((p) => p.id === selectedId) || patients[0], [patients, selectedId]);
+  const QUESTIONS: { key: string; label: string; hint: string }[] = [
+    { key: "numbness", label: t("footQuestionNumbness2"), hint: t("footQuestionNumbnessHint") },
+    { key: "wound", label: t("footQuestionWound2"), hint: t("footQuestionWoundHint") },
+    { key: "swelling", label: t("footQuestionSwelling2"), hint: t("footQuestionSwellingHint") },
+    { key: "color", label: t("footQuestionColor2"), hint: t("footQuestionColorHint") },
+    { key: "callus", label: t("footQuestionCallus2"), hint: t("footQuestionCallusHint") },
+  ];
   const [answers, setAnswers] = useState<Record<string, boolean>>({});
   const [preview, setPreview] = useState<string | null>(null);
   const [quality, setQuality] = useState<number | null>(null);
@@ -183,7 +184,7 @@ export default function FootScreeningPage() {
   if (!patient) {
     return (
       <div className="w-full max-w-[1220px] mx-auto p-6 min-w-0 overflow-x-hidden text-sm text-slate-600">
-        No patients. <Link href="/app/patients" className="text-teal-700 font-bold underline">Register one</Link>
+        {t("footNoPatients")} <Link href="/app/patients" className="text-teal-700 font-bold underline">{t("footRegisterOne")}</Link>
       </div>
     );
   }
@@ -193,15 +194,15 @@ export default function FootScreeningPage() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">
-            <Footprints className="w-3.5 h-3.5" /> SAME PHONE • SAME VISIT
+            <Footprints className="w-3.5 h-3.5" /> {t("footSamePhoneBadge2")}
           </div>
           <h1 className="mt-2 text-2xl md:text-[30px] font-black tracking-tight flex items-center gap-2" style={{ fontFamily: "var(--font-display)" }}>
-            Foot screening
+            {t("footHeading2")}
           </h1>
-          <p className="text-sm text-slate-600 max-w-[760px]">Diabetic foot check in under 3 minutes: 5 quick questions, phone photo, clear color guidance. No extra device, works like the eye check.</p>
+          <p className="text-sm text-slate-600 max-w-[760px]">{t("footSubText2")}</p>
         </div>
         <Link href="/app/patients" className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 hover:border-stone-300 hover:shadow-sm transition">
-          Back to eye screening <ArrowRight className="w-4 h-4" />
+          {t("footBackEyeBtn2")} <ArrowRight className="w-4 h-4" />
         </Link>
       </motion.div>
 
@@ -213,13 +214,13 @@ export default function FootScreeningPage() {
                 <span className="w-7 h-7 rounded-lg bg-teal-50 border border-teal-200 grid place-items-center text-teal-700">
                   <Search className="w-4 h-4" />
                 </span>
-                Choose patient
+                {t("footChoosePatient")}
               </h3>
-              <span className="text-xs px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200 font-medium">{patient.footLastCheck ? `Last foot check: ${patient.footLastCheck}` : "No prior foot check"}</span>
+              <span className="text-xs px-2.5 py-1 rounded-full bg-stone-50 border border-stone-200 font-medium">{patient.footLastCheck ? `${t("footLastFootCheck")} ${patient.footLastCheck}` : t("footNoPriorFoot")}</span>
             </div>
             <div className="mt-3 relative group">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 group-focus-within:text-teal-600 transition" />
-              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search patient…" className="w-full pl-10 pr-3 py-3 rounded-xl border border-stone-200 bg-stone-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none transition" />
+              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("footSearchPh2")} className="w-full pl-10 pr-3 py-3 rounded-xl border border-stone-200 bg-stone-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none transition" />
             </div>
             <CustomSelect value={selectedId} onChange={setSelectedId} options={(q ? filteredPatients : patients).map((p) => ({ value: p.id, label: p.name, desc: `${p.village} ${p.footLastCheck ? `• foot ${p.footLastCheck}` : "• no foot record"}` }))} placeholder="Select patient" searchable />
             <motion.div layout className="mt-3 rounded-xl bg-stone-50 border border-stone-200 p-3.5 text-xs leading-relaxed">
@@ -230,7 +231,7 @@ export default function FootScreeningPage() {
 
           <div>
             <h3 className="font-bold text-sm flex items-center gap-2">
-              <Activity className="w-4 h-4 text-teal-700" /> 5-point foot check (ASHA-friendly)
+              <Activity className="w-4 h-4 text-teal-700" /> {t("footFivePointTitle")}
             </h3>
             <div className="mt-3 space-y-2">
               {QUESTIONS.map((qq, i) => (
@@ -259,7 +260,7 @@ export default function FootScreeningPage() {
               ))}
             </div>
             <div className="mt-2 text-[11px] text-stone-500 flex items-start gap-1.5">
-              <Info className="w-3.5 h-3.5 mt-0.5 shrink-0" /> Tap yes for any that apply. This is a risk flag, not a final diagnosis, referral decides treatment.
+              <Info className="w-3.5 h-3.5 mt-0.5 shrink-0" /> {t("footTapYesNote2")}
             </div>
           </div>
         </motion.div>
@@ -270,16 +271,16 @@ export default function FootScreeningPage() {
               <span className="w-7 h-7 rounded-lg bg-teal-50 border border-teal-200 grid place-items-center text-teal-700">
                 <Camera className="w-4 h-4" />
               </span>
-              Foot photo, quality check (same as eye photo)
+              {t("footPhotoTitle2")}
             </h3>
-            <div className="text-xs text-slate-600 mt-1">Place foot on plain background, good light, include sole and top. Quick check before flagging.</div>
+            <div className="text-xs text-slate-600 mt-1">{t("footPhotoDesc2")}</div>
 
             <div className="mt-3 grid grid-cols-2 gap-2 p-1 rounded-2xl bg-stone-100 border border-stone-200">
               <button onClick={() => setCameraMode("camera")} className={`flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-bold transition ${cameraMode === "camera" ? "bg-zinc-900 text-white shadow" : "bg-transparent text-stone-600 hover:bg-white"}`}>
-                <Camera className="w-4 h-4" /> Live Camera
+                <Camera className="w-4 h-4" /> {t("footLiveCamera")}
               </button>
               <button onClick={() => setCameraMode("upload")} className={`flex items-center justify-center gap-1.5 py-2 rounded-xl text-sm font-bold transition ${cameraMode === "upload" ? "bg-white text-zinc-900 shadow border border-stone-200" : "bg-transparent text-stone-600 hover:bg-white"}`}>
-                <Upload className="w-4 h-4" /> Upload
+                <Upload className="w-4 h-4" /> {t("footUploadBtn2")}
               </button>
             </div>
             <canvas ref={liveCanvasRef} className="hidden" width={160} height={120} />
@@ -340,10 +341,10 @@ export default function FootScreeningPage() {
                 </div>
                 <div className="p-3 bg-white flex gap-2">
                   <button onClick={captureFromCamera} disabled={!cameraOn || (liveBlur?.isBlurry ?? false) || !liveBlur} className="flex-1 inline-flex items-center justify-center gap-2 py-3 rounded-full bg-teal-700 text-white font-bold hover:bg-teal-800 disabled:opacity-40 disabled:cursor-not-allowed">
-                    <Aperture className="w-4 h-4" /> Capture foot
+                    <Aperture className="w-4 h-4" /> {t("footCaptureBtn2")}
                   </button>
                   <button onClick={stopCamera} className="px-4 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold">
-                    Stop
+                    {t("footStopBtn")}
                   </button>
                 </div>
               </div>
@@ -392,27 +393,27 @@ export default function FootScreeningPage() {
             </AnimatePresence>
 
             <motion.button whileHover={{ y: -1, scale: 1.01 }} whileTap={{ scale: 0.98 }} onClick={runCheck} className="mt-3 w-full inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-teal-700 text-white font-bold hover:bg-teal-800 shadow-lg shadow-teal-700/20 hover:shadow-xl transition">
-              <ShieldCheck className="w-4 h-4" /> Run foot risk flag
+              <ShieldCheck className="w-4 h-4" /> {t("footRunFlagBtn2")}
             </motion.button>
-            <div className="mt-2 text-[11px] text-center text-stone-500">On device check, no cloud needed. Image stays on your device.</div>
+            <div className="mt-2 text-[11px] text-center text-stone-500">{t("footOnDeviceNote2")}</div>
           </motion.div>
 
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.5 }} className="border bg-white border border-stone-200 p-5 shadow-sm">
-            <h3 className="font-bold text-sm">Result, color coded guidance</h3>
+            <h3 className="font-bold text-sm">{t("footResultTitle2")}</h3>
             {!result ? (
               <div className="mt-3 rounded-xl border border-dashed border-stone-300 bg-stone-50 p-6 text-center">
                 <div className="w-10 h-10 mx-auto rounded-xl bg-white border border-stone-200 grid place-items-center">
                   <Footprints className="w-5 h-5 text-stone-400" />
                 </div>
-                <div className="mt-2 text-sm font-bold text-slate-700">No check yet</div>
-                <div className="text-xs text-slate-500">Answer the 5 questions (and optional photo) then run the flag.</div>
+                <div className="mt-2 text-sm font-bold text-slate-700">{t("footNoCheckTitle2")}</div>
+                <div className="text-xs text-slate-500">{t("footNoCheckDesc2")}</div>
               </div>
             ) : (
               <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-3 space-y-3">
                 <motion.div initial={{ scale: 0.96 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className={`border border p-4 flex items-center justify-between ${result.risk === "low" ? "bg-emerald-50 border-emerald-200" : result.risk === "moderate" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
                   <div>
                     <div className="text-[11px] font-bold tracking-widest opacity-60">FOOT RISK FLAG • PRELIMINARY</div>
-                    <div className={`text-xl font-black mt-1 ${result.risk === "low" ? "text-emerald-700" : result.risk === "moderate" ? "text-amber-800" : "text-red-700"}`}>{result.risk === "low" ? "Low risk, self care" : result.risk === "moderate" ? "Moderate, PHC review" : "High, urgent referral"}</div>
+                    <div className={`text-xl font-black mt-1 ${result.risk === "low" ? "text-emerald-700" : result.risk === "moderate" ? "text-amber-800" : "text-red-700"}`}>{result.risk === "low" ? t("footRiskLow2") : result.risk === "moderate" ? t("footRiskModerate2") : t("footRiskHigh2")}</div>
                     <div className="text-xs text-slate-700 mt-1">{result.flags.length === 0 ? "No flags, keep up foot care." : `${result.flags.length} flag(s) found`}</div>
                   </div>
                   <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring" }} className={`w-14 h-14 border grid place-items-center text-white font-black text-xl shadow-lg ${result.risk === "low" ? "bg-emerald-600 shadow-emerald-600/20" : result.risk === "moderate" ? "bg-amber-500 shadow-amber-500/20" : "bg-red-600 shadow-red-600/20"}`}>{result.risk === "low" ? "✓" : result.risk === "moderate" ? "!" : "!!"}</motion.div>
@@ -453,15 +454,15 @@ export default function FootScreeningPage() {
       <motion.div initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="border bg-gradient-to-br from-teal-700 via-teal-800 to-teal-900 text-white p-6 grid md:grid-cols-2 gap-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_0%,rgba(255,255,255,0.12),transparent_50%)]" />
         <div className="relative">
-          <h3 className="font-bold flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-300" /> Why bundled?</h3>
-          <p className="text-sm opacity-90 mt-1 leading-relaxed">Eye and foot risk share the same factors (duration, HbA1c, BP). One visit, one record, one ASHA workflow, double the benefit without extra trips.</p>
+          <h3 className="font-bold flex items-center gap-2"><Sparkles className="w-4 h-4 text-amber-300" /> {t("footWhyBundled")}</h3>
+          <p className="text-sm opacity-90 mt-1 leading-relaxed">{t("footWhyBundledDesc2")}</p>
         </div>
         <div className="relative border bg-white text-slate-900 p-4 shadow-xl">
-          <div className="text-xs font-black tracking-widest text-teal-700">TRY IN 60 SECONDS</div>
+          <div className="text-xs font-black tracking-widest text-teal-700">{t("footTryTitle2")}</div>
           <ol className="mt-2 space-y-1 text-sm list-decimal list-inside">
-            <li>Pick a high risk patient (Arjun or Ramesh), check wound and upload any photo, see High flag</li>
-            <li>Pick a low risk patient, no flags, see Low risk</li>
-            <li>See last foot check update on the patient card</li>
+            <li>{t("footTryStep1")}</li>
+            <li>{t("footTryStep2")}</li>
+            <li>{t("footTryStep3")}</li>
           </ol>
         </div>
       </motion.div>

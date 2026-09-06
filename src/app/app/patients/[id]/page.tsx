@@ -30,8 +30,10 @@ import {
   FileText,
 } from "lucide-react";
 import { CustomSelect } from "@/components/CustomSelect";
+import { useLang } from "@/lib/i18n";
 
 function AddVisitInline({ patientId }: { patientId: string }) {
+  const { t } = useLang();
   const { patients, addVisit } = useStore();
   const patient = patients.find((p) => p.id === patientId);
   const [open, setOpen] = useState(false);
@@ -214,29 +216,29 @@ function AddVisitInline({ patientId }: { patientId: string }) {
     <div className="border border-zinc-200 bg-white p-4">
       <div className="flex items-center justify-between">
         <h3 className="font-semibold text-sm flex items-center gap-2">
-          <FileText className="w-4 h-4" /> Add new examination, new entries possible
+          <FileText className="w-4 h-4" /> {t("patientAddVisitTitle2")}
         </h3>
         <button onClick={() => setOpen(!open)} className="px-3 py-1.5 border border-zinc-200 bg-white text-xs font-semibold hover:bg-zinc-50">
           {open ? "Cancel" : "+ New entry"}
         </button>
       </div>
-      <p className="text-xs text-zinc-600 mt-1">Upload eye image, set stage, confidence and quality, we create the summary and save it.</p>
+      <p className="text-xs text-zinc-600 mt-1">{t("patientAddVisitDesc2")}</p>
       {open && (
         <div className="mt-3 border border-zinc-200 bg-zinc-50 p-3 space-y-3">
           <div className="grid md:grid-cols-2 gap-3">
             <div>
-              <div className="text-xs font-bold text-zinc-500">Image (optional but recommended)</div>
+              <div className="text-xs font-bold text-zinc-500">{t("patientAddVisitImageLabel2")}</div>
               <input type="file" accept="image/*" onChange={(e) => onFile(e.target.files?.[0] || null)} className="mt-1 w-full text-xs" />
               {preview && <img src={preview} alt="preview" className="mt-2 w-full h-32 object-cover border border-zinc-200" />}
             </div>
             <div className="space-y-2">
               <div className="grid grid-cols-2 gap-2">
                 <label className="text-xs">
-                  <span className="font-bold text-zinc-500">Date</span>
+                  <span className="font-bold text-zinc-500">{t("patientAddVisitDateLabel2")}</span>
                   <input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} className="mt-1 w-full px-2 py-1.5 border border-zinc-200 text-xs" />
                 </label>
                 <label className="text-xs">
-                  <span className="font-bold text-zinc-500">Stage</span>
+                  <span className="font-bold text-zinc-500">{t("patientAddVisitStageLabel2")}</span>
                   <CustomSelect
                     value={String(form.stage)}
                     onChange={(v) => setForm({ ...form, stage: parseInt(v) as any })}
@@ -252,24 +254,24 @@ function AddVisitInline({ patientId }: { patientId: string }) {
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <label className="text-xs">
-                  <span className="font-bold text-zinc-500">Confidence %</span>
+                  <span className="font-bold text-zinc-500">{t("patientAddVisitConfidenceLabel2")}</span>
                   <input type="number" min={50} max={98} value={form.confidence} onChange={(e) => setForm({ ...form, confidence: parseInt(e.target.value) || 87 })} className="mt-1 w-full px-2 py-1.5 border border-zinc-200 text-xs" />
                 </label>
                 <label className="text-xs">
-                  <span className="font-bold text-zinc-500">Quality /100</span>
+                  <span className="font-bold text-zinc-500">{t("patientAddVisitQualityLabel2")}</span>
                   <input type="number" min={60} max={100} value={form.quality} onChange={(e) => setForm({ ...form, quality: parseInt(e.target.value) || 85 })} className="mt-1 w-full px-2 py-1.5 border border-zinc-200 text-xs" />
                 </label>
               </div>
               <label className="text-xs">
-                <span className="font-bold text-zinc-500">Notes</span>
+                <span className="font-bold text-zinc-500">{t("patientAddVisitNotesLabel2")}</span>
                 <input value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="e.g. heatmap shows spots near center" className="mt-1 w-full px-2 py-1.5 border border-zinc-200 text-xs" />
               </label>
             </div>
           </div>
           <button onClick={submit} className="w-full py-2 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
-            Save examination, will appear in dashboard and timeline
+            {t("patientAddVisitSaveBtn2")}
           </button>
-          <div className="text-[11px] text-zinc-500">Systematic analysis auto-generated: stage justification, confidence, risk breakdown, urgency.</div>
+          <div className="text-[11px] text-zinc-500">{t("patientAddVisitAutoNote2")}</div>
         </div>
       )}
     </div>
@@ -277,6 +279,7 @@ function AddVisitInline({ patientId }: { patientId: string }) {
 }
 
 function AddPrescriptionForm({ patientId }: { patientId: string }) {
+  const { t } = useLang();
   const { patients, updatePatient, addPharmacy } = useStore();
   const patient = patients.find((p) => p.id === patientId);
   const [open, setOpen] = useState(false);
@@ -312,7 +315,7 @@ function AddPrescriptionForm({ patientId }: { patientId: string }) {
     <div className="mt-3">
       {!open ? (
         <button onClick={() => setOpen(true)} className="w-full py-2 border border-dashed border-zinc-300 text-xs font-semibold hover:bg-zinc-50">
-          + Add prescription
+          {t("patientAddPrescriptionBtn2")}
         </button>
       ) : (
         <div className="border border-zinc-200 p-3 space-y-2 bg-zinc-50">
@@ -325,7 +328,7 @@ function AddPrescriptionForm({ patientId }: { patientId: string }) {
           <input placeholder="Indication" value={form.indication} onChange={(e) => setForm({ ...form, indication: e.target.value })} className="w-full px-2 py-1.5 border border-zinc-200 text-xs" />
           <div className="flex gap-2">
             <button onClick={submit} className="flex-1 py-1.5 bg-teal-700 text-white text-xs font-semibold">Save</button>
-            <button onClick={() => setOpen(false)} className="flex-1 py-1.5 border border-zinc-200 bg-white text-xs">Cancel</button>
+            <button onClick={() => setOpen(false)} className="flex-1 py-1.5 border border-zinc-200 bg-white text-xs">{t("cancel")}</button>
           </div>
         </div>
       )}
@@ -334,6 +337,7 @@ function AddPrescriptionForm({ patientId }: { patientId: string }) {
 }
 
 function ReferPatientForm({ patient }: { patient: import("@/lib/types").Patient }) {
+  const { t } = useLang();
   const { addReferral } = useStore();
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ stage: String(patient.visits[patient.visits.length - 1]?.drStage ?? 2), via: "eSanjeevani" as "eSanjeevani" | "Direct" });
@@ -352,7 +356,7 @@ function ReferPatientForm({ patient }: { patient: import("@/lib/types").Patient 
     <div className="mt-3">
       {!open ? (
         <button onClick={() => setOpen(true)} className="w-full inline-flex items-center justify-center gap-1.5 py-2 bg-zinc-900 text-white text-xs font-semibold hover:bg-black">
-          <Send className="w-3.5 h-3.5" /> Refer this patient
+          <Send className="w-3.5 h-3.5" /> {t("patientReferThisBtn2")}
         </button>
       ) : (
         <div className="border border-zinc-700 bg-zinc-800 p-3 space-y-2">
@@ -361,8 +365,8 @@ function ReferPatientForm({ patient }: { patient: import("@/lib/types").Patient 
             <CustomSelect value={form.via} onChange={(v) => setForm({ ...form, via: v as any })} options={[{ value: "eSanjeevani", label: "eSanjeevani" }, { value: "Direct", label: "Direct" }]} />
           </div>
           <div className="flex gap-2">
-            <button onClick={submit} className="flex-1 py-1.5 bg-teal-600 text-white text-xs font-semibold hover:bg-teal-700">Queue referral</button>
-            <button onClick={() => setOpen(false)} className="flex-1 py-1.5 border border-zinc-600 text-white text-xs">Cancel</button>
+            <button onClick={submit} className="flex-1 py-1.5 bg-teal-600 text-white text-xs font-semibold hover:bg-teal-700">{t("patientQueueReferral")}</button>
+            <button onClick={() => setOpen(false)} className="flex-1 py-1.5 border border-zinc-600 text-white text-xs">{t("cancel")}</button>
           </div>
         </div>
       )}
@@ -371,6 +375,7 @@ function ReferPatientForm({ patient }: { patient: import("@/lib/types").Patient 
 }
 
 export default function PatientExaminationPage() {
+  const { t } = useLang();
   const params = useParams<{ id: string }>();
   const id = params?.id as string;
   const { patients, referrals, pharmacy } = useStore();
@@ -382,13 +387,13 @@ export default function PatientExaminationPage() {
     return (
       <div className="w-full max-w-[1220px] mx-auto p-6 min-w-0 overflow-x-hidden">
         <Link href="/app/patients" className="inline-flex items-center gap-2 text-sm font-medium hover:underline">
-          <ArrowLeft className="w-4 h-4" /> Back to patients
+          <ArrowLeft className="w-4 h-4" /> {t("patientBackToPatients")}
         </Link>
         <div className="mt-6 border border-amber-200 bg-amber-50 p-6 text-center">
-          <p className="font-semibold text-amber-900">Patient not found</p>
-          <p className="text-sm text-zinc-600 mt-1">ID: {id}, it may have been removed or is still syncing.</p>
+          <p className="font-semibold text-amber-900">{t("patientNotFoundTitle")}</p>
+          <p className="text-sm text-zinc-600 mt-1">ID: {id}, {t("patientNotFoundDesc")}</p>
           <Link href="/app/patients" className="mt-3 inline-flex px-4 py-2 bg-zinc-900 text-white text-sm font-semibold">
-            Back to registry
+            {t("patientBackRegistry")}
           </Link>
         </div>
       </div>
@@ -451,10 +456,10 @@ export default function PatientExaminationPage() {
             </div>
             <div className="flex flex-col gap-2">
               <Link href={`/app/patients?patient=${patient.id}`} className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 text-white text-sm font-semibold hover:bg-black">
-                <ScanEye className="w-4 h-4" /> Screen now
+                <ScanEye className="w-4 h-4" /> {t("patientScreenNowBtn")}
               </Link>
               <Link href="/app/patients" className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-zinc-200 bg-white text-sm font-medium hover:bg-zinc-50">
-                <ArrowLeft className="w-4 h-4" /> Back
+                <ArrowLeft className="w-4 h-4" /> {t("patientBackBtnLabel")}
               </Link>
             </div>
           </div>
@@ -462,7 +467,7 @@ export default function PatientExaminationPage() {
           {/* glucose */}
           <div className="mt-5">
             <h3 className="text-sm font-semibold flex items-center gap-2">
-              <TrendingUp className="w-4 h-4" /> Glucose trends (mg/dL)
+              <TrendingUp className="w-4 h-4" /> {t("patientGlucoseTitle")}
             </h3>
             <div className="h-[180px] mt-2 border border-zinc-100 bg-zinc-50 p-2">
               {patient.glucose.length > 0 ? (
@@ -485,44 +490,44 @@ export default function PatientExaminationPage() {
         {/* quick stats */}
         <div className="space-y-3">
           <div className="border border-zinc-200 bg-white p-4">
-            <h3 className="font-semibold text-sm">Examination history</h3>
+            <h3 className="font-semibold text-sm">{t("patientExamHistoryTitle")}</h3>
             <div className="mt-3 grid grid-cols-3 gap-2 text-center">
               <div className="border border-zinc-200 p-3 bg-zinc-50">
                 <div className="text-xl font-black">{visits.length}</div>
-                <div className="text-xs text-zinc-600">Total</div>
+                <div className="text-xs text-zinc-600">{t("patientTotalLabel")}</div>
               </div>
               <div className="border border-zinc-200 p-3 bg-white">
                 <div className="text-xl font-black text-amber-700">{visits.filter((v) => v.drStage >= 1 && v.drStage <= 2).length}</div>
-                <div className="text-xs text-zinc-600">Mild/Mod</div>
+                <div className="text-xs text-zinc-600">{t("patientMildModLabel")}</div>
               </div>
               <div className="border border-zinc-200 p-3 bg-red-50">
                 <div className="text-xl font-black text-red-700">{visits.filter((v) => v.drStage >= 3).length}</div>
-                <div className="text-xs text-zinc-600">Severe/PDR</div>
+                <div className="text-xs text-zinc-600">{t("patientSeverePdrLabelShort")}</div>
               </div>
             </div>
             {visits.length > 0 && (
               <div className="mt-3 text-xs leading-relaxed p-3 bg-amber-50 border border-amber-200 text-amber-900">
-                <b>Latest:</b> {DR_LABELS[visits[0].drStage]} • {(visits[0].confidence * 100).toFixed(0)}% • Q{visits[0].imageQuality} • {new Date(visits[0].date).toLocaleString()}
+                <b>{t("patientLatestLabel2")}</b> {DR_LABELS[visits[0].drStage]} • {(visits[0].confidence * 100).toFixed(0)}% • Q{visits[0].imageQuality} • {new Date(visits[0].date).toLocaleString()}
                 <br />
                 {visits[0].notes}
               </div>
             )}
             <div className="mt-3 flex gap-2">
               <Link href={`/app/patients?patient=${patient.id}`} className="flex-1 text-center px-3 py-2 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
-                + New examination
+                {t("patientNewExamBtn")}
               </Link>
               <Link href="/app/dashboard" className="flex-1 text-center px-3 py-2 border border-zinc-200 bg-white text-sm font-medium hover:bg-zinc-50">
-                Dashboard
+                {t("patientDashboardLink")}
               </Link>
             </div>
           </div>
 
           <div className="border border-zinc-200 bg-zinc-900 text-white p-4">
             <h3 className="font-semibold text-sm flex items-center gap-2">
-              <Send className="w-4 h-4" /> Referrals
+              <Send className="w-4 h-4" /> {t("patientReferralsTitle2")}
             </h3>
             {patientReferrals.length === 0 ? (
-              <div className="text-xs text-zinc-400 mt-2">No referrals for this patient.</div>
+              <div className="text-xs text-zinc-400 mt-2">{t("patientNoReferrals")}</div>
             ) : (
               <div className="mt-2 space-y-2">
                 {patientReferrals.map((r) => (
@@ -539,17 +544,17 @@ export default function PatientExaminationPage() {
             )}
             <ReferPatientForm patient={patient} />
             <Link href="/app/referrals" className="mt-3 inline-flex text-xs underline text-zinc-300 hover:text-white">
-              View all referrals
+              {t("patientViewAllReferrals")}
             </Link>
           </div>
 
           <div className="border border-zinc-200 bg-white p-4">
             <h3 className="font-semibold text-sm flex items-center gap-2">
-              <Pill className="w-4 h-4" /> Prescriptions allotted
+              <Pill className="w-4 h-4" /> {t("patientPrescriptionsTitle2")}
             </h3>
-            <div className="text-xs text-zinc-500 mt-1">Medication plan for this patient, add new prescriptions below</div>
+            <div className="text-xs text-zinc-500 mt-1">{t("patientPrescriptionsSub2")}</div>
             {(!patient.prescriptions || patient.prescriptions.length === 0) && patientOrders.length === 0 ? (
-              <div className="text-xs text-zinc-500 mt-3">No prescriptions yet. Add via screening or below.</div>
+              <div className="text-xs text-zinc-500 mt-3">{t("patientNoPrescriptions")}</div>
             ) : (
               <div className="mt-3 space-y-2">
                 {(patient.prescriptions || []).map((rx, i) => (
@@ -585,11 +590,11 @@ export default function PatientExaminationPage() {
       <div className="border border-zinc-200 bg-white p-4 md:p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-lg font-black tracking-tight flex items-center gap-2" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-            <Eye className="w-5 h-5" /> Eye examinations, image timeline
+            <Eye className="w-5 h-5" /> {t("patientEyeTimelineTitle")}
           </h2>
           <div className="flex items-center gap-2">
             <label className="flex items-center gap-1.5 text-xs font-medium">
-              <input type="checkbox" checked={showHeatmap} onChange={(e) => setShowHeatmap(e.target.checked)} /> Show heatmap
+              <input type="checkbox" checked={showHeatmap} onChange={(e) => setShowHeatmap(e.target.checked)} /> {t("patientShowHeatmap")}
             </label>
             <span className="text-xs text-zinc-500">{visits.length} total</span>
           </div>
@@ -600,10 +605,10 @@ export default function PatientExaminationPage() {
             <div className="w-12 h-12 mx-auto bg-white border border-zinc-200 grid place-items-center">
               <ImageIcon className="w-6 h-6 text-zinc-400" />
             </div>
-            <div className="mt-3 font-semibold">No examinations yet</div>
-            <div className="text-sm text-zinc-600 mt-1">Images you capture yesterday (or today) will appear here with heatmaps, quality, and AI staging.</div>
+            <div className="mt-3 font-semibold">{t("patientNoExamsTitle2")}</div>
+            <div className="text-sm text-zinc-600 mt-1">{t("patientNoExamsDesc2")}</div>
             <Link href={`/app/patients?patient=${patient.id}`} className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
-              <ScanEye className="w-4 h-4" /> Start screening
+              <ScanEye className="w-4 h-4" /> {t("patientStartScreeningBtn2")}
             </Link>
           </div>
         ) : (
@@ -722,7 +727,7 @@ export default function PatientExaminationPage() {
                   </div>
                   <div className="space-y-3">
                     <div>
-                      <div className="text-xs font-bold tracking-widest text-zinc-500">SELECTED EXAMINATION</div>
+                      <div className="text-xs font-bold tracking-widest text-zinc-500">{t("patientSelectedExam")}</div>
                       <div className="text-xl font-black mt-1">{DR_LABELS[activeVisit.drStage]}</div>
                       <div className="text-sm text-zinc-600">
                         Confidence {(activeVisit.confidence * 100).toFixed(0)}% • Quality {activeVisit.imageQuality}/100 • {activeVisit.id}
@@ -739,14 +744,14 @@ export default function PatientExaminationPage() {
                     </div>
                     <div className="flex gap-2">
                       <Link href={`/app/patients?patient=${patient.id}`} className="flex-1 text-center px-4 py-2 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
-                        New screening
+                        {t("patientNewScreeningBtn")}
                       </Link>
                       <button onClick={() => setSelectedVisit(null)} className="px-4 py-2 border border-zinc-200 bg-white text-sm font-medium">
-                        Clear
+                        {t("patientClearBtn")}
                       </button>
                     </div>
                     <div className="text-xs text-zinc-500 leading-relaxed">
-                      <ShieldCheck className="w-3 h-3 inline" /> Early result, an eye specialist will confirm before any treatment.
+                      <ShieldCheck className="w-3 h-3 inline" /> {t("patientEarlyNote2")}
                     </div>
                   </div>
                 </div>
@@ -754,14 +759,14 @@ export default function PatientExaminationPage() {
                 {activeVisit.analysis && (
                   <div className="mt-4 border border-teal-200 bg-white p-4">
                     <h3 className="font-bold text-sm flex items-center gap-2">
-                      <ClipboardList className="w-4 h-4 text-teal-700" /> Why this score
+                      <ClipboardList className="w-4 h-4 text-teal-700" /> {t("patientWhyScore")}
                     </h3>
                     <p className="text-xs text-zinc-600 mt-1 leading-relaxed bg-teal-50 border border-teal-200 p-2.5">{activeVisit.analysis.summary}</p>
 
                     <div className="mt-3 grid md:grid-cols-2 gap-3">
                       <div className="border border-zinc-200 p-3">
                         <div className="text-xs font-bold tracking-widest text-zinc-500 flex items-center gap-1">
-                          <Eye className="w-3 h-3" /> Lesions detected
+                          <Eye className="w-3 h-3" /> {t("patientLesionsDetected")}
                         </div>
                         <div className="mt-2 space-y-1.5">
                           {activeVisit.analysis.lesionsDetected.map((l, i) => (
@@ -772,7 +777,7 @@ export default function PatientExaminationPage() {
                           ))}
                         </div>
                         <div className="mt-3 text-xs leading-relaxed p-2.5 bg-zinc-50 border border-zinc-200">
-                          <b>Why this stage:</b> {activeVisit.analysis.stageJustification}
+                          <b>{t("patientWhyStage")}</b> {activeVisit.analysis.stageJustification}
                         </div>
                       </div>
 
@@ -781,12 +786,12 @@ export default function PatientExaminationPage() {
                           <div className="text-xs font-bold tracking-widest text-zinc-500">Confidence, why {(activeVisit.confidence * 100).toFixed(0)}%</div>
                           <div className="text-xs leading-relaxed mt-1 text-zinc-700">{activeVisit.analysis.confidenceExplanation}</div>
                           <div className="text-xs leading-relaxed mt-2 p-2 bg-zinc-50 border border-zinc-200">
-                            <b>Image quality:</b> {activeVisit.analysis.imageQualityAssessment}
+                            <b>{t("patientImageQualityWhy")}</b> {activeVisit.analysis.imageQualityAssessment}
                           </div>
                         </div>
                         <div className="border border-zinc-200 overflow-hidden">
                           <div className="bg-zinc-900 text-white px-3 py-2.5 flex items-center justify-between">
-                            <div className="text-xs font-bold tracking-widest">RISK SCORE, WHY {patient.riskScore}/100</div>
+                            <div className="text-xs font-bold tracking-widest">{t("patientRiskWhyTitle")} {patient.riskScore}/100</div>
                             <span className={`px-2 py-1 rounded-full text-xs font-black ${patient.riskScore >= 70 ? "bg-red-500 text-white" : patient.riskScore >= 40 ? "bg-amber-500 text-white" : "bg-emerald-500 text-white"}`}>{patient.riskScore}</span>
                           </div>
                           <div className="divide-y divide-zinc-100">
@@ -810,7 +815,7 @@ export default function PatientExaminationPage() {
                           </div>
                           <div className="bg-amber-50 border-t border-amber-200 p-3">
                             <div className="text-xs font-bold text-amber-900 flex items-center gap-1.5">
-                              <AlertTriangle className="w-3.5 h-3.5" /> Clinical significance
+                              <AlertTriangle className="w-3.5 h-3.5" /> {t("patientClinicalSig")}
                             </div>
                             <div className="text-xs leading-relaxed text-amber-900 mt-1">{activeVisit.analysis.clinicalSignificance}</div>
                           </div>
@@ -821,7 +826,7 @@ export default function PatientExaminationPage() {
                     <div className="mt-3 grid md:grid-cols-[1.2fr_0.8fr] gap-3">
                       <div className="border border-zinc-200 p-3">
                         <div className="text-xs font-bold tracking-widest text-zinc-500 flex items-center gap-1">
-                          <Beaker className="w-3 h-3" /> Recommended actions
+                          <Beaker className="w-3 h-3" /> {t("patientRecommendedActions")}
                         </div>
                         <ul className="mt-2 space-y-1 list-disc list-inside text-xs leading-relaxed text-zinc-700">
                           {activeVisit.analysis.recommendedActions.map((a, i) => (
@@ -849,9 +854,9 @@ export default function PatientExaminationPage() {
       {/* Foot report — visible on same page as eye report */}
       <div className="border border-zinc-200 bg-white p-4 md:p-5">
         <h2 className="text-lg font-black tracking-tight flex items-center gap-2" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-          <Footprints className="w-5 h-5 text-teal-700" /> Foot report — on same page
+          <Footprints className="w-5 h-5 text-teal-700" /> {t("patientFootReportTitle2")}
         </h2>
-        <p className="text-xs text-zinc-600 mt-1">Diabetic foot check done together with eye camp. See risk, flags, and next steps below — no need to open another page.</p>
+        <p className="text-xs text-zinc-600 mt-1">{t("patientFootReportDesc2")}</p>
         {patient.footAnalysis ? (
           <div className="mt-4 space-y-3">
             <div className={`border p-4 flex items-center justify-between ${patient.footAnalysis.risk === "high" ? "bg-red-50 border-red-200" : patient.footAnalysis.risk === "moderate" ? "bg-amber-50 border-amber-200" : "bg-emerald-50 border-emerald-200"}`}>
@@ -888,10 +893,10 @@ export default function PatientExaminationPage() {
           </div>
         ) : (
           <div className="mt-4 border-2 border-dashed border-zinc-200 bg-zinc-50 p-6 text-center">
-            <div className="text-sm font-bold">No foot screening yet</div>
-            <div className="text-xs text-zinc-600 mt-1">Do eye and foot together in one visit.</div>
+            <div className="text-sm font-bold">{t("patientFootNoScreen")}</div>
+            <div className="text-xs text-zinc-600 mt-1">{t("patientFootNoScreenDesc")}</div>
             <Link href="/app/foot" className="mt-3 inline-flex px-4 py-2 bg-zinc-900 text-white text-xs font-semibold">
-              Start foot check
+              {t("patientStartFootCheck")}
             </Link>
           </div>
         )}
@@ -900,8 +905,8 @@ export default function PatientExaminationPage() {
       <div className="grid md:grid-cols-2 gap-4 text-sm">
         <div className="border border-zinc-200 bg-teal-50 p-4 flex items-center justify-between">
           <div className="text-sm">
-            <div className="font-semibold">Need second opinion?</div>
-            <div className="text-xs text-zinc-600">eSanjeevani • chat with ophthalmologist</div>
+            <div className="font-semibold">{t("patientNeedSecond")}</div>
+            <div className="text-xs text-zinc-600">{t("patientESanjeevaniChat")}</div>
           </div>
           <Link href={`/app/patients?patient=${patient.id}`} className="px-4 py-2 bg-teal-700 text-white text-xs font-semibold">
             Ask

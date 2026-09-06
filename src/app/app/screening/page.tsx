@@ -2,8 +2,10 @@
 import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useStore } from "@/lib/store";
+import { useLang } from "@/lib/i18n";
 
 function ScreeningInner() {
+  const { t } = useLang();
   const { patients } = useStore();
   const search = useSearchParams();
   const router = useRouter();
@@ -16,9 +18,9 @@ function ScreeningInner() {
   return (
     <div className="p-10 text-center">
       <div className="inline-flex items-center gap-2 text-sm text-zinc-600">
-        <span className="w-4 h-4 border-2 border-zinc-200 border-t-teal-600 rounded-full animate-spin" /> Redirecting to patient examination...
+        <span className="w-4 h-4 border-2 border-zinc-200 border-t-teal-600 rounded-full animate-spin" /> {t("screeningRedirecting2")}
       </div>
-      <div className="mt-2 text-xs text-zinc-500">Screening now happens inside the Patients tab. Choose a patient to start.</div>
+      <div className="mt-2 text-xs text-zinc-500">{t("screeningRedirectNote2")}</div>
     </div>
   );
 }

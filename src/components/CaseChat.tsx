@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { Send, Loader2, Trash2, Image as ImageIcon, Sparkles, ShieldCheck, AlertTriangle } from "lucide-react";
+import { useLang } from "@/lib/i18n";
 
 type ChatMsg = { id: string; role: "user" | "assistant"; content: string; image_url?: string | null; model?: string; created_at?: string };
 
@@ -24,6 +25,7 @@ export function CaseChat({
   previews?: { left: string | null; right: string | null };
   patientLabel?: string;
 }) {
+  const { t } = useLang();
   // Normalize to both eyes , support single preview (old) or both (new)
   const bothPreviews = previews || (preview ? { left: preview, right: null } : { left: null, right: null });
   const hasLeft = !!bothPreviews.left;
@@ -161,12 +163,12 @@ export function CaseChat({
             <Sparkles className="w-4 h-4" />
           </span>
           <div>
-            <div className="text-sm font-bold leading-none">Discuss this case</div>
-            <div className="text-xs text-zinc-500">Chat about the eye image, patient details are added automatically</div>
+            <div className="text-sm font-bold leading-none">{t("caseChatTitle2")}</div>
+            <div className="text-xs text-zinc-500">{t("caseChatSubtitle2")}</div>
           </div>
         </div>
         <button onClick={clear} className="px-2.5 py-1.5 rounded-full border border-zinc-200 bg-white text-xs font-semibold hover:bg-zinc-50 flex items-center gap-1">
-          <Trash2 className="w-3 h-3" /> Clear
+          <Trash2 className="w-3 h-3" /> {t("caseChatClearBtn2")}
         </button>
       </div>
 
@@ -194,37 +196,37 @@ export function CaseChat({
               )}
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-sm font-bold text-zinc-900">{hasBoth ? "Both eyes attached" : hasLeft ? "Left eye attached" : hasRight ? "Right eye attached" : "Fundus attached"}</div>
-              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">{hasBoth ? "Both images will be sent for AI check. Ask to compare left and right." : "This image will be sent with your question."}</div>
+              <div className="text-sm font-bold text-zinc-900">{hasBoth ? t("caseChatBothEyes2") : hasLeft ? t("caseChatLeftEye2") : hasRight ? t("caseChatRightEye2") : t("caseChatFundusAttached")}</div>
+              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">{hasBoth ? t("caseChatBothImages") : t("caseChatOneImage")}</div>
             </div>
             <label className="flex items-center gap-2 text-xs font-medium cursor-pointer shrink-0 bg-white border border-zinc-200 rounded-full px-3 py-1.5 hover:bg-zinc-50">
               <input type="checkbox" checked={includeImage} onChange={(e) => setIncludeImage(e.target.checked)} className="rounded text-teal-600" />
-              Include
+              {t("caseChatIncludeLabel2")}
             </label>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-3 border-t border-zinc-200">
             <div className="flex items-center gap-3">
               <label className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-medium cursor-pointer transition ${hasLeft ? (includeLeft ? "bg-teal-50 border-teal-300 text-teal-800" : "bg-white border-zinc-200 hover:bg-zinc-50") : "bg-zinc-100 border-zinc-200 text-zinc-400 cursor-not-allowed"}`}>
                 <input type="checkbox" checked={includeLeft} onChange={(e) => setIncludeLeft(e.target.checked)} disabled={!hasLeft} className="rounded text-teal-600" />
-                Left {hasLeft ? "✓" : "Not set"}
+                {t("caseChatLeftLabel2")} {hasLeft ? "✓" : t("caseChatNotSet")}
               </label>
               <label className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-medium cursor-pointer transition ${hasRight ? (includeRight ? "bg-amber-50 border-amber-300 text-amber-800" : "bg-white border-zinc-200 hover:bg-zinc-50") : "bg-zinc-100 border-zinc-200 text-zinc-400 cursor-not-allowed"}`}>
                 <input type="checkbox" checked={includeRight} onChange={(e) => setIncludeRight(e.target.checked)} disabled={!hasRight} className="rounded text-amber-600" />
-                Right {hasRight ? "✓" : "Not set"}
+                {t("caseChatRightLabel2")} {hasRight ? "✓" : t("caseChatNotSet")}
               </label>
             </div>
-            <span className="text-xs text-zinc-500 sm:ml-auto bg-white border border-zinc-200 rounded-full px-3 py-1.5 text-center">{hasBoth ? "Tip: Ask “Compare left vs right”" : "Upload the other eye to compare"}</span>
+            <span className="text-xs text-zinc-500 sm:ml-auto bg-white border border-zinc-200 rounded-full px-3 py-1.5 text-center">{hasBoth ? t("caseChatTipCompare2") : t("caseChatTipUpload2")}</span>
           </div>
         </div>
       )}
 
       {!API ? (
         <div className="mx-4 mt-3 rounded-xl bg-amber-50 border border-amber-200 px-3 py-2 text-xs text-amber-800 flex items-center gap-2">
-          <AlertTriangle className="w-4 h-4" /> Chat using local guidance. Connect for image analysis.
+          <AlertTriangle className="w-4 h-4" /> {t("caseChatLocalGuidance2")}
         </div>
       ) : (
         <div className="mx-4 mt-3 rounded-xl bg-emerald-50 border border-emerald-200 px-3 py-2 text-xs text-emerald-800 flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> AI chat ready, image analysis on
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> {t("caseChatReady2")}
         </div>
       )}
 
@@ -234,10 +236,10 @@ export function CaseChat({
             <div className="w-10 h-10 mx-auto rounded-xl bg-white border border-zinc-200 grid place-items-center">
               <ShieldCheck className="w-5 h-5 text-teal-700" />
             </div>
-            <div className="mt-2 text-sm font-bold">No messages yet</div>
-            <div className="text-xs text-zinc-500 max-w-[36ch] mx-auto">Ask e.g. “What stage is this? Where is the haemorrhage?” or “Explain to ASHA in Hindi.” Image + patient history (risk, HbA1c, prior visits) are auto-included via state-of-art context management.</div>
+            <div className="mt-2 text-sm font-bold">{t("caseChatNoMessagesTitle2")}</div>
+            <div className="text-xs text-zinc-500 max-w-[36ch] mx-auto">{t("caseChatNoMessagesDesc2")}</div>
             <div className="mt-3 flex flex-wrap gap-1.5 justify-center">
-              {["What is in this image?", "Explain stage and next step", "Is there neovascularization?", "Summarize for ASHA in Hindi"].map((q) => (
+              {[t("caseChatQuickQ1"), t("caseChatQuickQ2"), t("caseChatQuickQ3"), t("caseChatQuickQ4")].map((q) => (
                 <button key={q} onClick={() => setInput(q)} className="px-2.5 py-1 rounded-full bg-white border border-zinc-200 text-xs font-medium hover:bg-zinc-50">
                   {q}
                 </button>
@@ -280,7 +282,7 @@ export function CaseChat({
         {sending && (
           <div className="flex justify-start">
             <div className="rounded-2xl bg-white border border-zinc-200 px-3.5 py-2.5 text-sm flex items-center gap-2">
-              <Loader2 className="w-4 h-4 animate-spin" /> Thinking, checking AI models
+              <Loader2 className="w-4 h-4 animate-spin" /> {t("caseChatThinking2")}
             </div>
           </div>
         )}
@@ -296,15 +298,15 @@ export function CaseChat({
               send();
             }
           }}
-          placeholder="Ask about this eye image, e.g. What stage is this or What is seen"
+          placeholder={t("caseChatPlaceholder2")}
           className="flex-1 px-3.5 py-2.5 rounded-full border border-zinc-200 bg-zinc-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none"
         />
         <button onClick={send} disabled={!input.trim() || sending} className="px-5 py-2.5 rounded-full bg-teal-700 text-white font-bold hover:bg-teal-800 disabled:opacity-40 flex items-center gap-1.5">
-          <Send className="w-4 h-4" /> Send
+          <Send className="w-4 h-4" /> {t("caseChatSendBtn2")}
         </button>
       </div>
       <div className="px-3 pb-2 text-[10px] text-zinc-500 flex items-center gap-1">
-        <ShieldCheck className="w-3 h-3" /> Early AI check, eye doctor must confirm.
+        <ShieldCheck className="w-3 h-3" /> {t("caseChatEarlyCheck2")}
       </div>
     </div>
   );

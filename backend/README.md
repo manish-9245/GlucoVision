@@ -1,12 +1,13 @@
-# GlucoVision — Cloudflare Backend (D1 + R2 + Workers)
+# GlucoVision — Cloudflare backend for the PHC screening workflow
 
-Deployable Hono Worker + Cloudflare D1 (SQLite) + R2 (fundus images). Frontend (Next.js) talks to this API when `NEXT_PUBLIC_API_URL` is set; otherwise it falls back to local mock + localStorage for offline PHC use.
+Deployable Hono Worker powering the GlucoVision app: auth, patient records, referrals, pharmacy, case chat, and NVIDIA NIM inference. It uses Cloudflare D1 for clinical data and secrets, optional R2 for fundus images, and serves the Next.js frontend when `NEXT_PUBLIC_API_URL` is configured. Without that env var, the frontend falls back to local mock data and localStorage for offline PHC use.
 
 ## Stack
-- **Worker:** Hono `src/index.ts` (CORS, JSON, multipart upload)
-- **DB:** Cloudflare D1 `glucovision` — schema `migrations/0001_initial.sql` (patients, glucose_readings, visits, referrals, pharmacy_orders, foot_checks)
-- **Storage:** R2 `glucovision-images` (`IMAGES` binding) for fundus photos — `POST /api/upload` → `R2` → `GET /api/images/:key`
-- **Deploy:** `wrangler deploy` (Worker) + `wrangler d1 migrations apply`
+
+- **Worker:** Hono `src/index.ts` with CORS, auth, patient CRUD, referrals, pharmacy, chat, and inference routes
+- **DB:** Cloudflare D1 `glucovision` — schema `migrations/0001_initial.sql` through `migrations/0007_foot.sql` for patients, glucose readings, visits, referrals, pharmacy orders, foot checks, auth, chat, and secrets
+- **Storage:** Optional R2 `glucovision-images` (`IMAGES` binding) for fundus photos — `POST /api/upload` → `R2` → `GET /api/images/:key`
+- **Deploy:** `wrangler deploy` (Worker) + `wrangler d1 migrations apply` (local or remote)
 
 ## Quickstart (local)
 
@@ -74,10 +75,13 @@ npx opennextjs-cloudflare deploy
 ## API
 
 - `GET /api/health` — probe
+- `POST /api/auth/signup`, `POST /api/auth/login`, `GET /api/auth/me`, `POST /api/auth/logout` — authentication
 - `GET /api/patients?search=&village=&riskMin=&limit=&offset=` — list
 - `GET /api/patients/:id` — detail + glucose + visits
-- `POST /api/patients` — `{name, age, gender, village, phone, diabetesYears, diabetesType, bp, hbA1c, familyHistory, symptoms[], riskScore, medication[]}`
+- `POST /api/patients` — `{name, age, gender, village, phone, diabetesYears, diabetesType?, bp, hbA1c, familyHistory, symptoms[], riskScore, medication[]}`
+- `PATCH /api/patients/:id` — update local clinical fields such as risk, medication, prescriptions, and foot follow-up
 - `POST /api/patients/:id/visits` — `{drStage, confidence, heatmapRegions[], notes, imageQuality, imageUrl?, date?}` (auto-creates referral if stage≥2)
+- `GET /api/cases/:patientId/chat` and `POST /api/cases/:patientId/chat` — explainable case chat with context window management
 - `GET /api/referrals?status=` + `PATCH /api/referrals/:id` `{status, doctor}`
 - `GET /api/pharmacy` + `POST /api/pharmacy` + `PATCH /api/pharmacy/:id`
 - `POST /api/upload` — `multipart file` → R2 `fundus/...` → `{key, url}`
@@ -90,7 +94,7 @@ All write endpoints use `prepare().bind().run()` (D1 prepared statements, no SQL
 
 `src/lib/store.tsx` already wraps `localStorage` + `src/lib/mockData.ts`. To go live, set `NEXT_PUBLIC_API_URL`:
 
-```
+```bash
 NEXT_PUBLIC_API_URL=https://glucovision-api.<subdomain>.workers.dev npm run dev
 ```
 

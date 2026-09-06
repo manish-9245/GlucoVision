@@ -1,4 +1,11 @@
-# GlucoVision — Explainable AI Diabetic Retinopathy Screening for Rural India
+<!-- markdownlint-disable MD033 MD038 MD060 -->
+
+# GlucoVision — Offline-first explainable diabetic retinopathy screening for rural PHCs
+
+<p align="center">
+  <strong>Next.js 16 frontend + Cloudflare Workers API + D1/R2 + NVIDIA NIM fallback</strong><br />
+  Screen, explain, refer, and follow up from one shared clinical workflow.
+</p>
 
 <p align="center">
   <img src="public/icon.svg" width="80" height="80" alt="GlucoVision concentric retina logo" />
@@ -18,13 +25,13 @@
 </p>
 
 <p align="center">
-  <a href="https://glucovision.pages.dev"><strong>🌐 Live Demo — gluvovision.pages.dev</strong></a> •
+  <a href="https://glucovision.pages.dev"><strong>🌐 Live Demo — glucovision.pages.dev</strong></a> •
   <a href="https://glucovision-api.wethreemusks.workers.dev/api/health">API Health</a> •
   <a href="#-quickstart">Quickstart</a> •
   <a href="#-architecture">Architecture</a>
 </p>
 
-> **Smart India Hackathon 2026 — PHC Edition.** AI diabetic retinopathy screening that works with your **ophthalmoscope + phone**. No fundus camera to procure, no internet to screen, and **every result shows why** (Grad-CAM) — so ASHA workers and ophthalmologists can verify, not just trust.
+> **Smart India Hackathon 2026 — PHC Edition.** A clinical screening suite for diabetic retinopathy that works with an **ophthalmoscope + phone**, keeps PHCs **offline-first**, and makes every result **explainable** with Grad-CAM so ASHA workers, Medical Officers, and ophthalmologists can verify what the model saw.
 
 **Keywords for SEO:** `diabetic retinopathy`, `AI screening`, `fundus photography`, `rural health`, `PHC`, `ASHA`, `offline-first`, `explainable AI`, `Grad-CAM`, `eSanjeevani`, `telepharmacy`, `Next.js`, `Cloudflare D1`, `NVIDIA NIM`, `Smart India Hackathon`
 
@@ -49,23 +56,51 @@
 
 ---
 
-## 🏗️ Architecture — UI ↔ Backend strictly segregated
+## 🏗️ Architecture — UI ↔ API with offline fallback
 
+```mermaid
+flowchart LR
+  subgraph users[PHC users]
+    A["ASHA workers\nMedical Officer\nOphthalmologist\nPharmacist"]
+    B["Phone browser\nPWA camera"]
+  end
+
+  subgraph frontend[Next.js 16 frontend]
+    C["src/app routes\nlogin, signup, dashboard, patients\nscreening, referrals, pharmacy, foot"]
+    D["src/components + src/lib/store.tsx\noffline mock + localStorage + API hydration"]
+  end
+
+  subgraph worker[Cloudflare Worker API]
+    E["Hono routes in backend/src/index.ts"]
+    F["Auth\nsignup, login, me, logout"]
+    G["Patients, referrals, pharmacy, visits"]
+    H["Case chat\nprompt window management"]
+    I["NIM inference\n3-model fallback"]
+  end
+
+  subgraph cloudflare[Cloudflare data services]
+    J["D1 SQLite\npatients, glucose, visits, referrals\npharmacy, auth, chats, secrets"]
+    K["R2 fundus images"]
+  end
+
+  L["NVIDIA NIM"]
+
+  A --> B --> C
+  C -->|HTTPS| E
+  D --> C
+  E --> F --> J
+  E --> G --> J
+  E --> H --> J
+  E --> K
+  I --> L
+  E --> I
 ```
-┌─────────────────┐         ┌──────────────────────────┐
-│  Next.js 16     │  fetch  │  Cloudflare Worker (Hono)│
-│  src/app/*      │────────▶│  backend/src/index.ts    │
-│  src/lib/store  │◀────────│  D1 glucovision (SQLite) │
-│  PWA + Camera   │  JSON   │  R2 glucovision-images   │
-│  + Tailwind     │         │  NVIDIA NIM fallback     │
-└─────────────────┘         └──────────────────────────┘
-   localhost:3000              glucovision-api.*.workers.dev
-```
 
-**UI** (`src/`) — Next.js 16, Tailwind 4, Framer Motion, GSAP, Recharts, `next/font` Cabinet Grotesk (display) + Geist (body), `src/lib/blur.ts` Variance-of-Laplacian, `src/components/CaseChat.tsx` chat about fundus image  
-**Backend** (`backend/`) — Hono, Cloudflare D1 (patients, glucose_readings, visits, referrals, pharmacy_orders, foot_checks, secrets, nim_requests) + R2, `backend/src/nim.ts` 3-model fallback, `backend/src/crypto.ts` AES-GCM, `backend/src/auth.ts` PBKDF2 + JWT
+**Frontend** (`src/`) — Next.js 16 App Router, offline mock/store fallback, live camera screening with blur gating, explainable AI review, patient management, referrals, telepharmacy, foot screening, and case chat. The current route set is `login`, `signup`, `dashboard`, `patients`, `screening`, `referrals`, `pharmacy`, and `foot`.
 
-**Cloudflare DB — D1 (10GB, SQLite):** `backend/migrations/0001_initial.sql` → `0004_auth.sql` (users + PBKDF2 demo hashes), `backend/seed.sql` 28 patients, 8 referrals, 8 pharmacy (Bhainsa, Shirpur, Eekkadu eye camps — Wikimedia Commons `Category:Rural health in India`, NIH fundus)
+**Backend** (`backend/`) — Hono Worker with auth, patient records, referral and pharmacy workflows, case chat, encrypted secrets, D1 persistence, optional R2 image storage, and NVIDIA NIM inference with fallback across multiple models.
+
+**Cloudflare DB — D1 (SQLite):** `backend/migrations/0001_initial.sql` through `0007_foot.sql`, plus `backend/migrations/0004_auth.sql` for users and PBKDF2 demo hashes. `backend/seed.sql` carries the current demo dataset for patients, referrals, and pharmacy records.
 
 ---
 

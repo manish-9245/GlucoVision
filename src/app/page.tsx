@@ -27,6 +27,7 @@ import {
   Send,
 } from "lucide-react";
 import { Logo } from "@/components/Logo";
+import { LanguageSwitcher, useLang } from "@/lib/i18n";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,7 +49,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 3. Hero Math Verification:
    H1 container: max-w-[1080px] w-full mx-auto, font-size clamp(2.8rem,6vw,5.8rem), tracking -0.04em, line 0.88
-   Text: "Prevent blindness before it starts" + inline pill image (9 words) => flows in 2 lines on 1280px, 2-3 lines on mobile, NEVER 6 lines. Max-w-6xl guarantees horizontal flow.
+   Text: "{t("landingHeroTitle1")} before it starts" + inline pill image (9 words) => flows in 2 lines on 1280px, 2-3 lines on mobile, NEVER 6 lines. Max-w-6xl guarantees horizontal flow.
    No stamp icons, no pill-tags, no stats inside hero. Exactly 2 CTAs with perfect contrast (white bg / zinc-900 text + translucent border white text).
 
 4. Bento Density Verification:
@@ -131,6 +132,7 @@ const RetinaSVG = () => (
 );
 
 const PhoneMockup = () => {
+  const { t } = useLang();
   const tiltRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -168,21 +170,21 @@ const PhoneMockup = () => {
         <span className="w-5 h-5 rounded-full bg-emerald-500 text-white grid place-items-center">
           <Eye className="w-3 h-3" />
         </span>
-        Auto-capture
+        {t("phoneMockupAutoCapture")}
         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
       </div>
       <div className="absolute -right-6 top-[10%] hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-zinc-900 text-white shadow-[0_8px_24px_rgba(0,0,0,0.18)] text-[10px] font-bold z-20">
-        <ScanEye className="w-3 h-3 text-teal-300" /> &lt;2.1s on-device
+        <ScanEye className="w-3 h-3 text-teal-300" /> {t("phoneMockupOnDevice")}
       </div>
       <div className="absolute -right-8 top-[58%] hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-amber-500 text-white shadow-[0_8px_24px_rgba(0,0,0,0.15)] text-[10px] font-bold z-20">
-        <span className="w-4 h-4 rounded-full bg-white text-amber-600 grid place-items-center text-[9px] font-black">II</span> Stage II • 87%
+        <span className="w-4 h-4 rounded-full bg-white text-amber-600 grid place-items-center text-[9px] font-black">II</span> {t("phoneMockupStageII")}
       </div>
       <div className="absolute -left-6 bottom-[22%] hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white border border-zinc-200 shadow-[0_8px_24px_rgba(0,0,0,0.12)] text-[10px] font-bold z-20">
-        <ShieldCheck className="w-3.5 h-3.5 text-teal-600" /> Heatmap
+        <ShieldCheck className="w-3.5 h-3.5 text-teal-600" /> {t("phoneMockupHeatmap")}
         <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
       </div>
       <div className="absolute left-1/2 -translate-x-1/2 -bottom-3 hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-zinc-200 shadow-[0_8px_24px_rgba(0,0,0,0.12)] text-[10px] font-bold z-20">
-        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Sync queued
+        <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> {t("phoneMockupSyncQueued")}
         <WifiOff className="w-3 h-3 text-zinc-400" />
       </div>
 
@@ -217,13 +219,13 @@ const PhoneMockup = () => {
                 <Activity className="w-3 h-3" />
               </span>
               <div className="leading-none">
-                <div className="text-[10px] font-black tracking-widest">PHC • READY</div>
-                <div className="text-[9px] font-medium text-zinc-500">Shirpur Rural • 94% battery</div>
+                <div className="text-[10px] font-black tracking-widest">{t("phoneMockupPhcReady")}</div>
+                <div className="text-[9px] font-medium text-zinc-500">{t("phoneMockupShirpur")}</div>
               </div>
             </div>
             <div className="flex items-center gap-1.5">
               <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-[9px] font-bold text-emerald-700">
-                <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" /> LIVE
+                <span className="w-1 h-1 rounded-full bg-emerald-500 animate-pulse" /> {t("phoneMockupLive")}
               </span>
               <div className="w-[22px] h-[11px] rounded-[3px] border border-zinc-300 p-[1.5px] flex">
                 <div className="flex-1 bg-emerald-500 rounded-[1px]" style={{ width: "94%" }} />
@@ -267,16 +269,16 @@ const PhoneMockup = () => {
             <div className="absolute bottom-0 left-0 right-0 h-[44px] bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
             <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between gap-2">
               <span className="px-2 py-1 rounded-full bg-white text-zinc-900 text-[10px] font-black shadow-[0_4px_12px_rgba(0,0,0,0.25)] flex items-center gap-1">
-                <Eye className="w-3 h-3" /> L-eye • Auto-capture ✓
+                <Eye className="w-3 h-3" /> {t("phoneMockupLEye")}
               </span>
               <span className="px-2 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-black shadow-[0_4px_12px_rgba(0,0,0,0.25)] border border-emerald-500 flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> Quality 94/100
+                <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> {t("phoneMockupQuality")}
               </span>
             </div>
             {/* top meta */}
             <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between">
               <span className="px-2 py-1 rounded-full bg-black/55 backdrop-blur-md border border-white/15 text-white text-[9px] font-bold flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> 5 stage • AI
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> {t("phoneMockup5Stage")}
               </span>
               <span className="px-1.5 py-1 rounded-full bg-white/90 backdrop-blur text-zinc-900 text-[9px] font-mono font-bold">94%</span>
             </div>
@@ -286,30 +288,30 @@ const PhoneMockup = () => {
           <div className="p-3 bg-white border-t border-zinc-100 shrink-0">
             <div className="rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 p-2.5 flex items-center justify-between shadow-[0_4px_12px_rgba(245,158,11,0.12)]">
               <div>
-                <div className="text-[10px] font-black tracking-[0.14em] text-amber-700">MODERATE NPDR • STAGE II</div>
-                <div className="text-[12px] font-black leading-none mt-0.5">87% confidence</div>
-                <div className="text-[9px] font-medium text-zinc-500 mt-0.5">Bleeding spots near macula • Heatmap</div>
+                <div className="text-[10px] font-black tracking-[0.14em] text-amber-700">{t("phoneMockupModerate")}</div>
+                <div className="text-[12px] font-black leading-none mt-0.5">{t("phoneMockupConfidence")}</div>
+                <div className="text-[9px] font-medium text-zinc-500 mt-0.5">{t("phoneMockupBleeding")}</div>
               </div>
               <div className="w-10 h-10 rounded-xl bg-amber-500 text-white grid place-items-center font-black text-sm shadow-[0_4px_12px_rgba(245,158,11,0.35)] border border-amber-400">II</div>
             </div>
             {/* three micro-metrics , showcase all features */}
             <div className="grid grid-cols-3 gap-1.5 mt-2">
               <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-1.5 text-center hover:border-zinc-300 transition-colors">
-                <div className="text-[7.5px] font-black tracking-widest text-zinc-500 uppercase">Progression</div>
-                <div className="text-[10px] font-black text-amber-700">↑ Worse</div>
-                <div className="text-[8px] font-medium text-zinc-500">vs Feb</div>
+                <div className="text-[7.5px] font-black tracking-widest text-zinc-500 uppercase">{t("phoneMockupProgression")}</div>
+                <div className="text-[10px] font-black text-amber-700">{t("phoneMockupWorse")}</div>
+                <div className="text-[8px] font-medium text-zinc-500">{t("phoneMockupVsFeb")}</div>
               </div>
               <div className="bg-zinc-50 border border-zinc-200 rounded-xl p-1.5 text-center hover:border-zinc-300 transition-colors">
-                <div className="text-[7.5px] font-black tracking-widest text-zinc-500 uppercase">Action</div>
-                <div className="text-[10px] font-black">3 mo</div>
-                <div className="text-[8px] font-medium text-zinc-500">Re-screen</div>
+                <div className="text-[7.5px] font-black tracking-widest text-zinc-500 uppercase">{t("phoneMockupAction")}</div>
+                <div className="text-[10px] font-black">{t("phoneMockup3Mo")}</div>
+                <div className="text-[8px] font-medium text-zinc-500">{t("phoneMockupReScreen")}</div>
               </div>
               <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-1.5 text-center">
-                <div className="text-[7.5px] font-black tracking-widest text-emerald-700 uppercase">Referral</div>
+                <div className="text-[7.5px] font-black tracking-widest text-emerald-700 uppercase">{t("phoneMockupReferral")}</div>
                 <div className="text-[9px] font-black text-emerald-700 flex items-center justify-center gap-0.5">
                   eSanj <Send className="w-2.5 h-2.5" />
                 </div>
-                <div className="text-[8px] font-medium text-emerald-600">queued</div>
+                <div className="text-[8px] font-medium text-emerald-600">{t("phoneMockupQueued")}</div>
               </div>
             </div>
           </div>
@@ -329,6 +331,7 @@ const PhoneMockup = () => {
 };
 
 const FloatingNav = () => {
+  const { t } = useLang();
   return (
     <header className="fixed top-4 md:top-6 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
       <nav className="pointer-events-auto w-full max-w-[1120px] flex items-center justify-between gap-4 bg-white/85 backdrop-blur-2xl border border-zinc-200/70 shadow-[0_8px_32px_rgba(0,0,0,0.08),0_1px_0_rgba(255,255,255,0.8)_inset] rounded-full px-2 md:px-2.5 py-2">
@@ -346,17 +349,20 @@ const FloatingNav = () => {
 
         <div className="hidden lg:flex items-center gap-1 bg-zinc-900 rounded-full p-1">
           <a href="#how" className="px-4 py-1.5 rounded-full text-white text-sm font-medium">
-            How it works
+            {t("landingHowItWorks")}
           </a>
           <a href="#evidence" className="px-4 py-1.5 rounded-full text-zinc-400 hover:text-white text-sm font-medium transition">
-            Evidence
+            {t("landingEvidence")}
           </a>
           <a href="#impact" className="px-4 py-1.5 rounded-full text-zinc-400 hover:text-white text-sm font-medium transition">
-            Impact
+            {t("landingImpact")}
           </a>
         </div>
 
         <div className="flex items-center gap-2">
+          <div className="hidden md:block">
+            <LanguageSwitcher />
+          </div>
           <Link
             href="/app/dashboard"
             className="hidden md:inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 transition"
@@ -367,7 +373,7 @@ const FloatingNav = () => {
             href="/app/patients"
             className="inline-flex items-center gap-2 text-sm font-bold px-5 md:px-6 py-2.5 md:py-3 rounded-full bg-zinc-900 text-white hover:bg-black transition shadow-[0_4px_16px_rgba(0,0,0,0.16)]"
           >
-            Start Screening <ArrowRight className="w-4 h-4" />
+            {t("landingStartScreening")} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </nav>
@@ -376,6 +382,7 @@ const FloatingNav = () => {
 };
 
 export default function Landing() {
+  const { t } = useLang();
   const heroRef = useRef<HTMLDivElement>(null);
   const bentoRef = useRef<HTMLDivElement>(null);
   const pinnedRef = useRef<HTMLDivElement>(null);
@@ -513,11 +520,11 @@ export default function Landing() {
         <div className="hero-content relative z-10 w-full max-w-[1080px] mx-auto flex flex-col items-center">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/15 text-white text-xs font-semibold tracking-wide">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Clear AI results • Works everywhere • eSanjeevani ready
+            {t("landingHeroBadge")}
           </div>
 
           <h1 className="hero-title mt-6 text-white text-balance max-w-[1080px] w-full">
-            Prevent blindness
+            {t("landingHeroTitle1")}
             <br />
             <span className="inline-flex items-center gap-3 md:gap-4 flex-wrap justify-center">
               before it
@@ -542,13 +549,13 @@ export default function Landing() {
               href="/app/patients"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-zinc-900 font-bold rounded-full hover:bg-zinc-100 transition shadow-[0_12px_32px_rgba(255,255,255,0.15)] text-[15px]"
             >
-              <ScanEye className="w-4 h-4" /> Try live screening demo
+              <ScanEye className="w-4 h-4" /> {t("landingHeroCtaDemo")}
             </Link>
             <Link
               href="#how"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/20 bg-white/10 backdrop-blur-xl text-white font-semibold hover:bg-white/15 transition text-[15px]"
             >
-              <Play className="w-4 h-4" /> See 10-step workflow
+              <Play className="w-4 h-4" /> {t("landingHeroCtaWorkflow")}
             </Link>
           </div>
 
@@ -576,19 +583,19 @@ export default function Landing() {
             {[...Array(2)].map((_, dup) => (
               <div key={dup} className="flex items-center gap-12 shrink-0">
                 <span className="flex items-center gap-2 text-sm font-bold tracking-tight whitespace-nowrap">
-                  <HeartPulse className="w-4 h-4 text-teal-700" /> PHCs • CHCs • District Hospitals
+                  <HeartPulse className="w-4 h-4 text-teal-700" /> {t("landingMarqueePhc")}
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
                 <span className="flex items-center gap-2 text-sm font-bold whitespace-nowrap">
-                  <Eye className="w-4 h-4" /> eSanjeevani • Ophthalmologists
+                  <Eye className="w-4 h-4" /> {t("landingMarqueeEye")}
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
                 <span className="flex items-center gap-2 text-sm font-bold whitespace-nowrap">
-                  <Pill className="w-4 h-4" /> Telepharmacy • Last-mile delivery
+                  <Pill className="w-4 h-4" /> {t("landingMarqueeTele")}
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
                 <span className="flex items-center gap-2 text-sm font-bold whitespace-nowrap text-teal-700">
-                  <WifiOff className="w-4 h-4" /> Ready to use • Clear AI
+                  <WifiOff className="w-4 h-4" /> {t("landingMarqueeReady")}
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
                 <span className="flex items-center gap-2 text-sm font-bold whitespace-nowrap">
@@ -596,7 +603,7 @@ export default function Landing() {
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
                 <span className="flex items-center gap-2 text-sm font-bold whitespace-nowrap">
-                  <Activity className="w-4 h-4" /> Glucometer • BP • HbA1c trends
+                  <Activity className="w-4 h-4" /> {t("landingMarqueeGlucose")}
                 </span>
                 <span className="w-1 h-1 rounded-full bg-zinc-300" />
               </div>
@@ -634,16 +641,16 @@ export default function Landing() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div className="max-w-[640px]">
             <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-700">
-              <span className="w-8 h-[2px] bg-teal-700" /> Built for how PHCs actually work
+              <span className="w-8 h-[2px] bg-teal-700" /> {t("landingBuiltForPhc")}
             </div>
             <h2 className="mt-3 text-[36px] md:text-[48px] font-black tracking-tight leading-[0.9]" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-              One phone.
+              {t("landingOnePhone")}
               <br />
-              <span className="text-zinc-400">Ten steps to continuity.</span>
+              <span className="text-zinc-400">{t("landingTenSteps")}</span>
             </h2>
           </div>
           <p className="max-w-[380px] text-[15px] leading-6 text-zinc-600">
-            Not just diagnosis, intake, glucose trends, capture, AI, guidance, referral, pharmacy and foot checks in one simple flow.
+            {t("landingOnePhoneDesc")}
           </p>
         </div>
 
@@ -661,9 +668,9 @@ export default function Landing() {
                   <Smartphone className="w-3.5 h-3.5" /> Capture • Quality gate • Inference
                 </div>
                 <h3 className="mt-3 text-[28px] font-bold leading-tight tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-                  Ophthalmoscope + phone is enough
+                  {t("landingCaptureTitle")}
                 </h3>
-                <p className="mt-3 text-sm leading-6 text-zinc-300">Clip-on adapter optional. We check blur and light to block bad photos before AI runs, then results in under 2.1s on your device.</p>
+                <p className="mt-3 text-sm leading-6 text-zinc-300">{t("landingCaptureDesc")}</p>
 
                 {/* feature showcase , all steps visible */}
                 <div className="mt-6 grid gap-2.5">
@@ -725,12 +732,12 @@ export default function Landing() {
               <Layers className="w-3.5 h-3.5" /> Explainable AI
             </div>
             <h3 className="mt-3 text-[22px] font-bold leading-tight tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-              Not a black box.
+              {t("landingNotBlackBox")}
               <br />
-              Heatmaps show why.
+              {t("landingHeatmapWhy")}
             </h3>
             <p className="mt-3 text-sm leading-6 text-zinc-600">
-              Heatmap highlights bleeding and spots that led to the decision, so ASHA workers and doctors can verify, not just trust.
+              {t("landingHeatmapDesc")}
             </p>
             <div className="mt-6 relative overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-50 h-[180px] grid place-items-center">
               <img src="/images/fundus-mild.jpg" alt="Fundus with hemorrhages and cotton wool spots, early NPDR" className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-luminosity group-hover:scale-105 transition-transform duration-700" />
@@ -755,11 +762,11 @@ export default function Landing() {
               <Zap className="w-3.5 h-3.5" /> Ready to use
             </div>
             <h3 className="mt-3 text-[22px] font-bold leading-tight tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-              Zero bars.
+              {t("landingZeroBars")}
               <br />
-              Full screening.
+              {t("landingFullScreening")}
             </h3>
-            <p className="mt-3 text-sm leading-6 text-zinc-700">AI on your device, safe storage, SMS reminders queued and synced later. Built for villages, not WiFi.</p>
+            <p className="mt-3 text-sm leading-6 text-zinc-700">{t("landingZeroBarsDesc")}</p>
             <div className="mt-6 grid grid-cols-3 gap-2">
               {[
                 { v: "<2.1s", l: "Inference" },
@@ -790,7 +797,7 @@ export default function Landing() {
                 <br />
                 without the lost follow-up.
               </h3>
-              <p className="mt-3 text-sm leading-6 text-zinc-600">One tap creates an eSanjeevani report with heatmap and history. Pharmacist checks and delivers, no paper needed.</p>
+              <p className="mt-3 text-sm leading-6 text-zinc-600">{t("landingReferralDesc")}</p>
               <div className="mt-6 space-y-2">
                 {[
                   ["Auto-report", "Stage, confidence, heatmap, HbA1c trends"],
@@ -837,9 +844,9 @@ export default function Landing() {
       <section className="w-full max-w-[1120px] mx-auto px-6 min-w-0 overflow-x-hidden pb-24 md:pb-32">
         <div className="flex items-end justify-between gap-6 mb-8">
           <h3 className="text-[28px] md:text-[36px] font-black tracking-tight leading-none" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-            Ten steps. One flow.
+            {t("landingTenStepsFlow")}
           </h3>
-          <p className="hidden md:block max-w-[420px] text-sm text-zinc-600">Hover to expand. Every step works anywhere and syncs later.</p>
+          <p className="hidden md:block max-w-[420px] text-sm text-zinc-600">{t("landingHoverExpand")}</p>
         </div>
 
         <div className="flex flex-col md:flex-row gap-3 h-auto md:h-[420px]">
@@ -934,13 +941,13 @@ export default function Landing() {
             {/* Pinned left — always visible, solid bg on desktop to prevent gallery bleed */}
             <div className="pinned-left lg:h-screen lg:sticky lg:top-0 flex flex-col justify-center py-16 lg:py-0 relative z-30 bg-zinc-950 lg:bg-transparent">
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-300">
-                <Sparkles className="w-3.5 h-3.5" /> Evidence you can verify
+                <Sparkles className="w-3.5 h-3.5" /> {t("landingEvidenceEyebrow")}
               </div>
               <h2 className="mt-4 text-[32px] sm:text-[40px] md:text-[56px] font-black leading-[0.88] tracking-tight text-balance" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
                 Every <span className="text-zinc-500">decision</span> is shown.
               </h2>
               <p className="mt-6 text-[15px] leading-7 text-zinc-400 max-w-[420px]">
-                Confidence, heatmap, progress and simple guidance on every screen, so checking is built in, not an afterthought.
+                {t("landingEvidenceDesc")}
               </p>
 
               <div className="mt-8 space-y-3 max-w-[420px]">
@@ -961,10 +968,10 @@ export default function Landing() {
 
               <div className="mt-10 flex gap-3">
                 <Link href="/app/patients" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-zinc-900 font-bold text-sm hover:bg-zinc-100 transition">
-                  Try the explainer <ScanEye className="w-4 h-4" />
+                  {t("landingTryExplainer")} <ScanEye className="w-4 h-4" />
                 </Link>
                 <Link href="/app/dashboard" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-white font-semibold text-sm hover:bg-white/10 transition">
-                  View dashboard
+                  {t("landingViewDashboard")}
                 </Link>
               </div>
             </div>
@@ -1048,12 +1055,12 @@ export default function Landing() {
         <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 md:gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-700">
-              <span className="w-8 h-[2px] bg-teal-700" /> Field voices
+              <span className="w-8 h-[2px] bg-teal-700" /> {t("landingFieldVoices")}
             </div>
             <h2 className="mt-3 text-[36px] md:text-[48px] font-black leading-[0.9] tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-              Built with PHCs,
+              {t("landingBuiltWithPhc")}
               <br />
-              <span className="text-zinc-400">not for them.</span>
+              <span className="text-zinc-400">{t("landingNotForThem")}</span>
             </h2>
             <div className="mt-8 relative">
               <div className="overflow-hidden rounded-[28px] border border-zinc-200 bg-white p-8 md:p-10">
@@ -1134,8 +1141,8 @@ export default function Landing() {
                 <img src="/images/pharmacist-portrait.jpg" alt="Pharmacist" className="w-8 h-8 rounded-full border-2 border-white object-cover" />
               </div>
               <div className="text-xs leading-none">
-                <div className="font-bold">Trusted by 12 PHCs</div>
-                <div className="text-zinc-500">Dhule • Adilabad • Warangal</div>
+                <div className="font-bold">{t("landingTrustedBy")}</div>
+                <div className="text-zinc-500">{t("landingTrustedSub")}</div>
               </div>
             </div>
           </div>
@@ -1180,34 +1187,34 @@ export default function Landing() {
             <div className="relative">
               <div className="text-xs font-bold tracking-widest uppercase text-amber-300">Impact if deployed in one district</div>
               <h3 className="mt-2 text-[28px] md:text-[32px] font-bold leading-tight tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-                One ASHA worker + one phone can screen a village in a day.
+                {t("landingImpactTitle")}
               </h3>
               <ul className="mt-6 space-y-2.5 text-sm text-zinc-300">
                 <li className="flex gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> No new hardware, use the ophthalmoscope you already have
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> {t("landingImpactLi1")}
                 </li>
                 <li className="flex gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> Works in villages with no signal, syncs when back online
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> {t("landingImpactLi2")}
                 </li>
                 <li className="flex gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> Builds trust with heatmaps and simple guidance
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> {t("landingImpactLi3")}
                 </li>
                 <li className="flex gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> Continuity: glucose, eye, foot and pharmacy in one record
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2" /> {t("landingImpactLi4")}
                 </li>
               </ul>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/app/dashboard" className="px-6 py-3 rounded-full bg-white text-zinc-900 font-bold text-sm hover:bg-zinc-100 transition">
-                  Explore PHC dashboard
+                  {t("landingExploreDashboard")}
                 </Link>
                 <Link href="/app/patients" className="px-6 py-3 rounded-full bg-teal-600 text-white font-bold text-sm hover:bg-teal-700 transition">
-                  Run demo screening
+                  {t("landingRunDemo")}
                 </Link>
               </div>
             </div>
           </div>
           <div className="rounded-[28px] border border-zinc-200 bg-white p-6 md:p-8">
-            <h4 className="font-bold text-sm">Try this in 60 seconds</h4>
+            <h4 className="font-bold text-sm">{t("landingTry60Title")}</h4>
             <ol className="mt-4 space-y-3 text-sm">
               {[
                 ["Pick high-risk", "Patients → choose RISK ≥70"],
@@ -1248,7 +1255,7 @@ export default function Landing() {
           <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
             <div>
               <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-teal-300">
-                <Sparkles className="w-3.5 h-3.5" /> Ready to screen?
+                <Sparkles className="w-3.5 h-3.5" /> {t("landingReadyToScreenEyebrow")}
               </div>
               <h2 className="mt-4 text-[42px] md:text-[64px] font-black leading-[0.85] tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
                 Screen a
@@ -1256,14 +1263,14 @@ export default function Landing() {
                 <span className="text-zinc-500">village</span> today.
               </h2>
               <p className="mt-6 max-w-[520px] text-sm md:text-[15px] leading-6 text-zinc-400">
-                No new orders, no waiting for signal. Your PHC can start with the phone in your pocket. Clear results, ready to use, built for Bharat.
+                {t("landingCtaDesc")}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link href="/app/patients" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-zinc-900 font-black text-sm hover:bg-zinc-100 transition shadow-[0_12px_32px_rgba(255,255,255,0.12)]">
-                  Start screening now <ArrowRight className="w-4 h-4" />
+                  {t("landingStartNow")} <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link href="/app/dashboard" className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white font-semibold text-sm hover:bg-white/10 transition">
-                  Open PHC demo <Layers className="w-4 h-4" />
+                  {t("landingOpenDemo")} <Layers className="w-4 h-4" />
                 </Link>
               </div>
               <div className="mt-6 flex flex-wrap gap-2 text-xs text-zinc-500">

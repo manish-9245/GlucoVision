@@ -6,6 +6,7 @@ import { useAuth } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
 import { Eye, EyeOff, ArrowRight, ShieldCheck } from "lucide-react";
 import { CustomSelect } from "@/components/CustomSelect";
+import { useLang } from "@/lib/i18n";
 
 const ROLES = [
   { value: "asha", label: "ASHA Worker", desc: "Village screening, intake" },
@@ -15,6 +16,7 @@ const ROLES = [
 ] as const;
 
 export default function SignupPage() {
+  const { t } = useLang();
   const { signup } = useAuth();
   const router = useRouter();
   const [form, setForm] = useState({ name: "", email: "", password: "", role: "asha" as (typeof ROLES)[number]["value"], phc: "Shirpur Rural", village: "" });
@@ -60,43 +62,43 @@ export default function SignupPage() {
           <h1 className="text-[32px] font-black leading-none tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
             Create account
           </h1>
-          <p className="text-sm text-zinc-600 mt-2">Join your PHC. Your role decides what you see: ASHA screens, Medical Officer reviews, Eye doctor confirms, Pharmacy delivers.</p>
+          <p className="text-sm text-zinc-600 mt-2">{t("signupDesc2")}</p>
 
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-bold tracking-widest uppercase">Full name</label>
+                <label className="text-xs font-bold tracking-widest uppercase">{t("signupFullNameLabel2")}</label>
                 <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Asha Kokate" required className="mt-1 w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none" />
               </div>
               <div>
-                <label className="text-xs font-bold tracking-widest uppercase">Role</label>
-                <CustomSelect value={form.role} onChange={(v) => setForm({ ...form, role: v as never })} options={ROLES.map((r) => ({ value: r.value, label: r.label, desc: r.desc }))} />
+                <label className="text-xs font-bold tracking-widest uppercase">{t("signupRoleLabel2")}</label>
+                <CustomSelect value={form.role} onChange={(v) => setForm({ ...form, role: v as never })} options={ROLES.map((r) => ({ value: r.value, label: t(r.value==="asha"? "signupAshaWorker" : r.value==="mo"? "signupMo" : r.value==="ophthalmologist"? "signupOphthalmologist" : "signupPharmacist"), desc: t(r.value==="asha"? "signupAshaDesc" : r.value==="mo"? "signupMoDesc" : r.value==="ophthalmologist"? "signupOphthDesc" : "signupPharmaDesc") }))} />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-bold tracking-widest uppercase">Email</label>
+              <label className="text-xs font-bold tracking-widest uppercase">{t("signupEmailLabel2")}</label>
               <input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="asha@phc.in" type="email" required className="mt-1 w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none" />
             </div>
 
             <div>
-              <label className="text-xs font-bold tracking-widest uppercase">Password</label>
+              <label className="text-xs font-bold tracking-widest uppercase">{t("signupPasswordLabel2")}</label>
               <div className="relative">
                 <input value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} placeholder="••••••••" type={show ? "text" : "password"} required className="mt-1 w-full px-4 py-3 pr-11 rounded-xl border border-zinc-200 bg-zinc-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none" />
                 <button type="button" onClick={() => setShow(!show)} className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 grid place-items-center rounded-full hover:bg-zinc-100">
                   {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
-              <div className="text-xs text-zinc-500 mt-1">Min 6 characters, your data is handled securely.</div>
+              <div className="text-xs text-zinc-500 mt-1">{t("signupMinChars2")}</div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <label className="text-xs font-bold tracking-widest uppercase">PHC</label>
+                <label className="text-xs font-bold tracking-widest uppercase">{t("signupPhcLabel2")}</label>
                 <input value={form.phc} onChange={(e) => setForm({ ...form, phc: e.target.value })} placeholder="Shirpur Rural" className="mt-1 w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none" />
               </div>
               <div>
-                <label className="text-xs font-bold tracking-widest uppercase">Village</label>
+                <label className="text-xs font-bold tracking-widest uppercase">{t("signupVillageLabel2")}</label>
                 <input value={form.village} onChange={(e) => setForm({ ...form, village: e.target.value })} placeholder="Shirpur, Dhule" className="mt-1 w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none" />
               </div>
             </div>
@@ -104,11 +106,11 @@ export default function SignupPage() {
             {err && <div className="rounded-xl bg-red-50 border border-red-200 px-3 py-2.5 text-sm text-red-700 flex items-center gap-2"><ShieldCheck className="w-4 h-4" /> {err}</div>}
 
             <button type="submit" disabled={loading} className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-zinc-900 text-white font-bold hover:bg-black disabled:opacity-40">
-              {loading ? "Creating…" : <>Create account <ArrowRight className="w-4 h-4" /></>}
+              {loading ? t("signupCreating2") : <>{t("signupCreateBtn2")} <ArrowRight className="w-4 h-4" /></>}
             </button>
 
             <div className="text-center text-sm">
-              <span className="text-zinc-500">Already have an account?</span> <Link href="/login" className="font-bold text-teal-700 hover:underline">Sign in</Link>
+              <span className="text-zinc-500">{t("signupAlreadyText2")}</span> <Link href="/login" className="font-bold text-teal-700 hover:underline">{t("signupSignInLink2")}</Link>
             </div>
           </form>
         </div>

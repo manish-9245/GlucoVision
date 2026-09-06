@@ -5,9 +5,11 @@ import { DR_LABELS } from "@/lib/types";
 import Link from "next/link";
 import { Search, Plus, ScanEye, Activity, MapPin, Phone, AlertTriangle, Eye, Image as ImageIcon } from "lucide-react";
 import { CustomSelect } from "@/components/CustomSelect";
+import { useLang } from "@/lib/i18n";
 
 export default function PatientsPage() {
   const { patients, addPatient } = useStore();
+  const { t } = useLang();
   const [q, setQ] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: "", age: "", village: "", phone: "", gender: "M" as "M" | "F", diabetesYears: "", hbA1c: "", bp: "", diabetesType: "Type 2" as "Type 1" | "Type 2" });
@@ -49,41 +51,41 @@ export default function PatientsPage() {
     <div className="w-full max-w-[1220px] mx-auto p-4 md:p-6 min-w-0 overflow-x-hidden space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Patients</h1>
-          <p className="text-sm text-zinc-600 mt-1">Registry • {filtered.length} patients • Tap to start screening</p>
+          <h1 className="text-2xl font-bold tracking-tight">{t("patientsHeading")}</h1>
+          <p className="text-sm text-zinc-600 mt-1">{t("patientsRegistrySub").replace("patients", `${filtered.length} ${t("patients")}`)}</p>
         </div>
         <button onClick={() => setShowForm(!showForm)} className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 text-white text-sm font-semibold hover:bg-black">
-          <Plus className="w-4 h-4" /> Register patient
+          <Plus className="w-4 h-4" /> {t("patientsRegisterBtn")}
         </button>
       </div>
 
       <div className="flex items-center gap-3">
         <div className="flex-1 relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
-          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search by name, village or ID…" className="w-full pl-10 pr-4 py-2.5 border border-zinc-200 bg-white text-sm focus:outline-none focus:border-zinc-900" />
+          <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("patientsSearchPh2")} className="w-full pl-10 pr-4 py-2.5 border border-zinc-200 bg-white text-sm focus:outline-none focus:border-zinc-900" />
         </div>
       </div>
 
       {showForm && (
         <div className="border border-zinc-200 bg-white p-4 space-y-3">
           <div className="grid md:grid-cols-3 gap-3">
-            <input placeholder="Full name *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm focus:outline-none focus:border-zinc-900 placeholder:text-zinc-400" />
-            <input placeholder="Age *" type="number" value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
-            <CustomSelect value={form.gender} onChange={(v) => setForm({ ...form, gender: v as "M" | "F" })} options={[{ value: "M", label: "Male (M)" }, { value: "F", label: "Female (F)" }]} placeholder="Gender" />
-            <input placeholder="Village * e.g. Shirpur, Dhule" value={form.village} onChange={(e) => setForm({ ...form, village: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
-            <input placeholder="Phone e.g. 98XXXXX000" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
-            <CustomSelect value={form.diabetesType} onChange={(v) => setForm({ ...form, diabetesType: v as "Type 1" | "Type 2" })} options={[{ value: "Type 2", label: "Type 2" }, { value: "Type 1", label: "Type 1" }]} placeholder="Diabetes type" />
-            <input placeholder="Diabetes years e.g. 5" type="number" value={form.diabetesYears} onChange={(e) => setForm({ ...form, diabetesYears: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
-            <input placeholder="HbA1c % * e.g. 7.5" type="number" step="0.1" value={form.hbA1c} onChange={(e) => setForm({ ...form, hbA1c: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
-            <input placeholder="BP * e.g. 130/85" value={form.bp} onChange={(e) => setForm({ ...form, bp: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
+            <input placeholder={t("patientsFullNamePh")} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm focus:outline-none focus:border-zinc-900 placeholder:text-zinc-400" />
+            <input placeholder={t("patientsAgePh")} type="number" value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
+            <CustomSelect value={form.gender} onChange={(v) => setForm({ ...form, gender: v as "M" | "F" })} options={[{ value: "M", label: t("patientsGenderMale") }, { value: "F", label: t("patientsGenderFemale") }]} placeholder="Gender" />
+            <input placeholder={t("patientsVillagePh")} value={form.village} onChange={(e) => setForm({ ...form, village: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
+            <input placeholder={t("patientsPhonePh")} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
+            <CustomSelect value={form.diabetesType} onChange={(v) => setForm({ ...form, diabetesType: v as "Type 1" | "Type 2" })} options={[{ value: "Type 2", label: t("patientsDiabetesType2") }, { value: "Type 1", label: t("patientsDiabetesType1") }]} placeholder="Diabetes type" />
+            <input placeholder={t("patientsDiabetesYearsPh")} type="number" value={form.diabetesYears} onChange={(e) => setForm({ ...form, diabetesYears: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
+            <input placeholder={t("patientsHbA1cPh")} type="number" step="0.1" value={form.hbA1c} onChange={(e) => setForm({ ...form, hbA1c: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
+            <input placeholder={t("patientsBpPh")} value={form.bp} onChange={(e) => setForm({ ...form, bp: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
           </div>
-          <div className="text-xs text-zinc-500">* Required, values you enter set the risk. No preset numbers, risk is based on your HbA1c, years and age.</div>
+          <div className="text-xs text-zinc-500">{t("patientsRequiredNote")}</div>
           <div className="flex justify-end gap-2">
             <button onClick={() => { setShowForm(false); setForm({ name: "", age: "", village: "", phone: "", gender: "M", diabetesYears: "", hbA1c: "", bp: "", diabetesType: "Type 2" }); }} className="px-4 py-2 border border-zinc-200 bg-white text-sm font-medium hover:bg-zinc-50">
-              Cancel
+              {t("patientsCancelBtn")}
             </button>
             <button onClick={submit} disabled={!form.name.trim() || !form.village.trim() || !form.age || !form.hbA1c || !form.bp.trim()} className="px-5 py-2 bg-zinc-900 text-white text-sm font-semibold hover:bg-black disabled:opacity-40 disabled:cursor-not-allowed">
-              Save patient, risk calculated
+              {t("patientsSaveBtn")}
             </button>
           </div>
         </div>
@@ -112,13 +114,13 @@ export default function PatientsPage() {
                     </span>
                   </div>
                 </div>
-                <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 border ${p.riskScore >= 70 ? "bg-red-50 border-red-200 text-red-700" : p.riskScore >= 40 ? "bg-amber-50 border-amber-200 text-amber-800" : "bg-emerald-50 border-emerald-200 text-emerald-700"}`}>RISK {p.riskScore}</span>
+                <span className={`shrink-0 text-xs font-semibold px-2.5 py-1 border ${p.riskScore >= 70 ? "bg-red-50 border-red-200 text-red-700" : p.riskScore >= 40 ? "bg-amber-50 border-amber-200 text-amber-800" : "bg-emerald-50 border-emerald-200 text-emerald-700"}`}>{t("patientsRiskLabel")} {p.riskScore}</span>
               </div>
 
               <div className="flex flex-wrap gap-2 text-xs">
-                <span className="px-2 py-1 bg-zinc-50 border border-zinc-200">HbA1c {p.hbA1c}%</span>
-                <span className="px-2 py-1 bg-zinc-50 border border-zinc-200">BP {p.bp}</span>
-                {p.familyHistory && <span className="px-2 py-1 bg-white border border-zinc-200">Family history</span>}
+                <span className="px-2 py-1 bg-zinc-50 border border-zinc-200">{t("patientsHbA1cShort")} {p.hbA1c}%</span>
+                <span className="px-2 py-1 bg-zinc-50 border border-zinc-200">{t("patientsBpShort")} {p.bp}</span>
+                {p.familyHistory && <span className="px-2 py-1 bg-white border border-zinc-200">{t("patientsFamilyHist")}</span>}
                 {p.symptoms.length > 0 && <span className="px-2 py-1 bg-zinc-50 border border-zinc-200 inline-flex items-center gap-1"><AlertTriangle className="w-3 h-3" />{p.symptoms.join(", ")}</span>}
               </div>
 
@@ -137,12 +139,12 @@ export default function PatientsPage() {
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="text-xs font-semibold flex items-center gap-1">
-                    <Eye className="w-3 h-3" /> {p.visits.length} examination{p.visits.length !== 1 ? "s" : ""} {p.visits.length > 0 && `• last ${p.lastScreened || last?.date || ""}`}
+                    <Eye className="w-3 h-3" /> {p.visits.length} {t("patientsExamsLabel")} {p.visits.length > 0 && `• ${t("patientsLastLabel")} ${p.lastScreened || last?.date || ""}`}
                   </div>
                   <div className="text-xs text-zinc-600 truncate">
-                    {last ? `${DR_LABELS[last.drStage]} • ${(last.confidence * 100).toFixed(0)}% • ${last.imageUrl ? "Image saved ✓" : "No image"}` : "Never screened, images you save will appear here"}
+                    {last ? `${DR_LABELS[last.drStage]} • ${(last.confidence * 100).toFixed(0)}% • ${last.imageUrl ? t("patientImageSaved") : t("patientNoImage")}` : t("patientsNeverScreened")}
                   </div>
-                  <div className="text-[11px] text-zinc-500">Tap to open patient examination page</div>
+                  <div className="text-[11px] text-zinc-500">{t("patientsTapOpen")}</div>
                 </div>
                 <Eye className="w-4 h-4 text-zinc-400 shrink-0" />
               </Link>
@@ -152,16 +154,16 @@ export default function PatientsPage() {
                   {last ? (
                     <span className="font-medium border px-2 py-1 bg-white border-zinc-200">{DR_LABELS[last.drStage]} • {(last.confidence * 100).toFixed(0)}%</span>
                   ) : (
-                    <span className="px-2 py-1 bg-zinc-100 border border-zinc-200">Never screened</span>
+                    <span className="px-2 py-1 bg-zinc-100 border border-zinc-200">{t("patientsNeverScreened")}</span>
                   )}
-                  <span className="ml-2 text-zinc-500">{p.lastScreened ? `Last: ${p.lastScreened}` : "Not yet"}</span>
+                  <span className="ml-2 text-zinc-500">{p.lastScreened ? `${t("patientsLastLabel")} ${p.lastScreened}` : t("patientsNotYet")}</span>
                 </div>
                 <div className="flex gap-1.5">
                   <Link href={`/app/patients/${p.id}`} className="inline-flex items-center gap-1.5 px-3 py-2 border border-zinc-200 bg-white text-xs font-medium hover:bg-zinc-50">
-                    <Eye className="w-3.5 h-3.5" /> View
+                    <Eye className="w-3.5 h-3.5" /> {t("patientsViewBtn")}
                   </Link>
                   <Link href={`/app/patients?patient=${p.id}`} className="inline-flex items-center gap-1.5 px-4 py-2 bg-zinc-900 text-white text-xs font-semibold hover:bg-black">
-                    <ScanEye className="w-3.5 h-3.5" /> Screen
+                    <ScanEye className="w-3.5 h-3.5" /> {t("patientsScreenBtn")}
                   </Link>
                 </div>
               </div>
