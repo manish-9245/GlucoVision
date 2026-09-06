@@ -9,7 +9,6 @@ import { Logo } from "@/components/Logo";
 const nav = [
   { href: "/app/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/app/patients", label: "Patients", icon: Users },
-  { href: "/app/screening", label: "Screening", icon: ScanEye },
   { href: "/app/referrals", label: "Referrals", icon: Send },
   { href: "/app/pharmacy", label: "Telepharmacy", icon: Pill },
   { href: "/app/foot", label: "Foot Screening", icon: Footprints },

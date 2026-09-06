@@ -115,7 +115,7 @@ export default function ReferralsPage() {
               </div>
               <div className="mt-3 font-bold">No referrals in this filter</div>
               <div className="text-sm text-slate-600">Screen a patient (stage ≥2) and a referral is auto-queued here.</div>
-              <Link href="/app/screening" className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal-700 text-white text-sm font-bold">
+              <Link href="/app/patients" className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal-700 text-white text-sm font-bold">
                 Go to screening <ArrowRight className="w-4 h-4" />
               </Link>
             </motion.div>
@@ -181,7 +181,7 @@ export default function ReferralsPage() {
                 </div>
 
                 <div className="flex gap-2 pt-1">
-                  <Link href={`/app/screening?patient=${r.patientId}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-black transition">
+                  <Link href={`/app/patients?patient=${r.patientId}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-black transition">
                     View patient <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                   <span className="inline-flex items-center gap-1 px-3 py-2.5 rounded-full bg-white border border-stone-200 text-xs font-semibold shadow-sm">
@@ -209,7 +209,7 @@ export default function ReferralsPage() {
         <div className="relative border bg-white text-slate-900 p-5 border border-stone-200 shadow-xl">
           <div className="text-xs font-black tracking-widest text-teal-700">FOR JUDGES</div>
           <p className="text-sm mt-2 leading-relaxed">Try: Screening → run AI on a high-risk patient (Ramesh/Arjun) → see referral auto-appear here as “pending”. Filter by status to show pipeline.</p>
-          <Link href="/app/screening" className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal-700 text-white text-sm font-bold hover:bg-teal-800 shadow-md transition">
+          <Link href="/app/patients" className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-teal-700 text-white text-sm font-bold hover:bg-teal-800 shadow-md transition">
             Run a screening now <CheckCircle2 className="w-4 h-4" />
           </Link>
         </div>

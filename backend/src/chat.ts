@@ -153,13 +153,17 @@ export function mountChat(app: Hono<{ Bindings: Env }>) {
       .all<{ role: string; content: string; image_url: string | null }>();
     const history = (histRows.results || []).reverse().map((r) => ({ role: r.role as "user" | "assistant", content: r.content, image_url: r.image_url }));
 
-    // Resolve API key (Worker secret > D1 encrypted)
+    // Resolve API key (Worker secret > D1 encrypted) — if missing, use local mock (for open source / offline demo)
     let apiKey = c.env.NVIDIA_API_KEY || "";
     if (!apiKey && c.env.ENCRYPTION_KEY) {
       const fromDb = await getEncryptedSecret(c.env.DB, "NVIDIA_API_KEY", c.env.ENCRYPTION_KEY).catch(() => null);
       if (fromDb) apiKey = fromDb;
     }
-    if (!apiKey) return c.json({ error: "NVIDIA_API_KEY not configured. wrangler secret put NVIDIA_API_KEY" }, 500);
+    const useMock = !apiKey;
+    if (useMock) {
+      // No API key — return helpful local mock instead of 500, so UI stays in "connected" mode even without key
+      console.warn("NVIDIA_API_KEY not configured — using local mock for chat");
+    }
 
     // Build messages with engineered system prompt + patient context + sliding window
     const messages = buildMessages(patient, visit, history, userMessage, imageUrl);
@@ -170,21 +174,35 @@ export function mountChat(app: Hono<{ Bindings: Env }>) {
       .bind(userId, patientId, visitId, userMessage, imageUrl, "user")
       .run();
 
-    // Call NIM with fallback
+    // Call NIM with fallback — or local mock if no API key (open source demo)
     const started = Date.now();
     let modelUsed = "";
     let assistantText = "";
     try {
-      const r = await callNimWithFallback(messages, apiKey);
-      modelUsed = r.model;
-      const d = r.data as Record<string, unknown>;
-      // Try extract assistant content from various NIM response shapes
-      const choice = (d as { choices?: { message?: { content?: string } }[] })?.choices?.[0]?.message?.content;
-      const content = (d as { content?: string })?.content;
-      assistantText = (choice as string) || (content as string) || JSON.stringify(d).slice(0, 4000);
-      // If model returned JSON string, keep it; else wrap
-      if (!assistantText.includes("disclaimer")) {
-        assistantText += "\n\n*Disclaimer: Preliminary AI — ophthalmologist confirmation required.*";
+      if (useMock) {
+        // Local mock: generate structured response from patient/visit without external API
+        const lastStage = visit ? (visit.dr_stage as number) : -1;
+        const risk = patient.risk_score as number;
+        const guidance =
+          lastStage >= 2
+            ? "Routine referral within 4 to 8 weeks, re-screen in 3 months, optimize HbA1c and BP."
+            : lastStage === 1
+              ? "Tighten control, re-screen in 6 months."
+              : lastStage === 0
+                ? "No changes seen, annual re-screen in 12 months."
+                : "Continue routine follow up.";
+        assistantText = `**Local guidance for ${patient.name} (${patient.id})** — risk ${risk}/100, last stage ${lastStage === -1 ? "unknown" : lastStage} — ${guidance}\n\nYou asked: "${userMessage}"\n\n*This is a local demo response. For image-specific analysis, set NVIDIA_API_KEY to enable vision models. Preliminary — ophthalmologist must confirm.*`;
+        modelUsed = "local-mock";
+      } else {
+        const r = await callNimWithFallback(messages, apiKey);
+        modelUsed = r.model;
+        const d = r.data as Record<string, unknown>;
+        const choice = (d as { choices?: { message?: { content?: string } }[] })?.choices?.[0]?.message?.content;
+        const content = (d as { content?: string })?.content;
+        assistantText = (choice as string) || (content as string) || JSON.stringify(d).slice(0, 4000);
+        if (!assistantText.includes("disclaimer")) {
+          assistantText += "\n\n*Disclaimer: Preliminary AI — ophthalmologist confirmation required.*";
+        }
       }
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : String(e);

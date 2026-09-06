@@ -364,7 +364,7 @@ const FloatingNav = () => {
             Open PHC Demo
           </Link>
           <Link
-            href="/app/screening"
+            href="/app/patients"
             className="inline-flex items-center gap-2 text-sm font-bold px-5 md:px-6 py-2.5 md:py-3 rounded-full bg-zinc-900 text-white hover:bg-black transition shadow-[0_4px_16px_rgba(0,0,0,0.16)]"
           >
             Start Screening <ArrowRight className="w-4 h-4" />
@@ -549,7 +549,7 @@ export default function Landing() {
 
           <div className="mt-10 flex flex-col sm:flex-row items-center gap-3">
             <Link
-              href="/app/screening"
+              href="/app/patients"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-zinc-900 font-bold rounded-full hover:bg-zinc-100 transition shadow-[0_12px_32px_rgba(255,255,255,0.15)] text-[15px]"
             >
               <ScanEye className="w-4 h-4" /> Try live screening demo
@@ -970,7 +970,7 @@ export default function Landing() {
               </div>
 
               <div className="mt-10 flex gap-3">
-                <Link href="/app/screening" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-zinc-900 font-bold text-sm hover:bg-zinc-100 transition">
+                <Link href="/app/patients" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-zinc-900 font-bold text-sm hover:bg-zinc-100 transition">
                   Try the explainer <ScanEye className="w-4 h-4" />
                 </Link>
                 <Link href="/app/dashboard" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-white font-semibold text-sm hover:bg-white/10 transition">
@@ -1210,7 +1210,7 @@ export default function Landing() {
                 <Link href="/app/dashboard" className="px-6 py-3 rounded-full bg-white text-zinc-900 font-bold text-sm hover:bg-zinc-100 transition">
                   Explore PHC dashboard
                 </Link>
-                <Link href="/app/screening" className="px-6 py-3 rounded-full bg-teal-600 text-white font-bold text-sm hover:bg-teal-700 transition">
+                <Link href="/app/patients" className="px-6 py-3 rounded-full bg-teal-600 text-white font-bold text-sm hover:bg-teal-700 transition">
                   Run demo screening
                 </Link>
               </div>
@@ -1269,7 +1269,7 @@ export default function Landing() {
                 No new orders, no waiting for signal. Your PHC can start with the phone in your pocket. Clear results, ready to use, built for Bharat.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Link href="/app/screening" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-zinc-900 font-black text-sm hover:bg-zinc-100 transition shadow-[0_12px_32px_rgba(255,255,255,0.12)]">
+                <Link href="/app/patients" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-zinc-900 font-black text-sm hover:bg-zinc-100 transition shadow-[0_12px_32px_rgba(255,255,255,0.12)]">
                   Start screening now <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link href="/app/dashboard" className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white font-semibold text-sm hover:bg-white/10 transition">
@@ -1338,7 +1338,7 @@ export default function Landing() {
               <Link href="/app/patients" className="hover:text-white transition">
                 Patients
               </Link>
-              <Link href="/app/screening" className="hover:text-white transition">
+              <Link href="/app/patients" className="hover:text-white transition">
                 Screening
               </Link>
               <Link href="/app/referrals" className="hover:text-white transition">

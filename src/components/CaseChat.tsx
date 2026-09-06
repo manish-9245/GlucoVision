@@ -171,48 +171,50 @@ export function CaseChat({
       </div>
 
       {hasAny && (
-        <div className="px-4 py-3 border-b border-zinc-200 bg-white space-y-3">
-          <div className="flex items-center gap-3">
-            {hasLeft && bothPreviews.left && (
-              <div className="relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={bothPreviews.left} alt="left eye" className="w-14 h-14 rounded-xl object-cover border-2 border-teal-600" />
-                <span className="absolute -bottom-1 -right-1 px-1 py-0.5 rounded-full bg-teal-600 text-white text-[10px] font-bold">L</span>
-              </div>
-            )}
-            {hasRight && bothPreviews.right && (
-              <div className="relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={bothPreviews.right} alt="right eye" className="w-14 h-14 rounded-xl object-cover border-2 border-amber-500" />
-                <span className="absolute -bottom-1 -right-1 px-1 py-0.5 rounded-full bg-amber-500 text-white text-[10px] font-bold">R</span>
-              </div>
-            )}
-            {!hasLeft && !hasRight && preview && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={preview} alt="case image" className="w-14 h-14 rounded-xl object-cover border border-zinc-200" />
-            )}
-            <div className="flex-1">
-              <div className="text-xs font-bold">{hasBoth ? "Both eyes attached" : hasLeft ? "Left eye attached" : hasRight ? "Right eye attached" : "Fundus attached"}</div>
-              <div className="text-xs text-zinc-500">{hasBoth ? "Both will be sent for AI check, ask to compare" : "Will be sent with your question"}</div>
+        <div className="px-4 py-4 border-b border-zinc-200 bg-zinc-50/50 space-y-4">
+          <div className="flex items-start gap-4">
+            <div className="flex gap-2 shrink-0">
+              {hasLeft && bothPreviews.left && (
+                <div className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={bothPreviews.left} alt="left eye" className="w-16 h-16 rounded-xl object-cover border-2 border-teal-600 shadow-sm" />
+                  <span className="absolute -bottom-1.5 -right-1.5 w-6 h-6 rounded-full bg-teal-600 text-white text-[11px] font-bold grid place-items-center border-2 border-white">L</span>
+                </div>
+              )}
+              {hasRight && bothPreviews.right && (
+                <div className="relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={bothPreviews.right} alt="right eye" className="w-16 h-16 rounded-xl object-cover border-2 border-amber-500 shadow-sm" />
+                  <span className="absolute -bottom-1.5 -right-1.5 w-6 h-6 rounded-full bg-amber-500 text-white text-[11px] font-bold grid place-items-center border-2 border-white">R</span>
+                </div>
+              )}
+              {!hasLeft && !hasRight && preview && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={preview} alt="case image" className="w-16 h-16 rounded-xl object-cover border-2 border-zinc-200" />
+              )}
             </div>
-            <label className="flex items-center gap-1.5 text-xs font-medium cursor-pointer">
-              <input type="checkbox" checked={includeImage} onChange={(e) => setIncludeImage(e.target.checked)} className="rounded" />
+            <div className="flex-1 min-w-0">
+              <div className="text-sm font-bold text-zinc-900">{hasBoth ? "Both eyes attached" : hasLeft ? "Left eye attached" : hasRight ? "Right eye attached" : "Fundus attached"}</div>
+              <div className="text-xs text-zinc-600 mt-1 leading-relaxed">{hasBoth ? "Both images will be sent for AI check. Ask to compare left and right." : "This image will be sent with your question."}</div>
+            </div>
+            <label className="flex items-center gap-2 text-xs font-medium cursor-pointer shrink-0 bg-white border border-zinc-200 rounded-full px-3 py-1.5 hover:bg-zinc-50">
+              <input type="checkbox" checked={includeImage} onChange={(e) => setIncludeImage(e.target.checked)} className="rounded text-teal-600" />
               Include
             </label>
           </div>
-          {hasAny && (
-            <div className="flex items-center gap-3 text-xs">
-              <label className="flex items-center gap-1.5 cursor-pointer">
-                <input type="checkbox" checked={includeLeft} onChange={(e) => setIncludeLeft(e.target.checked)} disabled={!hasLeft} className="rounded" />
-                <span className={hasLeft ? "" : "text-zinc-400"}>Left {hasLeft ? "✓" : "Not set"}</span>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 pt-3 border-t border-zinc-200">
+            <div className="flex items-center gap-3">
+              <label className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-medium cursor-pointer transition ${hasLeft ? (includeLeft ? "bg-teal-50 border-teal-300 text-teal-800" : "bg-white border-zinc-200 hover:bg-zinc-50") : "bg-zinc-100 border-zinc-200 text-zinc-400 cursor-not-allowed"}`}>
+                <input type="checkbox" checked={includeLeft} onChange={(e) => setIncludeLeft(e.target.checked)} disabled={!hasLeft} className="rounded text-teal-600" />
+                Left {hasLeft ? "✓" : "Not set"}
               </label>
-              <label className="flex items-center gap-1.5 cursor-pointer">
-                <input type="checkbox" checked={includeRight} onChange={(e) => setIncludeRight(e.target.checked)} disabled={!hasRight} className="rounded" />
-                <span className={hasRight ? "" : "text-zinc-400"}>Right {hasRight ? "✓" : "Not set"}</span>
+              <label className={`flex items-center gap-2 px-3 py-1.5 rounded-full border text-xs font-medium cursor-pointer transition ${hasRight ? (includeRight ? "bg-amber-50 border-amber-300 text-amber-800" : "bg-white border-zinc-200 hover:bg-zinc-50") : "bg-zinc-100 border-zinc-200 text-zinc-400 cursor-not-allowed"}`}>
+                <input type="checkbox" checked={includeRight} onChange={(e) => setIncludeRight(e.target.checked)} disabled={!hasRight} className="rounded text-amber-600" />
+                Right {hasRight ? "✓" : "Not set"}
               </label>
-              <span className="ml-auto text-[11px] text-zinc-500">{hasBoth ? "Tip: Ask “Compare left vs right”" : "Upload the other eye to compare"}</span>
             </div>
-          )}
+            <span className="text-xs text-zinc-500 sm:ml-auto bg-white border border-zinc-200 rounded-full px-3 py-1.5 text-center">{hasBoth ? "Tip: Ask “Compare left vs right”" : "Upload the other eye to compare"}</span>
+          </div>
         </div>
       )}
 

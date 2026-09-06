@@ -251,7 +251,7 @@ export default function PharmacyPage() {
                         <PackageCheck className="w-4 h-4" /> Completed, refill reminder set
                       </span>
                     )}
-                    <Link href={`/app/screening?patient=${o.patientId}`} className="px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">
+                    <Link href={`/app/patients?patient=${o.patientId}`} className="px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">
                       Patient
                     </Link>
                   </div>

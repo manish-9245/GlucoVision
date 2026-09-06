@@ -317,6 +317,74 @@ export const patients: Patient[] = [
         "indication": "Metformin-induced B12 check",
         "status": "active"
       }
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-001",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 91,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -533,6 +601,50 @@ export const patients: Patient[] = [
     "medication": [
       "Metformin 500mg",
       "Telmisartan 40mg"
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "low",
+      "summary": "Low foot risk: no current ulcer, good circulation. Keep up daily checks.",
+      "flags": [],
+      "recommendation": "Re-screen every 6 months, daily foot check, never walk barefoot, trim nails straight.",
+      "nextCheck": "6 months",
+      "dietTips": [
+        "Whole grains, dal, veg",
+        "Walk 30 min"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-002",
+        "date": "2026-08-15",
+        "risk": "low",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "low",
+          "summary": "Low foot risk: no current ulcer, good circulation. Keep up daily checks.",
+          "flags": [],
+          "recommendation": "Re-screen every 6 months, daily foot check, never walk barefoot, trim nails straight.",
+          "nextCheck": "6 months",
+          "dietTips": [
+            "Whole grains, dal, veg",
+            "Walk 30 min"
+          ]
+        },
+        "imageQuality": 85,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -861,6 +973,74 @@ export const patients: Patient[] = [
       "Metformin 500mg",
       "Glimipride 2mg",
       "Insulin Glargine"
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-003",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 87,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -1056,7 +1236,51 @@ export const patients: Patient[] = [
     "medication": [
       "Metformin 500mg"
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "low",
+      "summary": "Low foot risk: no current ulcer, good circulation. Keep up daily checks.",
+      "flags": [],
+      "recommendation": "Re-screen every 6 months, daily foot check, never walk barefoot, trim nails straight.",
+      "nextCheck": "6 months",
+      "dietTips": [
+        "Whole grains, dal, veg",
+        "Walk 30 min"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-004",
+        "date": "2026-08-15",
+        "risk": "low",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "low",
+          "summary": "Low foot risk: no current ulcer, good circulation. Keep up daily checks.",
+          "flags": [],
+          "recommendation": "Re-screen every 6 months, daily foot check, never walk barefoot, trim nails straight.",
+          "nextCheck": "6 months",
+          "dietTips": [
+            "Whole grains, dal, veg",
+            "Walk 30 min"
+          ]
+        },
+        "imageQuality": 87,
+        "imageUrl": null
+      }
+    ]
   },
   {
     "id": "GV-005",
@@ -1364,6 +1588,56 @@ export const patients: Patient[] = [
       "Metformin 500mg",
       "Glimipride 2mg",
       "Atorvastatin 10mg"
+    ],
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-005",
+        "date": "2026-08-18",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 92,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -1679,6 +1953,57 @@ export const patients: Patient[] = [
         "indication": "Metformin-induced B12 check",
         "status": "active"
       }
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-006",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 91,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -1982,6 +2307,73 @@ export const patients: Patient[] = [
         "prescribedOn": "2026-05-10",
         "indication": "Metformin-induced B12 check",
         "status": "active"
+      }
+    ],
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-007",
+        "date": "2026-08-18",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 93,
+        "imageUrl": null
       }
     ]
   },
@@ -2311,7 +2703,75 @@ export const patients: Patient[] = [
         "status": "active"
       }
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-008",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 85,
+        "imageUrl": null
+      }
+    ]
   },
   {
     "id": "GV-009",
@@ -2670,7 +3130,75 @@ export const patients: Patient[] = [
         "status": "active"
       }
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-009",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 89,
+        "imageUrl": null
+      }
+    ]
   },
   {
     "id": "GV-010",
@@ -3035,6 +3563,57 @@ export const patients: Patient[] = [
         "indication": "Severe NPDR/PDR \u2014 prevent progression",
         "status": "active"
       }
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-010",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 85,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -3267,7 +3846,46 @@ export const patients: Patient[] = [
     "medication": [
       "Metformin 500mg"
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "low",
+      "summary": "Low foot risk: no current ulcer, good circulation. Keep up daily checks.",
+      "flags": [],
+      "recommendation": "Re-screen every 6 months, daily foot check, never walk barefoot, trim nails straight.",
+      "nextCheck": "6 months",
+      "dietTips": [
+        "Whole grains, dal, veg",
+        "Walk 30 min"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-011",
+        "date": "2026-08-15",
+        "risk": "low",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "low",
+          "summary": "Low foot risk: no current ulcer, good circulation. Keep up daily checks.",
+          "flags": [],
+          "recommendation": "Re-screen every 6 months, daily foot check, never walk barefoot, trim nails straight.",
+          "nextCheck": "6 months",
+          "dietTips": [
+            "Whole grains, dal, veg",
+            "Walk 30 min"
+          ]
+        },
+        "imageQuality": 87,
+        "imageUrl": null
+      }
+    ]
   },
   {
     "id": "GV-012",
@@ -3587,6 +4205,57 @@ export const patients: Patient[] = [
         "prescribedOn": "2026-05-10",
         "indication": "Metformin-induced B12 check",
         "status": "active"
+      }
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-012",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 90,
+        "imageUrl": null
       }
     ]
   },
@@ -3932,7 +4601,75 @@ export const patients: Patient[] = [
         "status": "active"
       }
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-013",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 85,
+        "imageUrl": null
+      }
+    ]
   },
   {
     "id": "GV-014",
@@ -4162,6 +4899,49 @@ export const patients: Patient[] = [
       "Metformin 500mg",
       "Telmisartan 40mg",
       "Mupirocin 2% ointment"
+    ],
+    "footAnalysis": {
+      "risk": "low",
+      "summary": "Low foot risk: no current ulcer, good circulation. Keep up daily checks.",
+      "flags": [],
+      "recommendation": "Re-screen every 6 months, daily foot check, never walk barefoot, trim nails straight.",
+      "nextCheck": "6 months",
+      "dietTips": [
+        "Whole grains, dal, veg",
+        "Walk 30 min"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-014",
+        "date": "2026-08-02",
+        "risk": "low",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "low",
+          "summary": "Low foot risk: no current ulcer, good circulation. Keep up daily checks.",
+          "flags": [],
+          "recommendation": "Re-screen every 6 months, daily foot check, never walk barefoot, trim nails straight.",
+          "nextCheck": "6 months",
+          "dietTips": [
+            "Whole grains, dal, veg",
+            "Walk 30 min"
+          ]
+        },
+        "imageQuality": 86,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -4394,6 +5174,57 @@ export const patients: Patient[] = [
     "medication": [
       "Metformin 500mg",
       "Sitagliptin 100mg"
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-015",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 91,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -4758,6 +5589,73 @@ export const patients: Patient[] = [
         "indication": "Severe NPDR/PDR \u2014 prevent progression",
         "status": "active"
       }
+    ],
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-016",
+        "date": "2026-08-18",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 90,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -5024,6 +5922,57 @@ export const patients: Patient[] = [
       "Metformin 500mg",
       "Telmisartan 40mg",
       "Amlodipine 5mg"
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-017",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 87,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -5383,7 +6332,58 @@ export const patients: Patient[] = [
       "Sitagliptin 100mg",
       "Telmisartan 40mg"
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-018",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 90,
+        "imageUrl": null
+      }
+    ]
   },
   {
     "id": "GV-019",
@@ -5754,6 +6754,74 @@ export const patients: Patient[] = [
         "indication": "Severe NPDR/PDR \u2014 prevent progression",
         "status": "active"
       }
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-019",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 93,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -6070,7 +7138,58 @@ export const patients: Patient[] = [
         "status": "active"
       }
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-020",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 85,
+        "imageUrl": null
+      }
+    ]
   },
   {
     "id": "GV-021",
@@ -6391,6 +7510,56 @@ export const patients: Patient[] = [
         "prescribedOn": "2026-01-12",
         "indication": "Metformin-induced B12 check",
         "status": "active"
+      }
+    ],
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-021",
+        "date": "2026-08-18",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 93,
+        "imageUrl": null
       }
     ]
   },
@@ -6770,6 +7939,74 @@ export const patients: Patient[] = [
         "indication": "Severe NPDR/PDR \u2014 prevent progression",
         "status": "active"
       }
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-022",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 91,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -7048,6 +8285,74 @@ export const patients: Patient[] = [
         "prescribedOn": "2026-05-10",
         "indication": "Severe NPDR/PDR \u2014 prevent progression",
         "status": "active"
+      }
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-023",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 88,
+        "imageUrl": null
       }
     ]
   },
@@ -7388,6 +8693,74 @@ export const patients: Patient[] = [
         "indication": "Severe NPDR/PDR \u2014 prevent progression",
         "status": "active"
       }
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "high",
+      "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+          "severity": "high"
+        },
+        {
+          "id": "2",
+          "label": "Possible ischaemia, check pulses",
+          "severity": "high"
+        }
+      ],
+      "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+      "nextCheck": "1 week",
+      "dietTips": [
+        "Low salt, high protein for wound healing",
+        "Vitamin C rich fruit small",
+        "Hydrate well"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-024",
+        "date": "2026-08-15",
+        "risk": "high",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+            "severity": "high"
+          },
+          {
+            "id": "2",
+            "label": "Possible ischaemia, check pulses",
+            "severity": "high"
+          }
+        ],
+        "analysis": {
+          "risk": "high",
+          "summary": "High foot risk: long diabetes, high HbA1c, and skin changes suggest ischaemia and ulcer risk.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Non-healing lesion, ulcer risk, needs dressing and offloading",
+              "severity": "high"
+            },
+            {
+              "id": "2",
+              "label": "Possible ischaemia, check pulses",
+              "severity": "high"
+            }
+          ],
+          "recommendation": "Urgent referral to surgery/podiatry within 2 days, offload pressure, sterile dressing, check pulses.",
+          "nextCheck": "1 week",
+          "dietTips": [
+            "Low salt, high protein for wound healing",
+            "Vitamin C rich fruit small",
+            "Hydrate well"
+          ]
+        },
+        "imageQuality": 86,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -7680,7 +9053,58 @@ export const patients: Patient[] = [
         "status": "completed"
       }
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-025",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 94,
+        "imageUrl": null
+      }
+    ]
   },
   {
     "id": "GV-026",
@@ -8057,6 +9481,56 @@ export const patients: Patient[] = [
         "indication": "Severe NPDR/PDR \u2014 prevent progression",
         "status": "active"
       }
+    ],
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-026",
+        "date": "2026-08-18",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 88,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -8321,6 +9795,57 @@ export const patients: Patient[] = [
       "Metformin 500mg",
       "Telmisartan 40mg",
       "Amlodipine 5mg"
+    ],
+    "footLastCheck": "2026-08-15",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-027",
+        "date": "2026-08-15",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 85,
+        "imageUrl": null
+      }
     ]
   },
   {
@@ -8582,7 +10107,57 @@ export const patients: Patient[] = [
       "Insulin Glargine",
       "Insulin Aspart"
     ],
-    "lastScreened": "2026-08-20"
+    "lastScreened": "2026-08-20",
+    "footAnalysis": {
+      "risk": "moderate",
+      "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+      "flags": [
+        {
+          "id": "1",
+          "label": "Possible nerve loss, simple touch test advised",
+          "severity": "med"
+        }
+      ],
+      "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+      "nextCheck": "2 weeks",
+      "dietTips": [
+        "Balanced protein, green veg",
+        "Keep sugar steady"
+      ]
+    },
+    "footChecks": [
+      {
+        "id": "foot-GV-028",
+        "date": "2026-08-18",
+        "risk": "moderate",
+        "flags": [
+          {
+            "id": "1",
+            "label": "Possible nerve loss, simple touch test advised",
+            "severity": "med"
+          }
+        ],
+        "analysis": {
+          "risk": "moderate",
+          "summary": "Moderate foot risk: some nerve changes, needs monofilament check and footwear advice.",
+          "flags": [
+            {
+              "id": "1",
+              "label": "Possible nerve loss, simple touch test advised",
+              "severity": "med"
+            }
+          ],
+          "recommendation": "PHC review within 1 week, footwear and hygiene counselling, moisturise and check daily.",
+          "nextCheck": "2 weeks",
+          "dietTips": [
+            "Balanced protein, green veg",
+            "Keep sugar steady"
+          ]
+        },
+        "imageQuality": 85,
+        "imageUrl": null
+      }
+    ]
   }
 ];
 

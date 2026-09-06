@@ -200,7 +200,7 @@ export default function FootScreeningPage() {
           </h1>
           <p className="text-sm text-slate-600 max-w-[760px]">Diabetic foot check in under 3 minutes: 5 quick questions, phone photo, clear color guidance. No extra device, works like the eye check.</p>
         </div>
-        <Link href="/app/screening" className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 hover:border-stone-300 hover:shadow-sm transition">
+        <Link href="/app/patients" className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 hover:border-stone-300 hover:shadow-sm transition">
           Back to eye screening <ArrowRight className="w-4 h-4" />
         </Link>
       </motion.div>
@@ -442,7 +442,7 @@ export default function FootScreeningPage() {
 
                 <div className="flex gap-2">
                   <Link href="/app/pharmacy" className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-black transition">Post-care via pharmacy</Link>
-                  <Link href={`/app/screening?patient=${patient.id}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">Back to eye screen →</Link>
+                  <Link href={`/app/patients?patient=${patient.id}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">Back to eye screen →</Link>
                 </div>
               </motion.div>
             )}

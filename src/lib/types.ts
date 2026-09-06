@@ -63,6 +63,30 @@ export interface Patient {
   lastScreened?: string;
   medication?: string[];
   footLastCheck?: string;
+  footAnalysis?: {
+    risk: "low" | "moderate" | "high";
+    summary: string;
+    flags: { id: string; label: string; severity: "low" | "med" | "high" }[];
+    recommendation: string;
+    nextCheck: string;
+    dietTips: string[];
+  };
+  footChecks?: {
+    id: string;
+    date: string;
+    risk: "low" | "moderate" | "high";
+    flags: { id: string; label: string; severity: "low" | "med" | "high" }[];
+    analysis: {
+      risk: "low" | "moderate" | "high";
+      summary: string;
+      flags: { id: string; label: string; severity: "low" | "med" | "high" }[];
+      recommendation: string;
+      nextCheck: string;
+      dietTips: string[];
+    };
+    imageQuality?: number;
+    imageUrl?: string | null;
+  }[];
   prescriptions?: {
     drug: string;
     dosage: string;

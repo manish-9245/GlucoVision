@@ -33,7 +33,7 @@ export default function Dashboard() {
             </span>
           </p>
         </div>
-        <Link href="/app/screening" className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 text-white text-sm font-semibold hover:bg-black">
+        <Link href="/app/patients" className="inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 text-white text-sm font-semibold hover:bg-black">
           New screening <ScanEye className="w-4 h-4" />
         </Link>
       </div>

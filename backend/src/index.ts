@@ -31,6 +31,8 @@ type PatientRow = {
   medication: string;
   prescriptions: string | null;
   foot_last_check: string | null;
+  foot_analysis: string | null;
+  foot_checks: string | null;
 };
 
 const app = new Hono<{ Bindings: Env }>();
@@ -68,6 +70,18 @@ function toPatient(row: PatientRow, glucose: { date: string; fasting: number; po
   } catch {
     prescriptions = undefined;
   }
+  let footAnalysis: unknown | undefined;
+  try {
+    footAnalysis = (row as unknown as { foot_analysis?: string }).foot_analysis ? JSON.parse((row as unknown as { foot_analysis: string }).foot_analysis) : undefined;
+  } catch {
+    footAnalysis = undefined;
+  }
+  let footChecks: unknown[] | undefined;
+  try {
+    footChecks = (row as unknown as { foot_checks?: string }).foot_checks ? JSON.parse((row as unknown as { foot_checks: string }).foot_checks) : undefined;
+  } catch {
+    footChecks = undefined;
+  }
   return {
     id: row.id,
     name: row.name,
@@ -88,6 +102,8 @@ function toPatient(row: PatientRow, glucose: { date: string; fasting: number; po
     medication: JSON.parse(row.medication || "[]"),
     prescriptions,
     footLastCheck: row.foot_last_check || undefined,
+    footAnalysis,
+    footChecks,
   };
 }
 
