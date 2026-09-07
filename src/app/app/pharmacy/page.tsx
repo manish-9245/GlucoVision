@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { CustomSelect } from "@/components/CustomSelect";
 import { useLang } from "@/lib/i18n";
+import { pharmacyStatusLabel } from "@/lib/labels";
 
 const STATUS_STEPS = ["pending", "verified", "dispatched", "delivered"] as const;
 
@@ -58,7 +59,7 @@ export default function PharmacyPage() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <div className="inline-flex items-center gap-2 text-xs font-bold tracking-widest text-teal-700 bg-teal-50 border border-teal-200 px-3 py-1 rounded-full">
-            <Pill className="w-3.5 h-3.5" /> TELEPHARMACY • VERIFY, NOT AUTO-PRESCRIBE
+            <Pill className="w-3.5 h-3.5" /> {t("pharmacyTopBadge")}
           </div>
           <h1 className="mt-2 text-2xl md:text-[30px] font-black tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
             {t("pharmacyHeading2")}
@@ -69,7 +70,7 @@ export default function PharmacyPage() {
           <motion.span animate={{ rotate: showForm ? 45 : 0 }}>
             <Plus className="w-4 h-4" />
           </motion.span>
-          New order
+          {t("pharmacyNewOrderBtn2")}
         </motion.button>
       </motion.div>
 
@@ -99,7 +100,7 @@ export default function PharmacyPage() {
               className={`group relative border border p-4 text-left transition overflow-hidden ${filter === s ? "bg-slate-900 text-white border-slate-900 shadow-lg" : "bg-stone-50 border-stone-200 hover:bg-white hover:border-stone-300 hover:shadow-sm"}`}
             >
               <div className="flex items-center justify-between">
-                <span className={`text-xs font-bold tracking-widest ${filter === s ? "text-white/70" : "text-stone-500"}`}>{s.toUpperCase()}</span>
+                <span className={`text-xs font-bold tracking-widest ${filter === s ? "text-white/70" : "text-stone-500"}`}>{pharmacyStatusLabel(t, s).toUpperCase()}</span>
                 {s === "pending" && <Clock className="w-4 h-4 opacity-60 group-hover:opacity-100 transition" />}
                 {s === "verified" && <ShieldCheck className="w-4 h-4 opacity-60 group-hover:opacity-100 transition" />}
                 {s === "dispatched" && <Truck className="w-4 h-4 opacity-60 group-hover:opacity-100 transition" />}
@@ -146,7 +147,7 @@ export default function PharmacyPage() {
               onClick={() => setFilter(k)}
               className={`px-3 py-2 rounded-full text-xs font-bold border capitalize transition ${filter === k ? "bg-slate-900 text-white border-slate-900" : "bg-white border-stone-200 hover:bg-stone-50"}`}
             >
-              {k} {k !== "all" ? `• ${counts[k as keyof typeof counts]}` : `• ${counts.all}`}
+              {k === "all" ? t("genericAll") : pharmacyStatusLabel(t, k)} {k !== "all" ? `• ${counts[k as keyof typeof counts]}` : `• ${counts.all}`}
             </button>
           ))}
         </div>
@@ -157,7 +158,7 @@ export default function PharmacyPage() {
           <motion.div initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.98 }} transition={{ duration: 0.3 }} className="border bg-white border border-stone-200 p-5 grid md:grid-cols-[1.1fr_1.6fr_0.9fr_auto] gap-3 items-end shadow-sm">
             <label className="text-sm">
               <span className="text-xs font-bold text-stone-500">{t("pharmacyPatientLabel2")}</span>
-              <CustomSelect value={form.patientId} onChange={(v) => setForm({ ...form, patientId: v })} options={patients.map((p) => ({ value: p.id, label: p.name, desc: p.village }))} placeholder="Select patient" searchable />
+              <CustomSelect value={form.patientId} onChange={(v) => setForm({ ...form, patientId: v })} options={patients.map((p) => ({ value: p.id, label: p.name, desc: p.village }))} placeholder={t("commonSelectPatient")} searchable />
             </label>
             <label className="text-sm">
               <span className="text-xs font-bold text-stone-500">{t("pharmacyPrescriptionLabel2")}</span>
@@ -169,10 +170,10 @@ export default function PharmacyPage() {
             </label>
             <div className="flex gap-2">
               <button onClick={() => setShowForm(false)} className="px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">
-                Cancel
+                {t("cancel")}
               </button>
               <button onClick={submit} className="px-6 py-3 rounded-full bg-teal-700 text-white text-sm font-bold hover:bg-teal-800 shadow-md transition">
-                Queue
+                {t("pharmacyQueueBtn")}
               </button>
             </div>
           </motion.div>
@@ -210,10 +211,10 @@ export default function PharmacyPage() {
                         {o.patientName} <span className="text-xs font-mono text-stone-500 bg-stone-50 border border-stone-200 px-2 py-0.5 rounded-full">{o.id}</span>
                       </div>
                       <div className="text-xs text-slate-600 mt-1">
-                        {o.date} {o.pharmacist ? `• ${o.pharmacist}` : ""} • Patient {o.patientId}
+                        {o.date} {o.pharmacist ? `• ${o.pharmacist}` : ""} • {t("commonPatientLink")} {o.patientId}
                       </div>
                     </div>
-                    <span className={`shrink-0 text-[11px] font-black px-2.5 py-1 rounded-full border capitalize shadow-sm ${o.status === "pending" ? "bg-amber-50 border-amber-200 text-amber-800" : o.status === "verified" ? "bg-sky-50 border-sky-200 text-sky-700" : o.status === "dispatched" ? "bg-violet-50 border-violet-200 text-violet-700" : "bg-emerald-50 border-emerald-200 text-emerald-700"}`}>{o.status}</span>
+                    <span className={`shrink-0 text-[11px] font-black px-2.5 py-1 rounded-full border capitalize shadow-sm ${o.status === "pending" ? "bg-amber-50 border-amber-200 text-amber-800" : o.status === "verified" ? "bg-sky-50 border-sky-200 text-sky-700" : o.status === "dispatched" ? "bg-violet-50 border-violet-200 text-violet-700" : "bg-emerald-50 border-emerald-200 text-emerald-700"}`}>{pharmacyStatusLabel(t, o.status)}</span>
                   </div>
 
                   <div className="rounded-xl bg-stone-50 border border-stone-200 p-3.5">
@@ -232,7 +233,7 @@ export default function PharmacyPage() {
                   <div className="grid grid-cols-4 gap-1 text-[10px] font-bold tracking-widest text-stone-500">
                     {STATUS_STEPS.map((s) => (
                       <span key={s} className={o.status === s ? "text-teal-700" : ""}>
-                        {s}
+                        {pharmacyStatusLabel(t, s)}
                       </span>
                     ))}
                   </div>
@@ -246,7 +247,7 @@ export default function PharmacyPage() {
                   <div className="flex gap-2">
                     {idx < STATUS_STEPS.length - 1 ? (
                       <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => advance(o.id, o.status)} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-full bg-teal-700 text-white text-sm font-bold hover:bg-teal-800 shadow-md hover:shadow-lg transition">
-                        <CheckCircle2 className="w-4 h-4" /> {t("pharmacyMarkNext")} {STATUS_STEPS[idx + 1]}
+                        <CheckCircle2 className="w-4 h-4" /> {t("pharmacyMarkNext")} {pharmacyStatusLabel(t, STATUS_STEPS[idx + 1])}
                       </motion.button>
                     ) : (
                       <span className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-3 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-bold">
@@ -254,7 +255,7 @@ export default function PharmacyPage() {
                       </span>
                     )}
                     <Link href={`/app/patients?patient=${o.patientId}`} className="px-5 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">
-                      Patient
+                      {t("commonPatientLink")}
                     </Link>
                   </div>
                 </motion.div>

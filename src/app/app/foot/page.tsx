@@ -1,7 +1,7 @@
 "use client";
 import { useState, useMemo, useRef, useEffect } from "react";
 import { useStore } from "@/lib/store";
-import { Footprints, Upload, ShieldCheck, AlertTriangle, CheckCircle2, XCircle, Search, Camera, Activity, Info, Sparkles, ArrowRight, Video, Aperture, Zap } from "lucide-react";
+import { Footprints, Upload, ShieldCheck, AlertTriangle, CheckCircle2, XCircle, Search, Camera, Activity, Info, Sparkles, ArrowRight, Video, Aperture } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { estimateBlurScore, type BlurResult } from "@/lib/blur";
@@ -84,8 +84,8 @@ export default function FootScreeningPage() {
         setCameraOn(true);
       }
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Camera unavailable";
-      setCameraError(msg.includes("NotAllowed") ? "Camera permission denied, allow camera or use upload." : msg);
+      const msg = e instanceof Error ? e.message : t("footCameraUnavailable");
+      setCameraError(msg.includes("NotAllowed") ? t("footCameraDenied") : msg);
       setCameraOn(false);
     }
   };
@@ -122,9 +122,21 @@ export default function FootScreeningPage() {
     }, "image/jpeg", 0.92);
   };
   useEffect(() => {
-    if (cameraMode === "camera") startCamera();
-    else stopCamera();
-    return () => stopCamera();
+    // startCamera/stopCamera touch state, so invoke them from a deferred
+    // microtask instead of the synchronous effect body
+    // (react-hooks/set-state-in-effect). Still runs pre-paint.
+    void Promise.resolve().then(() => {
+      if (cameraMode === "camera") startCamera();
+      else stopCamera();
+    });
+    // Copy the ref node: it may change by the time cleanup runs.
+    const videoEl = videoRef.current;
+    return () => {
+      // Synchronous external-system cleanup only (no setState): release hardware.
+      const stream = videoEl?.srcObject as MediaStream | null;
+      stream?.getTracks().forEach((tr) => tr.stop());
+      if (videoEl) videoEl.srcObject = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cameraMode]);
   useEffect(() => {
@@ -222,10 +234,10 @@ export default function FootScreeningPage() {
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-stone-400 group-focus-within:text-teal-600 transition" />
               <input value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("footSearchPh2")} className="w-full pl-10 pr-3 py-3 rounded-xl border border-stone-200 bg-stone-50 text-sm focus:bg-white focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 focus:outline-none transition" />
             </div>
-            <CustomSelect value={selectedId} onChange={setSelectedId} options={(q ? filteredPatients : patients).map((p) => ({ value: p.id, label: p.name, desc: `${p.village} ${p.footLastCheck ? `• foot ${p.footLastCheck}` : "• no foot record"}` }))} placeholder="Select patient" searchable />
+            <CustomSelect value={selectedId} onChange={setSelectedId} options={(q ? filteredPatients : patients).map((p) => ({ value: p.id, label: p.name, desc: `${p.village} ${p.footLastCheck ? `• foot ${p.footLastCheck}` : t("footNoFootRecord")}` }))} placeholder={t("commonSelectPatient")} searchable />
             <motion.div layout className="mt-3 rounded-xl bg-stone-50 border border-stone-200 p-3.5 text-xs leading-relaxed">
               <div className="font-bold">{patient.name} • {patient.age}y • {patient.diabetesYears}y DM • HbA1c {patient.hbA1c}%</div>
-              <div className="text-slate-600">{patient.village} • Risk {patient.riskScore} • {patient.symptoms.join(", ") || "no eye symptoms"}</div>
+              <div className="text-slate-600">{patient.village} • {t("risk")} {patient.riskScore} • {patient.symptoms.join(", ") || t("footNoEyeSymptoms")}</div>
             </motion.div>
           </div>
 
@@ -308,9 +320,9 @@ export default function FootScreeningPage() {
                   </div>
                   <div className="absolute top-2 left-2 right-2 flex items-center justify-between">
                     <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur border border-white/15 text-white text-xs font-bold flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> LIVE
+                      <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" /> {t("footLive")}
                     </span>
-                    <span className="px-2 py-1 rounded-full bg-white text-zinc-900 text-xs font-mono font-bold">{cameraOn ? "● CAM" : "○ OFF"}</span>
+                    <span className="px-2 py-1 rounded-full bg-white text-zinc-900 text-xs font-mono font-bold">{cameraOn ? t("footCamOn") : t("footCamOff")}</span>
                   </div>
                   <div className="absolute bottom-2 left-2 right-2">
                     {cameraError ? (
@@ -321,20 +333,20 @@ export default function FootScreeningPage() {
                       <div className={`rounded-xl px-3 py-2 flex items-center justify-between text-xs font-bold border backdrop-blur-md ${liveBlur.isBlurry ? "bg-red-600/90 text-white border-red-500" : liveBlur.quality >= 80 ? "bg-emerald-600/90 text-white border-emerald-500" : "bg-amber-500/90 text-white border-amber-400"}`}>
                         <span className="flex items-center gap-1.5">
                           {liveBlur.isBlurry ? <XCircle className="w-4 h-4" /> : liveBlur.quality >= 80 ? <CheckCircle2 className="w-4 h-4" /> : <AlertTriangle className="w-4 h-4" />}
-                          {liveBlur.isBlurry ? "Too blurry" : liveBlur.quality >= 80 ? "Sharp ✓" : "Soft focus"} • {liveBlur.quality}/100
+                          {liveBlur.isBlurry ? t("footTooBlurry") : liveBlur.quality >= 80 ? t("footSharp") : t("footSoftFocus")} • {liveBlur.quality}/100
                         </span>
                         <span className="text-[10px] font-mono opacity-80">var {liveBlur.variance}</span>
                       </div>
                     ) : (
                       <div className="rounded-xl bg-black/50 backdrop-blur border border-white/15 text-white px-3 py-2 text-xs font-medium flex items-center gap-2">
-                        <Aperture className="w-4 h-4 animate-pulse" /> Starting, hold foot steady
+                        <Aperture className="w-4 h-4 animate-pulse" /> {t("footStartingHold")}
                       </div>
                     )}
                   </div>
                   {!cameraOn && !cameraError && (
                     <div className="absolute inset-0 grid place-items-center bg-black/40 backdrop-blur-sm">
                       <button onClick={() => { setCameraMode("camera"); setTimeout(() => { const v = videoRef.current; if (v && !cameraOn) { navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } } }).then(s => { v.srcObject = s; v.play(); setCameraOn(true); }).catch(()=>{}); } }, 100); }} className="px-5 py-3 rounded-full bg-white text-zinc-900 font-bold flex items-center gap-2">
-                        <Video className="w-4 h-4" /> Enable camera
+                        <Video className="w-4 h-4" /> {t("footEnableCamera")}
                       </button>
                     </div>
                   )}
@@ -355,13 +367,13 @@ export default function FootScreeningPage() {
                 {preview ? (
                   <>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={preview} alt="foot preview" className="absolute inset-0 w-full h-full object-cover" />
+                    <img src={preview} alt={t("footTapAddPhoto")} className="absolute inset-0 w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
                     <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-                      <span className="px-3 py-1.5 rounded-full bg-white/95 text-xs font-bold border border-stone-200 shadow-sm">Foot capture ✓</span>
+                      <span className="px-3 py-1.5 rounded-full bg-white/95 text-xs font-bold border border-stone-200 shadow-sm">{t("footFootCapture")}</span>
                       {quality !== null && (
                         <span className={`px-3 py-1.5 rounded-full text-xs font-black border shadow-md ${quality >= 80 ? "bg-emerald-500 text-white border-emerald-600" : quality >= 60 ? "bg-amber-500 text-white border-amber-600" : "bg-red-600 text-white border-red-700"}`}>
-                          Quality {quality}/100 {quality < 60 ? "• BLURRY" : quality >= 80 ? "• SHARP" : "• SOFT"}
+                          {t("footQualityLabel")} {quality}/100 {quality < 60 ? t("footBlurryCaps") : quality >= 80 ? t("footSharpCaps") : t("footSoftCaps")}
                         </span>
                       )}
                     </div>
@@ -371,8 +383,8 @@ export default function FootScreeningPage() {
                     <div className="w-14 h-14 mx-auto border bg-white border-stone-200 grid place-items-center shadow-sm">
                       <Upload className="w-6 h-6 text-stone-500" />
                     </div>
-                    <div className="mt-3 text-sm font-bold">Tap to add foot photo</div>
-                    <div className="text-xs text-slate-500 mt-1">Optional but improves triage. Real blur detection before flagging.</div>
+                    <div className="mt-3 text-sm font-bold">{t("footTapAddPhoto")}</div>
+                    <div className="text-xs text-slate-500 mt-1">{t("footTapAddDesc")}</div>
                   </motion.div>
                 )}
                 <input type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => onFile(e.target.files?.[0] || null)} />
@@ -382,12 +394,12 @@ export default function FootScreeningPage() {
             <AnimatePresence>
               {quality !== null && quality < 60 && (
                 <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }} className="mt-3 rounded-xl bg-red-50 border-2 border-red-300 p-3 flex items-start gap-2 text-xs text-red-800">
-                  <XCircle className="w-4 h-4 mt-0.5 shrink-0" /> Quality {quality}/100, <b>Too blurry</b>. Retake with steadier hand, better light, plain background.
+                  <XCircle className="w-4 h-4 mt-0.5 shrink-0" /> {t("footQualityLabel")} {quality}/100, <b>{t("footTooBlurry")}</b>. {t("footBlurryRetake")}
                 </motion.div>
               )}
               {quality !== null && quality >= 60 && quality < 80 && (
                 <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="mt-3 rounded-xl bg-amber-50 border border-amber-200 p-3 flex items-center gap-2 text-xs text-amber-800">
-                  <AlertTriangle className="w-4 h-4" /> Soft focus {quality}/100, will flag but hold steadier for 85 or more.
+                  <AlertTriangle className="w-4 h-4" /> {t("footSoftFocus")} {quality}/100, {t("footSoftNote")}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -412,9 +424,9 @@ export default function FootScreeningPage() {
               <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-3 space-y-3">
                 <motion.div initial={{ scale: 0.96 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className={`border border p-4 flex items-center justify-between ${result.risk === "low" ? "bg-emerald-50 border-emerald-200" : result.risk === "moderate" ? "bg-amber-50 border-amber-200" : "bg-red-50 border-red-200"}`}>
                   <div>
-                    <div className="text-[11px] font-bold tracking-widest opacity-60">FOOT RISK FLAG • PRELIMINARY</div>
+                    <div className="text-[11px] font-bold tracking-widest opacity-60">{t("footRiskFlagPrelim")}</div>
                     <div className={`text-xl font-black mt-1 ${result.risk === "low" ? "text-emerald-700" : result.risk === "moderate" ? "text-amber-800" : "text-red-700"}`}>{result.risk === "low" ? t("footRiskLow2") : result.risk === "moderate" ? t("footRiskModerate2") : t("footRiskHigh2")}</div>
-                    <div className="text-xs text-slate-700 mt-1">{result.flags.length === 0 ? "No flags, keep up foot care." : `${result.flags.length} flag(s) found`}</div>
+                    <div className="text-xs text-slate-700 mt-1">{result.flags.length === 0 ? t("footNoFlagsKeepUp") : `${result.flags.length} ${t("footFlagsFound")}`}</div>
                   </div>
                   <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2, type: "spring" }} className={`w-14 h-14 border grid place-items-center text-white font-black text-xl shadow-lg ${result.risk === "low" ? "bg-emerald-600 shadow-emerald-600/20" : result.risk === "moderate" ? "bg-amber-500 shadow-amber-500/20" : "bg-red-600 shadow-red-600/20"}`}>{result.risk === "low" ? "✓" : result.risk === "moderate" ? "!" : "!!"}</motion.div>
                 </motion.div>
@@ -429,21 +441,21 @@ export default function FootScreeningPage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-xs leading-relaxed text-emerald-900">✅ No red flags. Counsel: daily foot check, moisturise, never walk barefoot, trim nails straight, report any blister within 24h.</div>
+                  <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-xs leading-relaxed text-emerald-900">{t("footNoFlagsCounsel")}</div>
                 )}
 
                 <div className="rounded-xl bg-stone-50 border border-stone-200 p-3 text-xs leading-relaxed">
-                  <b>Next steps:</b>
+                  <b>{t("footNextSteps")}</b>
                   <ul className="list-disc list-inside mt-1 space-y-1">
-                    <li>{result.risk === "high" ? "Urgent PHC/MO review + referral to surgery/podiatry. Offload pressure, sterile dressing." : result.risk === "moderate" ? "Review at PHC within 1 week. Footwear & hygiene counselling." : "Re-screen every 6 months; sooner if wound appears."}</li>
-                    <li>Record saved to {patient.name} • last foot check updated.</li>
-                    <li>Combine with eye & glucose data on the <Link href="/app/patients" className="text-teal-700 font-bold underline">patient record</Link>.</li>
+                    <li>{result.risk === "high" ? t("footUrgentReview") : result.risk === "moderate" ? t("footModerateReview") : t("footLowReview")}</li>
+                    <li>{t("footRecordSaved")} {patient.name} • last foot check updated.</li>
+                    <li>{t("footCombineRecord")} <Link href="/app/patients" className="text-teal-700 font-bold underline">{t("footPatientRecord")}</Link>.</li>
                   </ul>
                 </div>
 
                 <div className="flex gap-2">
-                  <Link href="/app/pharmacy" className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-black transition">Post-care via pharmacy</Link>
-                  <Link href={`/app/patients?patient=${patient.id}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">Back to eye screen →</Link>
+                  <Link href="/app/pharmacy" className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-black transition">{t("footPostCare")}</Link>
+                  <Link href={`/app/patients?patient=${patient.id}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">{t("footBackEye")}</Link>
                 </div>
               </motion.div>
             )}

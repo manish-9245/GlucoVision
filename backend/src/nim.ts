@@ -171,14 +171,12 @@ export function mountNim(app: Hono<{ Bindings: Env }>) {
 
     let lastErr: string | null = null;
     let usedModel = "";
-    let resultData: unknown = null;
     const started = Date.now();
 
     for (const m of toTry) {
       const r = await callOne(m, imageUrl, prompt, apiKey);
       if (r.ok) {
         usedModel = r.model;
-        resultData = r.data;
         // Audit log
         const id = `nim_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
         await c.env.DB.prepare(

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
 import { Eye, EyeOff, LogIn, ArrowRight, ShieldCheck, WifiOff } from "lucide-react";
-import { useLang } from "@/lib/i18n";
+import { LanguageSwitcher, useLang } from "@/lib/i18n";
 
 export default function LoginPage() {
   const { t } = useLang();
@@ -42,12 +42,15 @@ export default function LoginPage() {
             <div className="font-bold tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
               GlucoVision
             </div>
-            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">GlucoVision</div>
+            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">{t("phcEdition")}</div>
           </div>
         </Link>
-        <Link href="/signup" className="text-sm font-semibold px-4 py-2 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50">
-          {t("loginHeaderCreate2")}
-        </Link>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <Link href="/signup" className="text-sm font-semibold px-4 py-2 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50">
+            {t("loginHeaderCreate2")}
+          </Link>
+        </div>
       </header>
 
       <div className="flex-1 grid lg:grid-cols-[1.05fr_0.95fr] max-w-[1120px] mx-auto w-full px-6 gap-10 items-center py-10">
@@ -90,7 +93,7 @@ export default function LoginPage() {
 
         <form onSubmit={onSubmit} className="bg-white border border-zinc-200 rounded-[28px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.08)]">
           <h2 className="text-xl font-black tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-            Sign in
+            {t("loginSignInTitle2")}
           </h2>
           <p className="text-sm text-zinc-600 mt-1">{t("loginSignInDesc2")}</p>
 

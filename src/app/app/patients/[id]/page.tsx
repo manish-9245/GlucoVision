@@ -3,7 +3,6 @@ import { useState, useMemo } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
-import { DR_LABELS } from "@/lib/types";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { CaseChat } from "@/components/CaseChat";
 import {
@@ -16,21 +15,19 @@ import {
   AlertTriangle,
   ShieldCheck,
   TrendingUp,
-  Calendar,
   Image as ImageIcon,
   Send,
   MessageCircle,
   Pill,
   Footprints,
-  X,
   ZoomIn,
   ClipboardList,
-  Info,
   Beaker,
   FileText,
 } from "lucide-react";
 import { CustomSelect } from "@/components/CustomSelect";
 import { useLang } from "@/lib/i18n";
+import { drStageLabel } from "@/lib/labels";
 
 function AddVisitInline({ patientId }: { patientId: string }) {
   const { t } = useLang();
@@ -39,7 +36,6 @@ function AddVisitInline({ patientId }: { patientId: string }) {
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({ date: new Date().toISOString().slice(0, 10), stage: 2 as 0 | 1 | 2 | 3 | 4, confidence: 87, quality: 85, notes: "" });
   const [preview, setPreview] = useState<string | null>(null);
-  const fileRef = useState(() => ({ current: null as HTMLInputElement | null }))[0];
 
   const onFile = (f: File | null) => {
     if (!f) return;
@@ -65,7 +61,7 @@ function AddVisitInline({ patientId }: { patientId: string }) {
     // Try real AI first (NIM vision), fallback to structured local if offline
     let stage = form.stage;
     let conf = form.confidence / 100;
-    let quality = form.quality;
+    const quality = form.quality;
     let lesions: { x: number; y: number; r: number; label: string }[] = [];
     let analysis: {
       summary: string;
@@ -101,7 +97,6 @@ function AddVisitInline({ patientId }: { patientId: string }) {
           // Try to parse stage/confidence/lesions from NIM response
           const mStage = raw.match(/"stage"\s*:\s*([0-4])/);
           const mConf = raw.match(/"confidence"\s*:\s*([0-9]*\.?[0-9]+)/);
-          const mLesions = raw.match(/"lesions"\s*:\s*\[[^\]]*\]/);
           if (mStage) stage = parseInt(mStage[1]) as 0 | 1 | 2 | 3 | 4;
           if (mConf) {
             let c = parseFloat(mConf[1]);
@@ -142,7 +137,7 @@ function AddVisitInline({ patientId }: { patientId: string }) {
       lesions =
         stage === 0
           ? []
-          : Array.from({ length: stage >= 3 ? 3 : stage === 2 ? 2 : 1 }).map((_, i) => ({
+          : Array.from({ length: stage >= 3 ? 3 : stage === 2 ? 2 : 1 }).map(() => ({
               x: 35 + Math.random() * 30,
               y: 35 + Math.random() * 30,
               r: 14 + Math.random() * 10,
@@ -177,7 +172,7 @@ function AddVisitInline({ patientId }: { patientId: string }) {
         urgency: (["routine", "routine", "soon", "urgent", "emergency"][stage] as "routine" | "soon" | "urgent" | "emergency"),
       };
     } else if (!lesions.length && stage !== 0) {
-      lesions = Array.from({ length: stage >= 3 ? 3 : stage === 2 ? 2 : 1 }).map((_, i) => ({
+      lesions = Array.from({ length: stage >= 3 ? 3 : stage === 2 ? 2 : 1 }).map(() => ({
         x: 35 + Math.random() * 30,
         y: 35 + Math.random() * 30,
         r: 14 + Math.random() * 10,
@@ -241,7 +236,7 @@ function AddVisitInline({ patientId }: { patientId: string }) {
                   <span className="font-bold text-zinc-500">{t("patientAddVisitStageLabel2")}</span>
                   <CustomSelect
                     value={String(form.stage)}
-                    onChange={(v) => setForm({ ...form, stage: parseInt(v) as any })}
+                    onChange={(v) => setForm({ ...form, stage: parseInt(v) as 0 | 1 | 2 | 3 | 4 })}
                     options={[
                       { value: "0", label: "0, No DR" },
                       { value: "1", label: "1, Mild" },
@@ -264,7 +259,7 @@ function AddVisitInline({ patientId }: { patientId: string }) {
               </div>
               <label className="text-xs">
                 <span className="font-bold text-zinc-500">{t("patientAddVisitNotesLabel2")}</span>
-                <input value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder="e.g. heatmap shows spots near center" className="mt-1 w-full px-2 py-1.5 border border-zinc-200 text-xs" />
+                <input value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder={t("patientAddVisitNotesLabel2")} className="mt-1 w-full px-2 py-1.5 border border-zinc-200 text-xs" />
               </label>
             </div>
           </div>
@@ -319,15 +314,15 @@ function AddPrescriptionForm({ patientId }: { patientId: string }) {
         </button>
       ) : (
         <div className="border border-zinc-200 p-3 space-y-2 bg-zinc-50">
-          <input placeholder="Drug e.g. Metformin 500mg" value={form.drug} onChange={(e) => setForm({ ...form, drug: e.target.value })} className="w-full px-2 py-1.5 border border-zinc-200 text-xs" />
+          <input placeholder={t("patientAddPrescriptionBtn2")} value={form.drug} onChange={(e) => setForm({ ...form, drug: e.target.value })} className="w-full px-2 py-1.5 border border-zinc-200 text-xs" />
           <div className="grid grid-cols-3 gap-2">
-            <input placeholder="Dosage" value={form.dosage} onChange={(e) => setForm({ ...form, dosage: e.target.value })} className="px-2 py-1.5 border border-zinc-200 text-xs" />
+            <input placeholder={t("patientDuration")} value={form.dosage} onChange={(e) => setForm({ ...form, dosage: e.target.value })} className="px-2 py-1.5 border border-zinc-200 text-xs" />
             <CustomSelect value={form.frequency} onChange={(v) => setForm({ ...form, frequency: v })} options={[{ value: "OD", label: "OD" }, { value: "BD", label: "BD" }, { value: "TID", label: "TID" }, { value: "HS", label: "HS" }, { value: "QID", label: "QID" }]} />
-            <input placeholder="Duration" value={form.duration} onChange={(e) => setForm({ ...form, duration: e.target.value })} className="px-2 py-1.5 border border-zinc-200 text-xs" />
+            <input placeholder={t("patientDuration")} value={form.duration} onChange={(e) => setForm({ ...form, duration: e.target.value })} className="px-2 py-1.5 border border-zinc-200 text-xs" />
           </div>
-          <input placeholder="Indication" value={form.indication} onChange={(e) => setForm({ ...form, indication: e.target.value })} className="w-full px-2 py-1.5 border border-zinc-200 text-xs" />
+          <input placeholder={t("patientIndication")} value={form.indication} onChange={(e) => setForm({ ...form, indication: e.target.value })} className="w-full px-2 py-1.5 border border-zinc-200 text-xs" />
           <div className="flex gap-2">
-            <button onClick={submit} className="flex-1 py-1.5 bg-teal-700 text-white text-xs font-semibold">Save</button>
+            <button onClick={submit} className="flex-1 py-1.5 bg-teal-700 text-white text-xs font-semibold">{t("save")}</button>
             <button onClick={() => setOpen(false)} className="flex-1 py-1.5 border border-zinc-200 bg-white text-xs">{t("cancel")}</button>
           </div>
         </div>
@@ -362,7 +357,7 @@ function ReferPatientForm({ patient }: { patient: import("@/lib/types").Patient 
         <div className="border border-zinc-700 bg-zinc-800 p-3 space-y-2">
           <div className="grid grid-cols-2 gap-2">
             <CustomSelect value={form.stage} onChange={(v) => setForm({ ...form, stage: v })} options={[0, 1, 2, 3, 4].map((s) => ({ value: String(s), label: `Stage ${s}` }))} />
-            <CustomSelect value={form.via} onChange={(v) => setForm({ ...form, via: v as any })} options={[{ value: "eSanjeevani", label: "eSanjeevani" }, { value: "Direct", label: "Direct" }]} />
+            <CustomSelect value={form.via} onChange={(v) => setForm({ ...form, via: v as "eSanjeevani" | "Direct" })} options={[{ value: "eSanjeevani", label: "eSanjeevani" }, { value: "Direct", label: "Direct" }]} />
           </div>
           <div className="flex gap-2">
             <button onClick={submit} className="flex-1 py-1.5 bg-teal-600 text-white text-xs font-semibold hover:bg-teal-700">{t("patientQueueReferral")}</button>
@@ -443,7 +438,7 @@ export default function PatientExaminationPage() {
                 <span className="px-2.5 py-1 bg-zinc-50 border border-zinc-200">HbA1c {patient.hbA1c}%</span>
                 <span className="px-2.5 py-1 bg-zinc-50 border border-zinc-200">BP {patient.bp}</span>
                 <span className={`px-2.5 py-1 border font-semibold ${patient.riskScore >= 70 ? "bg-red-50 border-red-200 text-red-700" : "bg-zinc-50 border-zinc-200"}`}>Risk {patient.riskScore}/100</span>
-                {patient.familyHistory && <span className="px-2.5 py-1 bg-violet-50 border border-violet-200 text-violet-700">Family history</span>}
+                {patient.familyHistory && <span className="px-2.5 py-1 bg-violet-50 border border-violet-200 text-violet-700">{t("patientsFamilyHist")}</span>}
                 {patient.symptoms.length > 0 && (
                   <span className="px-2.5 py-1 bg-amber-50 border border-amber-200 text-amber-800 inline-flex items-center gap-1">
                     <AlertTriangle className="w-3 h-3" /> {patient.symptoms.join(", ")}
@@ -481,7 +476,7 @@ export default function PatientExaminationPage() {
                   </LineChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="h-full grid place-items-center text-sm text-zinc-500">No glucose data</div>
+                <div className="h-full grid place-items-center text-sm text-zinc-500">{t("commonNoGlucose")}</div>
               )}
             </div>
           </div>
@@ -507,7 +502,7 @@ export default function PatientExaminationPage() {
             </div>
             {visits.length > 0 && (
               <div className="mt-3 text-xs leading-relaxed p-3 bg-amber-50 border border-amber-200 text-amber-900">
-                <b>{t("patientLatestLabel2")}</b> {DR_LABELS[visits[0].drStage]} • {(visits[0].confidence * 100).toFixed(0)}% • Q{visits[0].imageQuality} • {new Date(visits[0].date).toLocaleString()}
+                <b>{t("patientLatestLabel2")}</b> {drStageLabel(t, visits[0].drStage)} • {(visits[0].confidence * 100).toFixed(0)}% • Q{visits[0].imageQuality} • {new Date(visits[0].date).toLocaleString()}
                 <br />
                 {visits[0].notes}
               </div>
@@ -533,7 +528,7 @@ export default function PatientExaminationPage() {
                 {patientReferrals.map((r) => (
                   <div key={r.id} className="border border-zinc-700 p-2 text-xs">
                     <div className="font-semibold">
-                      {r.id} • {DR_LABELS[r.stage]} • {r.status}
+                      {r.id} • {drStageLabel(t, r.stage)} • {r.status}
                     </div>
                     <div className="text-zinc-400">
                       {r.date} • {r.via} {r.doctor ? `• ${r.doctor}` : ""}
@@ -626,7 +621,7 @@ export default function PatientExaminationPage() {
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={v.imageUrl}
-                        alt={`Fundus ${v.date} ${DR_LABELS[v.drStage]}`}
+                        alt={`Fundus ${v.date} ${drStageLabel(t, v.drStage)}`}
                         className="w-full h-full object-cover group-hover:scale-[1.02] transition"
                         onError={(e) => {
                           (e.target as HTMLImageElement).style.display = "none";
@@ -663,7 +658,7 @@ export default function PatientExaminationPage() {
                       {new Date(v.date).toLocaleDateString()} • Q{v.imageQuality}
                     </div>
                     <div className={`absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-bold border ${v.drStage === 0 ? "bg-emerald-600 text-white border-emerald-700" : v.drStage >= 3 ? "bg-red-600 text-white border-red-700" : "bg-amber-500 text-white border-amber-600"}`}>
-                      {DR_LABELS[v.drStage]}
+                      {drStageLabel(t, v.drStage)}
                     </div>
                     <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between">
                       <span className="px-2 py-1 rounded-full bg-black/70 text-white text-xs font-medium backdrop-blur">{(v.confidence * 100).toFixed(0)}% conf</span>
@@ -674,7 +669,7 @@ export default function PatientExaminationPage() {
                   </div>
                   <div className="p-3">
                     <div className="text-sm font-semibold leading-tight">
-                      {DR_LABELS[v.drStage]} <span className="text-xs font-normal text-zinc-500">• {v.id}</span>
+                      {drStageLabel(t, v.drStage)} <span className="text-xs font-normal text-zinc-500">• {v.id}</span>
                     </div>
                     <div className="text-xs text-zinc-600 mt-1 line-clamp-2">{v.notes}</div>
                     <div className="mt-2 flex flex-wrap gap-1">
@@ -683,7 +678,7 @@ export default function PatientExaminationPage() {
                           {r.label}
                         </span>
                       ))}
-                      {v.heatmapRegions.length === 0 && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-50 border border-zinc-200">No lesions</span>}
+                      {v.heatmapRegions.length === 0 && <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-zinc-50 border border-zinc-200">{t("commonNoLesions")}</span>}
                     </div>
                   </div>
                 </div>
@@ -728,7 +723,7 @@ export default function PatientExaminationPage() {
                   <div className="space-y-3">
                     <div>
                       <div className="text-xs font-bold tracking-widest text-zinc-500">{t("patientSelectedExam")}</div>
-                      <div className="text-xl font-black mt-1">{DR_LABELS[activeVisit.drStage]}</div>
+                      <div className="text-xl font-black mt-1">{drStageLabel(t, activeVisit.drStage)}</div>
                       <div className="text-sm text-zinc-600">
                         Confidence {(activeVisit.confidence * 100).toFixed(0)}% • Quality {activeVisit.imageQuality}/100 • {activeVisit.id}
                       </div>
@@ -736,7 +731,7 @@ export default function PatientExaminationPage() {
                     </div>
                     <div className="flex flex-wrap gap-2">
                       <span className={`px-3 py-1.5 rounded-full text-xs font-bold border ${activeVisit.drStage === 0 ? "bg-emerald-50 border-emerald-200 text-emerald-800" : activeVisit.drStage >= 3 ? "bg-red-50 border-red-200 text-red-700" : "bg-amber-50 border-amber-200 text-amber-800"}`}>
-                        Stage {activeVisit.drStage} • {DR_LABELS[activeVisit.drStage]}
+                        {t("stage")} {activeVisit.drStage} • {drStageLabel(t, activeVisit.drStage)}
                       </span>
                       <span className="px-3 py-1.5 rounded-full bg-white border border-zinc-200 text-xs font-medium">
                         Heatmap: {activeVisit.heatmapRegions.map((r) => r.label).join(", ") || "none"}
@@ -835,7 +830,7 @@ export default function PatientExaminationPage() {
                         </ul>
                       </div>
                       <div className={`border p-3 text-center ${activeVisit.analysis.urgency === "emergency" ? "bg-red-50 border-red-200 text-red-800" : activeVisit.analysis.urgency === "urgent" ? "bg-amber-50 border-amber-200 text-amber-800" : activeVisit.analysis.urgency === "soon" ? "bg-amber-50 border-amber-200 text-amber-800" : "bg-emerald-50 border-emerald-200 text-emerald-800"}`}>
-                        <div className="text-xs font-bold tracking-widest">URGENCY</div>
+                        <div className="text-xs font-bold tracking-widest">{t("patientUrgency")}</div>
                         <div className="text-lg font-black mt-1 capitalize">{activeVisit.analysis.urgency}</div>
                         <div className="text-xs mt-1">{activeVisit.analysis.urgency === "routine" ? "Annual rescreen" : activeVisit.analysis.urgency === "soon" ? "4 to 8 weeks" : activeVisit.analysis.urgency === "urgent" ? "1 to 2 weeks" : "Immediate"}</div>
                       </div>
@@ -861,7 +856,7 @@ export default function PatientExaminationPage() {
           <div className="mt-4 space-y-3">
             <div className={`border p-4 flex items-center justify-between ${patient.footAnalysis.risk === "high" ? "bg-red-50 border-red-200" : patient.footAnalysis.risk === "moderate" ? "bg-amber-50 border-amber-200" : "bg-emerald-50 border-emerald-200"}`}>
               <div>
-                <div className="text-xs font-bold tracking-widest opacity-60">FOOT RISK</div>
+                <div className="text-xs font-bold tracking-widest opacity-60">{t("patientUrgency")}</div>
                 <div className={`text-xl font-black mt-1 capitalize ${patient.footAnalysis.risk === "high" ? "text-red-700" : patient.footAnalysis.risk === "moderate" ? "text-amber-800" : "text-emerald-700"}`}>{patient.footAnalysis.risk} risk</div>
                 <div className="text-xs text-zinc-700 mt-1 max-w-[520px]">{patient.footAnalysis.summary}</div>
               </div>
@@ -879,16 +874,16 @@ export default function PatientExaminationPage() {
                 ))}
               </div>
             ) : (
-              <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-xs text-emerald-900">No flags. Keep daily foot check, moisturise, never walk barefoot.</div>
+              <div className="rounded-xl bg-emerald-50 border border-emerald-200 p-3 text-xs text-emerald-900">{t("commonNoFlagsKeep")}</div>
             )}
             <div className="rounded-xl bg-zinc-50 border border-zinc-200 p-3 text-xs">
-              <b>Recommendation:</b> {patient.footAnalysis.recommendation}
+              <b>{t("commonRecommendation")}</b> {patient.footAnalysis.recommendation}
               <br />
-              <b>Next check:</b> {patient.footAnalysis.nextCheck} • <b>Diet tips:</b> {patient.footAnalysis.dietTips.join(", ")}
+              <b>{t("commonNextCheck")}</b> {patient.footAnalysis.nextCheck} • <b>{t("commonDietTips")}</b> {patient.footAnalysis.dietTips.join(", ")}
             </div>
-            <div className="text-xs text-zinc-500">Last foot check: {patient.footLastCheck ? new Date(patient.footLastCheck).toLocaleString() : "—"} • {patient.footChecks?.length || 0} records</div>
+            <div className="text-xs text-zinc-500">{t("commonLastFootCheck")} {patient.footLastCheck ? new Date(patient.footLastCheck).toLocaleString() : "—"} • {patient.footChecks?.length || 0} {t("commonRecords")}</div>
             <Link href="/app/foot" className="inline-flex items-center gap-1.5 text-xs font-semibold text-teal-700 hover:underline">
-              Open detailed foot screening <ArrowLeft className="w-3 h-3 rotate-180" />
+              {t("commonOpenFoot")} <ArrowLeft className="w-3 h-3 rotate-180" />
             </Link>
           </div>
         ) : (
@@ -909,16 +904,16 @@ export default function PatientExaminationPage() {
             <div className="text-xs text-zinc-600">{t("patientESanjeevaniChat")}</div>
           </div>
           <Link href={`/app/patients?patient=${patient.id}`} className="px-4 py-2 bg-teal-700 text-white text-xs font-semibold">
-            Ask
+            {t("commonAsk")}
           </Link>
         </div>
         <div className="border border-zinc-200 bg-white p-4 flex items-center justify-between">
           <div className="text-sm">
-            <div className="font-semibold">View all patients</div>
-            <div className="text-xs text-zinc-600">Back to registry</div>
+            <div className="font-semibold">{t("commonViewAllPatients")}</div>
+            <div className="text-xs text-zinc-600">{t("commonBackRegistry")}</div>
           </div>
           <Link href="/app/patients" className="px-4 py-2 border border-zinc-200 bg-white text-xs font-semibold">
-            Registry
+            {t("commonRegistry")}
           </Link>
         </div>
       </div>
@@ -926,9 +921,9 @@ export default function PatientExaminationPage() {
       {/* Patient-level chat — discuss history/case */}
       <div className="border border-zinc-200 bg-white p-4">
         <h3 className="font-semibold text-sm flex items-center gap-2">
-          <MessageCircle className="w-4 h-4 text-teal-700" /> Discuss this patient — history and case
+          <MessageCircle className="w-4 h-4 text-teal-700" /> {t("commonDiscussHistory")}
         </h3>
-        <p className="text-xs text-zinc-600 mt-1">Chat about all visits, trends, and next steps. Patient history is automatically included. Supports both eye images.</p>
+        <p className="text-xs text-zinc-600 mt-1">{t("commonDiscussDesc")}</p>
         <div className="mt-4">
           <CaseChat
             patientId={patient.id}

@@ -44,7 +44,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${instrument.variable} h-full antialiased`}>
       <head>
         <link rel="preconnect" href="https://api.fontshare.com" />
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-full flex flex-col bg-[#FCFCF9] text-zinc-900 selection:bg-teal-600 selection:text-white">

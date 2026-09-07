@@ -1,5 +1,5 @@
 // GlucoVision PWA — offline-first cache for rural PHCs
-const CACHE = "glucovision-v1";
+const CACHE = "glucovision-v2";
 const CORE = [
   "/",
   "/manifest.json",

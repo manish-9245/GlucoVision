@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useState, useSyncExternalStore } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -134,8 +134,12 @@ const RetinaSVG = () => (
 const PhoneMockup = () => {
   const { t } = useLang();
   const tiltRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  // Client-only flag without setState-in-effect: false during SSR/prerender, true after hydration.
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const onMove = (e: React.MouseEvent) => {
     const el = tiltRef.current;
     if (!el) return;
@@ -343,7 +347,7 @@ const FloatingNav = () => {
             <div className="font-bold tracking-tight text-[15px]" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
               GlucoVision
             </div>
-            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">GlucoVision</div>
+            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">{t("phcEdition")}</div>
           </div>
         </Link>
 
@@ -367,7 +371,7 @@ const FloatingNav = () => {
             href="/app/dashboard"
             className="hidden md:inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50 transition"
           >
-            Open PHC Demo
+            {t("landingOpenDemo")}
           </Link>
           <Link
             href="/app/patients"
@@ -679,8 +683,8 @@ export default function Landing() {
                       <Eye className="w-3.5 h-3.5" />
                     </span>
                     <div>
-                      <div className="text-xs font-black tracking-wide">Capture</div>
-                      <div className="text-xs leading-4 text-zinc-300">Direct ophthalmoscope + smartphone • Auto-capture • clip-on optional</div>
+                      <div className="text-xs font-black tracking-wide">{t("landingCaptureFeatTitle")}</div>
+                      <div className="text-xs leading-4 text-zinc-300">{t("landingCaptureFeatDesc")}</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 rounded-2xl bg-white/[0.06] border border-white/10 backdrop-blur px-3 py-2.5">
@@ -688,8 +692,8 @@ export default function Landing() {
                       <ShieldCheck className="w-3.5 h-3.5" />
                     </span>
                     <div>
-                      <div className="text-xs font-black tracking-wide">Quality gate</div>
-                       <div className="text-xs leading-4 text-zinc-300">We check blur and light, blocks under 60, shows 94/100</div>
+                      <div className="text-xs font-black tracking-wide">{t("landingQualityFeatTitle")}</div>
+                       <div className="text-xs leading-4 text-zinc-300">{t("landingQualityFeatDesc")}</div>
                     </div>
                   </div>
                   <div className="flex items-start gap-3 rounded-2xl bg-white/[0.06] border border-white/10 backdrop-blur px-3 py-2.5">
@@ -697,20 +701,20 @@ export default function Landing() {
                       <Zap className="w-3.5 h-3.5" />
                     </span>
                     <div>
-                      <div className="text-xs font-black tracking-wide">Inference • Explainable</div>
-                       <div className="text-xs leading-4 text-zinc-300">Under 2.1s on your device, 5 stage AI, heatmap, 87% confidence</div>
+                      <div className="text-xs font-black tracking-wide">{t("landingInferenceFeatTitle")}</div>
+                       <div className="text-xs leading-4 text-zinc-300">{t("landingInferenceFeatDesc")}</div>
                     </div>
                   </div>
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   <span className="px-3 py-1.5 rounded-full bg-white text-zinc-900 text-xs font-bold flex items-center gap-1.5">
-                    <WifiOff className="w-3 h-3" /> No internet required
+                    <WifiOff className="w-3 h-3" /> {t("landingNoInternet")}
                   </span>
-                  <span className="px-3 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur text-white text-xs font-semibold">Sync queued</span>
+                  <span className="px-3 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur text-white text-xs font-semibold">{t("landingSyncQueued")}</span>
                 </div>
                 <div className="mt-auto pt-6 flex items-center gap-3 text-xs text-zinc-400">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> PHC Tablet • Ready
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" /> {t("landingPhcReady")}
                   <span className="ml-auto px-2 py-1 rounded-full bg-teal-600 text-white font-bold text-[10px]">5 STAGE AI</span>
                 </div>
               </div>
@@ -745,7 +749,7 @@ export default function Landing() {
                 <div className="w-16 h-16 rounded-full bg-red-500/20 border border-red-400/40 blur-[1px] animate-pulse" />
                 <div className="absolute w-3 h-3 rounded-full bg-red-500 shadow-[0_0_12px_rgba(239,68,68,0.8)]" />
               </div>
-              <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-full bg-red-600 text-white text-[10px] font-bold">Heatmap, bleeding</div>
+              <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-full bg-red-600 text-white text-[10px] font-bold">{t("phoneMockupHeatmap")}</div>
               <div className="absolute top-2 right-2 w-6 h-6 rounded-full bg-white border border-zinc-200 grid place-items-center">
                 <ScanEye className="w-3.5 h-3.5" />
               </div>
@@ -817,10 +821,10 @@ export default function Landing() {
             <div className="md:w-[280px] shrink-0 space-y-3">
               <div className="overflow-hidden rounded-2xl border border-zinc-200 h-[160px] relative">
                 <img src="/images/telehealth.jpg" alt="Doctor conducting teleophthalmology consultation via eSanjeevani" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold">eSanjeevani • Pending</div>
+                <div className="absolute top-2 left-2 px-2.5 py-1 rounded-full bg-emerald-600 text-white text-xs font-bold">eSanjeevani • {t("referralsPendingLabel")}</div>
               </div>
               <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-4">
-                <div className="text-xs font-bold tracking-widest uppercase text-zinc-500">Next camps</div>
+                <div className="text-xs font-bold tracking-widest uppercase text-zinc-500">{t("dashboardNextCampTitle")}</div>
                 <div className="mt-2 space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="font-medium">Bhainsa</span>
@@ -1010,7 +1014,7 @@ export default function Landing() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
                     <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-white text-zinc-900 text-xs font-bold">{card.label}</div>
                     <div className="absolute bottom-4 left-4 right-4">
-                      <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-amber-500 text-white text-xs font-bold">Stage II • 87%</div>
+                      <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-amber-500 text-white text-xs font-bold">{t("phoneMockupStageII")}</div>
                     </div>
                     {/* scan line */}
                     <div className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-60" style={{ top: "44%" }} />
@@ -1030,18 +1034,18 @@ export default function Landing() {
               ))}
 
               <div className="rounded-[28px] border border-white/10 bg-white/[0.04] p-6 md:p-8">
-                <div className="text-xs font-bold tracking-widest uppercase text-teal-300">Safe AI</div>
+                <div className="text-xs font-bold tracking-widest uppercase text-teal-300">{t("landingPhcReady")}</div>
                 <p className="mt-2 text-sm leading-6 text-zinc-300">
-                  All results are early checks. Eye doctor confirms via eSanjeevani before treatment. No auto prescription. Consent and safe storage on your device.
+                  {t("dashboardNote")}
                 </p>
                 <div className="mt-4 grid grid-cols-2 gap-3 text-xs">
                   <div className="rounded-xl bg-white text-zinc-900 p-3 text-center">
                     <div className="font-black text-lg">68%</div>
-                    <div className="font-semibold text-zinc-500">Coverage this month</div>
+                    <div className="font-semibold text-zinc-500">{t("dashboardCoverage")}</div>
                   </div>
                   <div className="rounded-xl border border-white/10 p-3 text-center">
                     <div className="font-black text-lg">54%</div>
-                    <div className="text-zinc-400">Referral completion</div>
+                    <div className="text-zinc-400">{t("dashboardReferralComp")}</div>
                   </div>
                 </div>
               </div>
@@ -1081,14 +1085,14 @@ export default function Landing() {
                 <button
                   onClick={() => setTestimonialIdx((i) => (i - 1 + testimonials.length) % testimonials.length)}
                   className="w-10 h-10 rounded-full border border-zinc-200 bg-white grid place-items-center hover:bg-zinc-50 transition"
-                  aria-label="Previous"
+                  aria-label={t("commonPreviousLabel")}
                 >
                   <ChevronLeft className="w-4 h-4" />
                 </button>
                 <button
                   onClick={() => setTestimonialIdx((i) => (i + 1) % testimonials.length)}
                   className="w-10 h-10 rounded-full bg-zinc-900 text-white grid place-items-center hover:bg-black transition"
-                  aria-label="Next"
+                  aria-label={t("commonNextLabel")}
                 >
                   <ChevronRight className="w-4 h-4" />
                 </button>
@@ -1185,7 +1189,7 @@ export default function Landing() {
           <div className="rounded-[28px] bg-zinc-900 text-white p-8 md:p-10 relative overflow-hidden">
             <div className="absolute -right-20 -top-20 w-80 h-80 bg-teal-600/20 rounded-full blur-3xl" />
             <div className="relative">
-              <div className="text-xs font-bold tracking-widest uppercase text-amber-300">Impact if deployed in one district</div>
+              <div className="text-xs font-bold tracking-widest uppercase text-amber-300">{t("landingImpact")}</div>
               <h3 className="mt-2 text-[28px] md:text-[32px] font-bold leading-tight tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
                 {t("landingImpactTitle")}
               </h3>
@@ -1237,8 +1241,8 @@ export default function Landing() {
                 <ScanEye className="w-5 h-5" />
               </div>
                 <div className="text-xs">
-                  <div className="font-bold">On your device, no cloud needed</div>
-                  <div className="text-zinc-500">Easy model swap</div>
+                  <div className="font-bold">{t("landingNoInternet")}</div>
+                  <div className="text-zinc-500">{t("landingSyncQueued")}</div>
                 </div>
             </div>
           </div>
@@ -1274,9 +1278,9 @@ export default function Landing() {
                 </Link>
               </div>
               <div className="mt-6 flex flex-wrap gap-2 text-xs text-zinc-500">
-                <span className="px-3 py-1.5 rounded-full border border-white/10">Ready • under 2.1s</span>
-                <span className="px-3 py-1.5 rounded-full border border-white/10">Clear • Heatmap</span>
-                <span className="px-3 py-1.5 rounded-full border border-white/10">eSanjeevani ready</span>
+                <span className="px-3 py-1.5 rounded-full border border-white/10">{t("landingHeroChipOffline")}</span>
+                <span className="px-3 py-1.5 rounded-full border border-white/10">{t("landingHeroChipStage")}</span>
+                <span className="px-3 py-1.5 rounded-full border border-white/10">{t("landingHeroChipPhc")}</span>
               </div>
             </div>
 
@@ -1309,7 +1313,7 @@ export default function Landing() {
                   </div>
                   <span className="px-2.5 py-1 rounded-full bg-zinc-900 text-white text-xs font-bold">Online</span>
                 </div>
-                <div className="mt-3 text-[11px] leading-relaxed text-zinc-400 text-center">Early AI check, needs eye doctor confirmation before treatment.</div>
+                <div className="mt-3 text-[11px] leading-relaxed text-zinc-400 text-center">{t("preliminaryNote")}</div>
               </div>
               <div className="absolute -bottom-3 -right-3 hidden md:flex items-center gap-2 px-3 py-2 rounded-full bg-amber-500 text-white text-xs font-bold shadow-xl">
                 <Footprints className="w-3.5 h-3.5" /> Foot + Pharmacy bundled
@@ -1326,7 +1330,7 @@ export default function Landing() {
                 </span>{" "}
                 GlucoVision
               </Link>
-              <span className="hidden md:inline">© 2026 GlucoVision • Built for Bharat</span>
+              <span className="hidden md:inline">{t("rightsReserved")}</span>
             </div>
             <div className="flex flex-wrap items-center gap-4">
               <a href="#how" className="hover:text-white transition">

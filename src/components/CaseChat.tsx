@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { Send, Loader2, Trash2, Image as ImageIcon, Sparkles, ShieldCheck, AlertTriangle } from "lucide-react";
+import { Send, Loader2, Trash2, Sparkles, ShieldCheck, AlertTriangle } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 
 type ChatMsg = { id: string; role: "user" | "assistant"; content: string; image_url?: string | null; model?: string; created_at?: string };
@@ -42,20 +42,20 @@ export function CaseChat({
   const [includeRight, setIncludeRight] = useState(true);
   const listRef = useRef<HTMLDivElement>(null);
 
-  const load = async () => {
-    if (!API) return;
-    try {
-      const url = `${API}/api/cases/${patientId}/chat${visitId ? `?visitId=${visitId}` : ""}`;
-      const r = await fetch(url);
-      if (r.ok) {
-        const j = (await r.json()) as { chats: ChatMsg[] };
-        setMsgs(j.chats || []);
-      }
-    } catch {}
-  };
-
   useEffect(() => {
-    load();
+    if (!API) return;
+    // setState only inside async callbacks (no synchronous setState-in-effect)
+    let cancelled = false;
+    const url = `${API}/api/cases/${patientId}/chat${visitId ? `?visitId=${visitId}` : ""}`;
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (!cancelled && j) setMsgs((j as { chats: ChatMsg[] }).chats || []);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [patientId, visitId]);
 
@@ -85,12 +85,6 @@ export function CaseChat({
     // Primary for single-image backends: prefer left if available, else right
     const primary = leftUrl || rightUrl || null;
     return { left: leftUrl, right: rightUrl, primary };
-  };
-
-  // Backward compat single
-  const getImageDataUrl = async (): Promise<string | null> => {
-    const r = await getImageDataUrls();
-    return r.primary;
   };
 
   const send = async () => {
@@ -179,20 +173,20 @@ export function CaseChat({
               {hasLeft && bothPreviews.left && (
                 <div className="relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={bothPreviews.left} alt="left eye" className="w-16 h-16 rounded-xl object-cover border-2 border-teal-600 shadow-sm" />
+                  <img src={bothPreviews.left} alt={t("caseChatLeftLabel2")} className="w-16 h-16 rounded-xl object-cover border-2 border-teal-600 shadow-sm" />
                   <span className="absolute -bottom-1.5 -right-1.5 w-6 h-6 rounded-full bg-teal-600 text-white text-[11px] font-bold grid place-items-center border-2 border-white">L</span>
                 </div>
               )}
               {hasRight && bothPreviews.right && (
                 <div className="relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={bothPreviews.right} alt="right eye" className="w-16 h-16 rounded-xl object-cover border-2 border-amber-500 shadow-sm" />
+                  <img src={bothPreviews.right} alt={t("caseChatRightLabel2")} className="w-16 h-16 rounded-xl object-cover border-2 border-amber-500 shadow-sm" />
                   <span className="absolute -bottom-1.5 -right-1.5 w-6 h-6 rounded-full bg-amber-500 text-white text-[11px] font-bold grid place-items-center border-2 border-white">R</span>
                 </div>
               )}
               {!hasLeft && !hasRight && preview && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={preview} alt="case image" className="w-16 h-16 rounded-xl object-cover border-2 border-zinc-200" />
+                <img src={preview} alt={t("caseChatFundusAttached")} className="w-16 h-16 rounded-xl object-cover border-2 border-zinc-200" />
               )}
             </div>
             <div className="flex-1 min-w-0">

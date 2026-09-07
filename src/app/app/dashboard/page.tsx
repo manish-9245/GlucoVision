@@ -1,10 +1,10 @@
 "use client";
 import { useStore } from "@/lib/store";
-import { DR_LABELS } from "@/lib/types";
 import Link from "next/link";
 import { ScanEye, Pill, TrendingUp, ArrowRight } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { useLang } from "@/lib/i18n";
+import { drStageLabel, pharmacyStatusLabel } from "@/lib/labels";
 
 export default function Dashboard() {
   const { patients, referrals, pharmacy } = useStore();
@@ -15,10 +15,10 @@ export default function Dashboard() {
   const urgent = patients.filter((p) => p.visits.some((v) => v.drStage >= 3)).length;
 
   const dist = [
-    { name: "No DR", value: patients.filter((p) => p.visits[p.visits.length - 1]?.drStage === 0).length },
-    { name: "Mild/Mod", value: patients.filter((p) => [1, 2].includes(p.visits[p.visits.length - 1]?.drStage)).length },
-    { name: "Severe/PDR", value: patients.filter((p) => [3, 4].includes(p.visits[p.visits.length - 1]?.drStage)).length },
-    { name: "Unscreened", value: patients.filter((p) => p.visits.length === 0).length },
+    { name: drStageLabel(t, 0), value: patients.filter((p) => p.visits[p.visits.length - 1]?.drStage === 0).length },
+    { name: t("patientMildModLabel"), value: patients.filter((p) => [1, 2].includes(p.visits[p.visits.length - 1]?.drStage)).length },
+    { name: t("patientSeverePdrLabelShort"), value: patients.filter((p) => [3, 4].includes(p.visits[p.visits.length - 1]?.drStage)).length },
+    { name: t("stageUnscreened"), value: patients.filter((p) => p.visits.length === 0).length },
   ];
   const COLORS = ["#0f766e", "#d97706", "#dc2626", "#e7e5e4"];
   const glucoseAvg = patients.flatMap((p) => p.glucose).slice(-8).map((g, i) => ({ name: `W${i + 1}`, fasting: g.fasting }));
@@ -111,7 +111,7 @@ export default function Dashboard() {
                   <div className="text-sm font-medium">{o.patientName}</div>
                   <div className="text-xs text-zinc-600 line-clamp-1">{o.prescription}</div>
                 </div>
-                <div className="text-xs font-medium border border-zinc-200 px-2 py-1 bg-zinc-50 ml-2 shrink-0">{o.status}</div>
+                <div className="text-xs font-medium border border-zinc-200 px-2 py-1 bg-zinc-50 ml-2 shrink-0">{pharmacyStatusLabel(t, o.status)}</div>
               </div>
             ))}
             {pharmacy.length === 0 && <div className="p-4 text-sm text-zinc-500 text-center">{t("dashboardNoOrders")}</div>}
@@ -144,7 +144,7 @@ export default function Dashboard() {
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={v.imageUrl} alt={`${p.name} fundus`} className="w-full h-full object-cover" />
                       ) : (
-                        <div className="w-full h-full grid place-items-center bg-zinc-900 text-zinc-500 text-[10px]">No img</div>
+                        <div className="w-full h-full grid place-items-center bg-zinc-900 text-zinc-500 text-[10px]">{t("patientNoImage")}</div>
                       )}
                       <div className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[10px] text-center py-0.5">Q{v.imageQuality}</div>
                     </div>
@@ -153,11 +153,11 @@ export default function Dashboard() {
                         {p.name} <span className="text-xs text-zinc-500">{p.village}</span>
                       </div>
                       <div className="text-xs text-zinc-600">
-                        {v.date} • {DR_LABELS[v.drStage]} • {(v.confidence * 100).toFixed(0)}%
+                        {v.date} • {drStageLabel(t, v.drStage)} • {(v.confidence * 100).toFixed(0)}%
                       </div>
-                      <div className="text-[11px] text-zinc-500 truncate">{v.imageUrl ? "Image saved ✓" : "Seed visit (no image)"} • {p.visits.length} exam{p.visits.length > 1 ? "s" : ""}</div>
+                      <div className="text-[11px] text-zinc-500 truncate">{v.imageUrl ? t("patientImageSaved") : t("patientSeedVisit")} • {p.visits.length} {t("patientsExamsLabel")}</div>
                     </div>
-                    <span className={`text-xs font-medium border px-2 py-1 shrink-0 ml-2 ${v.drStage === 0 ? "bg-emerald-50 border-emerald-200 text-emerald-800" : v.drStage >= 3 ? "bg-red-50 border-red-200 text-red-700" : "bg-amber-50 border-amber-200 text-amber-800"}`}>{DR_LABELS[v.drStage]}</span>
+                    <span className={`text-xs font-medium border px-2 py-1 shrink-0 ml-2 ${v.drStage === 0 ? "bg-emerald-50 border-emerald-200 text-emerald-800" : v.drStage >= 3 ? "bg-red-50 border-red-200 text-red-700" : "bg-amber-50 border-amber-200 text-amber-800"}`}>{drStageLabel(t, v.drStage)}</span>
                   </Link>
                 );
               })}

@@ -6,7 +6,7 @@ import { useAuth } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
 import { Eye, EyeOff, ArrowRight, ShieldCheck } from "lucide-react";
 import { CustomSelect } from "@/components/CustomSelect";
-import { useLang } from "@/lib/i18n";
+import { LanguageSwitcher, useLang } from "@/lib/i18n";
 
 const ROLES = [
   { value: "asha", label: "ASHA Worker", desc: "Village screening, intake" },
@@ -49,18 +49,21 @@ export default function SignupPage() {
             <div className="font-bold tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
               GlucoVision
             </div>
-            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">GlucoVision</div>
+            <div className="text-[10px] font-semibold tracking-widest text-zinc-500 uppercase">{t("phcEdition")}</div>
           </div>
         </Link>
-        <Link href="/login" className="text-sm font-semibold px-4 py-2 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50">
-          Sign in
-        </Link>
+        <div className="flex items-center gap-2">
+          <LanguageSwitcher />
+          <Link href="/login" className="text-sm font-semibold px-4 py-2 rounded-full border border-zinc-200 bg-white hover:bg-zinc-50">
+            {t("signupHeaderSignIn2")}
+          </Link>
+        </div>
       </header>
 
       <div className="flex-1 max-w-[640px] mx-auto w-full px-6 py-10">
         <div className="bg-white border border-zinc-200 rounded-[28px] p-8 shadow-[0_20px_40px_rgba(0,0,0,0.08)]">
           <h1 className="text-[32px] font-black leading-none tracking-tight" style={{ fontFamily: "Cabinet Grotesk, sans-serif" }}>
-            Create account
+            {t("signupTitle2")}
           </h1>
           <p className="text-sm text-zinc-600 mt-2">{t("signupDesc2")}</p>
 

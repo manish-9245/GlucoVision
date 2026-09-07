@@ -17,42 +17,63 @@ const Ctx = createContext<AuthCtx | null>(null);
 const API = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "";
 const USE_API = !!API;
 
+function readStoredToken(): string | null {
+  try {
+    return localStorage.getItem("gv_token");
+  } catch {
+    return null;
+  }
+}
+
+function readStoredUser(): User | null {
+  try {
+    const u = localStorage.getItem("gv_user");
+    return u ? (JSON.parse(u) as User) : null;
+  } catch {
+    return null;
+  }
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [token, setToken] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  // Hydrate synchronously during initial render (client) instead of setState-in-effect.
+  const [user, setUser] = useState<User | null>(() => (typeof window === "undefined" ? null : readStoredUser()));
+  const [token, setToken] = useState<string | null>(() => (typeof window === "undefined" ? null : readStoredToken()));
+  // Loading is only true when a backend verification round-trip will run.
+  const [loading, setLoading] = useState(
+    () => typeof window === "undefined" || (USE_API && readStoredToken() !== null),
+  );
 
   useEffect(() => {
-    const t = localStorage.getItem("gv_token");
-    const u = localStorage.getItem("gv_user");
-    if (t) setToken(t);
-    if (u) {
-      try {
-        setUser(JSON.parse(u));
-      } catch {}
-    }
-    // verify with backend if API set
-    if (USE_API && t) {
-      fetch(`${API}/api/auth/me`, { headers: { Authorization: `Bearer ${t}` } })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((j) => {
-          if (j?.user) {
-            setUser(j.user);
+    if (!USE_API || !token) return;
+    // verify with backend if API set (setState only inside async callbacks)
+    let cancelled = false;
+    fetch(`${API}/api/auth/me`, { headers: { Authorization: `Bearer ${token}` } })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => {
+        if (cancelled) return;
+        if (j?.user) {
+          setUser(j.user as User);
+          try {
             localStorage.setItem("gv_user", JSON.stringify(j.user));
-          } else {
-            // token invalid
+          } catch {}
+        } else {
+          // token invalid
+          try {
             localStorage.removeItem("gv_token");
             localStorage.removeItem("gv_user");
-            setToken(null);
-            setUser(null);
-          }
-        })
-        .catch(() => {})
-        .finally(() => setLoading(false));
-    } else {
-      setLoading(false);
-    }
-  }, []);
+          } catch {}
+          setToken(null);
+          setUser(null);
+        }
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [token]);
 
   const login = async (email: string, password: string) => {
     if (!USE_API) {

@@ -1,12 +1,13 @@
 "use client";
 import { useState, useMemo } from "react";
 import { useStore } from "@/lib/store";
-import { DR_LABELS, DRStage } from "@/lib/types";
+import { DRStage } from "@/lib/types";
 import Link from "next/link";
 import { Send, CheckCircle2, Clock, Stethoscope, MapPin, Phone, Filter, ArrowRight, ShieldCheck, WifiOff, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CustomSelect } from "@/components/CustomSelect";
 import { useLang } from "@/lib/i18n";
+import { drStageLabel } from "@/lib/labels";
 
 export default function ReferralsPage() {
   const { t } = useLang();
@@ -60,7 +61,7 @@ export default function ReferralsPage() {
           <motion.span animate={{ rotate: showForm ? 45 : 0 }}>
             <Send className="w-4 h-4" />
           </motion.span>
-          New referral
+          {t("referralsNewReferralBtn")}
         </motion.button>
       </motion.div>
 
@@ -82,26 +83,26 @@ export default function ReferralsPage() {
             onClick={() => setFilter(k)}
             className={`px-4 py-2.5 rounded-full text-sm font-bold border capitalize transition ${filter === k ? "bg-slate-900 text-white border-slate-900 shadow-md" : "bg-white border-stone-200 text-slate-700 hover:bg-stone-50 hover:border-stone-300"}`}
           >
-            {k} • {counts[k]}
+            {k === "all" ? t("referralsFilterAll2") : k === "pending" ? t("referralsFilterPending2") : k === "confirmed" ? t("referralsFilterConfirmed2") : t("referralsFilterCompleted2")} • {counts[k]}
           </motion.button>
         ))}
         <span className="ml-auto hidden md:inline-flex items-center gap-1.5 text-xs text-stone-500 bg-white border border-stone-200 px-3 py-2 rounded-full">
-          <Filter className="w-3.5 h-3.5" /> {enriched.length} referrals
+          <Filter className="w-3.5 h-3.5" /> {enriched.length} {t("commonReferralsSuffix")}
         </span>
       </motion.div>
 
       <AnimatePresence>
         {showForm && (
           <motion.div initial={{ opacity: 0, y: -8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8, scale: 0.98 }} transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }} className="border bg-white border border-stone-200 p-5 grid md:grid-cols-4 gap-3 shadow-sm">
-            <CustomSelect value={form.patientId} onChange={(v) => setForm({ ...form, patientId: v })} options={patients.map((p) => ({ value: p.id, label: p.name, desc: `${p.village} • ${DR_LABELS[p.visits[p.visits.length - 1]?.drStage ?? 0]}` }))} placeholder="Select patient" searchable />
-            <CustomSelect value={String(form.stage)} onChange={(v) => setForm({ ...form, stage: Number(v) as DRStage })} options={[0, 1, 2, 3, 4].map((s) => ({ value: String(s), label: `Stage ${s}`, desc: DR_LABELS[s as DRStage] }))} />
-            <CustomSelect value={form.via} onChange={(v) => setForm({ ...form, via: v as never })} options={[{ value: "eSanjeevani", label: "eSanjeevani" }, { value: "Direct", label: "Direct, district hospital" }]} />
+            <CustomSelect value={form.patientId} onChange={(v) => setForm({ ...form, patientId: v })} options={patients.map((p) => ({ value: p.id, label: p.name, desc: `${p.village} • ${drStageLabel(t, p.visits[p.visits.length - 1]?.drStage ?? 0)}` }))} placeholder={t("commonSelectPatient")} searchable />
+            <CustomSelect value={String(form.stage)} onChange={(v) => setForm({ ...form, stage: Number(v) as DRStage })} options={[0, 1, 2, 3, 4].map((s) => ({ value: String(s), label: `${t("stage")} ${s}`, desc: drStageLabel(t, s as DRStage) }))} />
+            <CustomSelect value={form.via} onChange={(v) => setForm({ ...form, via: v as never })} options={[{ value: "eSanjeevani", label: "eSanjeevani" }, { value: "Direct", label: "Direct" }]} />
             <div className="flex gap-2">
               <button onClick={() => setShowForm(false)} className="flex-1 px-4 py-3 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">
-                Cancel
+                {t("cancel")}
               </button>
               <button onClick={createReferral} className="flex-1 px-4 py-3 rounded-full bg-teal-700 text-white text-sm font-bold hover:bg-teal-800 shadow-md transition">
-                Queue
+                {t("pharmacyQueueBtn")}
               </button>
             </div>
           </motion.div>
@@ -170,7 +171,7 @@ export default function ReferralsPage() {
 
                 <div className="flex flex-wrap gap-2 text-xs">
                   <span className={`px-2.5 py-1 rounded-full border font-bold shadow-sm ${r.stage >= 3 ? "bg-red-50 border-red-200 text-red-700" : r.stage >= 1 ? "bg-amber-50 border-amber-200 text-amber-800" : "bg-emerald-50 border-emerald-200 text-emerald-700"}`}>
-                    {DR_LABELS[r.stage]} • Stage {r.stage}
+                    {drStageLabel(t, r.stage)} • {t("stage")} {r.stage}
                   </span>
                   <span className="px-2.5 py-1 rounded-full bg-white border border-stone-200 font-semibold shadow-sm">{r.via}</span>
                   {r.patient && <span className="px-2.5 py-1 rounded-full bg-white border border-stone-200 font-medium shadow-sm">HbA1c {r.patient.hbA1c}% • {r.patient.bp}</span>}

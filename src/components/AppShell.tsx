@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { LayoutDashboard, Users, ScanEye, Send, Pill, Footprints, Menu, X, LogOut, ShieldCheck, Globe } from "lucide-react";
-import { useState, useEffect } from "react";
+import { LayoutDashboard, Users, Send, Pill, Footprints, Menu, X } from "lucide-react";
+import { useState, useEffect, useSyncExternalStore } from "react";
 import { useAuth } from "@/lib/auth";
 import { Logo } from "@/components/Logo";
 import { LanguageSwitcher, useLang } from "@/lib/i18n";
@@ -18,13 +18,17 @@ const navConfig = [
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
   const router = useRouter();
-  const { user, loading, logout } = useAuth();
+  const { user, loading } = useAuth();
   const { t } = useLang();
   const nav = navConfig.map((n) => ({ ...n, label: t(n.key) }));
   const [open, setOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  // Client-only flag without setState-in-effect: false during SSR/prerender, true after hydration.
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
-  useEffect(() => setMounted(true), []);
   useEffect(() => {
     if (!loading && !user) router.replace("/login");
   }, [user, loading, router]);

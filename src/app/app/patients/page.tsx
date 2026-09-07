@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useStore } from "@/lib/store";
-import { DR_LABELS } from "@/lib/types";
 import Link from "next/link";
 import { Search, Plus, ScanEye, Activity, MapPin, Phone, AlertTriangle, Eye, Image as ImageIcon } from "lucide-react";
 import { CustomSelect } from "@/components/CustomSelect";
 import { useLang } from "@/lib/i18n";
+import { drStageLabel } from "@/lib/labels";
 
 export default function PatientsPage() {
   const { patients, addPatient } = useStore();
@@ -71,10 +71,10 @@ export default function PatientsPage() {
           <div className="grid md:grid-cols-3 gap-3">
             <input placeholder={t("patientsFullNamePh")} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm focus:outline-none focus:border-zinc-900 placeholder:text-zinc-400" />
             <input placeholder={t("patientsAgePh")} type="number" value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
-            <CustomSelect value={form.gender} onChange={(v) => setForm({ ...form, gender: v as "M" | "F" })} options={[{ value: "M", label: t("patientsGenderMale") }, { value: "F", label: t("patientsGenderFemale") }]} placeholder="Gender" />
+            <CustomSelect value={form.gender} onChange={(v) => setForm({ ...form, gender: v as "M" | "F" })} options={[{ value: "M", label: t("patientsGenderMale") }, { value: "F", label: t("patientsGenderFemale") }]} placeholder={t("commonGender")} />
             <input placeholder={t("patientsVillagePh")} value={form.village} onChange={(e) => setForm({ ...form, village: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
             <input placeholder={t("patientsPhonePh")} value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
-            <CustomSelect value={form.diabetesType} onChange={(v) => setForm({ ...form, diabetesType: v as "Type 1" | "Type 2" })} options={[{ value: "Type 2", label: t("patientsDiabetesType2") }, { value: "Type 1", label: t("patientsDiabetesType1") }]} placeholder="Diabetes type" />
+            <CustomSelect value={form.diabetesType} onChange={(v) => setForm({ ...form, diabetesType: v as "Type 1" | "Type 2" })} options={[{ value: "Type 2", label: t("patientsDiabetesType2") }, { value: "Type 1", label: t("patientsDiabetesType1") }]} placeholder={t("commonDiabetesType")} />
             <input placeholder={t("patientsDiabetesYearsPh")} type="number" value={form.diabetesYears} onChange={(e) => setForm({ ...form, diabetesYears: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
             <input placeholder={t("patientsHbA1cPh")} type="number" step="0.1" value={form.hbA1c} onChange={(e) => setForm({ ...form, hbA1c: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
             <input placeholder={t("patientsBpPh")} value={form.bp} onChange={(e) => setForm({ ...form, bp: e.target.value })} className="px-3 py-2.5 border border-zinc-200 text-sm placeholder:text-zinc-400" />
@@ -142,7 +142,7 @@ export default function PatientsPage() {
                     <Eye className="w-3 h-3" /> {p.visits.length} {t("patientsExamsLabel")} {p.visits.length > 0 && `• ${t("patientsLastLabel")} ${p.lastScreened || last?.date || ""}`}
                   </div>
                   <div className="text-xs text-zinc-600 truncate">
-                    {last ? `${DR_LABELS[last.drStage]} • ${(last.confidence * 100).toFixed(0)}% • ${last.imageUrl ? t("patientImageSaved") : t("patientNoImage")}` : t("patientsNeverScreened")}
+                    {last ? `${drStageLabel(t, last.drStage)} • ${(last.confidence * 100).toFixed(0)}% • ${last.imageUrl ? t("patientImageSaved") : t("patientNoImage")}` : t("patientsNeverScreened")}
                   </div>
                   <div className="text-[11px] text-zinc-500">{t("patientsTapOpen")}</div>
                 </div>
@@ -152,7 +152,7 @@ export default function PatientsPage() {
               <div className="flex items-center justify-between pt-3 border-t border-zinc-200">
                 <div className="text-xs">
                   {last ? (
-                    <span className="font-medium border px-2 py-1 bg-white border-zinc-200">{DR_LABELS[last.drStage]} • {(last.confidence * 100).toFixed(0)}%</span>
+                    <span className="font-medium border px-2 py-1 bg-white border-zinc-200">{drStageLabel(t, last.drStage)} • {(last.confidence * 100).toFixed(0)}%</span>
                   ) : (
                     <span className="px-2 py-1 bg-zinc-100 border border-zinc-200">{t("patientsNeverScreened")}</span>
                   )}
