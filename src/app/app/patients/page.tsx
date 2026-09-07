@@ -162,7 +162,7 @@ export default function PatientsPage() {
                   <Link href={`/app/patients/${p.id}`} className="inline-flex items-center gap-1.5 px-3 py-2 border border-zinc-200 bg-white text-xs font-medium hover:bg-zinc-50">
                     <Eye className="w-3.5 h-3.5" /> {t("patientsViewBtn")}
                   </Link>
-                  <Link href={`/app/patients?patient=${p.id}`} className="inline-flex items-center gap-1.5 px-4 py-2 bg-zinc-900 text-white text-xs font-semibold hover:bg-black">
+                  <Link href={`/app/patients/${p.id}#new-examination`} className="inline-flex items-center gap-1.5 px-4 py-2 bg-zinc-900 text-white text-xs font-semibold hover:bg-black">
                     <ScanEye className="w-3.5 h-3.5" /> {t("patientsScreenBtn")}
                   </Link>
                 </div>

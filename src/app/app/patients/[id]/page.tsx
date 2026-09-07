@@ -1,5 +1,5 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useStore } from "@/lib/store";
@@ -29,11 +29,16 @@ import { CustomSelect } from "@/components/CustomSelect";
 import { useLang } from "@/lib/i18n";
 import { drStageLabel } from "@/lib/labels";
 
-function AddVisitInline({ patientId }: { patientId: string }) {
+function AddVisitInline({ patientId, open: controlledOpen, onOpenChange }: { patientId: string; open?: boolean; onOpenChange?: (v: boolean) => void }) {
   const { t } = useLang();
   const { patients, addVisit } = useStore();
   const patient = patients.find((p) => p.id === patientId);
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = controlledOpen ?? internalOpen;
+  const setOpen = (v: boolean) => {
+    if (onOpenChange) onOpenChange(v);
+    else setInternalOpen(v);
+  };
   const [form, setForm] = useState({ date: new Date().toISOString().slice(0, 10), stage: 2 as 0 | 1 | 2 | 3 | 4, confidence: 87, quality: 85, notes: "" });
   const [preview, setPreview] = useState<string | null>(null);
 
@@ -214,7 +219,7 @@ function AddVisitInline({ patientId }: { patientId: string }) {
           <FileText className="w-4 h-4" /> {t("patientAddVisitTitle2")}
         </h3>
         <button onClick={() => setOpen(!open)} className="px-3 py-1.5 border border-zinc-200 bg-white text-xs font-semibold hover:bg-zinc-50">
-          {open ? "Cancel" : "+ New entry"}
+          {open ? t("cancel") : t("patientNewExamBtn")}
         </button>
       </div>
       <p className="text-xs text-zinc-600 mt-1">{t("patientAddVisitDesc2")}</p>
@@ -377,6 +382,37 @@ export default function PatientExaminationPage() {
   const patient = useMemo(() => patients.find((p) => p.id === id), [patients, id]);
   const [selectedVisit, setSelectedVisit] = useState<string | null>(null);
   const [showHeatmap, setShowHeatmap] = useState(true);
+  const [examOpen, setExamOpen] = useState(false);
+  const examRef = useRef<HTMLDivElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
+
+  const scrollToRef = useCallback((ref: React.RefObject<HTMLDivElement | null>) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        ref.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+  }, []);
+
+  const startScreening = useCallback(() => {
+    setExamOpen(true);
+    scrollToRef(examRef);
+  }, [scrollToRef]);
+
+  const scrollToChat = useCallback(() => {
+    scrollToRef(chatRef);
+  }, [scrollToRef]);
+
+  // Deep link support: /app/patients/<id>#new-examination or #patient-chat.
+  // Deferred past the synchronous effect body (react-hooks/set-state-in-effect).
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash === "#new-examination" || hash === "#patient-chat") {
+      const go = hash === "#new-examination" ? startScreening : scrollToChat;
+      void Promise.resolve().then(() => go());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!patient) {
     return (
@@ -450,9 +486,9 @@ export default function PatientExaminationPage() {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <Link href={`/app/patients?patient=${patient.id}`} className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 text-white text-sm font-semibold hover:bg-black">
+              <button onClick={startScreening} className="inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-zinc-900 text-white text-sm font-semibold hover:bg-black">
                 <ScanEye className="w-4 h-4" /> {t("patientScreenNowBtn")}
-              </Link>
+              </button>
               <Link href="/app/patients" className="inline-flex items-center justify-center gap-2 px-5 py-2.5 border border-zinc-200 bg-white text-sm font-medium hover:bg-zinc-50">
                 <ArrowLeft className="w-4 h-4" /> {t("patientBackBtnLabel")}
               </Link>
@@ -508,9 +544,9 @@ export default function PatientExaminationPage() {
               </div>
             )}
             <div className="mt-3 flex gap-2">
-              <Link href={`/app/patients?patient=${patient.id}`} className="flex-1 text-center px-3 py-2 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
+              <button onClick={startScreening} className="flex-1 text-center px-3 py-2 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
                 {t("patientNewExamBtn")}
-              </Link>
+              </button>
               <Link href="/app/dashboard" className="flex-1 text-center px-3 py-2 border border-zinc-200 bg-white text-sm font-medium hover:bg-zinc-50">
                 {t("patientDashboardLink")}
               </Link>
@@ -602,9 +638,9 @@ export default function PatientExaminationPage() {
             </div>
             <div className="mt-3 font-semibold">{t("patientNoExamsTitle2")}</div>
             <div className="text-sm text-zinc-600 mt-1">{t("patientNoExamsDesc2")}</div>
-            <Link href={`/app/patients?patient=${patient.id}`} className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
+            <button onClick={startScreening} className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
               <ScanEye className="w-4 h-4" /> {t("patientStartScreeningBtn2")}
-            </Link>
+            </button>
           </div>
         ) : (
           <>
@@ -738,9 +774,9 @@ export default function PatientExaminationPage() {
                       </span>
                     </div>
                     <div className="flex gap-2">
-                      <Link href={`/app/patients?patient=${patient.id}`} className="flex-1 text-center px-4 py-2 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
+                      <button onClick={startScreening} className="flex-1 text-center px-4 py-2 bg-teal-700 text-white text-sm font-semibold hover:bg-teal-800">
                         {t("patientNewScreeningBtn")}
-                      </Link>
+                      </button>
                       <button onClick={() => setSelectedVisit(null)} className="px-4 py-2 border border-zinc-200 bg-white text-sm font-medium">
                         {t("patientClearBtn")}
                       </button>
@@ -844,7 +880,9 @@ export default function PatientExaminationPage() {
       </div>
 
       {/* Add new examination */}
-      <AddVisitInline patientId={patient.id} />
+      <div ref={examRef} id="new-examination" className="scroll-mt-24">
+        <AddVisitInline patientId={patient.id} open={examOpen} onOpenChange={setExamOpen} />
+      </div>
 
       {/* Foot report — visible on same page as eye report */}
       <div className="border border-zinc-200 bg-white p-4 md:p-5">
@@ -903,9 +941,9 @@ export default function PatientExaminationPage() {
             <div className="font-semibold">{t("patientNeedSecond")}</div>
             <div className="text-xs text-zinc-600">{t("patientESanjeevaniChat")}</div>
           </div>
-          <Link href={`/app/patients?patient=${patient.id}`} className="px-4 py-2 bg-teal-700 text-white text-xs font-semibold">
+          <button onClick={scrollToChat} className="px-4 py-2 bg-teal-700 text-white text-xs font-semibold">
             {t("commonAsk")}
-          </Link>
+          </button>
         </div>
         <div className="border border-zinc-200 bg-white p-4 flex items-center justify-between">
           <div className="text-sm">
@@ -919,7 +957,7 @@ export default function PatientExaminationPage() {
       </div>
 
       {/* Patient-level chat — discuss history/case */}
-      <div className="border border-zinc-200 bg-white p-4">
+      <div ref={chatRef} id="patient-chat" className="border border-zinc-200 bg-white p-4 scroll-mt-24">
         <h3 className="font-semibold text-sm flex items-center gap-2">
           <MessageCircle className="w-4 h-4 text-teal-700" /> {t("commonDiscussHistory")}
         </h3>

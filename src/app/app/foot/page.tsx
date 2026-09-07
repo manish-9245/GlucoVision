@@ -455,7 +455,7 @@ export default function FootScreeningPage() {
 
                 <div className="flex gap-2">
                   <Link href="/app/pharmacy" className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-black transition">{t("footPostCare")}</Link>
-                  <Link href={`/app/patients?patient=${patient.id}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">{t("footBackEye")}</Link>
+                  <Link href={`/app/patients/${patient.id}#new-examination`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-full border border-stone-200 bg-white text-sm font-semibold hover:bg-stone-50 transition">{t("footBackEye")}</Link>
                 </div>
               </motion.div>
             )}

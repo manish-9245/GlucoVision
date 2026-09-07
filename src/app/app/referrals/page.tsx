@@ -184,7 +184,7 @@ export default function ReferralsPage() {
                 </div>
 
                 <div className="flex gap-2 pt-1">
-                  <Link href={`/app/patients?patient=${r.patientId}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-black transition">
+                  <Link href={`/app/patients/${r.patientId}`} className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-full bg-slate-900 text-white text-xs font-bold hover:bg-black transition">
                     {t("referralsViewPatient")} <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                   <span className="inline-flex items-center gap-1 px-3 py-2.5 rounded-full bg-white border border-stone-200 text-xs font-semibold shadow-sm">

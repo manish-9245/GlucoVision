@@ -11,7 +11,7 @@ function ScreeningInner() {
   const router = useRouter();
   const initialId = search.get("patient") || patients[0]?.id || "";
   useEffect(() => {
-    if (initialId) router.replace(`/app/patients/${initialId}`);
+    if (initialId) router.replace(`/app/patients/${initialId}#new-examination`);
     else router.replace("/app/patients");
   }, [initialId, router]);
 
