@@ -39,7 +39,7 @@ function AddVisitInline({ patientId, open: controlledOpen, onOpenChange }: { pat
     if (onOpenChange) onOpenChange(v);
     else setInternalOpen(v);
   };
-  const [form, setForm] = useState({ date: new Date().toISOString().slice(0, 10), stage: 2 as 0 | 1 | 2 | 3 | 4, confidence: 87, quality: 85, notes: "" });
+  const [form, setForm] = useState({ date: new Date().toISOString().slice(0, 10), stage: 2 as 0 | 1 | 2 | 3 | 4, confidence: 87, quality: 85, notes: "", eye: "left" as "left" | "right" });
   const [preview, setPreview] = useState<string | null>(null);
 
   const onFile = (f: File | null) => {
@@ -50,18 +50,28 @@ function AddVisitInline({ patientId, open: controlledOpen, onOpenChange }: { pat
 
   const submit = async () => {
     if (!patient) return;
-    let imageUrl: string | undefined = preview || undefined;
-    if (preview && preview.startsWith("blob:")) {
-      try {
-        const blob = await fetch(preview).then((r) => r.blob());
-        const dataUrl = await new Promise<string>((res, rej) => {
-          const fr = new FileReader();
-          fr.onload = () => res(fr.result as string);
-          fr.onerror = rej;
-          fr.readAsDataURL(blob);
-        });
-        imageUrl = dataUrl;
-      } catch {}
+    // Persist only durable URLs: convert object URLs to data URLs, and never
+    // store a dead blob: URL (it dies with the document on reload).
+    let imageUrl: string | undefined = undefined;
+    if (preview) {
+      if (preview.startsWith("blob:")) {
+        try {
+          const blob = await fetch(preview).then((r) => r.blob());
+          const dataUrl = await new Promise<string>((res, rej) => {
+            const fr = new FileReader();
+            fr.onload = () => res(fr.result as string);
+            fr.onerror = rej;
+            fr.readAsDataURL(blob);
+          });
+          imageUrl = dataUrl;
+        } catch {
+          imageUrl = undefined;
+        } finally {
+          URL.revokeObjectURL(preview);
+        }
+      } else {
+        imageUrl = preview;
+      }
     }
     // Try real AI first (NIM vision), fallback to structured local if offline
     let stage = form.stage;
@@ -192,7 +202,7 @@ function AddVisitInline({ patientId, open: controlledOpen, onOpenChange }: { pat
       if (stage === 3) return { summary: "Strict control", dos: ["Strict salt <4g", "Small meals"], donts: ["No sugar"], dailyCalories: "1200-1400 kcal", followUp: "Urgent referral 1-2 weeks" };
       return { summary: "Very strict", dos: ["Very strict small portions"], donts: ["No sugar"], dailyCalories: "1200-1300 kcal", followUp: "Emergency 1 week" };
     })();
-    const eyeVal = (form as unknown as { eye?: string }).eye || "left";
+    const eyeVal = form.eye;
     const visit = {
       id: `v${Date.now()}`,
       date: new Date(form.date).toISOString(),
@@ -209,7 +219,7 @@ function AddVisitInline({ patientId, open: controlledOpen, onOpenChange }: { pat
     addVisit(patientId, visit);
     setOpen(false);
     setPreview(null);
-    setForm({ date: new Date().toISOString().slice(0, 10), stage: 2, confidence: 87, quality: 85, notes: "" });
+    setForm({ date: new Date().toISOString().slice(0, 10), stage: 2, confidence: 87, quality: 85, notes: "", eye: "left" });
   };
 
   return (
@@ -225,6 +235,20 @@ function AddVisitInline({ patientId, open: controlledOpen, onOpenChange }: { pat
       <p className="text-xs text-zinc-600 mt-1">{t("patientAddVisitDesc2")}</p>
       {open && (
         <div className="mt-3 border border-zinc-200 bg-zinc-50 p-3 space-y-3">
+          <div className="grid grid-cols-2 gap-2 p-1 rounded-xl bg-white border border-zinc-200" role="radiogroup" aria-label={t("patientAddVisitImageLabel2")}>
+            {(["left", "right"] as const).map((e) => (
+              <button
+                key={e}
+                type="button"
+                role="radio"
+                aria-checked={form.eye === e}
+                onClick={() => setForm({ ...form, eye: e })}
+                className={`py-2 rounded-lg text-sm font-bold transition ${form.eye === e ? "bg-zinc-900 text-white shadow" : "text-zinc-500 hover:bg-zinc-50"}`}
+              >
+                {e === "left" ? t("caseChatLeftLabel2") : t("caseChatRightLabel2")}
+              </button>
+            ))}
+          </div>
           <div className="grid md:grid-cols-2 gap-3">
             <div>
               <div className="text-xs font-bold text-zinc-500">{t("patientAddVisitImageLabel2")}</div>
@@ -966,7 +990,10 @@ export default function PatientExaminationPage() {
           <CaseChat
             patientId={patient.id}
             visitId={activeVisit?.id || null}
-            previews={{ left: visits.find((v) => v.eye === "left")?.imageUrl || null, right: visits.find((v) => v.eye === "right")?.imageUrl || null }}
+            previews={{
+              left: visits.find((v) => v.eye === "left" && v.imageUrl && !v.imageUrl.startsWith("blob:"))?.imageUrl || null,
+              right: visits.find((v) => v.eye === "right" && v.imageUrl && !v.imageUrl.startsWith("blob:"))?.imageUrl || null,
+            }}
             preview={activeVisit?.imageUrl || visits[0]?.imageUrl || null}
             patientLabel={`${patient.name} • ${patient.riskScore}/100 • ${patient.village}`}
           />
